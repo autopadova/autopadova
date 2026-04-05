@@ -1,0 +1,1968 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coach Vânzări Iveco — Autopadova</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:       #f5f6f8;
+  --bg2:      #ffffff;
+  --bg3:      #f0f1f4;
+  --bg4:      #e8eaf0;
+  --card:     #ffffff;
+  --border:   rgba(0,0,0,0.08);
+  --border2:  rgba(0,0,0,0.13);
+  --border3:  rgba(0,0,0,0.22);
+  --red:      #d42e14;
+  --red2:     #e8351a;
+  --red-dim:  rgba(212,46,20,0.09);
+  --red-glow: rgba(212,46,20,0.20);
+  --gold:     #9a7320;
+  --gold2:    #b58a28;
+  --green:    #12a05e;
+  --green2:   #0e8a4f;
+  --green-dim:rgba(18,160,94,0.09);
+  --blue:     #2260c4;
+  --blue2:    #1a52b0;
+  --blue-dim: rgba(34,96,196,0.09);
+  --amber:    #b87010;
+  --amber-dim:rgba(184,112,16,0.09);
+  --text:     #111318;
+  --text2:    #4a5068;
+  --text3:    #8b91a8;
+  --r:        8px;
+  --r2:       12px;
+  --r3:       16px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 14px; }
+body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; line-height: 1.6; min-height: 100vh; overflow-x: hidden; }
+
+/* TOPBAR */
+.topbar {
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky; top: 0; z-index: 200;
+}
+.logo {
+  display: flex; align-items: center; gap: 12px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 15px; font-weight: 700;
+  letter-spacing: .03em;
+}
+.logo-mark {
+  width: 30px; height: 30px; border-radius: 6px;
+  background: var(--red);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700; color: #fff;
+  flex-shrink: 0;
+}
+.logo-ap { color: var(--text2); font-weight: 500; }
+.logo-iv { color: var(--text); }
+.logo-sep { color: var(--text3); margin: 0 2px; }
+.logo-sub { font-size: 10px; color: var(--text3); font-weight: 400; letter-spacing: .06em; text-transform: uppercase; }
+.topbar-right { display: flex; align-items: center; gap: 8px; }
+
+
+.pill-status {
+  font-size: 10px; font-weight: 600;
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: .08em; text-transform: uppercase;
+  color: var(--text3); display: flex; align-items: center; gap: 6px;
+}
+
+/* LAYOUT */
+.layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  height: calc(100vh - 52px);
+  overflow: hidden;
+}
+.sidebar {
+  background: var(--bg2);
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex; flex-direction: column;
+}
+.sidebar::-webkit-scrollbar { width: 3px; }
+.sidebar::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+.main { overflow-y: auto; background: var(--bg); }
+.main::-webkit-scrollbar { width: 4px; }
+.main::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+/* SIDEBAR HEADER */
+.sidebar-head {
+  padding: 16px 18px 12px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.step-track {
+  display: flex; align-items: center; gap: 0;
+  background: var(--bg3); border-radius: var(--r2);
+  padding: 3px; border: 1px solid var(--border);
+}
+.step-pill {
+  flex: 1; padding: 5px 4px;
+  font-size: 10px; font-weight: 600;
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: .06em; text-transform: uppercase;
+  border: none; border-radius: 9px;
+  color: var(--text3); cursor: pointer;
+  transition: all .25s; background: transparent;
+  text-align: center;
+}
+.step-pill.active { background: var(--red); color: #fff; box-shadow: 0 2px 12px var(--red-glow); }
+.step-pill.done { background: var(--green-dim); color: var(--green2); }
+
+/* FORM */
+.form-body { padding: 14px 18px; flex: 1; }
+.s-label {
+  font-size: 9px; font-weight: 600;
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--text3); margin: 16px 0 8px;
+  display: flex; align-items: center; gap: 6px;
+}
+.s-label::before {
+  content: ''; width: 12px; height: 1px;
+  background: var(--text3); display: block;
+}
+.s-label:first-child { margin-top: 0; }
+.fg { margin-bottom: 7px; }
+.fg label {
+  font-size: 10px; color: var(--text3);
+  display: block; margin-bottom: 3px;
+  font-weight: 500; letter-spacing: .02em;
+}
+.fg input, .fg select, .fg textarea {
+  width: 100%; background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--r); padding: 7px 10px;
+  font-size: 12.5px; color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  transition: border-color .15s, background .15s;
+  -webkit-appearance: none;
+}
+.fg input:focus, .fg select:focus, .fg textarea:focus {
+  outline: none; border-color: var(--red);
+  background: rgba(232,53,26,0.04);
+}
+.fg select { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23454c66' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; padding-right: 28px; }
+.fg select option { background: var(--bg3); }
+.fg textarea { resize: vertical; min-height: 54px; line-height: 1.5; }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+.btn-start {
+  width: 100%; padding: 11px;
+  background: var(--red); color: #fff; border: none;
+  border-radius: var(--r2); font-size: 13px; font-weight: 600;
+  font-family: 'Space Grotesk', sans-serif; letter-spacing: .04em;
+  cursor: pointer; margin-top: 16px;
+  transition: all .2s;
+  box-shadow: 0 4px 20px var(--red-glow);
+  position: relative; overflow: hidden;
+}
+.btn-start::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to right, transparent 0%, rgba(255,255,255,0.08) 50%, transparent 100%);
+  transform: translateX(-100%);
+  transition: transform .4s;
+}
+.btn-start:hover { background: var(--red2); }
+.btn-start:hover::after { transform: translateX(100%); }
+.btn-reset {
+  width: 100%; padding: 7px;
+  background: transparent; color: var(--text3);
+  border: 1px solid var(--border); border-radius: var(--r);
+  font-size: 12px; cursor: pointer; margin-top: 6px;
+  font-family: 'DM Sans', sans-serif; transition: all .15s;
+}
+.btn-reset:hover { border-color: var(--border3); color: var(--text2); }
+
+/* DOSAR */
+.dosar-body { padding: 14px 18px; flex: 1; }
+.client-header {
+  display: flex; align-items: center; gap: 11px;
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: var(--r2); padding: 12px;
+  margin-bottom: 12px;
+}
+.avatar {
+  width: 40px; height: 40px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--red), var(--amber));
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px; font-weight: 700; color: #fff; flex-shrink: 0;
+}
+.client-name { font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.3; }
+.client-meta { font-size: 11px; color: var(--text3); margin-top: 1px; }
+.info-list { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--r2); overflow: hidden; }
+.ir {
+  display: flex; justify-content: space-between;
+  align-items: center; padding: 7px 12px;
+  border-bottom: 1px solid var(--border); font-size: 12px;
+}
+.ir:last-child { border-bottom: none; }
+.ir .k { color: var(--text3); font-size: 11px; }
+.ir .v { color: var(--text); font-weight: 500; text-align: right; max-width: 160px; }
+.badge {
+  display: inline-flex; align-items: center;
+  font-size: 9px; font-weight: 700; padding: 2px 7px;
+  border-radius: 99px; font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: .06em; text-transform: uppercase;
+}
+.badge-r { background: var(--red-dim); color: var(--red2); border: 1px solid var(--red-glow); }
+.badge-g { background: var(--green-dim); color: var(--green2); border: 1px solid rgba(34,201,122,0.25); }
+.badge-b { background: var(--blue-dim); color: var(--blue2); border: 1px solid rgba(58,127,220,0.25); }
+.badge-a { background: var(--amber-dim); color: var(--gold2); border: 1px solid rgba(232,160,32,0.25); }
+
+/* MAIN PANELS */
+.main-pad { padding: 20px 24px; }
+
+/* EMPTY */
+.empty-state {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  height: 100%; min-height: 400px;
+  text-align: center; gap: 14px; padding: 40px;
+}
+.empty-truck {
+  width: 72px; height: 72px; border-radius: 18px;
+  background: var(--bg3); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 32px; margin-bottom: 4px;
+}
+.empty-state h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 20px; font-weight: 700; color: var(--text2);
+}
+.empty-state p { font-size: 12.5px; color: var(--text3); max-width: 260px; line-height: 1.7; }
+.api-hint {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--red-dim); border: 1px solid var(--red-glow);
+  border-radius: var(--r); padding: 8px 12px;
+  font-size: 11px; color: var(--red2); margin-top: 4px;
+}
+
+/* RESEARCH */
+.rscard {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--r3); padding: 18px; margin-bottom: 14px;
+}
+.rscard-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px; font-weight: 600; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--text3); margin-bottom: 12px;
+}
+.status-row {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12.5px; color: var(--text2); padding: 4px 0;
+}
+.dot {
+  width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
+}
+.dot-loading { background: var(--amber); animation: pulse 1.1s ease-in-out infinite; }
+.dot-ok { background: var(--green); }
+.dot-err { background: var(--red); }
+@keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.25;} }
+
+/* PROFILE CARD IN RESEARCH */
+.profile-rcard {
+  background: var(--bg3); border: 1px solid var(--border2);
+  border-radius: var(--r2); padding: 14px; margin: 12px 0;
+}
+.profile-rhead {
+  display: flex; align-items: flex-start; gap: 12px;
+  margin-bottom: 10px;
+}
+.profile-rname { font-size: 15px; font-weight: 600; color: var(--text); }
+.profile-rsub { font-size: 11px; color: var(--text3); margin-top: 2px; }
+.desc-text { font-size: 12.5px; color: var(--text2); line-height: 1.7; }
+.trend-list { margin-top: 4px; }
+.trend-item {
+  display: flex; gap: 8px; align-items: flex-start;
+  padding: 6px 0; border-bottom: 1px solid var(--border);
+  font-size: 12.5px; color: var(--text2); line-height: 1.55;
+}
+.trend-item:last-child { border-bottom: none; }
+.trend-arrow { color: var(--red); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+.trend-warn { color: var(--gold); }
+.opp-box {
+  border-radius: var(--r); padding: 12px;
+  margin-bottom: 8px;
+}
+.opp-box.green { background: var(--green-dim); border: 1px solid rgba(34,201,122,0.2); }
+.opp-box.blue { background: var(--blue-dim); border: 1px solid rgba(58,127,220,0.2); }
+.opp-box.amber { background: var(--amber-dim); border: 1px solid rgba(232,160,32,0.2); }
+.opp-label {
+  font-size: 9px; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; font-family: 'Space Grotesk', sans-serif;
+  margin-bottom: 5px;
+}
+.opp-label.green { color: var(--green2); }
+.opp-label.blue { color: var(--blue2); }
+.opp-label.amber { color: var(--gold2); }
+.opp-text { font-size: 12.5px; line-height: 1.6; }
+.opp-text.blue { color: var(--text); font-style: italic; }
+.opp-text.green { color: var(--text2); }
+.opp-text.amber { color: var(--gold2); }
+.nota-text { font-size: 11px; color: var(--text3); margin-top: 8px; line-height: 1.6; }
+
+/* CTA ROW */
+.cta-row { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
+.btn-cta {
+  flex: 1; min-width: 140px; padding: 10px 16px;
+  background: var(--red); color: #fff; border: none;
+  border-radius: var(--r2); font-size: 12px; font-weight: 700;
+  font-family: 'Space Grotesk', sans-serif; letter-spacing: .04em;
+  cursor: pointer; transition: all .2s;
+  box-shadow: 0 4px 16px var(--red-glow);
+}
+.btn-cta:hover { background: var(--red2); }
+
+/* COACHING */
+.coaching-layout {
+  display: flex; flex-direction: column;
+  height: calc(100vh - 52px); overflow: hidden;
+}
+.coaching-top {
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+  background: var(--bg2); flex-shrink: 0;
+}
+.stage-track {
+  display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 10px;
+}
+.stage-btn {
+  padding: 5px 11px; font-size: 10px; font-weight: 600;
+  font-family: 'Space Grotesk', sans-serif; letter-spacing: .04em;
+  text-transform: uppercase; border: 1px solid var(--border);
+  border-radius: 99px; background: transparent;
+  color: var(--text3); cursor: pointer; transition: all .18s;
+}
+.stage-btn:hover { border-color: var(--border3); color: var(--text2); }
+.stage-btn.on {
+  background: var(--blue-dim); border-color: var(--blue2);
+  color: var(--blue2);
+}
+.quick-row {
+  display: flex; gap: 5px; flex-wrap: wrap; align-items: center;
+}
+.qchip-label { font-size: 10px; color: var(--text3); font-weight: 500; margin-right: 2px; }
+.qchip {
+  padding: 3px 10px; font-size: 10px; border-radius: 99px;
+  border: 1px solid var(--border); background: transparent;
+  color: var(--text3); cursor: pointer; transition: all .15s;
+  font-family: 'DM Sans', sans-serif;
+}
+.qchip:hover { border-color: var(--red-glow); color: var(--red2); background: var(--red-dim); }
+.stage-chips-row {
+  display: flex; gap: 5px; flex-wrap: wrap; margin-top: 8px;
+}
+.schip {
+  padding: 4px 11px; font-size: 10px; border-radius: 99px;
+  border: 1px solid rgba(34,201,122,0.25);
+  background: var(--green-dim); color: var(--green2);
+  cursor: pointer; transition: all .15s;
+  font-family: 'DM Sans', sans-serif;
+}
+.schip:hover { background: rgba(34,201,122,0.18); }
+
+/* CHAT */
+.chat-body {
+  flex: 1; overflow-y: auto; padding: 18px 20px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.chat-body::-webkit-scrollbar { width: 3px; }
+.chat-body::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+.bubble {
+  padding: 11px 14px; border-radius: var(--r2);
+  font-size: 13px; line-height: 1.7; max-width: 90%;
+  animation: fadeUp .2s ease;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.bubble.ai {
+  background: #f0f1f4; border: 1px solid var(--border);
+  align-self: flex-start; color: var(--text);
+  border-bottom-left-radius: 4px;
+}
+.ai-lbl {
+  font-size: 9px; font-weight: 700; color: var(--red2);
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: .1em; text-transform: uppercase; margin-bottom: 6px;
+  display: flex; align-items: center; gap: 6px;
+}
+.ai-lbl::before {
+  content: ''; width: 4px; height: 4px;
+  border-radius: 50%; background: var(--red2); display: block;
+}
+.bubble.me {
+  background: var(--blue-dim); border: 1px solid rgba(58,127,220,0.2);
+  align-self: flex-end; color: var(--text);
+  border-bottom-right-radius: 4px;
+}
+.dots { display: inline-flex; gap: 3px; align-items: center; margin-top: 2px; }
+.dots span {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--text3); animation: blink 1.2s infinite;
+}
+.dots span:nth-child(2) { animation-delay: .2s; }
+.dots span:nth-child(3) { animation-delay: .4s; }
+@keyframes blink { 0%,80%,100%{opacity:.2;} 40%{opacity:1;} }
+
+/* CHAT FOOTER */
+.chat-footer {
+  padding: 12px 20px; border-top: 1px solid var(--border);
+  background: var(--bg2); flex-shrink: 0;
+}
+.chat-input-row { display: flex; gap: 8px; }
+.chat-input {
+  flex: 1; background: var(--bg3);
+  border: 1px solid var(--border2); border-radius: var(--r2);
+  padding: 9px 14px; font-size: 13px; color: var(--text);
+  font-family: 'DM Sans', sans-serif; transition: border-color .15s;
+}
+.chat-input:focus { outline: none; border-color: var(--red); }
+.chat-send {
+  background: var(--red); color: #fff; border: none;
+  border-radius: var(--r2); padding: 9px 20px;
+  font-size: 12px; font-weight: 700; cursor: pointer;
+  font-family: 'Space Grotesk', sans-serif; letter-spacing: .04em;
+  transition: background .15s; white-space: nowrap;
+}
+.chat-send:hover { background: var(--red2); }
+
+/* TOAST */
+.toast {
+  position: fixed; bottom: 20px; right: 20px;
+  background: var(--green); color: #fff;
+  padding: 8px 16px; border-radius: var(--r);
+  font-size: 12px; font-weight: 600; z-index: 999;
+  font-family: 'DM Sans', sans-serif;
+  animation: toastIn .2s ease;
+}
+@keyframes toastIn { from{opacity:0;transform:translateY(8px);} to{opacity:1;transform:none;} }
+
+/* SEPARATOR */
+.sep { height: 1px; background: var(--border); margin: 12px 0; }
+
+/* MOBILE */
+@media (max-width:700px) {
+  .layout { grid-template-columns: 1fr; height: auto; }
+  .sidebar { height: auto; max-height: none; overflow: visible; }
+  .main { min-height: 50vh; }
+  .api-input { width: 130px; }
+  .coaching-layout { height: auto; min-height: calc(100vh - 52px); }
+  .chat-body { min-height: 300px; }
+}
+/* TCO BUTTON */
+.btn-tco {
+  background: var(--bg3); border: 1px solid var(--border2);
+  border-radius: var(--r); padding: 5px 13px;
+  font-size: 12px; font-weight: 600; color: var(--text2);
+  font-family: 'Space Grotesk', sans-serif; letter-spacing: .03em;
+  cursor: pointer; transition: all .18s; white-space: nowrap;
+}
+.btn-tco:hover { border-color: var(--red); color: var(--red); background: var(--red-dim); }
+
+/* TCO MODAL */
+#tco-modal {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  width: min(96vw, 1100px); max-height: 92vh;
+  background: var(--bg2); border: 1px solid var(--border2);
+  border-radius: 18px; display: flex; flex-direction: column;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.18);
+  overflow: hidden;
+}
+.tco-header {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  padding: 18px 24px; border-bottom: 1px solid var(--border);
+  flex-shrink: 0; background: var(--bg2);
+}
+.tco-title { font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 700; color: var(--text); }
+.tco-sub { font-size: 11px; color: var(--text3); margin-top: 2px; }
+.tco-close {
+  background: var(--bg3); border: 1px solid var(--border); border-radius: var(--r);
+  width: 30px; height: 30px; font-size: 14px; cursor: pointer; color: var(--text2);
+  display: flex; align-items: center; justify-content: center;
+  transition: all .15s; flex-shrink: 0;
+}
+.tco-close:hover { background: var(--red-dim); color: var(--red); border-color: var(--red-glow); }
+
+.tco-body {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+  overflow-y: auto; flex: 1;
+}
+.tco-body::-webkit-scrollbar { width: 3px; }
+.tco-body::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+.tco-col {
+  padding: 20px 22px; border-right: 1px solid var(--border);
+  overflow-y: auto;
+}
+.tco-col::-webkit-scrollbar { width: 3px; }
+.tco-col::-webkit-scrollbar-thumb { background: var(--border2); }
+.tco-results-col { padding: 20px 22px; overflow-y: auto; }
+.tco-results-col::-webkit-scrollbar { width: 3px; }
+.tco-results-col::-webkit-scrollbar-thumb { background: var(--border2); }
+
+.tco-section-label {
+  font-size: 9px; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--text3);
+  font-family: 'Space Grotesk', sans-serif; margin-bottom: 8px;
+  display: flex; align-items: center; gap: 6px;
+}
+.tco-section-label::before { content:''; width:12px; height:1px; background:var(--text3); }
+
+.tco-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
+.tco-field { display: flex; flex-direction: column; gap: 3px; margin-bottom: 6px; }
+.tco-field label { font-size: 10px; color: var(--text3); font-weight: 500; }
+.tco-field input {
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: var(--r); padding: 6px 9px;
+  font-size: 12.5px; color: var(--text);
+  font-family: 'DM Sans', sans-serif; transition: border-color .15s;
+  width: 100%;
+}
+.tco-field input:focus { outline: none; border-color: var(--red); background: var(--red-dim); }
+
+/* VS HEADER */
+.tco-vs-header {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 14px;
+}
+.tco-vs-name {
+  flex: 1; background: var(--bg3); border: 1px solid var(--border);
+  border-radius: var(--r2); padding: 8px 12px;
+  font-size: 12px; font-weight: 600; color: var(--text); text-align: center;
+}
+.tco-vs-badge {
+  font-size: 10px; font-weight: 800; color: var(--text3);
+  font-family: 'Space Grotesk', sans-serif; letter-spacing: .1em;
+  flex-shrink: 0;
+}
+
+/* TABLE */
+.tco-table { margin-bottom: 14px; border: 1px solid var(--border); border-radius: var(--r2); overflow: hidden; }
+.tco-th {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+  background: var(--bg3); padding: 7px 12px;
+  font-size: 9px; font-weight: 700; color: var(--text3);
+  font-family: 'Space Grotesk', sans-serif; letter-spacing: .07em;
+  text-transform: uppercase;
+}
+.tco-tr {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+  padding: 7px 12px; border-top: 1px solid var(--border);
+  font-size: 11.5px; color: var(--text2); align-items: center;
+  transition: background .1s;
+}
+.tco-tr:hover { background: var(--bg3); }
+.tco-tr span:first-child { color: var(--text2); }
+.tco-tr span:nth-child(2) { color: var(--text); font-weight: 600; }
+.tco-tr span:nth-child(3) { color: var(--text2); }
+.tco-tr span:nth-child(4) { font-weight: 700; }
+.tco-total-row { background: var(--red-dim) !important; border-top: 2px solid var(--red-glow) !important; }
+.tco-total-row span { color: var(--text) !important; font-weight: 700 !important; font-size: 12.5px; }
+.tco-km-row span:first-child { color: var(--text3) !important; font-size: 11px; }
+.delta-pos { color: var(--green2) !important; }
+.delta-neg { color: var(--red2) !important; }
+
+/* WINNER CARD */
+.tco-winner-card {
+  background: linear-gradient(135deg, rgba(34,201,122,0.1), rgba(34,201,122,0.05));
+  border: 1px solid rgba(34,201,122,0.25);
+  border-radius: var(--r2); padding: 16px; margin-bottom: 14px;
+  text-align: center;
+}
+.tco-winner-label { font-size: 9px; font-weight: 700; color: var(--green2); letter-spacing: .1em; text-transform: uppercase; font-family: 'Space Grotesk', sans-serif; margin-bottom: 6px; }
+.tco-winner-amount { font-family: 'Space Grotesk', sans-serif; font-size: 28px; font-weight: 700; color: var(--green2); line-height: 1; }
+.tco-winner-sub { font-size: 11px; color: var(--text3); margin-top: 4px; }
+.tco-winner-km { font-size: 13px; font-weight: 600; color: var(--green); margin-top: 8px; }
+
+/* BARS */
+.tco-bars { margin-bottom: 14px; display: flex; flex-direction: column; gap: 6px; }
+.bar-row { display: flex; flex-direction: column; gap: 3px; }
+.bar-label { font-size: 10px; color: var(--text3); display: flex; justify-content: space-between; }
+.bar-track { height: 6px; background: var(--bg3); border-radius: 99px; overflow: hidden; position: relative; }
+.bar-iveco { height: 100%; background: var(--red); border-radius: 99px; transition: width .4s ease; }
+.bar-comp { height: 100%; background: var(--text3); border-radius: 99px; transition: width .4s ease; }
+
+/* ARG CARD */
+.tco-arg-card {
+  background: var(--blue-dim); border: 1px solid rgba(58,127,220,0.2);
+  border-radius: var(--r2); padding: 14px; margin-bottom: 12px;
+}
+.tco-arg-label { font-size: 9px; font-weight: 700; color: var(--blue2); letter-spacing: .1em; text-transform: uppercase; font-family: 'Space Grotesk', sans-serif; margin-bottom: 6px; }
+.tco-arg-text { font-size: 12.5px; color: var(--text); line-height: 1.7; font-style: italic; }
+
+.tco-export-btn {
+  width: 100%; padding: 9px; background: var(--bg3); border: 1px solid var(--border2);
+  border-radius: var(--r); font-size: 12px; font-weight: 600; color: var(--text2);
+  font-family: 'Space Grotesk', sans-serif; cursor: pointer; transition: all .15s;
+}
+.tco-export-btn:hover { border-color: var(--blue2); color: var(--blue2); background: var(--blue-dim); }
+
+.tco-pdf-btn { background: var(--red-dim) !important; border-color: var(--red-glow) !important; color: var(--red2) !important; }
+.tco-pdf-btn:hover { background: var(--red) !important; color: #fff !important; border-color: var(--red) !important; }
+
+@media (max-width: 750px) {
+  #tco-modal { width: 98vw; max-height: 95vh; }
+  .tco-body { grid-template-columns: 1fr; }
+  .tco-col { border-right: none; border-bottom: 1px solid var(--border); }
+}
+</style>
+
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="logo">
+    <div class="logo-mark">AP</div>
+    <div>
+      <div><span class="logo-ap">Autopadova</span><span class="logo-sep"> · </span><span class="logo-iv">IVECO</span></div>
+      <div class="logo-sub">Sales Coach</div>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <div class="pill-status" id="iveco-nr1">🏆 #1 România &gt;3,5t</div>
+    <button class="btn-tco" onclick="openTCO()">📊 Calculator TCO</button>
+    <input type="hidden" id="api-key" value="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" />
+  </div>
+</div>
+
+<!-- TCO MODAL OVERLAY -->
+<div id="tco-overlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:500; backdrop-filter:blur(4px);" onclick="if(event.target===this)closeTCO()">
+  <div id="tco-modal">
+    <div class="tco-header">
+      <div>
+        <div class="tco-title">📊 Calculator TCO — Iveco vs. Concurență</div>
+        <div class="tco-sub">Cost Total de Proprietate · 5 ani / 200.000 km</div>
+      </div>
+      <button class="tco-close" onclick="closeTCO()">✕</button>
+    </div>
+
+    <div class="tco-body">
+
+      <!-- LEFT: INPUTS -->
+      <div class="tco-col">
+
+        <div class="tco-section-label">Vehicule comparate</div>
+        <div class="tco-row2">
+          <div class="tco-field">
+            <label>Model Iveco</label>
+            <input id="t-iveco-name" value="Iveco Daily 35S18" />
+          </div>
+          <div class="tco-field">
+            <label>Concurență</label>
+            <input id="t-comp-name" value="Mercedes Sprinter 317" />
+          </div>
+        </div>
+
+        <div class="tco-section-label" style="margin-top:16px">Parametri misiune</div>
+        <div class="tco-row2">
+          <div class="tco-field">
+            <label>Km / an</label>
+            <input id="t-km" type="number" value="60000" oninput="calcTCO()" />
+          </div>
+          <div class="tco-field">
+            <label>Ani utilizare</label>
+            <input id="t-ani" type="number" value="5" min="1" max="10" oninput="calcTCO()" />
+          </div>
+        </div>
+
+        <div class="tco-section-label" style="margin-top:16px">Achiziție</div>
+        <div class="tco-row2">
+          <div class="tco-field">
+            <label>Preț Iveco (EUR fără TVA)</label>
+            <input id="t-iveco-pret" type="number" value="42000" oninput="calcTCO()" />
+          </div>
+          <div class="tco-field">
+            <label>Preț Concurență (EUR)</label>
+            <input id="t-comp-pret" type="number" value="39000" oninput="calcTCO()" />
+          </div>
+        </div>
+        <div class="tco-row2">
+          <div class="tco-field">
+            <label>Valoare reziduală Iveco (%)</label>
+            <input id="t-iveco-rv" type="number" value="20" min="0" max="60" oninput="calcTCO()" />
+          </div>
+          <div class="tco-field">
+            <label>Valoare reziduală Concurență (%)</label>
+            <input id="t-comp-rv" type="number" value="15" min="0" max="60" oninput="calcTCO()" />
+          </div>
+        </div>
+
+        <div class="tco-section-label" style="margin-top:16px">Combustibil</div>
+        <div class="tco-row2">
+          <div class="tco-field">
+            <label>Preț combustibil (lei/litru)</label>
+            <input id="t-fuel-price" type="number" value="7.5" step="0.1" oninput="calcTCO()" />
+          </div>
+          <div class="tco-field">
+            <label>Curs EUR/RON</label>
+            <input id="t-curs" type="number" value="5.0" step="0.01" oninput="calcTCO()" />
+          </div>
+        </div>
+        <div class="tco-row2">
+          <div class="tco-field">
+            <label>Consum Iveco (l/100km)</label>
+            <input id="t-iveco-cons" type="number" value="9.5" step="0.1" oninput="calcTCO()" />
+          </div>
+          <div class="tco-field">
+            <label>Consum Concurență (l/100km)</label>
+            <input id="t-comp-cons" type="number" value="11.0" step="0.1" oninput="calcTCO()" />
+          </div>
+        </div>
+
+        <div class="tco-section-label" style="margin-top:16px">Service & Mentenanță (EUR/an)</div>
+        <div class="tco-row2">
+          <div class="tco-field">
+            <label>Service Iveco / an</label>
+            <input id="t-iveco-svc" type="number" value="450" oninput="calcTCO()" />
+          </div>
+          <div class="tco-field">
+            <label>Service Concurență / an</label>
+            <input id="t-comp-svc" type="number" value="800" oninput="calcTCO()" />
+          </div>
+        </div>
+
+        <div class="tco-section-label" style="margin-top:16px">Alte costuri anuale (EUR)</div>
+        <div class="tco-row2">
+          <div class="tco-field">
+            <label>Asigurare Iveco / an</label>
+            <input id="t-iveco-asig" type="number" value="600" oninput="calcTCO()" />
+          </div>
+          <div class="tco-field">
+            <label>Asigurare Concurență / an</label>
+            <input id="t-comp-asig" type="number" value="650" oninput="calcTCO()" />
+          </div>
+        </div>
+        <div class="tco-row2">
+          <div class="tco-field">
+            <label>Taxe & roviniete Iveco / an</label>
+            <input id="t-iveco-taxe" type="number" value="200" oninput="calcTCO()" />
+          </div>
+          <div class="tco-field">
+            <label>Taxe & roviniete Concurență / an</label>
+            <input id="t-comp-taxe" type="number" value="200" oninput="calcTCO()" />
+          </div>
+        </div>
+        <div class="tco-row2">
+          <div class="tco-field">
+            <label>Downtime cost Iveco / an (EUR)</label>
+            <input id="t-iveco-down" type="number" value="300" oninput="calcTCO()" />
+          </div>
+          <div class="tco-field">
+            <label>Downtime cost Concurență / an</label>
+            <input id="t-comp-down" type="number" value="800" oninput="calcTCO()" />
+          </div>
+        </div>
+
+        <div class="tco-field" style="margin-top:12px">
+          <label>Nr. vehicule în flotă</label>
+          <input id="t-fleet" type="number" value="1" min="1" oninput="calcTCO()" />
+        </div>
+
+      </div>
+
+      <!-- RIGHT: RESULTS -->
+      <div class="tco-results-col">
+
+        <div class="tco-section-label">Rezultate TCO</div>
+
+        <div class="tco-vs-header">
+          <div class="tco-vs-name" id="r-iveco-name">Iveco Daily</div>
+          <div class="tco-vs-badge">VS</div>
+          <div class="tco-vs-name" id="r-comp-name">Mercedes Sprinter</div>
+        </div>
+
+        <!-- BREAKDOWN TABLE -->
+        <div class="tco-table">
+          <div class="tco-th"><span>Categorie</span><span id="rh-iveco">Iveco</span><span id="rh-comp">Concurență</span><span>Δ Iveco câștigă</span></div>
+          <div class="tco-tr" id="tr-achizitie">
+            <span>Achiziție netă</span><span></span><span></span><span></span>
+          </div>
+          <div class="tco-tr" id="tr-combustibil">
+            <span>Combustibil total</span><span></span><span></span><span></span>
+          </div>
+          <div class="tco-tr" id="tr-service">
+            <span>Service total</span><span></span><span></span><span></span>
+          </div>
+          <div class="tco-tr" id="tr-asigurare">
+            <span>Asigurare total</span><span></span><span></span><span></span>
+          </div>
+          <div class="tco-tr" id="tr-taxe">
+            <span>Taxe & roviniete</span><span></span><span></span><span></span>
+          </div>
+          <div class="tco-tr" id="tr-downtime">
+            <span>Downtime costs</span><span></span><span></span><span></span>
+          </div>
+          <div class="tco-tr tco-total-row" id="tr-total">
+            <span>COST TOTAL</span><span></span><span></span><span></span>
+          </div>
+          <div class="tco-tr tco-km-row" id="tr-km">
+            <span>Cost / km</span><span></span><span></span><span></span>
+          </div>
+          <div class="tco-tr tco-km-row" id="tr-luna">
+            <span>Cost / lună</span><span></span><span></span><span></span>
+          </div>
+        </div>
+
+        <!-- WINNER CARD -->
+        <div class="tco-winner-card" id="tco-winner">
+          <div class="tco-winner-label">Avantaj Iveco pe flotă</div>
+          <div class="tco-winner-amount" id="w-total">—</div>
+          <div class="tco-winner-sub" id="w-sub">pe perioada de utilizare</div>
+          <div class="tco-winner-km" id="w-km">— €/km economisit</div>
+        </div>
+
+        <!-- BREAKDOWN BARS -->
+        <div class="tco-bars" id="tco-bars"></div>
+
+        <!-- ARGUMENT CARD -->
+        <div class="tco-arg-card">
+          <div class="tco-arg-label">💬 Replică de vânzare</div>
+          <div class="tco-arg-text" id="tco-arg-text">Completează datele și vei primi argumentul TCO gata de folosit în discuția cu clientul.</div>
+        </div>
+
+        <button class="tco-export-btn" onclick="exportTCOText()">📋 Copiază argumentul TCO</button>
+        <button class="tco-export-btn tco-pdf-btn" onclick="exportTCOpdf()" style="margin-top:6px">⬇ Export PDF — Raport TCO complet</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LAYOUT -->
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sidebar-head">
+      <div class="step-track">
+        <button class="step-pill active" id="pill-1">1 · Date</button>
+        <button class="step-pill" id="pill-2">2 · Profil</button>
+        <button class="step-pill" id="pill-3">3 · Coach</button>
+      </div>
+    </div>
+
+    <!-- FORM -->
+    <div class="form-body" id="form-section">
+      <div class="s-label">Agent & vehicul</div>
+
+      <div class="fg">
+        <label>Agentul de vânzări</label>
+        <input id="agent" placeholder="ex. Cristi Pascal" />
+      </div>
+      <div class="fg">
+        <label>Model Iveco</label>
+        <select id="model">
+          <option value="">Selectează modelul...</option>
+          <optgroup label="Vehicule ușoare">
+            <option>Iveco Daily Van</option>
+            <option>Iveco Daily Cab</option>
+            <option>Iveco Daily 7T</option>
+            <option>Iveco eDaily (electric)</option>
+          </optgroup>
+          <optgroup label="Vehicule medii">
+            <option>Iveco Eurocargo</option>
+          </optgroup>
+          <optgroup label="Vehicule grele">
+            <option>Iveco S-WAY</option>
+            <option>Iveco S-eWAY (electric)</option>
+            <option>Iveco T-WAY</option>
+            <option>Iveco X-WAY</option>
+          </optgroup>
+        </select>
+      </div>
+      <div class="row2">
+        <div class="fg">
+          <label>Versiune / Config</label>
+          <input id="ver" placeholder="35S18 3.0 HI-MATIC" />
+        </div>
+        <div class="fg">
+          <label>Preț EUR (fără TVA)</label>
+          <input id="pret" type="number" placeholder="42000" />
+        </div>
+      </div>
+      <div class="row2">
+        <div class="fg">
+          <label>Unități</label>
+          <input id="units" type="number" placeholder="1" min="1" />
+        </div>
+        <div class="fg">
+          <label>Livrare estimată</label>
+          <input id="deliv" placeholder="stoc / 3 săpt." />
+        </div>
+      </div>
+
+      <div class="s-label">Client</div>
+
+      <div class="fg">
+        <label>Firmă client</label>
+        <input id="co" placeholder="SC Transport SRL" />
+      </div>
+      <div class="row2">
+        <div class="fg">
+          <label>CUI</label>
+          <input id="cui" placeholder="RO12345678" />
+        </div>
+        <div class="fg">
+          <label>Județ / Oraș</label>
+          <input id="loc" placeholder="Iași / Bacău" />
+        </div>
+      </div>
+      <div class="row2">
+        <div class="fg">
+          <label>Persoana de contact</label>
+          <input id="cn" placeholder="Ion Popescu" />
+        </div>
+        <div class="fg">
+          <label>Funcție</label>
+          <input id="cr" placeholder="Director / Patron" />
+        </div>
+      </div>
+
+      <div class="s-label">Flotă & operațional</div>
+
+      <div class="row2">
+        <div class="fg">
+          <label>Vehicule flotă actuale</label>
+          <input id="fln" type="number" placeholder="5" />
+        </div>
+        <div class="fg">
+          <label>Km anual / vehicul</label>
+          <input id="km" type="number" placeholder="60000" />
+        </div>
+      </div>
+      <div class="row2">
+        <div class="fg">
+          <label>Flotă actuală (mărci)</label>
+          <input id="flota" placeholder="3x DAF, 2x Ford Transit" />
+        </div>
+        <div class="fg">
+          <label>Buget lunar EUR/buc</label>
+          <input id="buget" type="number" placeholder="900" />
+        </div>
+      </div>
+      <div class="fg">
+        <label>Tip activitate</label>
+        <input id="tip" placeholder="transport marfă / construcții / curierat..." />
+      </div>
+      <div class="fg">
+        <label>Context · Concurență · Obiecții preliminare</label>
+        <textarea id="ctx" placeholder="Are ofertă de la Renault, îngrijorat de downtime, interesat și de leasing..."></textarea>
+      </div>
+
+      <button class="btn-start" onclick="startResearch()">🔍  Cercetează & Pornește Sesiunea</button>
+    </div>
+
+    <!-- DOSAR -->
+    <div class="dosar-body" id="dosar-section" style="display:none">
+      <div id="dosar-content"></div>
+      <div class="sep"></div>
+      <button class="btn-reset" onclick="resetAll()">↩ Dosar nou</button>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main" id="main-area">
+    <div class="empty-state">
+      <div class="empty-truck">🚛</div>
+      <h2>Coach Vânzări Iveco</h2>
+      <p>Completează datele clientului în panoul din stânga și pornește sesiunea pentru briefing personalizat și coaching live în timp real.</p>
+
+      <p style="color:var(--text3);font-size:11px;margin-top:8px">IVECO #1 România · Cotă piață 18,2% · Autopadova Iași & Bacău</p>
+    </div>
+  </div>
+
+</div><!-- /layout -->
+
+<script>
+const API = 'https://api.anthropic.com/v1/messages';
+let D = {}, hist = [], curStage = 0, researchText = '';
+
+/* ---------- KEY ---------- */
+function saveKey() {}
+function getKey() {
+  return document.getElementById('api-key').value.trim();
+}
+function showToast(msg, type) {
+  const t = document.createElement('div'); t.className = 'toast';
+  if (type === 'err') t.style.background = '#e8351a';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 2800);
+}
+function gv(id) { return (document.getElementById(id)||{}).value?.trim() || ''; }
+
+/* ---------- PILLS ---------- */
+function setPills(step) {
+  [1,2,3].forEach(i => {
+    const el = document.getElementById('pill-'+i);
+    el.className = 'step-pill' + (i < step ? ' done' : i === step ? ' active' : '');
+  });
+}
+
+/* ---------- RESET ---------- */
+function resetAll() {
+  document.getElementById('form-section').style.display = '';
+  document.getElementById('dosar-section').style.display = 'none';
+  setPills(1); hist = []; researchText = '';
+  document.getElementById('main-area').innerHTML = `
+    <div class="empty-state">
+      <div class="empty-truck">🚛</div>
+      <h2>Coach Vânzări Iveco</h2>
+      <p>Completează datele clientului și pornește sesiunea.</p>
+    </div>`;
+}
+
+/* ---------- START ---------- */
+async function startResearch() {
+  const co = gv('co'), model = gv('model');
+  if (!co || !model) { alert('Completează cel puțin firma clientului și modelul Iveco.'); return; }
+  D = { agent: gv('agent')||'agent', model, ver: gv('ver'), pret: gv('pret'),
+        units: gv('units')||'1', deliv: gv('deliv'), co, cui: gv('cui'),
+        loc: gv('loc'), cn: gv('cn'), cr: gv('cr'), fln: gv('fln'),
+        km: gv('km'), flota: gv('flota'), buget: gv('buget'),
+        tip: gv('tip'), ctx: gv('ctx') };
+
+  document.getElementById('form-section').style.display = 'none';
+  document.getElementById('dosar-section').style.display = '';
+  setPills(2);
+  renderDosar();
+  showResearchUI();
+  await doResearch();
+}
+
+/* ---------- DOSAR ---------- */
+function renderDosar() {
+  const initials = D.co.substring(0,2).toUpperCase();
+  const tcoEst = D.pret && D.units ? (Number(D.pret)*Number(D.units)).toLocaleString('ro') : null;
+  document.getElementById('dosar-content').innerHTML = `
+    <div class="client-header">
+      <div class="avatar">${initials}</div>
+      <div>
+        <div class="client-name">${D.co}</div>
+        <div class="client-meta">${[D.cui,D.loc].filter(Boolean).join(' · ')}</div>
+      </div>
+    </div>
+    <div class="info-list">
+      ${D.cn ? `<div class="ir"><span class="k">Contact</span><span class="v">${D.cn}${D.cr?' · '+D.cr:''}</span></div>` : ''}
+      <div class="ir"><span class="k">Vehicul</span><span class="v">${D.model} ${D.ver}</span></div>
+      ${D.pret ? `<div class="ir"><span class="k">Preț EUR</span><span class="v">${Number(D.pret).toLocaleString('ro')}${tcoEst&&D.units>1?' · total ~'+tcoEst:''}</span></div>` : ''}
+      ${D.deliv ? `<div class="ir"><span class="k">Livrare</span><span class="v">${D.deliv}</span></div>` : ''}
+      ${D.tip ? `<div class="ir"><span class="k">Activitate</span><span class="v">${D.tip}</span></div>` : ''}
+      ${D.km ? `<div class="ir"><span class="k">Km/an</span><span class="v">${Number(D.km).toLocaleString('ro')} km</span></div>` : ''}
+      ${D.flota ? `<div class="ir"><span class="k">Flotă actuală</span><span class="v">${D.flota}</span></div>` : ''}
+      ${D.buget ? `<div class="ir"><span class="k">Buget lunar</span><span class="v">${D.buget} EUR/buc</span></div>` : ''}
+    </div>`;
+}
+
+/* ---------- RESEARCH UI ---------- */
+function showResearchUI() {
+  document.getElementById('main-area').innerHTML = `
+    <div class="main-pad">
+      <div class="rscard">
+        <div class="rscard-title">Analiză Client</div>
+        <div class="status-row">
+          <div class="dot dot-loading" id="rs-dot"></div>
+          <span id="rs-text">Se analizează <strong>${D.co}</strong>...</span>
+        </div>
+        <div id="research-content"></div>
+      </div>
+      <div id="proceed-area" style="display:none">
+        <div class="cta-row">
+          <button class="btn-cta" onclick="startCoaching()">▶ Pornește sesiunea de coaching →</button>
+        </div>
+      </div>
+    </div>`;
+}
+
+/* ---------- RESEARCH API ---------- */
+async function doResearch() {
+  const prompt = `Ești un analist senior care pregătește un agent de vânzări Iveco din România (dealer Autopadova, Iași/Bacău).
+
+FIRMA: "${D.co}" | CUI: "${D.cui||'necunoscut'}" | Locație: ${D.loc||'Moldova, România'}
+Activitate: ${D.tip||'transport'} | Flotă actuală: ${D.flota||'necunoscută'} | Km/an: ${D.km||'necunoscut'}
+Vehicul propus: ${D.model} ${D.ver} | Preț: ${D.pret||'—'} EUR | Context/Concurență: ${D.ctx||'necunoscută'}
+
+Context piață: IVECO este lider în România segment >3,5t cu 18,2% cotă de piață (2024). Autopadova este dealer autorizat în Iași și Bacău.
+
+Generează profil de business în JSON strict:
+{
+  "firma": {
+    "nume": "...",
+    "domeniu": "...",
+    "descriere": "2-3 propoziții concise despre firmă și activitate",
+    "marime": "micro|mică|medie|mare",
+    "locatie": "..."
+  },
+  "industrie": {
+    "sector": "...",
+    "tendinte": ["tendință relevantă 1", "tendință 2", "tendință 3"],
+    "provocari": ["provocare operațională 1", "provocare 2"]
+  },
+  "oportunitate": {
+    "unghi_principal": "De ce are nevoie de Iveco acum — argument specific și concret",
+    "replica_deschidere": "Prima replică exactă, naturală, pe care agentul o spune când intră — referință la activitatea firmei",
+    "risc_principal": "Ce riscă concret dacă alege concurența sau amână decizia"
+  },
+  "nota": "Ce e cert vs. dedus dacă firma nu e publică"
+}
+
+Răspunde EXCLUSIV cu JSON valid. Fără backticks, fără text în afara JSON. Totul în română.`;
+
+  try {
+    const r = await fetch(API, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': getKey(),
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+    const data = await r.json();
+    const txt = (data.content||[]).map(i=>i.text||'').join('');
+    researchText = txt;
+    let parsed = null;
+    try { parsed = JSON.parse(txt.replace(/```json|```/g,'').trim()); } catch(e){}
+    document.getElementById('rs-dot').className = 'dot dot-ok';
+    document.getElementById('rs-text').innerHTML = `Profil generat pentru <strong>${D.co}</strong>`;
+    if (parsed) renderResearch(parsed);
+    else document.getElementById('research-content').innerHTML = `<div style="font-size:12.5px;color:var(--text2);margin-top:10px;white-space:pre-wrap;line-height:1.7">${txt}</div>`;
+    document.getElementById('proceed-area').style.display = '';
+  } catch(e) {
+    document.getElementById('rs-dot').className = 'dot dot-err';
+    document.getElementById('rs-text').textContent = 'Eroare la generare profil. Verifică conexiunea — poți continua oricum.';
+    document.getElementById('proceed-area').style.display = '';
+  }
+}
+
+/* ---------- RENDER RESEARCH ---------- */
+function renderResearch(d) {
+  const f = d.firma||{}, ind = d.industrie||{}, opp = d.oportunitate||{};
+  const szBadge = { micro:'badge-r', 'mică':'badge-a', medie:'badge-b', mare:'badge-g' };
+  const initials = (f.nume||D.co).substring(0,2).toUpperCase();
+
+  let html = `<div class="profile-rcard">
+    <div class="profile-rhead">
+      <div class="avatar" style="border-radius:12px">${initials}</div>
+      <div style="flex:1">
+        <div class="profile-rname">${f.nume||D.co}</div>
+        <div class="profile-rsub">${[f.domeniu,f.locatie].filter(Boolean).join(' · ')}</div>
+      </div>
+      ${f.marime?`<span class="badge ${szBadge[f.marime]||'badge-b'}">${f.marime}</span>`:''}
+    </div>
+    <p class="desc-text">${f.descriere||'—'}</p>
+  </div>`;
+
+  if (ind.tendinte?.length || ind.provocari?.length) {
+    html += `<div class="rscard" style="margin-bottom:10px">
+      <div class="rscard-title">Piață · ${ind.sector||'Industrie'}</div>
+      <div class="trend-list">
+        ${(ind.tendinte||[]).map(t=>`<div class="trend-item"><span class="trend-arrow">→</span><span>${t}</span></div>`).join('')}
+        ${(ind.provocari||[]).map(p=>`<div class="trend-item"><span class="trend-arrow trend-warn">⚠</span><span style="color:var(--gold)">${p}</span></div>`).join('')}
+      </div>
+    </div>`;
+  }
+
+  if (opp.unghi_principal) {
+    html += `<div class="opp-box green"><div class="opp-label green">Unghi de vânzare</div><div class="opp-text green">${opp.unghi_principal}</div></div>`;
+  }
+  if (opp.replica_deschidere) {
+    html += `<div class="opp-box blue"><div class="opp-label blue">Replică de deschidere</div><div class="opp-text blue">„${opp.replica_deschidere}"</div></div>`;
+  }
+  if (opp.risc_principal) {
+    html += `<div class="opp-box amber"><div class="opp-label amber">Risc principal</div><div class="opp-text amber">${opp.risc_principal}</div></div>`;
+  }
+  if (d.nota) {
+    html += `<p class="nota-text">ℹ ${d.nota}</p>`;
+  }
+
+  document.getElementById('research-content').innerHTML = html;
+}
+
+/* ========== COACHING ========== */
+const STAGES = [
+  { l:'Calificare', c:['Cum deschid conversația?','Ce întrebări de calificare pun?','Clientul spune «doar ne uităm»','Cum aflu km și aplicația reală?','Cum qualific nevoia de capacitate de încărcare?'] },
+  { l:'Prezentare', c:['Argumente șasiu vs. Sprinter/Transit','Motor 3.0 / 210 CP — cum îl prezint?','Hi-Matic ZF 8 trepte vs. concurență','Volum 19,6m³ — cel mai mare din clasă','Siguranță GSR-B — ce înseamnă pentru client?','Manevrabilitate Daily vs. Sprinter (3,2m rază mai mică)'] },
+  { l:'Trial Close', c:['Cum fac trial close acum?','Clientul ezită — ce zic?','Ce întreb înainte de cifre?','Semnalele de cumpărare pe care le văd'] },
+  { l:'TCO & Ofertă', c:['Calculează TCO 3 ani','Garanție 3 ani Drive Line Plus — cum o prezint?','Cum prezint leasing flotă IVECO Financial Services?','Argumentează prețul pe km','Service Autopadova Iași/Bacău — avantaj concret','Finanțare și rate lunare'] },
+  { l:'Obiecții', c:['Prețul e prea mare','Trebuie să vorbesc cu șeful','Vreau și alte oferte','Nu e momentul potrivit','Prefer DAF / Mercedes Sprinter / Ford Transit','Sprinter-ul are mai multă piață de service'] },
+  { l:'Electric', c:['Clientul întreabă de eDaily','Autonomie reală eDaily — ce garantez?','ePTO pentru aplicații speciale','Cum justific investiția în electric?','eDaily vs. diesel — TCO 5 ani'] },
+  { l:'Închidere', c:['Cum închid azi?','Clientul cere timp','Cum propun LOI sau rezervare?','Follow-up structurat dacă nu decide azi'] }
+];
+const OBJ_QUICK = ['Prețul e prea mare','Vorbesc cu șeful','Prefer Sprinter/Transit','Nu e momentul','Service prea departe','Livrare prea lungă','Prefer să aștept modelul nou'];
+
+function startCoaching() {
+  setPills(3);
+  document.getElementById('main-area').innerHTML = `
+    <div class="coaching-layout">
+      <div class="coaching-top">
+        <div class="stage-track" id="stage-bar"></div>
+        <div class="stage-chips-row" id="stage-chips"></div>
+        <div class="quick-row" style="margin-top:8px">
+          <span class="qchip-label">Obiecții rapide:</span>
+          ${OBJ_QUICK.map(o=>`<button class="qchip" onclick="sendQ('Obiecție client: ${o.replace(/'/g,"\\'")}','Obiecții')">${o}</button>`).join('')}
+        </div>
+      </div>
+      <div class="chat-body" id="chat"></div>
+      <div class="chat-footer">
+        <div class="chat-input-row">
+          <input class="chat-input" id="msg" placeholder="Descrie situația sau întreabă coach-ul..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMsg();}" />
+          <button class="chat-send" onclick="sendMsg()">Trimite →</button>
+        </div>
+      </div>
+    </div>`;
+  renderStageBar(); genBriefing();
+}
+
+function renderStageBar() {
+  document.getElementById('stage-bar').innerHTML = STAGES.map((s,i)=>
+    `<button class="stage-btn${i===0?' on':''}" id="st${i}" onclick="setStage(${i})">${s.l}</button>`
+  ).join('');
+  setStage(0);
+}
+
+function setStage(i) {
+  curStage = i;
+  STAGES.forEach((_,j)=>{
+    const el = document.getElementById('st'+j);
+    if (el) el.className = 'stage-btn'+(j===i?' on':'');
+  });
+  document.getElementById('stage-chips').innerHTML = STAGES[i].c.map(c=>
+    `<button class="schip" onclick="sendQ('${c.replace(/'/g,"\\'")}','${STAGES[i].l}')">${c}</button>`
+  ).join('');
+}
+
+/* ---------- SYSTEM PROMPT ---------- */
+function sysPrompt() {
+  const tco = D.pret && D.km && D.units
+    ? Math.round((Number(D.pret) + Number(D.km)*0.09*3) * Number(D.units)).toLocaleString('ro')
+    : 'N/A';
+  return `Ești un coach senior de vânzări pentru Autopadova — dealer autorizat IVECO în Iași și Bacău, România. Metodologie: Andy Elliott adaptată vânzări comerciale LCV & camioane.
+
+Context brand: IVECO este liderul pieței românești segment >3,5t cu 18,2% cotă (2024). Autopadova oferă service autorizat, piese originale, leasing IVECO Financial Services, program IVECO Drivers Fidelity Club.
+
+════════════════════════════════════
+KNOWLEDGE BASE PRODUS — IVECO DAILY MY24
+(extras din documentele oficiale de produs Autopadova)
+════════════════════════════════════
+
+## ARGUMENTE UNICE IVECO DAILY — DE VÂNZARE
+• SINGURUL motor de 3.0 litri din piață — F1C 210 CP, 470 Nm — putere maximă în clasă
+• GAMA cea mai extinsă: 3,5t → 7,2t MTMA — concurența se oprește la 5,5t
+• SARCINA UTILĂ până la 4,9t — cea mai mare din segment
+• CUTIE AUTOMATĂ ZF 8 trepte (Hi-Matic) disponibilă pe TOATĂ gama — concurența n-o oferă pe toate versiunile
+• SASIU DIN OȚEL CA LA CAMIOANE — lonjeroane industriale, rezistență superioară Sprinter/Transit
+• CEL MAI MARE VOLUM DIN CLASĂ: 19,6 m³ (VAN)
+• LUNGIME DE CAROSARE PESTE 6 METRI — cel mai bun din piață
+• CONECTIVITATE AVANSATĂ GRATUITĂ (IVECO On) cu diagnosticare la distanță
+• VERSIUNI FULL ELECTRIC (eDaily) pentru toată gama
+• VERSIUNE 4x4 permanent — unicat în segment
+• 3 ANI GARANȚIE (Drive Line Plus) — armonizat cu concurența din MY24
+
+## MOTOARE DISPONIBILE (MY24)
+### F1A — 2,3 litri (Light Duty & Heavy Duty dual)
+- 116 CP / 270 Nm
+- 136 CP / 320 Nm  
+- 160 CP / 350 Nm — disponibil LD și HD (omologare duală — UNIC în piață!)
+### F1C — 3,0 litri (Heavy Duty)
+- 146 CP / 350 Nm
+- 160 CP / 350 Nm
+- 180 CP / 400 Nm
+- 210 CP / 470 Nm — CEL MAI PUTERNIC DIN CLASĂ
+
+### VS. CONCURENȚĂ motoare:
+- Mercedes Sprinter: max 190 CP (3.0l) — Daily bate cu 210 CP
+- VW Crafter: 1 motor TDI max 163 CP — Daily oferă 6 niveluri de putere
+- Renault/Opel: 1 motor max 150 CP — Daily câștigă clar
+- Ford Transit: max 155 CP — Daily cu 210 CP este superior
+
+## GARANȚIE MY24 — DRIVE LINE PLUS
+- 3 ani garanție (inclusiv al 3-lea an nou adăugat MY24) în limita 40.000 km/an
+- Acoperire națională
+- Drive Line Plus = Drive Line + componente suplimentare până la 120.000 km total
+- Acoperiri extra: sistem evacuare complet, PTO, șasiu/suspensii/direcție, rulmenți
+
+## INTERVALE SERVICE
+- F1A: interval standard conform utilizare normală de transport
+- F1C: interval standard conform utilizare normală
+- Pentru misiuni dure (door-to-door urban, construcții): recomandare la jumătate de interval
+- Autopadova Iași & Bacău = service autorizat, piese originale, disponibilitate imediată
+
+## SIGURANȚĂ ACTIVĂ MY24 — STANDARD GSR-B (din iulie 2024)
+- ELK — Emergency Lane Keeping (STANDARD N1): corectează direcția automat
+- AEBS — Advanced Emergency Braking (STANDARD N1+N2): frânare autonomă față de pietoni și vehicule
+- ISA — Intelligent Speed Assist (STANDARD): recunoaștere semne viteză
+- BSIS — Blind Spot Information System: unghi mort + avertizare deschidere ușă
+- MOIS — Moving Off Information System: protecție pietoni la plecare de pe loc
+- DDAW — Driver Drowsiness Warning: avertizare somnolență
+- TPMS — Monitorizare presiune pneuri: STANDARD pe toate versiunile
+- Crosswind Assist: singurul sistem care funcționează și la CAB cu suprastructură
+
+## SIGURANȚĂ PASIVĂ MY24
+- Șasiu ranforsat conform GSR-B: protecție frontală (ECE R137), laterală (ECE R95), dorsală (ECE R153)
+- Rezervoare noi poziționate ÎNTRE lonjeroane (impact lateral ECE 95)
+- Airbaguri șofer + pasager — OBLIGATORII din MY24
+- Zonă deformabilă frontală + traversă nouă
+
+## VAN — DIMENSIUNI ȘI VOLUME
+| Ampatament | Volum cargo | MTMA |
+|---|---|---|
+| 3000 mm | 7,3–8 m³ | 3,5–3,8t |
+| 3520 mm | 10,8 m³ (H2) | 3,5–5,2t |
+| 3520L mm | 12–13,4 m³ | 3,5–5,4t |
+| 4100 mm | 16–18 m³ | 3,5–7,2t |
+| 4100L mm | 17,5–19,6 m³ | 4,6–7,2t |
+
+## CAB — AMPATAMENTE ȘI LUNGIMI CAROSARE
+- 3000 / 3450 / 3750 / 4100 / 4350 / 4750 / 5100 mm
+- Lungime utilă carosare: 2,5m → peste 6m
+- Aceeași lungime utilă la 3750 și 4100 (3750 = rază virare mai bună; 4100 = stabilitate încărcat)
+
+## MANEVRABILITATE (avantaj vs. concurență)
+- Daily 3,5t SW (10,8 m³): diametru virare 10,4m
+- Sprinter 2013 (10,5 m³): 13,6m — Daily câștigă cu 3,2m!
+- Transit FWD (11,3 m³): 13,3m
+- Ducato FWD: 12,5m
+- Daily 12 m³: diametru 11,9m vs. Sprinter 13,6m
+
+## EFICIENȚĂ COMBUSTIBIL (MY24)
+- Reducere până la -5,5% consum față de versiunile anterioare
+- Eco Switch: 2 moduri motor (Full / Eco) — adaptare la misiune
+- Smart Alternator: recuperare energie la decelerare
+- EcoMac: compresor AC activat doar la nevoie
+- Aerodynamics îmbunătățite
+
+## CNG (GAZ NATURAL)
+- Motor 3 litri CNG — MOD SILENȚIOS de funcționare
+- MY24: versiunile CNG sunt categoria N2 (pentru omologare)
+- Disponibil pe game: 38S, 40C, 6,5t, 7,2t + VAN și CAB
+- Avantaj: costuri combustibil mai mici, emisii reduse, acces zone emisii reduse
+
+## eDAILY MY24 — ELECTRIC
+- Baterii 37 kWh/modul — până la 4 module (148 kWh total)
+- Autonomie WLTP: până la 400 km (2 baterii); 72C cu 4 baterii = 240 km regional
+- Fast charge DC: până la 115 kW (3-4 baterii) — 100 km în 20 minute!
+- Încărcare AC: 11 kW standard
+- ePTO Low Voltage: 24V (6kW) și 48V (10kW) — lift, refrigerare, macarale
+- ePTO High Voltage: până la 50 kW — vidanje, pompieri, nacele, gunoiere
+- Suspensie pneumatică disponibilă pe 42S — SINGURUL eLCV din segment!
+- 7,2t MTMA cu WB 5100mm — PRIMUL eLCV pentru misiuni regionale
+- IVECO On Electric: control fleet de la distanță, programare climatizare, moduri condus
+
+## eMoovy MY24 (segment Midi eLCV)
+- Autoșasiu cu cabină derivat din Hyundai Staria (parteneriat tehnologic)
+- Autonomie până la 320 km WLTP (baterie 76 kWh)
+- Motor până la 160 kW și 350 Nm — CEA MAI MARE PUTERE DIN CATEGORIE
+- Fast charge până la 350 kW (arhitectură 800V) — CEA MAI RAPIDĂ DIN CATEGORIE
+- Volum cargo până la 10 m³ pe vehicul de dimensiuni medii
+- Priză 220V / 3,5 kWh pentru echipamente externe
+- Siguranță: airbaguri tip cortină, centură 3 puncte pasager, pregătit GSR-C (2026)
+- Sarcină utilă: max 1.530 kg (63 kWh) / 1.480 kg (76 kWh)
+- Masă totală: 3,5t — cea mai mare sarcină pe punți din segment midi
+
+## CONECTIVITATE — IVECO ON (gratuit)
+- Monitorizare proactivă flotă
+- Diagnosticare de la distanță
+- OTA (Over The Air) software updates
+- Remote controls & settings
+- Mentenanță predictivă pentru optimizare M&R
+- Keyless Entry & Go (MY24)
+
+## OPȚIONALE CHEIE DE VÂNZARE
+- Hi-Matic ZF 8 trepte: singura cutie automată full-range în clasă
+- Suspensie pneumatică spate: confort superior + stabilitate
+- Blocare diferențial spate: tracțiune pe teren dificil
+- Crosswind Assist: stabilizare la vânt lateral — unicat cu suprastructuri
+- Hill Descent Control + Traction Plus
+- Run Lock: motor funcționează cu cabina încuiată (ambulanțe, intervenții)
+- Imobilizator High Protection 78084
+- Incălzitor independent integrat (programabil prin bord/infotainment)
+- Capitonaj plastic vs. lemn: -60% greutate (recomandat lemn pentru România, temperaturi variabile)
+- Cârlig remorcare sferic 50mm: orice Daily remorcă până la 3,5t
+
+## BOARD DIGITAL + INFOTAINMENT MY24
+- Bord digital configurabil 10"
+- Infotainment 10" și 7" — navigație, Bluetooth, USB
+- Autonomous Level 2 driving
+- Avertizare unghi mort & deschidere ușă
+- Parcare senzori față + spate STANDARD
+
+════════════════════════════════════
+DOSAR CLIENT ACTIV
+════════════════════════════════════
+• Agent: ${D.agent}
+• Client: ${D.co}${D.cui?' (CUI: '+D.cui+')':''}
+• Locație: ${D.loc||'Moldova, România'}
+• Contact: ${D.cn||'—'}${D.cr?', '+D.cr:''}
+• Activitate: ${D.tip||'—'}
+• Flotă actuală: ${D.flota||'—'} | Vehicule: ${D.fln||'—'} | Km/an: ${D.km?Number(D.km).toLocaleString('ro')+' km':'—'}
+• Buget lunar: ${D.buget?D.buget+' EUR/buc':'—'}
+• Vehicul propus: ${D.model} ${D.ver}
+• Preț: ${D.pret?D.pret+' EUR':'—'} | Unități: ${D.units||'1'} | Livrare: ${D.deliv||'—'}
+• TCO estimat 3 ani total: ${tco} EUR
+• Context/Concurență: ${D.ctx||'—'}
+
+PROFIL CERCETAT: ${researchText?researchText.substring(0,600):'Nedisponibil.'}
+
+════════════════════════════════════
+METODOLOGIE ANDY ELLIOTT — VÂNZĂRI IVECO
+════════════════════════════════════
+Structura obligatorie: Califică (volum, km, downtime, aplicație) → Prezintă specs LEGATE de business → Trial close → TCO (nu preț sticker) → Obiecții pe date reale din knowledge base → Închide cu pas concret AZI
+
+Trial closes cheie:
+• «Dacă TCO-ul e sub ținta voastră lunară, dați comanda?»
+• «Se potrivește configurația pentru ruta voastră?»
+• «Dacă rezolvăm finanțarea astăzi, semnăm comanda?»
+• «Ce mai rămâne între noi și o decizie?»
+
+Tratarea obiecțiilor:
+• Preț → TCO pe 3 ani (combustibil+service+downtime) vs. concurență
+• Șef → «Haideți să-l sunăm acum împreună — 5 minute»
+• Concurență → Bifează criteriile: uptime garantat, service Iași/Bacău, piese originale, IVECO #1 România
+• Timing → Urgență stoc / livrare / creștere prețuri / sezon
+
+Limbaj corect:
+• NU: «îți place?» → DA: «rezolvă problema flotei?»
+• NU: «hai la cifre» → DA: «calculăm TCO real per km»
+• NU: «vom reveni» → DA: «fix mâine la 10 te sun cu oferta finală»
+
+Greșeli de evitat: comparare preț sticker, calificare volum prea târziu, lăsat «mă gândesc» fără follow-up fix, neutilizarea argumentului #1 România.
+
+ROLUL TĂU: Dai replici exacte, cuvânt cu cuvânt, pe care agentul ${D.agent} le poate folosi imediat. Direct, energic, fără teorie. Bullet points • pentru pași/replici. Maximum 350 cuvinte per răspuns. Totul în română.`;
+}
+
+/* ---------- CHAT ---------- */
+function addBubble(role, text, id) {
+  const a = document.getElementById('chat');
+  const d = document.createElement('div');
+  d.className = 'bubble ' + (role==='ai'?'ai':'me');
+  if (id) d.id = id;
+  if (role==='ai') d.innerHTML = `<div class="ai-lbl">Coach Iveco</div>` + formatText(text);
+  else d.textContent = text;
+  a.appendChild(d);
+  a.scrollTop = a.scrollHeight;
+}
+
+function formatText(t) {
+  return t
+    .replace(/\n/g,'<br>')
+    .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+    .replace(/•/g,'<span style="color:var(--red)">•</span>');
+}
+
+function addLoading(id) {
+  const a = document.getElementById('chat');
+  const d = document.createElement('div');
+  d.className = 'bubble ai'; d.id = id;
+  d.innerHTML = `<div class="ai-lbl">Coach Iveco</div><div class="dots"><span></span><span></span><span></span></div>`;
+  a.appendChild(d); a.scrollTop = a.scrollHeight;
+}
+
+async function callAI(userMsg) {
+  hist.push({ role:'user', content:userMsg });
+  const lid = 'l'+Date.now();
+  addLoading(lid);
+  try {
+    const r = await fetch(API, {
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'x-api-key':getKey(),
+        'anthropic-version':'2023-06-01',
+        'anthropic-dangerous-direct-browser-access':'true'
+      },
+      body: JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1000,
+        system:sysPrompt(),
+        messages:hist
+      })
+    });
+    const data = await r.json();
+    const txt = (data.content||[]).map(i=>i.text||'').join('');
+    if (!txt && data.error) throw new Error(data.error.message||'API error');
+    hist.push({ role:'assistant', content:txt });
+    const el = document.getElementById(lid);
+    if (el) el.innerHTML = `<div class="ai-lbl">Coach Iveco</div>` + formatText(txt);
+    document.getElementById('chat').scrollTop = 9999;
+  } catch(e) {
+    const el = document.getElementById(lid);
+    if (el) el.innerHTML = `<div class="ai-lbl">Coach Iveco</div><span style="color:var(--red2)">Eroare: ${e.message}. Contactează administratorul.</span>`;
+  }
+}
+
+async function genBriefing() {
+  await callAI(`Generează briefingul complet pre-întâlnire pentru agentul ${D.agent} — client: ${D.co}, vehicul: ${D.model} ${D.ver}:
+
+1. **Top 3 insight-uri** din profilul clientului relevante direct pentru această vânzare
+2. **4 întrebări de calificare** prioritare pentru această firmă (specifice, nu generice)
+3. **Argumentul principal de valoare** Iveco vs. situația lor actuală (${D.flota||'flotă necunoscută'}, ${D.km?D.km+' km/an':'km necunoscut'})
+4. **Prima replică exactă** de deschidere pentru ${D.agent} — naturală, nu de agent
+5. **Primul trial close** recomandat pentru această situație`);
+}
+
+async function sendMsg() {
+  const inp = document.getElementById('msg');
+  const txt = inp.value.trim();
+  if (!txt) return;
+  inp.value = '';
+  addBubble('me', txt);
+  await callAI(txt);
+}
+
+async function sendQ(txt, stage) {
+  addBubble('me', txt);
+  await callAI(`[Etapa: ${stage}] ${txt}`);
+}
+
+
+
+/* ========== PDF EXPORT — zero external dependencies ========== */
+function exportTCOpdf() {
+
+  // ── collect data ──────────────────────────────────────
+  const iName = document.getElementById('t-iveco-name').value || 'Iveco Daily';
+  const cName = document.getElementById('t-comp-name').value  || 'Concurenta';
+  const kmAn  = gn('t-km');  const ani = gn('t-ani');
+  const fleet = Math.max(1, gn('t-fleet'));
+  const curs  = gn('t-curs') || 5;
+  const totKm = kmAn * ani;
+  const iP=gn('t-iveco-pret'), cP=gn('t-comp-pret');
+  const iRV=gn('t-iveco-rv')/100, cRV=gn('t-comp-rv')/100;
+  const iAch=iP*(1-iRV), cAch=cP*(1-cRV);
+  const fl=gn('t-fuel-price');
+  const iC=gn('t-iveco-cons'), cC=gn('t-comp-cons');
+  const iFu=(totKm/100)*iC*fl/curs, cFu=(totKm/100)*cC*fl/curs;
+  const iSv=gn('t-iveco-svc')*ani, cSv=gn('t-comp-svc')*ani;
+  const iAs=gn('t-iveco-asig')*ani,cAs=gn('t-comp-asig')*ani;
+  const iTx=gn('t-iveco-taxe')*ani,cTx=gn('t-comp-taxe')*ani;
+  const iDn=gn('t-iveco-down')*ani,cDn=gn('t-comp-down')*ani;
+  const iT1=iAch+iFu+iSv+iAs+iTx+iDn, cT1=cAch+cFu+cSv+cAs+cTx+cDn;
+  const iT=iT1*fleet, cT=cT1*fleet, delta=cT-iT;
+  const iKm=iT1/(totKm||1), cKm=cT1/(totKm||1);
+  const iLu=iT1/(ani*12), cLu=cT1/(ani*12);
+
+  const n0 = v => Math.round(v).toLocaleString('ro')+' EUR';
+  const nkm= v => (Math.round(v*1000)/1000).toLocaleString('ro',{minimumFractionDigits:3})+' EUR/km';
+  const dateStr = new Date().toLocaleDateString('ro-RO',{day:'2-digit',month:'2-digit',year:'numeric'});
+  const agent = (typeof D !== 'undefined' && D.agent) ? D.agent : 'Autopadova';
+
+  // ── PDF geometry (points, A4 = 595x842) ──────────────
+  const PW=595, PH=842, ML=40, MR=40, CW=PW-ML-MR;
+  const Yf = y => PH - y; // flip y-axis (PDF origin = bottom-left)
+
+  // ── stream commands array ─────────────────────────────
+  const cmds = [];
+
+  function esc(s){ return String(s).replace(/\\/g,'\\\\').replace(/\(/g,'\\(').replace(/\)/g,'\\)').replace(/[^\x20-\x7E]/g,'?'); }
+  function rg(r,g,b){ return `${(r/255).toFixed(4)} ${(g/255).toFixed(4)} ${(b/255).toFixed(4)}`; }
+
+  function filled(x,y,w,h,r,g,b){
+    cmds.push(`${rg(r,g,b)} rg ${x.toFixed(1)} ${Yf(y+h).toFixed(1)} ${w.toFixed(1)} ${h.toFixed(1)} re f`);
+  }
+  function stroked(x,y,w,h,r,g,b,lw){
+    cmds.push(`${(lw||0.5).toFixed(2)} w ${rg(r,g,b)} RG ${x.toFixed(1)} ${Yf(y+h).toFixed(1)} ${w.toFixed(1)} ${h.toFixed(1)} re S`);
+  }
+  function hln(x1,x2,y,r,g,b,lw){
+    cmds.push(`${(lw||0.4).toFixed(2)} w ${rg(r,g,b)} RG ${x1.toFixed(1)} ${Yf(y).toFixed(1)} m ${x2.toFixed(1)} ${Yf(y).toFixed(1)} l S`);
+  }
+  function txt(t,x,y,sz,bold,r,g,b){
+    cmds.push(`BT /${bold?'F2':'F1'} ${sz.toFixed(1)} Tf ${rg(r,g,b)} rg ${x.toFixed(1)} ${Yf(y+sz*0.35).toFixed(1)} Td (${esc(t)}) Tj ET`);
+  }
+  function txtR(t,xr,y,sz,bold,r,g,b){ txt(t, xr-esc(t).length*sz*0.5, y, sz, bold, r,g,b); }
+  function txtC(t,cx,y,sz,bold,r,g,b){ txt(t, cx-esc(t).length*sz*0.25, y, sz, bold, r,g,b); }
+
+  // ── DRAW ─────────────────────────────────────────────
+  filled(0,0,PW,PH, 245,246,248);                      // bg
+  filled(0,0,PW,72, 212,46,20);                         // header band
+  filled(ML,12,36,36, 170,25,8);                        // logo box
+  txt('AP', ML+9,20, 13,true, 255,255,255);
+  txt('RAPORT TCO - Cost Total de Proprietate', ML+46,18, 13,true, 255,255,255);
+  txt('Autopadova  Dealer Autorizat IVECO  Iasi & Bacau  www.autopadova.com', ML+46,34, 8,false, 255,180,170);
+  txtR(dateStr, PW-MR, 34, 8,false, 255,210,200);
+
+  let y = 86;
+
+  // subtitle
+  filled(ML,y,CW,20, 232,234,240);
+  txt(`${iName}  vs.  ${cName}`, ML+8,y+4, 10,true, 74,80,104);
+  txtR(`${ani} ani  ${Math.round(totKm).toLocaleString('ro')} km${fleet>1?'  Flota: '+fleet+' veh':''}`, PW-MR-4,y+4, 9,false, 74,80,104);
+  y+=28;
+
+  // params box
+  txt('PARAMETRI MISIUNE', ML,y, 7,true, 140,145,165); y+=10;
+  filled(ML,y,CW,44, 255,255,255);
+  stroked(ML,y,CW,44, 200,202,210);
+  const pRows=[
+    [`Km/an: ${Math.round(kmAn).toLocaleString('ro')}`, `Ani: ${ani}`, `Flota: ${fleet} vehicule`],
+    [`Consum Iveco: ${iC} l/100km`,`Consum Conc: ${cC} l/100km`,`Pret comb: ${fl} lei/l  Curs: ${curs} RON/EUR`],
+    [`Val.Rez. Iveco: ${Math.round(iRV*100)}%`,`Val.Rez. Conc: ${Math.round(cRV*100)}%`,`Agent: ${agent}`],
+  ];
+  pRows.forEach((row,ri)=>row.forEach((c,ci)=>txt(c, ML+8+ci*(CW/3), y+8+ri*12, 8,false, 74,80,104)));
+  y+=52;
+
+  // table header
+  txt('DETALIU COSTURI - PER VEHICUL', ML,y, 7,true, 140,145,165); y+=10;
+  const C0=ML, C1=ML+CW*0.36, C2=ML+CW*0.58, C3=ML+CW*0.79;
+  const cW=[CW*0.36,CW*0.22,CW*0.21,CW*0.21];
+  const RH=18;
+  filled(C0,y,CW,RH, 17,19,24);
+  txt('Categorie cost', C0+6,y+5, 8,true, 255,255,255);
+  txtC(iName.substring(0,18), C1+cW[1]/2,y+5, 7,true, 255,255,255);
+  txtC(cName.substring(0,18), C2+cW[2]/2,y+5, 7,true, 200,200,200);
+  txtC('Avantaj Iveco', C3+cW[3]/2,y+5, 7,true, 255,220,80);
+  y+=RH;
+
+  const rows=[
+    ['Achizitie neta (dupa VR)', iAch, cAch, cAch-iAch],
+    ['Combustibil total',        iFu,  cFu,  cFu-iFu],
+    ['Service si revizii',       iSv,  cSv,  cSv-iSv],
+    ['Asigurare (RCA+CASCO)',    iAs,  cAs,  cAs-iAs],
+    ['Taxe si roviniete',        iTx,  cTx,  cTx-iTx],
+    ['Downtime (costuri oprire)',iDn,  cDn,  cDn-iDn],
+  ];
+  rows.forEach((row,ri)=>{
+    filled(C0,y,CW,RH, ...(ri%2===0?[255,255,255]:[240,241,244]));
+    hln(C0,C0+CW,y, 220,222,230, 0.3);
+    txt(row[0], C0+6,y+5, 8,false, 17,19,24);
+    txtC(n0(row[1]), C1+cW[1]/2,y+5, 8,false, 17,19,24);
+    txtC(n0(row[2]), C2+cW[2]/2,y+5, 8,false, 74,80,104);
+    const d=row[3]; const [dr,dg,db]=d>=0?[18,160,94]:[212,46,20];
+    txtC((d>=0?'+':'')+n0(Math.abs(d)), C3+cW[3]/2,y+5, 8,true, dr,dg,db);
+    y+=RH;
+  });
+
+  // total row
+  hln(C0,C0+CW,y, 212,46,20, 1.5);
+  filled(C0,y,CW,RH+2, 17,19,24);
+  txt('COST TOTAL (per vehicul)', C0+6,y+6, 9,true, 255,255,255);
+  txtC(n0(iT1), C1+cW[1]/2,y+6, 9,true, 255,255,255);
+  txtC(n0(cT1), C2+cW[2]/2,y+6, 9,true, 200,200,200);
+  const [tdr,tdg,tdb]=delta>=0?[100,230,160]:[255,120,100];
+  txtC((delta>=0?'+':'')+n0(Math.abs(delta/fleet)), C3+cW[3]/2,y+6, 9,true, tdr,tdg,tdb);
+  y+=RH+2;
+
+  filled(C0,y,CW,RH, 230,232,238);
+  txt('Cost / km', C0+6,y+5, 8,false, 74,80,104);
+  txtC(nkm(iKm), C1+cW[1]/2,y+5, 8,false, 74,80,104);
+  txtC(nkm(cKm), C2+cW[2]/2,y+5, 8,false, 74,80,104);
+  const dkm=cKm-iKm; const [kr,kg,kb]=dkm>=0?[18,160,94]:[212,46,20];
+  txtC((dkm>=0?'+':'')+nkm(Math.abs(dkm)), C3+cW[3]/2,y+5, 8,true, kr,kg,kb);
+  y+=RH;
+
+  filled(C0,y,CW,RH, 255,255,255);
+  txt('Cost / luna', C0+6,y+5, 8,false, 74,80,104);
+  txtC(n0(iLu), C1+cW[1]/2,y+5, 8,false, 74,80,104);
+  txtC(n0(cLu), C2+cW[2]/2,y+5, 8,false, 74,80,104);
+  const dl=cLu-iLu; const [lr,lg,lb]=dl>=0?[18,160,94]:[212,46,20];
+  txtC((dl>=0?'+':'')+n0(Math.abs(dl)), C3+cW[3]/2,y+5, 8,true, lr,lg,lb);
+  y+=RH+8;
+
+  // fleet banner
+  if(fleet>1){
+    filled(ML,y,CW,22, 17,19,24);
+    txt(`Total flota (${fleet} veh) - Iveco: ${n0(iT)}`, ML+8,y+7, 9,true, 255,255,255);
+    txtR(`Conc: ${n0(cT)}`, PW-MR-8,y+7, 9,true, 200,200,200);
+    y+=22;
+    const [br,bg2,bb]=delta>=0?[18,160,94]:[212,46,20];
+    filled(ML,y,CW,20, br,bg2,bb);
+    const bt=delta>=0?`Avantaj Iveco pe flota: +${n0(delta)} pe ${ani} ani`:`Concurenta mai ieftina cu: ${n0(Math.abs(delta))} pe ${ani} ani`;
+    txtC(bt, ML+CW/2,y+6, 9,true, 255,255,255);
+    y+=28;
+  }
+
+  // bars
+  txt('DISTRIBUTIE COSTURI COMPARATIVE', ML,y, 7,true, 140,145,165); y+=10;
+  const bCats=[{l:'Achizitie',i:iAch,c:cAch},{l:'Combustibil',i:iFu,c:cFu},{l:'Service',i:iSv,c:cSv},{l:'Downtime',i:iDn,c:cDn}];
+  const maxB=Math.max(...bCats.map(b=>Math.max(b.i,b.c)),1);
+  const bW=CW-90, bX=ML+82;
+  bCats.forEach(cat=>{
+    txt(cat.l, ML,y+4, 8,false, 74,80,104);
+    const iW=(cat.i/maxB)*bW, cW2=(cat.c/maxB)*bW;
+    filled(bX,y,iW,5, 212,46,20); filled(bX+iW,y,bW-iW,5, 225,227,235);
+    txtR(n0(cat.i), PW-MR,y+4, 7,false, 17,19,24); y+=8;
+    filled(bX,y,cW2,5, 140,145,165); filled(bX+cW2,y,bW-cW2,5, 225,227,235);
+    txtR(n0(cat.c), PW-MR,y+4, 7,false, 74,80,104); y+=12;
+  });
+  filled(ML,y,10,5, 212,46,20); txt(iName.substring(0,26), ML+14,y+1, 7,false, 74,80,104);
+  filled(ML+140,y,10,5, 140,145,165); txt(cName.substring(0,26), ML+154,y+1, 7,false, 74,80,104);
+  y+=16;
+
+  // advantages
+  if(y<PH-130){
+    txt('AVANTAJE IVECO DAILY MY24 - ARGUMENTE TEHNICE', ML,y, 7,true, 140,145,165); y+=10;
+    filled(ML,y,CW,58, 255,255,255); stroked(ML,y,CW,58, 200,202,210);
+    const advs=['+ Singurul motor 3.0L / 210 CP in segmentul LCV','+ Gama 3.5t - 7.2t - cea mai larga din clasa','+ Cutie automata ZF Hi-Matic 8 trepte pe toata gama','+ 3 ani garantie Drive Line Plus (MY24)','+ Volum VAN 19.6 m3 - record absolut de clasa','+ Service autorizat Autopadova Iasi + Bacau','+ Siguranta activa GSR-B standard (AEBS ELK BSIS)','+ IVECO On conectivitate diagnosticare GRATUITA'];
+    advs.forEach((a,i)=>txt(a, ML+6+(i<4?0:CW/2),y+8+(i<4?i:i-4)*12, 7.5,false, 17,19,24));
+    y+=64;
+  }
+
+  // footer
+  filled(0,PH-38,PW,38, 17,19,24);
+  txtC('Autopadova - Dealer Autorizat IVECO  |  Iasi: DN 28 km 61  |  Bacau: Calea Republicii 179  |  www.autopadova.com', PW/2,PH-28, 7.5,false, 140,145,165);
+  txtC('Valorile sunt estimative, bazate pe parametrii introdusi. Nu constituie oferta comerciala.', PW/2,PH-16, 7,false, 100,105,120);
+
+  // ── build raw PDF bytes ───────────────────────────────
+  const enc = new TextEncoder();
+  const streamStr = cmds.join('\n');
+  const streamBytes = enc.encode(streamStr);
+  const sLen = streamBytes.length;
+
+  const parts=[]; let off=0;
+  const ps = s=>{ const b=enc.encode(s); parts.push(b); off+=b.length; };
+
+  ps('%PDF-1.4\n%\xE2\xE3\xCF\xD3\n');
+  const o={};
+
+  o[1]=off;
+  ps('1 0 obj\n<< /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >> >> >>\nendobj\n');
+
+  o[2]=off;
+  ps(`2 0 obj\n<< /Length ${sLen} >>\nstream\n`);
+  parts.push(streamBytes); off+=sLen;
+  ps('\nendstream\nendobj\n');
+
+  o[3]=off;
+  ps(`3 0 obj\n<< /Type /Page /Parent 4 0 R /MediaBox [0 0 ${PW} ${PH}] /Contents 2 0 R /Resources 1 0 R >>\nendobj\n`);
+
+  o[4]=off;
+  ps('4 0 obj\n<< /Type /Pages /Kids [3 0 R] /Count 1 >>\nendobj\n');
+
+  o[5]=off;
+  ps('5 0 obj\n<< /Type /Catalog /Pages 4 0 R >>\nendobj\n');
+
+  const xOff=off;
+  ps(`xref\n0 6\n0000000000 65535 f \n${[1,2,3,4,5].map(i=>String(o[i]).padStart(10,'0')+' 00000 n ').join('\n')}\n`);
+  ps(`trailer\n<< /Size 6 /Root 5 0 R >>\nstartxref\n${xOff}\n%%EOF\n`);
+
+  const total=parts.reduce((s,p)=>s+p.length,0);
+  const out=new Uint8Array(total); let pos=0;
+  for(const p of parts){out.set(p,pos);pos+=p.length;}
+
+  const blob=new Blob([out],{type:'application/pdf'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;
+  a.download=`TCO_Iveco_${iName.replace(/\s+/g,'_')}_vs_${cName.split(' ')[0]}_${new Date().toISOString().slice(0,10)}.pdf`;
+  document.body.appendChild(a); a.click();
+  setTimeout(()=>{URL.revokeObjectURL(url);a.remove();},1000);
+  showToast('PDF exportat cu succes!');
+}
+
+
+function openTCO() {
+  // Pre-fill from dosar if available
+  if (D.pret) document.getElementById('t-iveco-pret').value = D.pret;
+  if (D.km)   document.getElementById('t-iveco-km') && (document.getElementById('t-km').value = D.km);
+  if (D.model) document.getElementById('t-iveco-name').value = D.model + (D.ver ? ' '+D.ver : '');
+  if (D.units && Number(D.units)>1) document.getElementById('t-fleet').value = D.units;
+  document.getElementById('tco-overlay').style.display = '';
+  calcTCO();
+}
+function closeTCO() {
+  document.getElementById('tco-overlay').style.display = 'none';
+}
+
+function fmtEUR(n, decimals) {
+  if (isNaN(n)) return '—';
+  return (decimals ? n.toLocaleString('ro',{minimumFractionDigits:2,maximumFractionDigits:2}) : Math.round(n).toLocaleString('ro')) + ' €';
+}
+function fmtKM(n) {
+  return (Math.round(n*1000)/1000).toLocaleString('ro',{minimumFractionDigits:3,maximumFractionDigits:3}) + ' €/km';
+}
+
+function gn(id) { return parseFloat(document.getElementById(id).value) || 0; }
+
+function calcTCO() {
+  const iName = document.getElementById('t-iveco-name').value || 'Iveco Daily';
+  const cName = document.getElementById('t-comp-name').value || 'Concurență';
+  document.getElementById('r-iveco-name').textContent = iName;
+  document.getElementById('r-comp-name').textContent = cName;
+  document.getElementById('rh-iveco').textContent = iName.split(' ')[0]+' '+iName.split(' ')[1]||'';
+  document.getElementById('rh-comp').textContent = cName.split(' ')[0]||'Conc.';
+
+  const kmAn = gn('t-km');
+  const ani  = gn('t-ani');
+  const fleet= Math.max(1, gn('t-fleet'));
+  const totalKm = kmAn * ani;
+  const curs = gn('t-curs') || 5;
+
+  // Acquisition net (after residual)
+  const iPretz = gn('t-iveco-pret');
+  const cPretz = gn('t-comp-pret');
+  const iRV    = gn('t-iveco-rv') / 100;
+  const cRV    = gn('t-comp-rv') / 100;
+  const iAch   = iPretz * (1 - iRV);
+  const cAch   = cPretz * (1 - cRV);
+
+  // Fuel (total over period, in EUR)
+  const fuelLei = gn('t-fuel-price');
+  const iCons   = gn('t-iveco-cons');
+  const cCons   = gn('t-comp-cons');
+  const iFuel   = (totalKm / 100) * iCons * fuelLei / curs;
+  const cFuel   = (totalKm / 100) * cCons * fuelLei / curs;
+
+  // Service total
+  const iSvc = gn('t-iveco-svc') * ani;
+  const cSvc = gn('t-comp-svc') * ani;
+
+  // Insurance total
+  const iAsig = gn('t-iveco-asig') * ani;
+  const cAsig = gn('t-comp-asig') * ani;
+
+  // Taxes total
+  const iTaxe = gn('t-iveco-taxe') * ani;
+  const cTaxe = gn('t-comp-taxe') * ani;
+
+  // Downtime total
+  const iDown = gn('t-iveco-down') * ani;
+  const cDown = gn('t-comp-down') * ani;
+
+  // Totals per vehicle
+  const iTotal1 = iAch + iFuel + iSvc + iAsig + iTaxe + iDown;
+  const cTotal1 = cAch + cFuel + cSvc + cAsig + cTaxe + cDown;
+
+  // Fleet totals
+  const iTotal = iTotal1 * fleet;
+  const cTotal = cTotal1 * fleet;
+
+  const deltaTotal = cTotal - iTotal; // positive = Iveco wins
+  const iKm = iTotal1 / (totalKm || 1);
+  const cKm = cTotal1 / (totalKm || 1);
+  const deltaKm = cKm - iKm;
+  const iLuna = iTotal1 / (ani * 12);
+  const cLuna = cTotal1 / (ani * 12);
+
+  // Helper to fill a table row
+  function fillRow(id, iVal, cVal, dVal) {
+    const el = document.getElementById(id);
+    const cells = el.querySelectorAll('span');
+    cells[1].textContent = fmtEUR(iVal);
+    cells[2].textContent = fmtEUR(cVal);
+    const d = dVal !== undefined ? dVal : (cVal - iVal);
+    cells[3].textContent = (d >= 0 ? '+' : '') + fmtEUR(Math.abs(d));
+    cells[3].className = d >= 0 ? 'delta-pos' : 'delta-neg';
+  }
+
+  fillRow('tr-achizitie',  iAch*fleet,  cAch*fleet);
+  fillRow('tr-combustibil',iFuel*fleet, cFuel*fleet);
+  fillRow('tr-service',    iSvc*fleet,  cSvc*fleet);
+  fillRow('tr-asigurare',  iAsig*fleet, cAsig*fleet);
+  fillRow('tr-taxe',       iTaxe*fleet, cTaxe*fleet);
+  fillRow('tr-downtime',   iDown*fleet, cDown*fleet);
+  fillRow('tr-total',      iTotal,      cTotal,     deltaTotal);
+  // km & luna rows
+  const trKm = document.getElementById('tr-km');
+  trKm.querySelectorAll('span')[1].textContent = fmtKM(iKm);
+  trKm.querySelectorAll('span')[2].textContent = fmtKM(cKm);
+  trKm.querySelectorAll('span')[3].textContent = (deltaKm>=0?'+':'')+fmtKM(Math.abs(deltaKm));
+  trKm.querySelectorAll('span')[3].className = deltaKm >= 0 ? 'delta-pos' : 'delta-neg';
+
+  const trLuna = document.getElementById('tr-luna');
+  trLuna.querySelectorAll('span')[1].textContent = fmtEUR(iLuna*fleet);
+  trLuna.querySelectorAll('span')[2].textContent = fmtEUR(cLuna*fleet);
+  const dLuna = (cLuna - iLuna)*fleet;
+  trLuna.querySelectorAll('span')[3].textContent = (dLuna>=0?'+':'')+fmtEUR(Math.abs(dLuna));
+  trLuna.querySelectorAll('span')[3].className = dLuna >= 0 ? 'delta-pos' : 'delta-neg';
+
+  // Winner card
+  const wFleetLabel = fleet > 1 ? ` (${fleet} vehicule)` : '';
+  document.getElementById('w-total').textContent = (deltaTotal >= 0 ? '+' : '') + fmtEUR(Math.abs(deltaTotal));
+  document.getElementById('w-sub').textContent = `${ani} ani · ${Math.round(totalKm).toLocaleString('ro')} km${wFleetLabel}`;
+  document.getElementById('w-km').textContent = (deltaKm >= 0 ? '▼ ' : '▲ ') + fmtKM(Math.abs(deltaKm)) + ' economisit';
+  const winnerCard = document.getElementById('tco-winner');
+  if (deltaTotal >= 0) {
+    winnerCard.style.background = 'linear-gradient(135deg,rgba(34,201,122,0.1),rgba(34,201,122,0.05))';
+    winnerCard.style.borderColor = 'rgba(34,201,122,0.25)';
+    document.getElementById('tco-winner-label') && (document.getElementById('tco-winner-label').style.color = 'var(--green2)');
+    document.getElementById('w-total').style.color = 'var(--green2)';
+    document.getElementById('w-km').style.color = 'var(--green)';
+    document.querySelector('.tco-winner-label').textContent = 'Avantaj Iveco' + wFleetLabel;
+  } else {
+    winnerCard.style.background = 'linear-gradient(135deg,rgba(232,53,26,0.08),rgba(232,53,26,0.03))';
+    winnerCard.style.borderColor = 'rgba(232,53,26,0.2)';
+    document.getElementById('w-total').style.color = 'var(--red2)';
+    document.getElementById('w-km').style.color = 'var(--red)';
+    document.querySelector('.tco-winner-label').textContent = '⚠ Concurența mai ieftină' + wFleetLabel;
+  }
+
+  // Bars
+  const barsEl = document.getElementById('tco-bars');
+  const cats = [
+    { l:'Achiziție netă', i: iAch, c: cAch },
+    { l:'Combustibil', i: iFuel, c: cFuel },
+    { l:'Service', i: iSvc, c: cSvc },
+    { l:'Downtime', i: iDown, c: cDown },
+  ];
+  const maxVal = Math.max(...cats.map(x => Math.max(x.i, x.c)), 1);
+  barsEl.innerHTML = cats.map(cat => {
+    const iW = Math.round((cat.i / maxVal) * 100);
+    const cW = Math.round((cat.c / maxVal) * 100);
+    return `<div class="bar-row">
+      <div class="bar-label"><span>${cat.l}</span><span style="color:var(--red)">${Math.round(cat.i).toLocaleString('ro')} €</span></div>
+      <div class="bar-track"><div class="bar-iveco" style="width:${iW}%"></div></div>
+      <div class="bar-label" style="margin-top:1px"><span style="color:var(--text3)">${cName.split(' ')[0]}</span><span>${Math.round(cat.c).toLocaleString('ro')} €</span></div>
+      <div class="bar-track"><div class="bar-comp" style="width:${cW}%"></div></div>
+    </div>`;
+  }).join('');
+
+  // Generate argument
+  genTCOArg(iName, cName, deltaTotal, deltaKm, iFuel, cFuel, iSvc, cSvc, iDown, cDown, ani, totalKm, fleet);
+}
+
+function genTCOArg(iName, cName, deltaTotal, deltaKm, iFuel, cFuel, iSvc, cSvc, iDown, cDown, ani, km, fleet) {
+  const fuelSave = Math.round(cFuel - iFuel);
+  const svcSave  = Math.round(cSvc - iSvc);
+  const downSave = Math.round(cDown - iDown);
+  const kmFmt    = Math.round(km).toLocaleString('ro');
+  const fleetTxt = fleet > 1 ? ` pe o flotă de ${fleet} vehicule` : '';
+
+  let arg = '';
+  if (deltaTotal >= 0) {
+    arg = `„Domnule ${D.cn||'Director'}, vă propun să privim cifrele reale. Pe ${ani} ani și ${kmFmt} km${fleetTxt}, ${iName} vă costă cu ${fmtEUR(Math.abs(deltaTotal))} mai puțin decât ${cName}.`;
+    if (fuelSave > 0) arg += ` Numai la combustibil economisiți ${fmtEUR(fuelSave)} — motorul ${iName.includes('Daily')?'3.0L F1C':'nostru'} consumă mai puțin.`;
+    if (svcSave > 0)  arg += ` Reviziile la Autopadova sunt cu ${fmtEUR(svcSave)} mai mici pe perioadă.`;
+    if (downSave > 0) arg += ` Plus ${fmtEUR(downSave)} economisiți din downtime evitat — avem service în Iași și Bacău, piese originale în stoc.`;
+    arg += ` La ${(Math.abs(deltaKm)*1000/1).toFixed(2)} bani/km diferență, ${iName} se plătește singur. Dați comanda azi?"`;
+  } else {
+    const diff = Math.abs(deltaTotal);
+    arg = `„Recunosc că prețul de achiziție ${iName} e ${fmtEUR(diff)} mai mare${fleetTxt}. Dar hai să vedem ce câștigați în schimb: garanție 3 ani Drive Line Plus, service autorizat Autopadova Iași/Bacău cu piese originale în stoc, motor ${iName.includes('Daily')?'F1C 3.0L unic în piață':'industrial'}, valoare reziduală ${document.getElementById('t-iveco-rv').value}% vs ${document.getElementById('t-comp-rv').value}% concurență. Ce se întâmplă cu afacerea dv. dacă vehiculul stă în service 3 zile?"`;
+  }
+  document.getElementById('tco-arg-text').textContent = arg;
+}
+
+function exportTCOText() {
+  const txt = document.getElementById('tco-arg-text').textContent;
+  navigator.clipboard.writeText(txt).then(()=>showToast('✓ Argument TCO copiat!')).catch(()=>{
+    const ta = document.createElement('textarea'); ta.value = txt;
+    document.body.appendChild(ta); ta.select(); document.execCommand('copy');
+    document.body.removeChild(ta); showToast('✓ Argument TCO copiat!');
+  });
+}
+
+/* ---------- INIT ---------- */
+window.onload = () => {};
+</script>
+</body>
+</html>
