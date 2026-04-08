@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valori Adăugate IVECO Daily MY24 — Training Autopadova</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #07080c;
+  --bg2: #0e1017;
+  --bg3: #14161f;
+  --card: #181b26;
+  --card2: #1e2130;
+  --border: rgba(255,255,255,0.06);
+  --border2: rgba(255,255,255,0.10);
+  --border3: rgba(255,255,255,0.18);
+  --red: #e8351a;
+  --red2: #ff5438;
+  --red-dim: rgba(232,53,26,0.12);
+  --red-glow: rgba(232,53,26,0.25);
+  --gold: #f5a623;
+  --gold2: #ffc04d;
+  --gold-dim: rgba(245,166,35,0.10);
+  --green: #22c97a;
+  --green2: #2ee88e;
+  --green-dim: rgba(34,201,122,0.10);
+  --blue: #4d8eff;
+  --blue-dim: rgba(77,142,255,0.10);
+  --text: #eef0f6;
+  --text2: #8e95b0;
+  --text3: #525878;
+  --r: 8px;
+  --r2: 12px;
+  --r3: 16px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:14px;scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;line-height:1.6;overflow-x:hidden}
+
+/* HEADER */
+.hero{
+  position:relative;padding:48px 40px 40px;
+  background:linear-gradient(160deg,#0a0c12 0%,#1a0a06 40%,#0a0c12 100%);
+  border-bottom:1px solid var(--border2);overflow:hidden;
+}
+.hero::before{content:'';position:absolute;top:-40%;right:-10%;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(232,53,26,0.08) 0%,transparent 70%);pointer-events:none}
+.hero-inner{max-width:1100px;margin:0 auto;position:relative}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--red-dim);border:1px solid rgba(232,53,26,0.25);padding:5px 14px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red2);margin-bottom:16px}
+.hero-title{font-size:clamp(32px,5vw,52px);font-weight:900;line-height:1.05;letter-spacing:-.02em}
+.hero-title em{color:var(--red2);font-style:normal}
+.hero-sub{margin-top:10px;font-size:14px;color:var(--text2);max-width:700px;line-height:1.7}
+.hero-sub strong{color:var(--gold)}
+.hero-stats{display:flex;gap:32px;margin-top:24px;flex-wrap:wrap}
+.hs{display:flex;flex-direction:column}
+.hs-val{font-size:28px;font-weight:800;color:var(--text);line-height:1}
+.hs-val em{color:var(--red2);font-style:normal}
+.hs-lbl{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-top:4px}
+
+/* NAV TABS */
+.nav-wrap{position:sticky;top:0;z-index:100;background:rgba(7,8,12,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.nav{max-width:1100px;margin:0 auto;display:flex;gap:2px;padding:0 40px;overflow-x:auto}
+.nav::-webkit-scrollbar{height:0}
+.nav-btn{padding:14px 18px;border:none;background:transparent;color:var(--text3);cursor:pointer;font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;letter-spacing:.04em;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s}
+.nav-btn:hover{color:var(--text2)}
+.nav-btn.active{color:var(--red2);border-bottom-color:var(--red)}
+
+/* MAIN */
+.main{max-width:1100px;margin:0 auto;padding:32px 40px 80px}
+.section{display:none}
+.section.show{display:block}
+.s-title{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--red);margin-bottom:18px;display:flex;align-items:center;gap:12px}
+.s-title::after{content:'';flex:1;height:1px;background:var(--border)}
+.s-sub{font-size:20px;font-weight:800;margin-bottom:20px;line-height:1.2}
+
+/* CARDS */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:24px}
+@media(max-width:800px){.grid2,.grid3{grid-template-columns:1fr}}
+.vcard{background:var(--card);border:1px solid var(--border);border-radius:var(--r2);padding:20px;transition:border-color .2s,transform .15s}
+.vcard:hover{border-color:var(--border3);transform:translateY(-2px)}
+.vcard-tag{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px;display:inline-block;padding:3px 8px;border-radius:4px}
+.tag-red{background:var(--red-dim);color:var(--red2)}
+.tag-gold{background:var(--gold-dim);color:var(--gold)}
+.tag-green{background:var(--green-dim);color:var(--green)}
+.tag-blue{background:var(--blue-dim);color:var(--blue)}
+.vcard-title{font-size:16px;font-weight:700;margin-bottom:6px;line-height:1.3}
+.vcard-body{font-size:12.5px;color:var(--text2);line-height:1.7}
+.vcard-body strong{color:var(--text);font-weight:600}
+.vcard-num{font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:700;color:var(--red2);line-height:1}
+.vcard-vs{font-size:11px;color:var(--text3);margin-top:4px}
+
+/* TCO TABLE */
+.tco-wrap{background:var(--card);border:1px solid var(--border);border-radius:var(--r2);overflow:hidden;margin-bottom:24px}
+.tco-head{padding:16px 20px;background:var(--card2);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.tco-head-title{font-size:14px;font-weight:700}
+.tco-head-badge{font-size:10px;font-weight:700;background:var(--green-dim);color:var(--green);padding:4px 10px;border-radius:12px}
+table.tco{width:100%;border-collapse:collapse}
+table.tco th{text-align:left;padding:10px 14px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);border-bottom:1px solid var(--border)}
+table.tco td{padding:10px 14px;font-size:12.5px;color:var(--text2);border-bottom:1px solid var(--border)}
+table.tco tr.iveco td{color:var(--text);font-weight:600;background:var(--red-dim)}
+table.tco tr.iveco td:nth-child(n+3){font-family:'JetBrains Mono',monospace}
+table.tco td.num{font-family:'JetBrains Mono',monospace;text-align:right}
+table.tco .best{color:var(--green);font-weight:700}
+table.tco .worst{color:var(--text3)}
+
+/* OBJECTION ACCORDION */
+.obj-list{display:flex;flex-direction:column;gap:8px;margin-bottom:24px}
+.obj{background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;cursor:pointer;transition:border-color .2s}
+.obj:hover{border-color:var(--border3)}
+.obj.open{border-color:var(--red-glow)}
+.obj-q{padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.obj-q-text{font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px}
+.obj-q-text::before{content:'❓';font-size:14px;flex-shrink:0}
+.obj-chev{font-size:10px;color:var(--text3);transition:transform .2s;flex-shrink:0}
+.obj.open .obj-chev{transform:rotate(180deg)}
+.obj-a{display:none;padding:0 18px 16px;font-size:12.5px;line-height:1.8;color:var(--text2)}
+.obj.open .obj-a{display:block}
+.obj-a .script{background:var(--bg3);border-left:3px solid var(--red);padding:12px 16px;border-radius:0 var(--r) var(--r) 0;margin-top:10px;font-style:italic;color:var(--text);line-height:1.7}
+
+/* SCENARIO CARDS */
+.scen{background:var(--card);border:1px solid var(--border);border-radius:var(--r2);margin-bottom:14px;overflow:hidden}
+.scen-head{padding:16px 20px;background:var(--card2);border-bottom:1px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:space-between}
+.scen-title{font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px}
+.scen-title .ico{font-size:18px}
+.scen-chev{font-size:10px;color:var(--text3);transition:transform .2s}
+.scen.open .scen-chev{transform:rotate(180deg)}
+.scen-body{display:none;padding:20px}
+.scen.open .scen-body{display:block}
+.scen-step{display:flex;gap:12px;margin-bottom:14px}
+.scen-step-num{width:24px;height:24px;border-radius:50%;background:var(--red-dim);color:var(--red2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:2px}
+.scen-step-content{flex:1}
+.scen-step-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:2px}
+.scen-step-text{font-size:12.5px;color:var(--text2);line-height:1.7}
+.scen-step-text strong{color:var(--text)}
+
+/* QUIZ */
+.quiz-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r2);padding:24px;margin-bottom:14px}
+.quiz-q{font-size:14px;font-weight:600;margin-bottom:14px}
+.quiz-opts{display:flex;flex-direction:column;gap:8px}
+.quiz-opt{padding:12px 16px;border:1px solid var(--border2);border-radius:var(--r);cursor:pointer;font-size:12.5px;transition:all .2s;display:flex;align-items:center;gap:10px}
+.quiz-opt:hover{border-color:var(--red);background:var(--red-dim)}
+.quiz-opt.correct{border-color:var(--green);background:var(--green-dim);color:var(--green2)}
+.quiz-opt.wrong{border-color:#ff4444;background:rgba(255,68,68,0.08);color:#ff6666}
+.quiz-opt .mark{width:20px;height:20px;border-radius:50%;border:2px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
+.quiz-opt.correct .mark{border-color:var(--green);background:var(--green-dim);color:var(--green)}
+.quiz-opt.wrong .mark{border-color:#ff4444;background:rgba(255,68,68,0.1);color:#ff4444}
+.quiz-explain{display:none;margin-top:12px;padding:12px 16px;background:var(--bg3);border-radius:var(--r);font-size:12px;color:var(--text2);line-height:1.7;border-left:3px solid var(--green)}
+.quiz-card.answered .quiz-explain{display:block}
+.quiz-score{text-align:center;padding:24px;font-size:20px;font-weight:700}
+.quiz-score em{color:var(--red2);font-style:normal}
+
+/* FOOTER */
+.footer{max-width:1100px;margin:0 auto;padding:20px 40px 40px;font-size:11px;color:var(--text3);text-align:center;border-top:1px solid var(--border);line-height:1.7}
+.footer strong{color:var(--text2)}
+
+@media(max-width:700px){
+  .hero{padding:28px 20px}
+  .main{padding:20px 16px 60px}
+  .nav{padding:0 16px}
+  .hero-stats{gap:20px}
+  .grid2,.grid3{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">📋 Material de training intern — Autopadova</div>
+    <div class="hero-title">Valori Adăugate<br><em>IVECO Daily MY24</em></div>
+    <div class="hero-sub">
+      Ghid complet de argumente competitive pentru echipa de vânzări. Include date TCO benchmark, avantaje produs, abordare clienți mici și scenarii de exersare.<br>
+      <strong>Autopadova exclusiv: Garanție 4 ani nelimitat km / 5 ani 200.000 km + Mentenanță -50%</strong>
+    </div>
+    <div class="hero-stats">
+      <div class="hs"><div class="hs-val"><em>27%</em></div><div class="hs-lbl">Cotă piață RO 2025</div></div>
+      <div class="hs"><div class="hs-val">210 CP</div><div class="hs-lbl">Best-in-class</div></div>
+      <div class="hs"><div class="hs-val">19,6 m³</div><div class="hs-lbl">Volum record</div></div>
+      <div class="hs"><div class="hs-val">7,2t</div><div class="hs-lbl">MTMA maxim</div></div>
+      <div class="hs"><div class="hs-val"><em>4.440€</em></div><div class="hs-lbl">Eco. vs Sprinter 7y</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav-wrap">
+  <div class="nav">
+    <button class="nav-btn active" onclick="showTab(0)">Avantaje Produs</button>
+    <button class="nav-btn" onclick="showTab(1)">TCO Benchmark</button>
+    <button class="nav-btn" onclick="showTab(2)">Autopadova Exclusiv</button>
+    <button class="nav-btn" onclick="showTab(3)">Clientul Mic</button>
+    <button class="nav-btn" onclick="showTab(4)">Obiecții & Răspunsuri</button>
+    <button class="nav-btn" onclick="showTab(5)">Scenarii Vânzare</button>
+    <button class="nav-btn" onclick="showTab(6)">Quiz Rapid</button>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+<!-- TAB 0: AVANTAJE PRODUS -->
+<div class="section show" id="tab-0">
+  <div class="s-title">Avantaje unice — nimeni altcineva nu oferă</div>
+  <div class="s-sub">Ce are Daily MY24 și concurența NU are</div>
+  
+  <div class="grid3">
+    <div class="vcard">
+      <div class="vcard-tag tag-red">MOTOR</div>
+      <div class="vcard-num">210 CP</div>
+      <div class="vcard-vs">F1C 3.0L / 470 Nm</div>
+      <div class="vcard-body" style="margin-top:8px">Singurul motor de <strong>3 litri</strong> din segment LCV. Sprinter max 190CP, Crafter 177CP, Transit 185CP. <strong>Nimeni nu se apropie.</strong></div>
+    </div>
+    <div class="vcard">
+      <div class="vcard-tag tag-red">GAMĂ</div>
+      <div class="vcard-num">3,5→7,2t</div>
+      <div class="vcard-vs">Cea mai extinsă gamă LCV</div>
+      <div class="vcard-body" style="margin-top:8px">Concurența se oprește la 5,5t. Daily merge până la <strong>7,2 tone MTMA</strong> — un singur model, un singur dealer, un singur service.</div>
+    </div>
+    <div class="vcard">
+      <div class="vcard-tag tag-red">VOLUM</div>
+      <div class="vcard-num">19,6 m³</div>
+      <div class="vcard-vs">Record absolut în clasă</div>
+      <div class="vcard-body" style="margin-top:8px">Crafter: ~18,3 m³. Sprinter: ~17,0 m³. Transit: ~15,1 m³. <strong>Daily câștigă cu minimum 1,3 m³</strong> — mai multă marfă per cursă.</div>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="vcard">
+      <div class="vcard-tag tag-gold">CUTIE</div>
+      <div class="vcard-title">Hi-Matic ZF 8 trepte pe TOATĂ gama</div>
+      <div class="vcard-body">Automată disponibilă de la 3,5t la 7,2t, toate motorizările. Concurența: doar parțial, și nu pe versiuni grele. <strong>8 trepte vs. 7 la concurență</strong> = consum mai mic, uzură mai mică.</div>
+    </div>
+    <div class="vcard">
+      <div class="vcard-tag tag-gold">SASIU</div>
+      <div class="vcard-title">Sasiu tip „C" ca la camion</div>
+      <div class="vcard-body">Lonjeroane din oțel, secțiune C deschisă. <strong>Carosare mai ieftină</strong> (suprafață plată), cabluri protejate, suportă aplicații grele (frigo, basculante, platforme aeriene). Concurența: monocorp mai slab.</div>
+    </div>
+  </div>
+
+  <div class="grid3">
+    <div class="vcard">
+      <div class="vcard-tag tag-green">CONFORT</div>
+      <div class="vcard-title">Memory Foam pe scaune</div>
+      <div class="vcard-body">Prima aplicare în LCV. Tehnologie NASA. +50% mai moale, sezut +20mm. <strong>Productivitate:</strong> șoferul obosește mai puțin = mai puține erori, mai puțin absenteism.</div>
+    </div>
+    <div class="vcard">
+      <div class="vcard-tag tag-green">DIGITAL</div>
+      <div class="vcard-title">Bord 10,25'' TFT standard</div>
+      <div class="vcard-body">Primul LCV cu cluster digital de 10,25'' standard. 3 layout-uri configurabile. Wireless CarPlay/Android Auto. City Mode -70% efort volan.</div>
+    </div>
+    <div class="vcard">
+      <div class="vcard-tag tag-green">CONECTIVITATE</div>
+      <div class="vcard-title">IVECO ON — 5 ani gratuit</div>
+      <div class="vcard-body">Connectivity Box standard. Diagnosticare la distanță, OTA updates, mentenanță predictivă, remote control. <strong>Concurența taxează suplimentar!</strong></div>
+    </div>
+  </div>
+
+  <div class="s-title">Manevrabilitate — avantaj decisiv în urban</div>
+  <div class="grid2">
+    <div class="vcard">
+      <div class="vcard-num" style="font-size:22px">10,4m <span style="font-size:14px;color:var(--text3)">rază virare</span></div>
+      <div class="vcard-body" style="margin-top:8px">Daily 3,5t SW (10,8 m³) — <strong>3,2 metri mai scurt ca Sprinter</strong> (13,6m). Transit 13,3m, Ducato 12,5m. Se manevrează mai ușor pe străduțe, în curtea clientului, la rampă.</div>
+    </div>
+    <div class="vcard">
+      <div class="vcard-tag tag-blue">SIGURANȚĂ</div>
+      <div class="vcard-title">ADAS complet standard (GSR-B)</div>
+      <div class="vcard-body">ELK, AEBS (pietoni+bicicliști), ISA, DDAW, MOIS, senzori parcare spate. Opțional: <strong>Autonomous Drive Level 2</strong> (TJA+LC+ACC). = asigurare mai ieftină, risc mai mic.</div>
+    </div>
+  </div>
+</div>
+
+<!-- TAB 1: TCO BENCHMARK -->
+<div class="section" id="tab-1">
+  <div class="s-title">TCO Benchmark — Date reale, 3,5t, 40.000 km/an</div>
+  <div class="s-sub">Daily bate concurența la cost total de utilizare</div>
+
+  <div class="tco-wrap">
+    <div class="tco-head">
+      <div class="tco-head-title">Roată simplă (4×2) — 7 ani / 280.000 km</div>
+      <div class="tco-head-badge">Daily #2 TCO</div>
+    </div>
+    <table class="tco">
+      <tr><th>Model</th><th>Preț achiziție</th><th>Val. reziduală</th><th>Combustibil 7y</th><th>Mentenanță</th><th>TCO net 7y</th><th>€/km</th></tr>
+      <tr><td>Renault Master</td><td class="num">38.500 €</td><td class="num">21.945 € <small>(57%)</small></td><td class="num">51.800 €</td><td class="num">3.850 €</td><td class="num best">72.205 €</td><td class="num best">0,258</td></tr>
+      <tr class="iveco"><td><strong>IVECO Daily</strong></td><td class="num">39.500 €</td><td class="num">23.700 € <small>(60%)</small></td><td class="num">53.200 €</td><td class="num">3.950 €</td><td class="num">72.950 €</td><td class="num">0,261</td></tr>
+      <tr><td>VW Crafter</td><td class="num">43.500 €</td><td class="num">26.970 € <small>(62%)</small></td><td class="num">54.600 €</td><td class="num">4.350 €</td><td class="num">75.480 €</td><td class="num">0,270</td></tr>
+      <tr><td>Fiat Ducato</td><td class="num">36.500 €</td><td class="num">14.600 € <small>(40%)</small></td><td class="num">50.400 €</td><td class="num">3.650 €</td><td class="num">75.950 €</td><td class="num">0,271</td></tr>
+      <tr><td>Ford Transit</td><td class="num">37.500 €</td><td class="num">16.500 € <small>(44%)</small></td><td class="num">51.800 €</td><td class="num">3.750 €</td><td class="num">76.550 €</td><td class="num">0,273</td></tr>
+      <tr><td>Mercedes Sprinter</td><td class="num">46.500 €</td><td class="num">29.760 € <small>(64%)</small></td><td class="num">56.000 €</td><td class="num">4.650 €</td><td class="num worst">77.390 €</td><td class="num worst">0,276</td></tr>
+    </table>
+  </div>
+
+  <div class="grid3" style="margin-bottom:28px">
+    <div class="vcard" style="text-align:center">
+      <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:6px">Economie vs. Sprinter</div>
+      <div class="vcard-num" style="color:var(--green2)">-4.440 €</div>
+      <div style="font-size:11px;color:var(--text3);margin-top:4px">per vehicul / 7 ani</div>
+    </div>
+    <div class="vcard" style="text-align:center">
+      <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:6px">Economie vs. Crafter</div>
+      <div class="vcard-num" style="color:var(--green2)">-2.530 €</div>
+      <div style="font-size:11px;color:var(--text3);margin-top:4px">per vehicul / 7 ani</div>
+    </div>
+    <div class="vcard" style="text-align:center">
+      <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:6px">Economie vs. Transit</div>
+      <div class="vcard-num" style="color:var(--green2)">-3.600 €</div>
+      <div style="font-size:11px;color:var(--text3);margin-top:4px">per vehicul / 7 ani</div>
+    </div>
+  </div>
+
+  <div class="tco-wrap">
+    <div class="tco-head">
+      <div class="tco-head-title">Roată dublă spate — 7 ani / 280.000 km</div>
+      <div class="tco-head-badge">🏆 DAILY E LIDER TCO!</div>
+    </div>
+    <table class="tco">
+      <tr><th>Model</th><th>Preț achiziție</th><th>Val. reziduală</th><th>Combustibil 7y</th><th>Mentenanță</th><th>TCO net 7y</th><th>€/km</th></tr>
+      <tr class="iveco"><td><strong>IVECO Daily</strong></td><td class="num">42.500 €</td><td class="num">25.925 € <small>(61%)</small></td><td class="num">56.000 €</td><td class="num">4.250 €</td><td class="num best">76.825 €</td><td class="num best">0,274</td></tr>
+      <tr><td>Renault Master</td><td class="num">41.500 €</td><td class="num">24.485 € <small>(59%)</small></td><td class="num">56.000 €</td><td class="num">4.150 €</td><td class="num">77.165 €</td><td class="num">0,276</td></tr>
+      <tr><td>VW Crafter</td><td class="num">45.500 €</td><td class="num">28.665 € <small>(63%)</small></td><td class="num">57.400 €</td><td class="num">4.550 €</td><td class="num">78.785 €</td><td class="num">0,281</td></tr>
+      <tr><td>Mercedes Sprinter</td><td class="num">48.500 €</td><td class="num">31.525 € <small>(65%)</small></td><td class="num">58.800 €</td><td class="num">4.850 €</td><td class="num">80.625 €</td><td class="num">0,288</td></tr>
+      <tr><td>Ford Transit</td><td class="num">40.000 €</td><td class="num">17.200 € <small>(43%)</small></td><td class="num">54.600 €</td><td class="num">4.000 €</td><td class="num worst">81.400 €</td><td class="num worst">0,291</td></tr>
+    </table>
+  </div>
+
+  <div class="tco-wrap">
+    <div class="tco-head">
+      <div class="tco-head-title">Roată simplă — 4 ani / 160.000 km</div>
+      <div class="tco-head-badge">Daily #2 TCO</div>
+    </div>
+    <table class="tco">
+      <tr><th>Model</th><th>Preț</th><th>Val. rez.</th><th>Comb. 4y</th><th>Mnt.</th><th>TCO 4y</th><th>€/km</th></tr>
+      <tr><td>Renault Master</td><td class="num">38.500€</td><td class="num">24.640€</td><td class="num">29.520€</td><td class="num">3.080€</td><td class="num best">40.480€</td><td class="num best">0,253</td></tr>
+      <tr class="iveco"><td><strong>IVECO Daily</strong></td><td class="num">39.500€</td><td class="num">25.280€</td><td class="num">30.400€</td><td class="num">3.160€</td><td class="num">41.720€</td><td class="num">0,261</td></tr>
+      <tr><td>Fiat Ducato</td><td class="num">36.500€</td><td class="num">21.900€</td><td class="num">28.800€</td><td class="num">2.920€</td><td class="num">42.120€</td><td class="num">0,263</td></tr>
+      <tr><td>Ford Transit</td><td class="num">37.500€</td><td class="num">22.500€</td><td class="num">29.520€</td><td class="num">3.000€</td><td class="num">43.520€</td><td class="num">0,272</td></tr>
+      <tr><td>VW Crafter</td><td class="num">43.500€</td><td class="num">27.840€</td><td class="num">31.200€</td><td class="num">3.480€</td><td class="num">44.920€</td><td class="num">0,281</td></tr>
+      <tr><td>Mercedes Sprinter</td><td class="num">46.500€</td><td class="num">31.620€</td><td class="num">32.000€</td><td class="num">3.720€</td><td class="num worst">46.140€</td><td class="num worst">0,288</td></tr>
+    </table>
+  </div>
+
+  <div class="tco-wrap">
+    <div class="tco-head">
+      <div class="tco-head-title">Roată dublă spate — 4 ani / 160.000 km</div>
+      <div class="tco-head-badge">🏆 DAILY E LIDER TCO!</div>
+    </div>
+    <table class="tco">
+      <tr><th>Model</th><th>Preț</th><th>Val. rez.</th><th>Comb. 4y</th><th>Mnt.</th><th>TCO 4y</th><th>€/km</th></tr>
+      <tr class="iveco"><td><strong>IVECO Daily</strong></td><td class="num">42.500€</td><td class="num">26.350€</td><td class="num">32.000€</td><td class="num">3.400€</td><td class="num best">43.650€</td><td class="num best">0,273</td></tr>
+      <tr><td>Renault Master</td><td class="num">41.500€</td><td class="num">25.730€</td><td class="num">32.000€</td><td class="num">3.320€</td><td class="num">44.450€</td><td class="num">0,278</td></tr>
+      <tr><td>Ford Transit</td><td class="num">40.000€</td><td class="num">23.200€</td><td class="num">31.680€</td><td class="num">3.200€</td><td class="num">45.280€</td><td class="num">0,283</td></tr>
+      <tr><td>VW Crafter</td><td class="num">45.500€</td><td class="num">28.665€</td><td class="num">32.760€</td><td class="num">3.640€</td><td class="num">46.235€</td><td class="num">0,289</td></tr>
+      <tr><td>Mercedes Sprinter</td><td class="num">48.500€</td><td class="num">31.525€</td><td class="num">33.600€</td><td class="num">3.880€</td><td class="num worst">49.455€</td><td class="num worst">0,309</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- TAB 2: AUTOPADOVA EXCLUSIV -->
+<div class="section" id="tab-2">
+  <div class="s-title">Avantaje exclusive Autopadova — doar la noi</div>
+  <div class="s-sub">Ce oferă Autopadova în plus față de orice alt dealer IVECO</div>
+
+  <div class="grid2">
+    <div class="vcard" style="border-color:var(--gold-dim);background:linear-gradient(135deg,var(--card) 0%,rgba(245,166,35,0.04) 100%)">
+      <div class="vcard-tag tag-gold">⭐ GARANȚIE EXTINSĂ</div>
+      <div class="vcard-title" style="font-size:20px">4 ani fără limită km<br><span style="color:var(--text2);font-weight:500;font-size:14px">SAU</span><br>5 ani / 200.000 km</div>
+      <div class="vcard-body" style="margin-top:12px">Standard IVECO: 3 ani / 120.000 km (Drive Line Plus).<br><strong>Autopadova adaugă 1-2 ani garanție fără cost suplimentar</strong> = zero cheltuieli service pe durata leasingului standard.<br><br>Niciun alt dealer IVECO din România nu oferă asta.</div>
+    </div>
+    <div class="vcard" style="border-color:var(--gold-dim);background:linear-gradient(135deg,var(--card) 0%,rgba(245,166,35,0.04) 100%)">
+      <div class="vcard-tag tag-gold">⭐ MENTENANȚĂ -50%</div>
+      <div class="vcard-title" style="font-size:20px">Pachete mentenanță<br>la 50% reducere</div>
+      <div class="vcard-body" style="margin-top:12px">Față de prețul standard IVECO al pachetelor de mentenanță.<br><strong>Impact direct pe TCO:</strong> dacă mentenanța standard e 3.950€/7 ani, cu Autopadova scade la ~2.000€.<br><br>Combinat cu garanția extinsă = cost previzibil pe toată durata vehiculului.</div>
+    </div>
+  </div>
+
+  <div class="vcard" style="margin-bottom:24px">
+    <div class="vcard-tag tag-red">SCRIPT DE PREZENTARE</div>
+    <div class="vcard-body" style="font-size:13px;line-height:1.8">
+      <div class="script" style="background:var(--bg3);border-left:3px solid var(--gold);padding:16px 20px;border-radius:0 8px 8px 0;margin-top:8px">
+        „Dl. [Nume], pe lângă avantajele IVECO Daily pe care le-am discutat, la Autopadova avem ceva ce nu veți găsi la niciun alt dealer din țară: <strong>garanție de 4 ani fără limită de kilometri, sau 5 ani cu limită de 200.000 km</strong> — alegerea e a dvs. Asta înseamnă că pe toată durata leasingului standard, <strong>nu plătiți nimic la service din buzunar</strong>. Plus că pachetele noastre de mentenanță vin la <strong>jumătate de preț</strong> față de lista oficială. Practic, costul lunar al mașinii include totul — rată, service, garanție — fără surprize."
+      </div>
+    </div>
+  </div>
+
+  <div class="s-title">Combinația câștigătoare — Daily + Autopadova</div>
+  <div class="grid3">
+    <div class="vcard">
+      <div class="vcard-tag tag-green">PRODUS</div>
+      <div class="vcard-title">IVECO Daily MY24</div>
+      <div class="vcard-body">210 CP best-in-class, 19,6 m³ volum record, gama 3,5→7,2t, ADAS standard, IVECO ON 5 ani gratuit, Memory Foam, Hi-Matic ZF.</div>
+    </div>
+    <div class="vcard">
+      <div class="vcard-tag tag-gold">DEALER</div>
+      <div class="vcard-title">Autopadova Exclusiv</div>
+      <div class="vcard-body">Garanție 4-5 ani extinsă, mentenanță -50%, service Iași + Bacău, proximitate, relație pe termen lung, scalabilitate.</div>
+    </div>
+    <div class="vcard">
+      <div class="vcard-tag tag-red">REZULTAT</div>
+      <div class="vcard-title">TCO imbatabil</div>
+      <div class="vcard-body">Produs superior + cost total mai mic + zero surprize = <strong>cel mai bun raport valoare/preț din piață</strong> pentru client.</div>
+    </div>
+  </div>
+</div>
+
+<!-- TAB 3: CLIENTUL MIC -->
+<div class="section" id="tab-3">
+  <div class="s-title">Vânzare către clientul mic — ghid adaptat</div>
+  <div class="s-sub">Antreprenor individual, IMM fără flotă structurată</div>
+
+  <div class="vcard" style="margin-bottom:20px;border-color:var(--red-glow);background:linear-gradient(135deg,var(--card) 0%,rgba(232,53,26,0.04) 100%)">
+    <div class="vcard-tag tag-red">⚠ REGULĂ DE BAZĂ</div>
+    <div class="vcard-body" style="font-size:13px;line-height:1.8">
+      Clientul mic <strong>NU decide pe TCO calculat</strong>. Decide pe: rată lunară accesibilă, recomandare de la persoane de încredere, service rapid, utilitate clară, și relația cu vânzătorul. <strong>Nu deschide cu grafice Excel.</strong>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="vcard">
+      <div class="vcard-tag tag-gold">1. RATĂ LUNARĂ</div>
+      <div class="vcard-title">„Cât mă costă pe lună?"</div>
+      <div class="vcard-body">Daily 39.500€ vs Sprinter 46.500€ = <strong>rata cu ~15% mai mică</strong>. Cu garanția Autopadova 4-5 ani = zero surprize la service pe durata leasingului. Mentenanță -50%.</div>
+      <div class="script" style="background:var(--bg3);border-left:3px solid var(--gold);padding:12px 16px;border-radius:0 8px 8px 0;margin-top:12px;font-style:italic;font-size:12px;color:var(--text);line-height:1.7">
+        „Dl. Popescu, rata la Daily e cu 100-120€ mai mică pe lună decât la Sprinter. Și cu garanția noastră de 4 ani, nu aveți nicio cheltuială neprevăzută la service. Practic plătiți rata și mergeți liniștit la treabă."
+      </div>
+    </div>
+    <div class="vcard">
+      <div class="vcard-tag tag-green">2. RECOMANDARE</div>
+      <div class="vcard-title">„Cine mai are și e mulțumit?"</div>
+      <div class="vcard-body">IVECO: <strong>27% cotă piață România 2025</strong>, lider pe >3,5t. Cel mai puternic argument: <strong>referințe locale</strong> de clienți mulțumiți din zona Iași-Bacău.</div>
+      <div class="script" style="background:var(--bg3);border-left:3px solid var(--green);padding:12px 16px;border-radius:0 8px 8px 0;margin-top:12px;font-style:italic;font-size:12px;color:var(--text);line-height:1.7">
+        „Avem peste [X] clienți activi în zona Iași-Bacău. Pot să vă pun în legătură cu dl. [Nume] care face distribuție ca dvs. și are 3 Daily-uri de 2 ani."
+      </div>
+    </div>
+    <div class="vcard">
+      <div class="vcard-tag tag-blue">3. SERVICE RAPID</div>
+      <div class="vcard-title">„Dacă se strică, cât stau?"</div>
+      <div class="vcard-body">Service Autopadova în <strong>Iași și Bacău</strong>. IVECO ON: diagnosticare la distanță + mentenanță predictivă. OTA updates fără vizită. Garanție 4-5 ani = repair inclus.</div>
+      <div class="script" style="background:var(--bg3);border-left:3px solid var(--blue);padding:12px 16px;border-radius:0 8px 8px 0;margin-top:12px;font-style:italic;font-size:12px;color:var(--text);line-height:1.7">
+        „Noi suntem aici, în Iași. Dacă aveți o problemă, ne sunați și vă programăm în aceeași zi. Plus că mașina ne trimite singură alertele — știm dinainte ce trebuie verificat."
+      </div>
+    </div>
+    <div class="vcard">
+      <div class="vcard-tag tag-red">4. FACE TREABA</div>
+      <div class="vcard-title">„Daily face ce am nevoie?"</div>
+      <div class="vcard-body"><strong>19,6 m³</strong> volum, <strong>210 CP</strong> pe deal, rază virare <strong>10,4m</strong> (Sprinter 13,6m), Memory Foam confort, ADAS standard siguranță. Scalabilitate 3,5→7,2t.</div>
+      <div class="script" style="background:var(--bg3);border-left:3px solid var(--red);padding:12px 16px;border-radius:0 8px 8px 0;margin-top:12px;font-style:italic;font-size:12px;color:var(--text);line-height:1.7">
+        „Daily-ul intră pe unde Sprinter-ul nu poate — raza de virare e cu 3 metri mai mică. Încarcă mai mult, are cel mai puternic motor din segment, și șoferul stă pe Memory Foam toată ziua."
+      </div>
+    </div>
+  </div>
+
+  <div class="s-title">Greșeli de evitat la clientul mic</div>
+  <div class="grid2">
+    <div class="vcard" style="border-color:rgba(255,68,68,0.2)">
+      <div style="font-size:13px;font-weight:600;color:#ff5555;margin-bottom:6px">❌ NU face asta</div>
+      <div class="vcard-body">
+        • Nu deschide cu TCO pe grafice Excel<br>
+        • Nu compara 6 competitori simultan<br>
+        • Nu vorbi de specificații tehnice abstracte (Nm, kW)<br>
+        • Nu uita referința locală<br>
+        • Nu neglija relația personală
+      </div>
+    </div>
+    <div class="vcard" style="border-color:rgba(34,201,122,0.2)">
+      <div style="font-size:13px;font-weight:600;color:var(--green);margin-bottom:6px">✅ FA asta</div>
+      <div class="vcard-body">
+        • Vorbește despre rată lunară, nu TCO<br>
+        • Concentrează-te pe 1-2 concurenți<br>
+        • Oferă beneficii practice (economie, spațiu, confort)<br>
+        • Dă mereu un contact de referință local<br>
+        • Clientul mic cumpără de la OM, nu de la brand
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TAB 4: OBIECȚII & RĂSPUNSURI -->
+<div class="section" id="tab-4">
+  <div class="s-title">Obiecții frecvente — răspunsuri gata de folosit</div>
+  <div class="s-sub">Click pe fiecare obiecție pentru scriptul complet</div>
+
+  <div class="obj-list">
+    <div class="obj" onclick="this.classList.toggle('open')">
+      <div class="obj-q"><div class="obj-q-text">„Daily e mai scump decât Sprinter-ul"</div><div class="obj-chev">▼</div></div>
+      <div class="obj-a">
+        Daily costă ~7.000€ mai puțin la achiziție (39.500€ vs 46.500€). TCO pe 7 ani arată:
+        <div class="script">„Înainte de preț, să facem calculul complet. Pe 7 ani, Daily costă <strong>72.950€</strong> vs Sprinter <strong>77.390€</strong> — economisiți <strong>4.440€ per vehicul</strong>. Plus la Autopadova aveți garanție 4-5 ani și mentenanță -50%. Cu 5 mașini, vorbim de <strong>22.000€ economie totală</strong>."</div>
+      </div>
+    </div>
+
+    <div class="obj" onclick="this.classList.toggle('open')">
+      <div class="obj-q"><div class="obj-q-text">„VW Crafter e la același nivel dar mai cunoscut"</div><div class="obj-chev">▼</div></div>
+      <div class="obj-a">
+        Crafter costă 4.000€ mai mult la achiziție și TCO-ul e mai mare.
+        <div class="script">„Crafter: 43.500€ la achiziție vs Daily 39.500€. TCO 7 ani: Crafter 75.480€ vs Daily 72.950€ — <strong>2.530€ per vehicul în plus</strong>. Și pentru acei bani, Daily oferă 210CP vs 177CP, gama până la 7,2t vs 5,5t, Hi-Matic pe toată gama. Crafter se oprește unde Daily abia începe."</div>
+      </div>
+    </div>
+
+    <div class="obj" onclick="this.classList.toggle('open')">
+      <div class="obj-q"><div class="obj-q-text">„Renault Master e mai ieftin la TCO"</div><div class="obj-chev">▼</div></div>
+      <div class="obj-a">
+        Diferența e de doar 745€ pe 7 ani — dar Master e incomparabil limitat.
+        <div class="script">„Master: 72.205€ vs Daily 72.950€ — diferență de 745€ pe 7 ani, adică 9€/lună. Dar Master: max 3,5t, max 163CP, fără motor 3L, fără ZF automată, fără garanție 3 ani Drive Line Plus, fără IVECO ON. Și când afacerea crește la 5t sau 7t, cu Daily rămâneți la noi. Cu Master, schimbați marca, dealerul, totul."</div>
+      </div>
+    </div>
+
+    <div class="obj" onclick="this.classList.toggle('open')">
+      <div class="obj-q"><div class="obj-q-text">„Valoarea reziduală a Sprinter-ului e mai bună"</div><div class="obj-chev">▼</div></div>
+      <div class="obj-a">
+        Procentual deprecierea e similară, dar Sprinter costă mult mai mult inițial.
+        <div class="script">„Sprinter revânzare: 29.760€ (64% din 46.500€). Daily: 23.700€ (60% din 39.500€). Deprecierea: Daily 40%, Sprinter 36% — diferență mică. Dar Sprinter costă cu 7.000€ mai mult la start. Câștigul la revânzare (+6.060€) NU acoperă prețul inițial mai mare (+7.000€). Net: Daily economisește 4.440€."</div>
+      </div>
+    </div>
+
+    <div class="obj" onclick="this.classList.toggle('open')">
+      <div class="obj-q"><div class="obj-q-text">„Nu știu marca, merg pe Sprinter că știu ce cumpăr"</div><div class="obj-chev">▼</div></div>
+      <div class="obj-a">
+        IVECO e #1 în România pe vehicule comerciale, cu 27% cotă de piață.
+        <div class="script">„IVECO e nr. 1 în România cu 27% cotă pe vehicule comerciale. Clienții cu Sprinter de 5,5t care au nevoie de mai multă capacitate n-au alternativă — doar Daily merge la 7,2t. Service-ul nostru e în Iași și Bacău — la fel de aproape. Și garanția noastră de 4-5 ani e mai lungă decât la orice dealer Sprinter."</div>
+      </div>
+    </div>
+
+    <div class="obj" onclick="this.classList.toggle('open')">
+      <div class="obj-q"><div class="obj-q-text">„Nu am nevoie de 7,2 tone, 3,5t îmi ajunge"</div><div class="obj-chev">▼</div></div>
+      <div class="obj-a">
+        Perfect — și la 3,5t Daily bate concurența. Dar scalabilitatea contează.
+        <div class="script">„Excelent, atunci comparăm Daily 35S vs Sprinter 315, ambele la 3,5t. TCO-ul e tot în favoarea Daily. Dar dacă afacerea crește, cu Daily urcați la 5,2t sau 7,2t fără să schimbați brandul, service-ul sau conducătorul auto. La Sprinter peste 5,5t treceți la TruckClass — alt permis, altă asigurare, altă rată."</div>
+      </div>
+    </div>
+
+    <div class="obj" onclick="this.classList.toggle('open')">
+      <div class="obj-q"><div class="obj-q-text">„Service-ul e prea departe / nu aveți piese"</div><div class="obj-chev">▼</div></div>
+      <div class="obj-a">
+        Autopadova are service în AMBELE locații principale din Moldova.
+        <div class="script">„Avem service autorizat IVECO atât în Iași cât și în Bacău — acoperim toată Moldova. Plus IVECO ON diagnostichează mașina de la distanță, trimite alertele automat, și multe update-uri se fac OTA fără să veniți la noi. Cu garanția noastră de 4-5 ani, totul e inclus."</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TAB 5: SCENARII VÂNZARE -->
+<div class="section" id="tab-5">
+  <div class="s-title">Scenarii de vânzare — exersează cu echipa</div>
+  <div class="s-sub">Click pe fiecare scenariu pentru pașii detaliați</div>
+
+  <div class="scen" onclick="this.classList.toggle('open')">
+    <div class="scen-head">
+      <div class="scen-title"><span class="ico">🏗️</span> Scenariu 1: Antreprenor construcții, 2 vehicule, buget limitat</div>
+      <div class="scen-chev">▼</div>
+    </div>
+    <div class="scen-body">
+      <div style="background:var(--bg3);border-radius:8px;padding:14px;margin-bottom:16px;font-size:12px;color:var(--text2);line-height:1.7">
+        <strong style="color:var(--text)">Context:</strong> Ion, patron firmă mică de construcții din Bacău. Are 2 Ducato vechi (2017). Vrea să înlocuiască, buget strâns. Coleg i-a recomandat Sprinter. Prima vizită la showroom.
+      </div>
+      <div class="scen-step"><div class="scen-step-num">1</div><div class="scen-step-content"><div class="scen-step-label">Deschidere</div><div class="scen-step-text">„Dl. Ion, bine ați venit! Am înțeles că lucrați în construcții în Bacău — <strong>cât de des transportați materiale grele pe șantiere?</strong>" → Identifică greutatea și tipul sarcinii.</div></div></div>
+      <div class="scen-step"><div class="scen-step-num">2</div><div class="scen-step-content"><div class="scen-step-label">Calificare</div><div class="scen-step-text">„Cele două Ducato fac treaba sau simțiți că le lipsește putere pe deal? Cam câți km faceți pe an?" → Află punctele dureroase. <strong>Ducato: max 160CP, Daily: 210CP.</strong></div></div></div>
+      <div class="scen-step"><div class="scen-step-num">3</div><div class="scen-step-content"><div class="scen-step-label">Prezentare adaptată</div><div class="scen-step-text">NU vorbi de TCO pe grafice. Spune: „Daily-ul ăsta are <strong>210 cai — cel mai puternic motor din clasă</strong>. Pe deal spre șantier, simțiți diferența imediat. Plus <strong>sasiu de camion</strong> — dacă puneți o basculantă, se carosează mai ieftin." Arată practic, nu teoretic.</div></div></div>
+      <div class="scen-step"><div class="scen-step-num">4</div><div class="scen-step-content"><div class="scen-step-label">Buget & rată</div><div class="scen-step-text">„Rata la Daily e cu <strong>100-120€ mai mică pe lună</strong> decât la Sprinter. Și la noi la Autopadova aveți <strong>garanție 4 ani fără limită km</strong> — pe toată durata leasingului, zero cheltuieli la service."</div></div></div>
+      <div class="scen-step"><div class="scen-step-num">5</div><div class="scen-step-content"><div class="scen-step-label">Referință</div><div class="scen-step-text">„Dl. [Referință] din Bacău are 3 Daily-uri pe construcții de 2 ani. Vă pot pune în legătură." → <strong>Recomandarea bate orice fișă tehnică.</strong></div></div></div>
+      <div class="scen-step"><div class="scen-step-num">6</div><div class="scen-step-content"><div class="scen-step-label">Închidere</div><div class="scen-step-text">„Dacă rata și garanția sunt în bugetul dvs., putem face o rezervare chiar azi și blocăm prețul. <strong>Mâine la 10 vă trimit oferta finală pe email.</strong>"</div></div></div>
+    </div>
+  </div>
+
+  <div class="scen" onclick="this.classList.toggle('open')">
+    <div class="scen-head">
+      <div class="scen-title"><span class="ico">📦</span> Scenariu 2: Firmă curierat regional, 5 vehicule, compară cu Crafter</div>
+      <div class="scen-chev">▼</div>
+    </div>
+    <div class="scen-body">
+      <div style="background:var(--bg3);border-radius:8px;padding:14px;margin-bottom:16px;font-size:12px;color:var(--text2);line-height:1.7">
+        <strong style="color:var(--text)">Context:</strong> Ana, director logistică firmă curierat. Are 5 Crafter-e, vrea să reînnoiască flota. A primit ofertă de la VW. Prioritate: volum cargo, consum, downtime minim.
+      </div>
+      <div class="scen-step"><div class="scen-step-num">1</div><div class="scen-step-content"><div class="scen-step-label">Calificare specifică</div><div class="scen-step-text">„Dna. Ana, cu Crafter-ele actuale, <strong>vă ajunge volumul cargo?</strong> Și câte zile pe an stați cu mașina în service?" → Detectează frustrări concrete.</div></div></div>
+      <div class="scen-step"><div class="scen-step-num">2</div><div class="scen-step-content"><div class="scen-step-label">Comparativ direct</div><div class="scen-step-text">„Daily oferă <strong>19,6 m³ vs. Crafter ~18,3 m³</strong> — mai multă marfă per cursă. Cu 5 vehicule, asta înseamnă mai puține curse pe lună. Plus <strong>mentenanță -50% la Autopadova</strong> = mai puțin downtime."</div></div></div>
+      <div class="scen-step"><div class="scen-step-num">3</div><div class="scen-step-content"><div class="scen-step-label">TCO pe flotă</div><div class="scen-step-text">ACUM se justifică TCO: „Pe 7 ani, 5 vehicule: <strong>Daily 364.750€ vs Crafter 377.400€</strong> — economisiți <strong>12.650€</strong>. Plus la noi: garanție 4-5 ani, mentenanță jumătate de preț, IVECO ON diagnosticare la distanță."</div></div></div>
+      <div class="scen-step"><div class="scen-step-num">4</div><div class="scen-step-content"><div class="scen-step-label">Închidere</div><div class="scen-step-text">„Dna. Ana, 12.650€ economie pe 5 vehicule, plus garanție mai lungă și mentenanță mai ieftină. <strong>Dacă rezolvăm finanțarea săptămâna asta, putem livra primul vehicul în [termen].</strong>"</div></div></div>
+    </div>
+  </div>
+
+  <div class="scen" onclick="this.classList.toggle('open')">
+    <div class="scen-head">
+      <div class="scen-title"><span class="ico">🍞</span> Scenariu 3: Brutar local, 1 vehicul, prima achiziție de utilitar</div>
+      <div class="scen-chev">▼</div>
+    </div>
+    <div class="scen-body">
+      <div style="background:var(--bg3);border-radius:8px;padding:14px;margin-bottom:16px;font-size:12px;color:var(--text2);line-height:1.7">
+        <strong style="color:var(--text)">Context:</strong> Mihai, brutar artizanal din Iași. Livrează cu mașina personală, vrea primul utilitar. Nu cunoaște brandurile de utilitare. Buget mic, prioritate: fiabilitate, ușurință, cost mic.
+      </div>
+      <div class="scen-step"><div class="scen-step-num">1</div><div class="scen-step-content"><div class="scen-step-label">Deschidere caldă</div><div class="scen-step-text">„Mihai, felicitări pentru decizia de a investi în livrare! <strong>Câte livrări faci pe zi și la ce distanță?</strong>" → Nu speria cu mărci sau specificații.</div></div></div>
+      <div class="scen-step"><div class="scen-step-num">2</div><div class="scen-step-content"><div class="scen-step-label">Simplitate</div><div class="scen-step-text">„Daily vine simplu — ca orice mașină. <strong>Furgon, 3,5t, încape totul.</strong> Se manevrează mai ușor decât un Sprinter (rază de virare cu 3m mai mică) și ai spațiu de încărcat tăvi fără să te apleci."</div></div></div>
+      <div class="scen-step"><div class="scen-step-num">3</div><div class="scen-step-content"><div class="scen-step-label">Siguranță financiară</div><div class="scen-step-text">„<strong>Rata e de [X]€/lună</strong>, incluzi totul. Garanția noastră e de 4 ani — adică pe toată perioada leasingului, orice problemă o rezolvăm noi, fără să scoți un leu." → Accent pe predictibilitate.</div></div></div>
+      <div class="scen-step"><div class="scen-step-num">4</div><div class="scen-step-content"><div class="scen-step-label">Scalabilitate</div><div class="scen-step-text">„Și dacă brutăria crește și ai nevoie de ceva mai mare, nu trebuie să schimbi brandul. <strong>Daily merge de la 3,5t la 7,2t — crește cu tine.</strong>"</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- TAB 6: QUIZ RAPID -->
+<div class="section" id="tab-6">
+  <div class="s-title">Quiz rapid — testează-ți cunoștințele</div>
+  <div class="s-sub">Răspunde corect și construiește-ți încrederea</div>
+  <div id="quiz-area"></div>
+  <div id="quiz-result" style="display:none" class="quiz-score"></div>
+  <div style="text-align:center;margin-top:16px"><button onclick="resetQuiz()" style="padding:10px 24px;border:1px solid var(--border2);background:var(--card);color:var(--text);border-radius:8px;cursor:pointer;font-family:'Outfit',sans-serif;font-weight:600;font-size:13px">🔄 Resetează Quiz</button></div>
+</div>
+
+</div><!-- /main -->
+
+<div class="footer">
+  <strong>Autopadova — Dealer Autorizat IVECO</strong> &nbsp;|&nbsp;
+  Iași: DN 28 km 61 &nbsp;|&nbsp; Bacău: Calea Republicii 179 &nbsp;|&nbsp; www.autopadova.com<br>
+  Material de training intern. Valorile TCO sunt estimative. Nu constituie ofertă comercială.
+</div>
+
+<script>
+// ── TABS ────────────────────────────────
+function showTab(i) {
+  document.querySelectorAll('.section').forEach((s,j)=>{
+    s.classList.toggle('show', j===i);
+  });
+  document.querySelectorAll('.nav-btn').forEach((b,j)=>{
+    b.classList.toggle('active', j===i);
+  });
+  window.scrollTo({top:document.querySelector('.nav-wrap').offsetTop, behavior:'smooth'});
+}
+
+// ── QUIZ ────────────────────────────────
+const QUIZ = [
+  {
+    q: 'Ce putere maximă are motorul F1C 3.0L al Daily MY24?',
+    opts: ['190 CP','210 CP','177 CP','200 CP'],
+    correct: 1,
+    explain: 'F1C 3.0L produce 210 CP / 470 Nm — cel mai puternic motor din segmentul LCV. Sprinter: max 190CP, Crafter: 177CP.'
+  },
+  {
+    q: 'Care e volumul cargo maxim al Daily Van?',
+    opts: ['17,0 m³','18,3 m³','19,6 m³','16,5 m³'],
+    correct: 2,
+    explain: 'Daily oferă 19,6 m³ — record absolut în clasă. Crafter: ~18,3 m³, Sprinter: ~17,0 m³.'
+  },
+  {
+    q: 'Cât economisește Daily vs. Sprinter pe TCO 7 ani (roată simplă)?',
+    opts: ['2.530 €','3.600 €','4.440 €','1.500 €'],
+    correct: 2,
+    explain: 'TCO 7 ani: Daily 72.950€ vs Sprinter 77.390€ = economie de 4.440€ per vehicul.'
+  },
+  {
+    q: 'Ce garanție exclusivă oferă Autopadova?',
+    opts: ['3 ani / 120.000 km (standard)','4 ani nelimitat km SAU 5 ani / 200.000 km','2 ani / 100.000 km','5 ani nelimitat km'],
+    correct: 1,
+    explain: 'Autopadova oferă garanție extinsă: 4 ani fără limită km SAU 5 ani / 200.000 km — unic în România!'
+  },
+  {
+    q: 'La clientul mic, care e factorul principal de decizie?',
+    opts: ['TCO pe 7 ani calculat pe Excel','Rată lunară + recomandare + service rapid','Specificațiile tehnice ale motorului','Valoarea reziduală procentuală'],
+    correct: 1,
+    explain: 'Clientul mic decide pe: rată accesibilă, recomandare de la persoane de încredere, service rapid, și relația cu vânzătorul. NU pe TCO.'
+  },
+  {
+    q: 'Cu cât e mai mică raza de virare a Daily vs. Sprinter?',
+    opts: ['1,5 m','2,0 m','3,2 m','4,0 m'],
+    correct: 2,
+    explain: 'Daily 3,5t: 10,4m. Sprinter: 13,6m. Diferență: 3,2m — avantaj enorm în urban și la rampă.'
+  },
+  {
+    q: 'Pe roată dublă spate (7 ani), cine are cel mai bun TCO?',
+    opts: ['Renault Master','Mercedes Sprinter','IVECO Daily','Ford Transit'],
+    correct: 2,
+    explain: 'Daily e LIDER TCO pe roată dublă: 76.825€ — bate toată concurența!'
+  },
+  {
+    q: 'Ce reducere la mentenanță oferă Autopadova?',
+    opts: ['20% reducere','30% reducere','50% reducere','10% reducere'],
+    correct: 2,
+    explain: 'Pachete mentenanță la 50% reducere față de prețul standard — exclusiv Autopadova.'
+  }
+];
+
+let quizAnswered = 0;
+
+function renderQuiz() {
+  document.getElementById('quiz-area').innerHTML = QUIZ.map((q,i) => `
+    <div class="quiz-card" id="qc-${i}">
+      <div class="quiz-q">${i+1}. ${q.q}</div>
+      <div class="quiz-opts">
+        ${q.opts.map((o,j) => `<div class="quiz-opt" id="qo-${i}-${j}" onclick="answerQuiz(${i},${j})"><div class="mark"></div><span>${o}</span></div>`).join('')}
+      </div>
+      <div class="quiz-explain">${q.explain}</div>
+    </div>
+  `).join('');
+  quizAnswered = 0;
+  document.getElementById('quiz-result').style.display = 'none';
+}
+
+let quizCorrect = 0;
+function answerQuiz(qi, oi) {
+  const card = document.getElementById('qc-'+qi);
+  if (card.classList.contains('answered')) return;
+  card.classList.add('answered');
+  quizAnswered++;
+  
+  const correct = QUIZ[qi].correct;
+  const chosen = document.getElementById('qo-'+qi+'-'+oi);
+  const correctEl = document.getElementById('qo-'+qi+'-'+correct);
+  
+  if (oi === correct) {
+    chosen.classList.add('correct');
+    chosen.querySelector('.mark').textContent = '✓';
+    quizCorrect++;
+  } else {
+    chosen.classList.add('wrong');
+    chosen.querySelector('.mark').textContent = '✗';
+    correctEl.classList.add('correct');
+    correctEl.querySelector('.mark').textContent = '✓';
+  }
+  
+  if (quizAnswered === QUIZ.length) {
+    const pct = Math.round(quizCorrect/QUIZ.length*100);
+    const res = document.getElementById('quiz-result');
+    res.style.display = 'block';
+    res.innerHTML = `Scor: <em>${quizCorrect}/${QUIZ.length}</em> (${pct}%)<br><span style="font-size:14px;color:var(--text2)">${pct>=80?'Excelent! Ești pregătit pentru teren.':pct>=60?'Bine! Revizuiește secțiunile unde ai greșit.':'Trebuie să mai exersezi. Recitește materialul.'}</span>`;
+  }
+}
+
+function resetQuiz() {
+  quizCorrect = 0;
+  renderQuiz();
+}
+
+renderQuiz();
+</script>
+</body>
+</html>
