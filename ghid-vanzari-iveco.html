@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ghid Vânzări Iveco — Autopadova Training</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=IBM+Plex+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #E05A00;
+    --orange-dark: #A03F00;
+    --orange-glow: rgba(224,90,0,0.18);
+    --navy: #0A1628;
+    --navy2: #0F1E36;
+    --navy3: #162540;
+    --navy4: #1C2D4F;
+    --steel: #2A3F60;
+    --text: #D8E4F0;
+    --text-muted: #7A8FA8;
+    --gold: #C8920A;
+    --green: #1A7F4B;
+    --border: rgba(224,90,0,0.22);
+    --border-soft: rgba(255,255,255,0.06);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--navy);
+    color: var(--text);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 60px 5vw 60px;
+    overflow: hidden;
+  }
+
+  .hero-bg-lines {
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 80px,
+        rgba(255,255,255,0.012) 80px,
+        rgba(255,255,255,0.012) 81px
+      ),
+      radial-gradient(ellipse 90% 70% at 70% 50%, rgba(224,90,0,0.14) 0%, transparent 65%),
+      radial-gradient(ellipse 40% 40% at 10% 80%, rgba(10,22,40,0.8) 0%, transparent 70%);
+  }
+
+  .hero-truck {
+    position: absolute;
+    right: -2%;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: clamp(12rem, 28vw, 22rem);
+    opacity: 0.04;
+    filter: blur(1px);
+    user-select: none;
+    pointer-events: none;
+    line-height: 1;
+  }
+
+  .hero-eyebrow {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.68rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 20px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 32px;
+    height: 2px;
+    background: var(--orange);
+  }
+
+  .hero h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: clamp(3.5rem, 10vw, 8rem);
+    letter-spacing: 0.02em;
+    line-height: 0.9;
+    color: #fff;
+    position: relative;
+    text-transform: uppercase;
+  }
+  .hero h1 .line2 {
+    color: var(--orange);
+    display: block;
+    font-size: clamp(4.5rem, 13vw, 10.5rem);
+  }
+  .hero h1 .line3 {
+    display: block;
+    font-size: clamp(2rem, 5vw, 4rem);
+    color: var(--text-muted);
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    margin-top: 8px;
+  }
+
+  .hero-meta {
+    margin-top: 36px;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .hero-tag {
+    background: rgba(224,90,0,0.12);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 7px 14px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .hero-tag.active {
+    background: var(--orange);
+    border-color: var(--orange);
+    color: #fff;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 30px;
+    left: 5vw;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    animation: pulse 2.5s infinite;
+  }
+  .scroll-hint .arrow { color: var(--orange); font-size: 1rem; }
+  @keyframes pulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
+
+  /* ─── LAYOUT ─── */
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ─── SECTIONS ─── */
+  .section {
+    padding: 80px 0 60px;
+    border-top: 1px solid var(--border-soft);
+  }
+
+  .section-label {
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-label::after {
+    content: '';
+    width: 48px;
+    height: 1px;
+    background: var(--orange);
+    opacity: 0.4;
+  }
+
+  .section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.2rem, 5vw, 3.6rem);
+    letter-spacing: 0.04em;
+    line-height: 1;
+    color: #fff;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .section-title em { color: var(--orange); font-style: normal; }
+
+  .lead {
+    font-family: 'IBM Plex Serif', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    max-width: 680px;
+    margin-bottom: 36px;
+    line-height: 1.7;
+  }
+
+  /* ─── GRID CARDS ─── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 2px;
+    margin: 28px 0;
+  }
+
+  .card {
+    background: var(--navy2);
+    padding: 26px 22px;
+    border: 1px solid var(--border-soft);
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .card:hover {
+    border-color: rgba(224,90,0,0.3);
+    background: var(--navy3);
+  }
+  .card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--orange), transparent);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .card:hover::after { opacity: 1; }
+
+  .card-icon {
+    font-size: 1.6rem;
+    margin-bottom: 12px;
+    display: block;
+  }
+  .card-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+  .card-body {
+    font-size: 0.86rem;
+    color: var(--text-muted);
+    line-height: 1.65;
+  }
+  .card-body strong { color: var(--text); font-weight: 600; }
+
+  /* ─── PRODUCT CARDS ─── */
+  .product-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 2px;
+    margin: 28px 0;
+  }
+
+  .product-card {
+    background: var(--navy2);
+    border: 1px solid var(--border-soft);
+    padding: 20px 18px;
+    position: relative;
+    overflow: hidden;
+  }
+  .product-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--orange);
+    opacity: 0.6;
+  }
+  .product-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 1.3rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+  .product-segment {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 10px;
+  }
+  .product-args {
+    list-style: none;
+  }
+  .product-args li {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    padding: 3px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    display: flex;
+    gap: 7px;
+    align-items: flex-start;
+  }
+  .product-args li::before {
+    content: '▸';
+    color: var(--orange);
+    opacity: 0.7;
+    flex-shrink: 0;
+    font-size: 0.7rem;
+    margin-top: 2px;
+  }
+
+  /* ─── SCENARIO ─── */
+  .scenario {
+    margin: 32px 0;
+    background: var(--navy2);
+    border: 1px solid var(--border-soft);
+    border-left: 3px solid var(--orange);
+    overflow: hidden;
+  }
+
+  .scenario-header {
+    background: linear-gradient(90deg, rgba(224,90,0,0.13), transparent);
+    padding: 16px 22px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .scenario-icon {
+    width: 38px;
+    height: 38px;
+    background: var(--orange);
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+  .scenario-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #fff;
+  }
+  .scenario-subtitle {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 300;
+    text-transform: none;
+  }
+  .scenario-body { padding: 22px 22px; }
+
+  .objection {
+    background: rgba(0,0,0,0.25);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 3px;
+    padding: 14px 18px 14px 32px;
+    font-family: 'IBM Plex Serif', serif;
+    font-style: italic;
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    margin-bottom: 18px;
+    position: relative;
+  }
+  .objection::before {
+    content: '"';
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 3.5rem;
+    color: var(--orange);
+    opacity: 0.25;
+    position: absolute;
+    top: -8px;
+    left: 8px;
+    line-height: 1;
+  }
+  .obj-label {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    opacity: 0.55;
+    margin-bottom: 6px;
+  }
+
+  .resp-label {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .resp-label::after {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .script-box {
+    background: rgba(224,90,0,0.06);
+    border: 1px solid rgba(224,90,0,0.16);
+    border-radius: 3px;
+    padding: 16px 18px;
+    font-family: 'IBM Plex Serif', serif;
+    font-style: italic;
+    font-size: 0.91rem;
+    line-height: 1.75;
+    color: var(--text);
+  }
+  .script-box strong {
+    font-style: normal;
+    color: #fff;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 600;
+  }
+
+  .tip-box {
+    margin-top: 12px;
+    background: rgba(200,146,10,0.07);
+    border: 1px solid rgba(200,146,10,0.2);
+    border-radius: 3px;
+    padding: 12px 16px;
+    font-size: 0.83rem;
+    color: #b89040;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .tip-box::before { content: '★'; flex-shrink: 0; margin-top: 1px; font-size: 0.8rem; }
+
+  .tco-box {
+    background: rgba(26,127,75,0.08);
+    border: 1px solid rgba(26,127,75,0.2);
+    border-radius: 3px;
+    padding: 12px 16px;
+    font-size: 0.83rem;
+    color: #4aad7a;
+    margin-top: 12px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .tco-box::before { content: '€'; flex-shrink: 0; font-weight: 700; margin-top: 1px; }
+
+  /* ─── STEPS ─── */
+  .steps { display: flex; flex-direction: column; }
+  .step {
+    display: flex;
+    gap: 22px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .step:last-child { border-bottom: none; }
+  .step-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 2.8rem;
+    color: var(--orange);
+    line-height: 1;
+    min-width: 46px;
+    opacity: 0.55;
+  }
+  .step-content h4 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+  .step-content p {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.65;
+  }
+  .step-content p strong { color: var(--text); font-weight: 600; }
+
+  /* ─── FORMULA ─── */
+  .formula {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+    margin: 24px 0;
+    padding: 22px 20px;
+    background: var(--navy2);
+    border: 1px solid var(--border-soft);
+  }
+  .f-step {
+    background: var(--orange);
+    color: #fff;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 8px 13px;
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+  .f-arrow { color: var(--orange); opacity: 0.4; font-size: 1.1rem; }
+
+  /* ─── TABLE ─── */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    margin: 22px 0;
+  }
+  .data-table th {
+    background: var(--navy3);
+    border-bottom: 2px solid var(--orange);
+    padding: 11px 14px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--orange);
+  }
+  .data-table td {
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--border-soft);
+    color: var(--text-muted);
+    vertical-align: top;
+  }
+  .data-table tr:hover td {
+    background: rgba(224,90,0,0.04);
+    color: var(--text);
+  }
+  .data-table td strong { color: var(--text); font-weight: 600; }
+
+  /* ─── PULLQUOTE ─── */
+  .pullquote {
+    margin: 44px 0;
+    padding: 28px 32px;
+    border: 1px solid var(--border);
+    background: linear-gradient(135deg, var(--navy3), var(--navy2));
+    position: relative;
+  }
+  .pullquote::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: linear-gradient(180deg, var(--orange), var(--orange-dark));
+  }
+  .pq-text {
+    font-family: 'IBM Plex Serif', serif;
+    font-style: italic;
+    font-size: clamp(1rem, 2.2vw, 1.35rem);
+    line-height: 1.5;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+  .pq-attr {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--orange);
+  }
+
+  /* ─── TCO CALC BOX ─── */
+  .tco-calc {
+    background: var(--navy3);
+    border: 1px solid rgba(26,127,75,0.25);
+    border-top: 3px solid var(--green);
+    padding: 24px 22px;
+    margin: 28px 0;
+  }
+  .tco-calc-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #4aad7a;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tco-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 0.84rem;
+  }
+  .tco-row:last-child { border-bottom: none; }
+  .tco-row .label { color: var(--text-muted); }
+  .tco-row .value { color: #fff; font-weight: 600; font-family: 'IBM Plex Sans', sans-serif; }
+  .tco-row.total .label { color: #4aad7a; font-weight: 600; }
+  .tco-row.total .value { color: #4aad7a; font-size: 1rem; }
+
+  /* ─── CHECKLIST ─── */
+  .checklist { list-style: none; display: flex; flex-direction: column; gap: 9px; margin: 18px 0; }
+  .checklist li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 0.88rem;
+    color: var(--text);
+  }
+  .checklist li::before {
+    content: '✓';
+    color: var(--orange);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* ─── CLOSING ─── */
+  .closing {
+    background: linear-gradient(135deg, var(--navy3), var(--navy2));
+    border: 1px solid var(--border);
+    padding: 56px 40px;
+    text-align: center;
+    margin: 60px 0 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .closing::before {
+    content: '🚛';
+    position: absolute;
+    font-size: 18rem;
+    opacity: 0.03;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    pointer-events: none;
+  }
+  .closing h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 12px;
+    position: relative;
+  }
+  .closing h2 span { color: var(--orange); }
+  .closing p {
+    font-family: 'IBM Plex Serif', serif;
+    font-style: italic;
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    max-width: 540px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  /* ─── DIVIDER ─── */
+  .divider { width: 48px; height: 3px; background: var(--orange); margin: 18px 0 26px; }
+
+  p { margin-bottom: 13px; }
+  p:last-child { margin-bottom: 0; }
+  strong { color: var(--text); font-weight: 600; }
+
+  footer {
+    border-top: 1px solid var(--border-soft);
+    padding: 22px;
+    text-align: center;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    opacity: 0.45;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero > * { animation: fadeUp 0.75s ease both; }
+  .hero > *:nth-child(1) { animation-delay: 0.1s; }
+  .hero > *:nth-child(2) { animation-delay: 0.25s; }
+  .hero > *:nth-child(3) { animation-delay: 0.42s; }
+  .hero > *:nth-child(4) { animation-delay: 0.58s; }
+  .hero > *:nth-child(5) { animation-delay: 0.72s; }
+
+  @media (max-width: 600px) {
+    .section { padding: 50px 0 36px; }
+    .closing { padding: 36px 18px; }
+    .scenario-body { padding: 16px 14px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-lines"></div>
+  <div class="hero-truck">🚛</div>
+
+  <div class="hero-eyebrow">Autopadova · Dealer Autorizat Iveco · Iași &amp; Bacău</div>
+  <h1>
+    Vinde
+    <span class="line2">Iveco</span>
+    <span class="line3">Ghid profesional de vânzări LCV &amp; camioane</span>
+  </h1>
+
+  <div class="hero-meta">
+    <div class="hero-tag active">Metodologie Andy Elliott</div>
+    <div class="hero-tag">Daily · Eurocargo · S-WAY · T-WAY · X-WAY</div>
+    <div class="hero-tag">B2B · Flotar · IMM · Antreprenor</div>
+    <div class="hero-tag">Adaptat piața MD România</div>
+  </div>
+
+  <div class="scroll-hint"><span class="arrow">↓</span> Derulează ghidul</div>
+</section>
+
+<!-- CONTAINER -->
+<div class="container">
+
+  <!-- SECTION 1: DE CE E DIFERIT B2B -->
+  <section class="section">
+    <div class="section-label">Fundament</div>
+    <h2 class="section-title">Vânzarea B2B <em>e Diferită</em></h2>
+    <p class="lead">Un Daily sau un S-WAY nu se vinde ca un autoturism. Cumpărătorul nu cumpără o mașină — cumpără un instrument de profit. Schimbă-ți mentalitatea complet.</p>
+
+    <div class="pullquote">
+      <p class="pq-text">„În vânzarea comercială, clientul calculează. Nu simte camionul — calculează câți bani îi aduce sau câți îi costă. Jobul tău e să faci calculul în favoarea ta."</p>
+      <div class="pq-attr">— Principiu Andy Elliott, adaptat B2B</div>
+    </div>
+
+    <div class="card-grid">
+      <div class="card">
+        <span class="card-icon">🧮</span>
+        <div class="card-title">Logică, nu emoție</div>
+        <p class="card-body">Decizia e justificată financiar. Folosești emoția pentru a deschide conversația, dar <strong>închizi cu cifre</strong>: TCO, productivitate/zi, uptime, consum. Clientul trebuie să poată justifica decizia în fața asociaților sau băncii.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">👥</span>
+        <div class="card-title">Factori de decizie multipli</div>
+        <p class="card-body">La o companie, decid: proprietarul, contabilul, managerul de flotă, uneori banca. <strong>Identifică DM-ul real</strong> (decision maker) din primele minute — altfel prezinți oamenilor greșiți.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🔄</span>
+        <div class="card-title">Ciclu lung de decizie</div>
+        <p class="card-body">O flotă nu se cumpără în o zi. Elliott spune că <strong>follow-up sistematic</strong> e esențial — dar și că poți accelera ciclul dacă oferi valoare reală la fiecare contact, nu doar „ați decis ceva?"</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🤝</span>
+        <div class="card-title">Relație pe termen lung</div>
+        <p class="card-body">Un client Iveco mulțumit = service regulat + reînnoire flotă la 4-5 ani + referințe în industrie. <strong>Nu vinzi un camion — construiești un parteneriat.</strong> Tratează-l ca atare din prima zi.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🏗️</span>
+        <div class="card-title">Cunoaște industria clientului</div>
+        <p class="card-body">Transportatorul de marfă are alte nevoi față de constructorul de drumuri sau distribuitorul alimentar. <strong>Studiază 5 industrii principale</strong> din zona Iași-Bacău și vorbește limba lor.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">📊</span>
+        <div class="card-title">TCO e argumentul suprem</div>
+        <p class="card-body">Total Cost of Ownership — costul total de deținere pe 3-5 ani — bate orice obiecție de preț. <strong>Iveco nr. 1 în România</strong> la segment >3,5t (18,2% cotă 2024) nu e întâmplător: înseamnă valoare reziduală mai bună și piese accesibile.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: PORTOFOLIU -->
+  <section class="section">
+    <div class="section-label">Arsenal de vânzări</div>
+    <h2 class="section-title">Cunoaște-ți <em>Produsele</em></h2>
+    <p class="lead">Nu poți vinde ce nu cunoști perfect. Fiecare model are argumente clare pentru un tip de client specific. Mapează modelul la nevoie — nu invers.</p>
+
+    <div class="product-row">
+      <div class="product-card">
+        <div class="product-name">Daily</div>
+        <div class="product-segment">LCV · 3,5T – 7T</div>
+        <ul class="product-args">
+          <li>Versatil: van, cab, 4x4, CNG, electric</li>
+          <li>Urban + regional, ultima milă</li>
+          <li>Cel mai vândut LCV comercial din clasă</li>
+          <li>Argument: „Orice afacere începe cu un Daily"</li>
+        </ul>
+      </div>
+      <div class="product-card">
+        <div class="product-name">eDaily</div>
+        <div class="product-segment">Electric · Zero emisii</div>
+        <ul class="product-args">
+          <li>Motor 140 kW, vmax 120 km/h</li>
+          <li>ePTO până la 15 kW</li>
+          <li>Ideal: livrări urbane, acces zone verzi</li>
+          <li>Argument: subvenții + cost/km redus 60%</li>
+        </ul>
+      </div>
+      <div class="product-card">
+        <div class="product-name">Eurocargo</div>
+        <div class="product-segment">Mediu · 7T – 18T</div>
+        <ul class="product-args">
+          <li>Distribuție urbană + regională</li>
+          <li>Aplicații speciale: pompieri, salubritate</li>
+          <li>Fiabilitate dovedită 30+ ani în România</li>
+          <li>Argument: raport cost-beneficiu imbatabil</li>
+        </ul>
+      </div>
+      <div class="product-card">
+        <div class="product-name">S-WAY</div>
+        <div class="product-segment">Greu · Long Haul</div>
+        <ul class="product-args">
+          <li>Transport distanțe lungi, Euro 6</li>
+          <li>Confort premium — șoferul = productivitate</li>
+          <li>Consum optimizat, aerodinamică avansată</li>
+          <li>Argument: cel mai profitabil km pe distanță lungă</li>
+        </ul>
+      </div>
+      <div class="product-card">
+        <div class="product-name">T-WAY</div>
+        <div class="product-segment">Off-Road · Construcții</div>
+        <ul class="product-args">
+          <li>Teren dificil, orice condiție meteo</li>
+          <li>Rezistență extremă, service durabil</li>
+          <li>Ideal: firme construcții, terasamente</li>
+          <li>Argument: „Dacă T-WAY stă, șantierul stă"</li>
+        </ul>
+      </div>
+      <div class="product-card">
+        <div class="product-name">X-WAY</div>
+        <div class="product-segment">On/Off Road · Polivalent</div>
+        <ul class="product-args">
+          <li>Construcții + transport pe drumuri publice</li>
+          <li>Polivalent — o investiție, două utilizări</li>
+          <li>Ideal: antreprenori cu activitate mixtă</li>
+          <li>Argument: flexibilitate maximă a investiției</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tip-box">Regula de aur: Nu prezenta niciodată modelul greșit. Dacă un client de construcții vine pentru un Daily, ascultă-i nevoia reală — poate are nevoie de un X-WAY și nu știe. Ghidează-l spre soluția corectă, chiar dacă înseamnă o vânzare mai mare sau mai mică.</div>
+  </section>
+
+  <!-- SECTION 3: PROCESUL -->
+  <section class="section">
+    <div class="section-label">Procesul de vânzare</div>
+    <h2 class="section-title">Cei <em>8 Pași</em> B2B Iveco</h2>
+    <p class="lead">Vânzarea comercială are un pas în plus față de auto — analiza afacerii clientului. Fără ea, ești un vânzător de produse. Cu ea, ești consultant.</p>
+
+    <div class="formula">
+      <div class="f-step">Prospectare</div>
+      <div class="f-arrow">→</div>
+      <div class="f-step">Calificare</div>
+      <div class="f-arrow">→</div>
+      <div class="f-step">Analiza afacerii</div>
+      <div class="f-arrow">→</div>
+      <div class="f-step">Soluție</div>
+      <div class="f-arrow">→</div>
+      <div class="f-step">Demo/Test</div>
+      <div class="f-arrow">→</div>
+      <div class="f-step">Ofertă TCO</div>
+      <div class="f-arrow">→</div>
+      <div class="f-step">Negociere</div>
+      <div class="f-arrow">→</div>
+      <div class="f-step">Contract</div>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <h4>Prospectare activă — Nu aștepta să vină clientul</h4>
+          <p>Elliott spune că cel mai bun moment să vinzi e când clientul nu căuta. Identifică firme din zona Iași-Bacău cu flotă veche (7+ ani), vizibile pe șosele sau la obiective de construcții. <strong>LinkedIn, RECOM, ANAF public, parcuri industriale</strong> — surse de prospectat săptămânal. Trimite un email personalizat cu un calcul TCO comparativ drept „cadou de prezentare".</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <h4>Calificarea B2B — BANT + FLOTĂ</h4>
+          <p>Buget, Autoritate, Nevoie, Timp — plus: <strong>dimensiunea flotei actuale, vârsta vehiculelor, tipul activității, contracte de transport active.</strong> „Câte vehicule aveți în flotă acum? Care e cel mai vechi? Cum decideți achizițiile — direct sau prin leasing?" Aceste întrebări îți dau putere în negociere.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <h4>Analiza afacerii — Fii consultant, nu vânzător</h4>
+          <p>Aceasta este diferența dintre vânzătorii medii și cei excelenți. <strong>Întreabă: „Care e costul mediu lunar de mentenanță per vehicul? Câte zile pe an stă vehiculul în service? Cum vă afectează o pană neplanificată?"</strong> Răspunsurile îți construiesc argumentul TCO și îi arată clientului că te interesează afacerea lui, nu comisionul tău.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-content">
+          <h4>Propunerea soluției — Model + Configurație + Servicii</h4>
+          <p>Nu vinzi un vehicul — vinzi un <strong>pachet complet</strong>: vehiculul configurat exact pentru activitate, finanțarea optimă (leasing operațional vs. financiar), contractul de mentenanță, IVECO Drivers Fidelity Club. Prezintă ca soluție integrată, nu ca produse separate.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">05</div>
+        <div class="step-content">
+          <h4>Demo &amp; Test Drive — Lasă camionul să vorbească</h4>
+          <p>Pentru LCV — test drive în condiții reale (traseu urban + extraurban). Pentru camioane grele — invită clientul să aducă propriul șofer. <strong>Șoferul convinge proprietarul mai repede decât orice argument.</strong> Programează demonstrații la sediul clientului dacă posibil — confortul lui = avantajul tău.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">06</div>
+        <div class="step-content">
+          <h4>Oferta TCO — Documentul care închide</h4>
+          <p>Prezintă costul total pe 3-5 ani: achiziție, finanțare, combustibil, mentenanță, asigurare, valoare reziduală. <strong>Compară cu alternativa clientului</strong> (vehiculul actual sau competitorul). Iveco câștigă de obicei la servicii și valoare reziduală. Fă cifrele vizibile — un tabel simplu, nu un roman.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">07</div>
+        <div class="step-content">
+          <h4>Negocierea — Valoare contra valoare</h4>
+          <p>Elliott: <strong>„Nu reduci prețul — schimbi valoarea."</strong> Dacă clientul vrea reducere, oferă alternativ: service inclus 1 an, extensie garanție, anvelope incluse, prioritate service. Menții prețul vehiculului și adaugi valoare din servicii — mult mai sănătos pentru relație și marjă.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">08</div>
+        <div class="step-content">
+          <h4>Contractul — Simplifică și grăbește birocratic</h4>
+          <p>Odată ce clientul a zis DA, mișcă rapid. Orice zi de delay e o zi în care un competitor poate interveni. <strong>Ai documentele pregătite dinainte</strong>, clarifică în avans ce acte sunt necesare de la firma lui, propune semnare în aceeași zi sau a doua zi. Livrarea rapidă = satisfacție maximă.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: TCO -->
+  <section class="section">
+    <div class="section-label">Arma secretă</div>
+    <h2 class="section-title">TCO — Argumentul <em>Definitiv</em></h2>
+    <p class="lead">Orice obiecție de preț dispare dacă demonstrezi că Iveco costă mai puțin pe termen mediu. Prezintă întotdeauna costul total, nu prețul de achiziție.</p>
+
+    <div class="tco-calc">
+      <div class="tco-calc-title">📊 Exemplu model TCO — Daily vs. concurență (3 ani)</div>
+      <div class="tco-row">
+        <span class="label">Preț achiziție Iveco Daily</span>
+        <span class="value">42.000 €</span>
+      </div>
+      <div class="tco-row">
+        <span class="label">Preț achiziție concurent</span>
+        <span class="value">39.500 €</span>
+      </div>
+      <div class="tco-row">
+        <span class="label">Diferență achiziție (dezavantaj Iveco)</span>
+        <span class="value" style="color:#e05a00">+2.500 €</span>
+      </div>
+      <div class="tco-row" style="margin-top:8px">
+        <span class="label">Economie combustibil/an (consum 8% mai mic)</span>
+        <span class="value" style="color:#4aad7a">-1.200 €/an</span>
+      </div>
+      <div class="tco-row">
+        <span class="label">Economie mentenanță/an (service Autopadova inclus)</span>
+        <span class="value" style="color:#4aad7a">-800 €/an</span>
+      </div>
+      <div class="tco-row">
+        <span class="label">Valoare reziduală mai bună la 3 ani</span>
+        <span class="value" style="color:#4aad7a">+2.200 €</span>
+      </div>
+      <div class="tco-row">
+        <span class="label">Zile mai puțin în service (uptime Iveco)</span>
+        <span class="value" style="color:#4aad7a">+1.500 € producție</span>
+      </div>
+      <div class="tco-row total" style="margin-top:8px; padding-top:12px; border-top:1px solid rgba(26,127,75,0.3)">
+        <span class="label">AVANTAJ NET TCO IVECO (3 ani)</span>
+        <span class="value">+7.100 €</span>
+      </div>
+    </div>
+
+    <div class="tip-box">Personalizează tabelul TCO pentru fiecare client cu cifrele lui reale (km/an, consum actual, frecvență service). Un calcul personalizat are impact de 10x față de unul generic. Fă-l în fața clientului — nu îl trimite pe email.</div>
+  </section>
+
+  <!-- SECTION 5: SCENARII -->
+  <section class="section">
+    <div class="section-label">Scenarii de teren</div>
+    <h2 class="section-title">Obiecții Reale — <em>Răspunsuri Reale</em></h2>
+    <p class="lead">Obiecțiile din vânzarea comercială sunt mai tehnice și mai dure decât în auto. Pregătire înseamnă să ai răspunsul înainte de întrebare.</p>
+
+    <!-- SCENARIU 1 -->
+    <div class="scenario">
+      <div class="scenario-header">
+        <div class="scenario-icon">💶</div>
+        <div>
+          <div class="scenario-title">Scenariu 1: „Iveco e mai scump decât competitorul"</div>
+          <div class="scenario-subtitle">Cea mai comună obiecție — câștigată întotdeauna prin TCO, niciodată prin reducere imediată</div>
+        </div>
+      </div>
+      <div class="scenario-body">
+        <div class="obj-label">Obiecție</div>
+        <div class="objection">Am primit o ofertă de la [concurent] cu 3.000 euro mai ieftină pentru același tonaj.</div>
+        <div class="resp-label">Tehnica Elliott — „Compară costul real, nu prețul de pe foaie"</div>
+        <div class="script-box">
+          „Apreciez că îmi spuneți direct — și înțeleg că fiecare euro contează în afacere.<br><br>
+          Haideți să facem un exercițiu rapid. Oferta lor — 3.000 euro mai mică acum. Dar <strong>câți km face vehiculul pe an la dumneavoastră?</strong><br><br>
+          [Răspuns: X km]<br><br>
+          Perfect. Pe baza consumului mediu Iveco Daily față de [concurent], la X km/an economisiți aproximativ 1.000-1.200 euro pe combustibil. La 3 ani — suntem deja la 3.600 euro economisit.<br><br>
+          Plus: service autorizat Autopadova în Iași și Bacău — fără să mergeți în altă regiune. Plus valoarea reziduală mai bună la revânzare sau reînnoire flotă.<br><br>
+          Deci întrebarea reală este: plătiți 3.000 euro mai puțin acum sau economisiți 7.000+ euro în 3 ani?"
+        </div>
+        <div class="tco-box">Pregătește tabelul TCO înainte de orice întâlnire la care știi că există ofertă concurentă. Cifrele personalizate bat orice argument verbal.</div>
+      </div>
+    </div>
+
+    <!-- SCENARIU 2 -->
+    <div class="scenario">
+      <div class="scenario-header">
+        <div class="scenario-icon">🏦</div>
+        <div>
+          <div class="scenario-title">Scenariu 2: „Nu avem buget acum"</div>
+          <div class="scenario-subtitle">Obiecția de lichiditate — soluționată prin structura financiară</div>
+        </div>
+      </div>
+      <div class="scenario-body">
+        <div class="obj-label">Obiecție</div>
+        <div class="objection">Ar fi interesant, dar în momentul ăsta nu avem disponibilul necesar pentru o achiziție.</div>
+        <div class="resp-label">Tehnica Elliott — „Restructurează cheltuiala"</div>
+        <div class="script-box">
+          „Înțeleg perfect — și de asta avem soluții de finanțare construite special pentru afaceri ca a dumneavoastră.<br><br>
+          Haideți să vedem: <strong>cât cheltuiți lunar acum pe mentenanța vehiculului actual?</strong><br><br>
+          [Răspuns]<br><br>
+          Bun. Un Daily nou în leasing operațional înseamnă o rată lunară de [X] euro. Din această rată scădem economiile la combustibil și mentenanță — și probabil vorbim de o diferență netă de [Y] euro/lună față de ce cheltuiți acum.<br><br>
+          Practic, nu adăugați o cheltuială — <strong>înlocuiți una ineficientă cu una predictibilă și mai mică.</strong><br><br>
+          Vreți să vedem structura exactă pentru situația dumneavoastră?"
+        </div>
+        <div class="tip-box">IVECO Financial Services oferă leasing operațional, credit și soluții flexibile. Cunoaște produsele financiare la fel de bine ca vehiculele — sunt parte din vânzare, nu un plus.</div>
+      </div>
+    </div>
+
+    <!-- SCENARIU 3 -->
+    <div class="scenario">
+      <div class="scenario-header">
+        <div class="scenario-icon">🔧</div>
+        <div>
+          <div class="scenario-title">Scenariu 3: „Am auzit că service-ul Iveco e scump"</div>
+          <div class="scenario-subtitle">Obiecția de reputație — combătută cu fapte și cu proximitatea Autopadova</div>
+        </div>
+      </div>
+      <div class="scenario-body">
+        <div class="obj-label">Obiecție</div>
+        <div class="objection">Un prieten transportator mi-a zis că piesele și service-ul Iveco costă mult.</div>
+        <div class="resp-label">Tehnica Elliott — „Izolează sursa, înlocuiește cu date"</div>
+        <div class="script-box">
+          „Apreciez că îmi spuneți asta — e important să clarificăm. Pot să vă întreb: știți la ce dealer a făcut service prietenul dumneavoastră și cam ce perioadă?<br><br>
+          [Ascultă]<br><br>
+          Înțeleg. Există diferențe mari între un service autorizat Iveco și unul neautorizat. La Autopadova — Iași și Bacău — lucrăm cu <strong>piese originale Iveco, tehnicienii sunt certificați și avem contracte de mentenanță predictivă</strong> care elimină exact surprizele de care vă temeți.<br><br>
+          Mai mult: avem clienți cu flote de 10-15 vehicule Iveco în zona Moldovei care pot confirma. Pot să vă pun în legătură cu unul dintre ei dacă vreți o opinie independentă."
+        </div>
+        <div class="tip-box">Referințele de la clienți existenți sunt mai puternice decât orice argument al tău. Construiește o listă de 5-6 clienți mulțumiți din zona Iași-Bacău dispuși să vorbească. Cere permisiunea lor în avans.</div>
+      </div>
+    </div>
+
+    <!-- SCENARIU 4 -->
+    <div class="scenario">
+      <div class="scenario-header">
+        <div class="scenario-icon">🚛</div>
+        <div>
+          <div class="scenario-title">Scenariu 4: „Avem deja relație cu alt dealer"</div>
+          <div class="scenario-subtitle">Loialitate față de concurență — cel mai greu de spart, dar posibil</div>
+        </div>
+      </div>
+      <div class="scenario-body">
+        <div class="obj-label">Obiecție</div>
+        <div class="objection">Cumpărăm de ani de zile de la [dealer concurent] și suntem mulțumiți. Nu vedem de ce am schimba.</div>
+        <div class="resp-label">Tehnica Elliott — „Nu ataca loialitatea — pune o întrebare bună"</div>
+        <div class="script-box">
+          „Respect asta — loialitatea în afaceri e valoroasă și înțeleg că o relație stabilă contează.<br><br>
+          Nu vă cer să schimbați nimic astăzi. Vă cer ceva mai mic: <strong>permiteți-mi 30 de minute să vă prezint calculul TCO comparat pentru următoarea achiziție.</strong><br><br>
+          Dacă după ce vedeți cifrele concluzia e că partenerul actual vă oferă mai multă valoare — perfect, asta e decizia corectă pentru afacerea dumneavoastră.<br><br>
+          Dar dacă există chiar și 10% economie pe 3 ani, merită să știți înainte să semnați următorul contract. Când avem 30 de minute?"
+        </div>
+        <div class="tip-box">Nu câștigi un client de flotă dintr-o singură întâlnire. Obiectivul la prima vizită e să obții o a doua întâlnire — cu datele lor reale de costuri. Elliott: „Micile DA-uri duc la marele DA."</div>
+      </div>
+    </div>
+
+    <!-- SCENARIU 5 -->
+    <div class="scenario">
+      <div class="scenario-header">
+        <div class="scenario-icon">⏳</div>
+        <div>
+          <div class="scenario-title">Scenariu 5: „Așteptăm să vedem cum merge cu A7"</div>
+          <div class="scenario-subtitle">Obiecție de context local — autostrada Moldovei ca argument pro-achiziție</div>
+        </div>
+      </div>
+      <div class="scenario-body">
+        <div class="obj-label">Obiecție</div>
+        <div class="objection">Cu autostrada A7 în construcție, nu știm cum se schimbă rutele și volumele. Mai așteptăm.</div>
+        <div class="resp-label">Tehnica Elliott — „Contextul tău e argumentul meu"</div>
+        <div class="script-box">
+          „Excelentă observație — și exact de asta ar trebui să achiziționați acum, nu după.<br><br>
+          A7 înseamnă <strong>mai mulți km, viteze mai mari, curse mai lungi și timpi de livrare mai scurți.</strong> Vehiculele pe care le aveți acum sunt calibrate pentru drumuri județene și naționale — nu pentru autostradă intensivă.<br><br>
+          Un S-WAY sau un Daily nou, configurat pentru autostradă, va fi semnificativ mai eficient pe combustibil și uzură decât ce aveți acum.<br><br>
+          Dacă așteptați până e gata autostrada, veți cumpăra în vârf de cerere, cu timpi de livrare mai lungi și posibil prețuri mai mari. Acum puteți negocia și livra înainte de sezon."
+        </div>
+        <div class="tco-box">A7 Autostrada Moldovei este un argument de vânzare local puternic — puțini vânzători din afara regiunii îl pot folosi. Documentează-te cu etapele de construcție și folosește-le activ în conversații.</div>
+      </div>
+    </div>
+
+    <!-- SCENARIU 6 -->
+    <div class="scenario">
+      <div class="scenario-header">
+        <div class="scenario-icon">⚡</div>
+        <div>
+          <div class="scenario-title">Scenariu 6: „Electricul e pentru viitor, nu pentru acum"</div>
+          <div class="scenario-subtitle">Obiecția față de eDaily — depășită cu argumente practice, nu ecologice</div>
+        </div>
+      </div>
+      <div class="scenario-body">
+        <div class="obj-label">Obiecție</div>
+        <div class="objection">Nu suntem pregătiți pentru electric. Infrastructura nu e. Nici noi.</div>
+        <div class="resp-label">Tehnica Elliott — „Vinde utilitate, nu ideologie"</div>
+        <div class="script-box">
+          „Perfect — și nu vă vând un vis ecologic. Vă vând un instrument de profit.<br><br>
+          <strong>eDaily are autonomie suficientă pentru orice livrare urbană sau periurbană din Iași sau Bacău.</strong> Dacă ruta dumneavoastră e sub 150-200 km/zi, funcționează perfect.<br><br>
+          Costul pe km: aproximativ 60% mai mic față de motorină la prețurile actuale. La 80.000 km/an — economie de [X] euro.<br><br>
+          Plus: acces în zonele de emisii zero (din ce în ce mai comune în orașele mari), imagine față de clienții dumneavoastră care au obiective ESG.<br><br>
+          Nu vă cer să electrificați toată flota — vă cer să luați în calcul un vehicul pentru ruta urbană fixă. Calculul îl facem împreună în 10 minute."
+        </div>
+        <div class="tip-box">Nu vinde eDaily cu argumentul „e mai verde". Vinde-l cu economii concrete pe km, acces urban, și profilul de utilizare al clientului. Emoția ecologică vine gratis — dar nu ea decide.</div>
+      </div>
+    </div>
+
+    <!-- SCENARIU 7 -->
+    <div class="scenario">
+      <div class="scenario-header">
+        <div class="scenario-icon">📋</div>
+        <div>
+          <div class="scenario-title">Scenariu 7: „Trebuie să aprob cu asociații / consiliul"</div>
+          <div class="scenario-subtitle">Decidentul multiplu — cum avansezi fără să blochezi procesul</div>
+        </div>
+      </div>
+      <div class="scenario-body">
+        <div class="obj-label">Obiecție</div>
+        <div class="objection">Mi se pare bine ce prezentați, dar decizia o luăm în consiliu. Vă contactăm noi.</div>
+        <div class="resp-label">Tehnica Elliott — „Echipează-l pe el să vândă intern"</div>
+        <div class="script-box">
+          „Perfect — și tocmai de asta vreau să vă las cu instrumentele potrivite pentru acea discuție.<br><br>
+          Haideți să pregătim împreună o <strong>prezentare de 2 pagini cu datele cheie</strong>: prețul, TCO pe 3 ani, structura de finanțare și avantajele față de alternativă. Ceva pe care îl puteți prezenta colegilor fără să fiți tehnic în toate detaliile.<br><br>
+          Când e programată ședința?<br><br>
+          [Răspuns]<br><br>
+          Excelent. Vă trimit documentul până [dată]. Dacă după ședință apar întrebări tehnice, pot fi disponibil pe video sau la telefon pentru 15 minute — colegii dumneavoastră pot întreba direct."
+        </div>
+        <div class="tip-box">Cel mai inteligent lucru: transformă interlocutorul tău în vânzătorul tău intern. Dacă el are argumentele corecte și documentele clare, șansele ca decizia să fie favorabilă cresc dramatic.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6: FOLLOW-UP -->
+  <section class="section">
+    <div class="section-label">Sistemul de urmărire</div>
+    <h2 class="section-title">Follow-Up <em>B2B Sistematic</em></h2>
+    <p class="lead">Ciclul de vânzare comercială e lung. Vânzătorul care câștigă nu e cel mai persuasiv la prima întâlnire — e cel mai consistent în urmărire.</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Când</th>
+          <th>Canal</th>
+          <th>Mesaj / Acțiune</th>
+          <th>Obiectiv</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>2h după întâlnire</strong></td>
+          <td>Email</td>
+          <td>Mulțumire + rezumat puncte discutate + ofertă TCO atașată</td>
+          <td>Profesionalism, ancorare</td>
+        </tr>
+        <tr>
+          <td><strong>Ziua 3</strong></td>
+          <td>Telefon</td>
+          <td>„Am un update la finanțare / am verificat stocul / am o informație utilă pentru situația dvs."</td>
+          <td>Adaugă valoare, nu presează</td>
+        </tr>
+        <tr>
+          <td><strong>Ziua 7</strong></td>
+          <td>WhatsApp / Email</td>
+          <td>Trimite un caz de succes: client similar din zonă + economia realizată</td>
+          <td>Dovadă socială locală</td>
+        </tr>
+        <tr>
+          <td><strong>Săptămâna 2</strong></td>
+          <td>Vizită / Video call</td>
+          <td>Prezentare personalizată cu datele reale ale firmei lor introduse în modelul TCO</td>
+          <td>Demonstrație concretă</td>
+        </tr>
+        <tr>
+          <td><strong>Luna 1</strong></td>
+          <td>Telefon</td>
+          <td>„Oferta de finanțare se schimbă la [dată]. Vreau să vă informez înainte." — urgență reală</td>
+          <td>Creare urgență legitimă</td>
+        </tr>
+        <tr>
+          <td><strong>Luna 2-3</strong></td>
+          <td>Email + LinkedIn</td>
+          <td>Noutăți Iveco relevante pentru industria lor, invitație event / test drive fleet</td>
+          <td>Relație continuă</td>
+        </tr>
+        <tr>
+          <td><strong>Ciclic (lunar)</strong></td>
+          <td>Mixt</td>
+          <td>Touch de valoare: un articol, o statistică, o invitație — nu o cerere de decizie</td>
+          <td>Prezență în mintea clientului</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="pullquote">
+      <p class="pq-text">„Cel mai mare vânzător nu e cel care vinde la prima întâlnire. E cel care este prezent exact în momentul în care clientul decide."</p>
+      <div class="pq-attr">— Andy Elliott</div>
+    </div>
+  </section>
+
+  <!-- SECTION 7: PROFILURI CLIENT -->
+  <section class="section">
+    <div class="section-label">Psihologia cumpărătorului B2B</div>
+    <h2 class="section-title">5 Profiluri de <em>Cumpărători Iveco</em></h2>
+    <p class="lead">Fiecare tip de client Iveco are o mentalitate diferită. Recunoașterea rapidă îți salvează ore de prezentare greșită.</p>
+
+    <div class="card-grid">
+      <div class="card">
+        <span class="card-icon">🏗️</span>
+        <div class="card-title">Constructorul</div>
+        <p class="card-body"><strong>Nevoia:</strong> Rezistență, putere, disponibilitate. Nu vrea să audă că mașina stă.<br><strong>Model ideal:</strong> T-WAY, X-WAY, Eurocargo.<br><strong>Argument cheie:</strong> „Dacă vehiculul stă, șantierul stă. T-WAY a fost construit să nu stea niciodată."</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🚚</span>
+        <div class="card-title">Transportatorul de lungă distanță</div>
+        <p class="card-body"><strong>Nevoia:</strong> Consum, confort șofer, TCO pe km.<br><strong>Model ideal:</strong> S-WAY.<br><strong>Argument cheie:</strong> „Șoferul odihnit = curse mai multe, accidente mai puține, rotație mai mică de personal. S-WAY e cel mai confortabil cab din clasă."</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">📦</span>
+        <div class="card-title">Distribuitorul / Livrare urbană</div>
+        <p class="card-body"><strong>Nevoia:</strong> Volum de încărcare, manevrabilitate, cost/stop.<br><strong>Model ideal:</strong> Daily, eDaily, Eurocargo.<br><strong>Argument cheie:</strong> „Daily intră unde alții nu intră. eDaily reduce costul ultimei mile cu 60%."</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">📊</span>
+        <div class="card-title">Managerul de flotă corporatist</div>
+        <p class="card-body"><strong>Nevoia:</strong> Date, rapoarte, predictibilitate, SLA service.<br><strong>Model ideal:</strong> Orice model + contract mentenanță + IVECO ON conectivitate.<br><strong>Argument cheie:</strong> „Îți ofer date reale de utilizare și uptime garantat. Fără surprize în buget."</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🛠️</span>
+        <div class="card-title">Antreprenorul IMM</div>
+        <p class="card-body"><strong>Nevoia:</strong> Preț bun, service accesibil, simplitate.<br><strong>Model ideal:</strong> Daily, Eurocargo de bază.<br><strong>Argument cheie:</strong> „Service la Iași sau Bacău, piese mereu în stoc, un singur număr de sunat. Nu trebuie să vă bateți capul."</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 8: CHECKLIST -->
+  <section class="section">
+    <div class="section-label">Ritual zilnic</div>
+    <h2 class="section-title">Checklist-ul <em>Vânzătorului Iveco</em></h2>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-title">🌅 Dimineața — Pregătire</div>
+        <ul class="checklist" style="margin:12px 0 0">
+          <li>Am verificat stocul actual: ce modele, ce configurații, timpi de livrare?</li>
+          <li>Am 3 clienți de urmărit astăzi cu acțiuni clare definite?</li>
+          <li>Știu oferta de finanțare activă și condițiile exacte?</li>
+          <li>Am pregătit un tabel TCO personalizat pentru cel puțin un client de astăzi?</li>
+          <li>Am studiat un model Iveco în detaliu (rotație săptămânală)?</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">🤝 La întâlnire — Execuție</div>
+        <ul class="checklist" style="margin:12px 0 0">
+          <li>Știu industria și activitatea principală a clientului?</li>
+          <li>Am identificat DM-ul real înainte de a prezenta?</li>
+          <li>Pun întrebări despre costuri actuale înainte de a prezenta soluția?</li>
+          <li>Propun pasul următor concret la finalul fiecărei întâlniri?</li>
+          <li>Nu plec fără o dată și o acțiune clară agreată?</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">🌆 Seara — Review</div>
+        <ul class="checklist" style="margin:12px 0 0">
+          <li>Am actualizat CRM-ul cu toate conversațiile de astăzi?</li>
+          <li>Am trimis follow-up în 2h după fiecare întâlnire importantă?</li>
+          <li>Am planificat acțiunile de mâine (nu improvizez dimineața)?</li>
+          <li>Ce obiecție nouă am primit astăzi? Cum o rezolv mai bine data viitoare?</li>
+          <li>Știu câți euro am în pipeline activ și când se închid?</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <div class="closing">
+    <h2><span>Iveco</span> nr. 1 România</h2>
+    <p>18,2% cotă de piață la >3,5t nu e întâmplare — e muncă, produs bun și vânzători excelenți. Fii tu motivul pentru care Moldova alege Iveco.</p>
+  </div>
+
+</div>
+
+<footer>
+  Autopadova · Dealer Autorizat Iveco · Iași: DN 28 km 61 · Bacău: Calea Republicii 179 · www.autopadova.com · Training intern — metodologie Andy Elliott adaptată B2B
+</footer>
+
+</body>
+</html>

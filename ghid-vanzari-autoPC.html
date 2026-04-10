@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ghid Andy Elliott — Închiderea Vânzărilor Auto</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #C8102E;
+    --red-dark: #8B0C20;
+    --red-glow: rgba(200,16,46,0.18);
+    --gold: #D4A017;
+    --dark: #0A0A0A;
+    --dark2: #111111;
+    --dark3: #1A1A1A;
+    --dark4: #222222;
+    --text: #E8E0D0;
+    --text-muted: #8A8278;
+    --border: rgba(200,16,46,0.25);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--dark);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ─── NOISE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 24px;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 40%, rgba(200,16,46,0.22) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 80% 80%, rgba(212,160,23,0.06) 0%, transparent 60%);
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 22px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .hero-eyebrow::before, .hero-eyebrow::after {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--red);
+    opacity: 0.6;
+  }
+
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 12vw, 9rem);
+    letter-spacing: 0.03em;
+    line-height: 0.92;
+    color: #fff;
+    position: relative;
+    text-shadow: 0 0 80px rgba(200,16,46,0.3);
+  }
+  .hero h1 span {
+    color: var(--red);
+    display: block;
+  }
+
+  .hero-sub {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    color: var(--text-muted);
+    margin-top: 20px;
+    position: relative;
+    max-width: 560px;
+  }
+
+  .hero-badge {
+    margin-top: 40px;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, var(--dark3), var(--dark4));
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    animation: bounce 2s infinite;
+  }
+  .scroll-hint::after {
+    content: '↓';
+    font-size: 1.1rem;
+    color: var(--red);
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
+
+  /* ─── LAYOUT ─── */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ─── SECTION HEADERS ─── */
+  .section {
+    padding: 80px 0 60px;
+    border-top: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .section-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--red) 0%, transparent 100%);
+    opacity: 0.35;
+    max-width: 80px;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    letter-spacing: 0.04em;
+    line-height: 1;
+    color: #fff;
+    margin-bottom: 28px;
+  }
+  .section-title em {
+    color: var(--red);
+    font-style: normal;
+  }
+
+  .lead {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    max-width: 680px;
+    margin-bottom: 40px;
+    line-height: 1.65;
+  }
+
+  /* ─── PRINCIPLE CARDS ─── */
+  .principle-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 2px;
+    margin: 32px 0;
+  }
+
+  .principle-card {
+    background: var(--dark3);
+    padding: 28px 24px;
+    border: 1px solid rgba(255,255,255,0.04);
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.25s;
+  }
+  .principle-card:hover {
+    border-color: var(--border);
+  }
+  .principle-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--red), transparent);
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+  .principle-card:hover::before { opacity: 1; }
+
+  .p-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    color: rgba(200,16,46,0.12);
+    line-height: 1;
+    margin-bottom: 6px;
+    transition: color 0.25s;
+  }
+  .principle-card:hover .p-num { color: rgba(200,16,46,0.35); }
+
+  .p-title {
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+  .p-body {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.65;
+  }
+
+  /* ─── SCENARIO BLOCKS ─── */
+  .scenario {
+    margin: 36px 0;
+    background: var(--dark3);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-left: 3px solid var(--red);
+    border-radius: 0 4px 4px 0;
+    overflow: hidden;
+  }
+
+  .scenario-header {
+    background: linear-gradient(90deg, rgba(200,16,46,0.15), transparent);
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .scenario-icon {
+    width: 36px;
+    height: 36px;
+    background: var(--red);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .scenario-title {
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.03em;
+    color: #fff;
+  }
+  .scenario-subtitle {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  .scenario-body {
+    padding: 22px 24px;
+  }
+
+  .objection {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 4px;
+    padding: 14px 18px;
+    margin-bottom: 16px;
+    font-style: italic;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    position: relative;
+  }
+  .objection::before {
+    content: '"';
+    font-family: 'DM Serif Display', serif;
+    font-size: 3rem;
+    color: var(--red);
+    opacity: 0.3;
+    position: absolute;
+    top: -6px;
+    left: 10px;
+    line-height: 1;
+  }
+  .objection-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    opacity: 0.6;
+    margin-bottom: 6px;
+  }
+
+  .response-block {
+    margin-bottom: 20px;
+  }
+  .response-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .response-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+    max-width: 40px;
+  }
+
+  .script-box {
+    background: rgba(200,16,46,0.06);
+    border: 1px solid rgba(200,16,46,0.18);
+    border-radius: 4px;
+    padding: 16px 18px;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: var(--text);
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    position: relative;
+  }
+
+  .tip-box {
+    background: rgba(212,160,23,0.07);
+    border: 1px solid rgba(212,160,23,0.2);
+    border-radius: 4px;
+    padding: 14px 18px;
+    font-size: 0.84rem;
+    color: #c9a84c;
+    margin-top: 14px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .tip-box::before {
+    content: '★';
+    font-size: 0.8rem;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  /* ─── STEPS ─── */
+  .steps {
+    counter-reset: step;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .step {
+    counter-increment: step;
+    display: flex;
+    gap: 24px;
+    padding: 24px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    position: relative;
+  }
+  .step:last-child { border-bottom: none; }
+  .step-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.6rem;
+    color: var(--red);
+    line-height: 1;
+    min-width: 44px;
+    opacity: 0.7;
+  }
+  .step-content h4 {
+    font-weight: 700;
+    font-size: 1rem;
+    color: #fff;
+    margin-bottom: 6px;
+    letter-spacing: 0.02em;
+  }
+  .step-content p {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.65;
+  }
+
+  /* ─── QUOTE PULLOUT ─── */
+  .pullquote {
+    margin: 48px 0;
+    padding: 32px 36px;
+    border: 1px solid var(--border);
+    position: relative;
+    background: linear-gradient(135deg, var(--dark3), var(--dark2));
+  }
+  .pullquote::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--red), var(--red-dark));
+  }
+  .pullquote-text {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    line-height: 1.5;
+    color: #fff;
+    margin-bottom: 14px;
+  }
+  .pullquote-attr {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red);
+  }
+
+  /* ─── FORMULA ─── */
+  .formula {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    margin: 28px 0;
+    padding: 24px;
+    background: var(--dark3);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 4px;
+  }
+  .formula-step {
+    background: var(--red);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 8px 14px;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+  .formula-arrow {
+    color: var(--red);
+    font-size: 1.2rem;
+    opacity: 0.5;
+  }
+
+  /* ─── CHECKLIST ─── */
+  .checklist {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 20px 0;
+  }
+  .checklist li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 0.9rem;
+    color: var(--text);
+  }
+  .checklist li::before {
+    content: '✓';
+    color: var(--red);
+    font-weight: 700;
+    margin-top: 1px;
+    flex-shrink: 0;
+  }
+
+  /* ─── TABLE ─── */
+  .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    font-size: 0.87rem;
+  }
+  .comparison-table th {
+    background: var(--red);
+    color: #fff;
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+  }
+  .comparison-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    color: var(--text-muted);
+    vertical-align: top;
+  }
+  .comparison-table tr:hover td {
+    background: rgba(200,16,46,0.04);
+    color: var(--text);
+  }
+  .comparison-table tr:nth-child(even) td {
+    background: rgba(255,255,255,0.02);
+  }
+
+  /* ─── CLOSING SECTION ─── */
+  .closing {
+    background: linear-gradient(135deg, var(--dark2), var(--dark3));
+    border: 1px solid var(--border);
+    padding: 52px 40px;
+    text-align: center;
+    margin: 60px 0 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .closing::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(200,16,46,0.12), transparent);
+    pointer-events: none;
+  }
+  .closing h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    letter-spacing: 0.06em;
+    color: #fff;
+    margin-bottom: 14px;
+    position: relative;
+  }
+  .closing h2 span { color: var(--red); }
+  .closing p {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    max-width: 520px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 24px;
+    text-align: center;
+    font-size: 0.73rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    opacity: 0.5;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero > * {
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero > *:nth-child(1) { animation-delay: 0.1s; }
+  .hero > *:nth-child(2) { animation-delay: 0.25s; }
+  .hero > *:nth-child(3) { animation-delay: 0.4s; }
+  .hero > *:nth-child(4) { animation-delay: 0.55s; }
+  .hero > *:nth-child(5) { animation-delay: 0.7s; }
+
+  /* ─── DIVIDER ─── */
+  .divider {
+    width: 60px;
+    height: 3px;
+    background: var(--red);
+    margin: 20px 0 30px;
+  }
+
+  p { margin-bottom: 14px; }
+  p:last-child { margin-bottom: 0; }
+
+  strong { color: #fff; font-weight: 600; }
+
+  @media (max-width: 600px) {
+    .section { padding: 50px 0 40px; }
+    .closing { padding: 36px 20px; }
+    .scenario-body { padding: 18px 16px; }
+    .scenario-header { padding: 14px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">Autopadova Training Series</div>
+  <h1>Arta<span>Închiderii</span></h1>
+  <p class="hero-sub">Ghid complet de vânzări auto bazat pe metodologia Andy Elliott — de la primul contact la semnătură</p>
+  <div class="hero-badge">🔥 Metodologie Andy Elliott · Adaptat pentru piața românească</div>
+  <div class="scroll-hint">Derulează</div>
+</section>
+
+<!-- SECTION 1: MINDSET -->
+<div class="container">
+  <section class="section">
+    <div class="section-label">Fundament</div>
+    <h2 class="section-title">Mindset-ul <em>Campionului</em></h2>
+    <p class="lead">Andy Elliott spune că 90% din vânzare se câștigă înainte ca clientul să intre pe ușă. Totul începe cu cum gândești tu.</p>
+
+    <div class="pullquote">
+      <p class="pullquote-text">„Nu vând mașini. Schimb viețile oamenilor. Dacă crezi că faci altceva, vei fi mediocru toată viața."</p>
+      <div class="pullquote-attr">— Andy Elliott</div>
+    </div>
+
+    <div class="principle-grid">
+      <div class="principle-card">
+        <div class="p-num">01</div>
+        <div class="p-title">Urgență internă</div>
+        <p class="p-body">Tratează fiecare client ca pe singura șansă din zi. Elliott antrenează vânzătorii să aibă foame permanentă — nu disperare, ci energie controlată și determinare vizibilă.</p>
+      </div>
+      <div class="principle-card">
+        <div class="p-num">02</div>
+        <div class="p-title">Zero scuze</div>
+        <p class="p-body">„Piața e grea", „clientul nu era serios", „prețul e prea mare" — acestea sunt poveștile pe care și le spun vânzătorii medii. Campionii găsesc soluții, nu explicații.</p>
+      </div>
+      <div class="principle-card">
+        <div class="p-num">03</div>
+        <div class="p-title">Stăpânire totală</div>
+        <p class="p-body">Cunoaște fiecare model, fiecare ofertă de finanțare, fiecare competitor. Clienții cumpără de la oameni care radiază expertiză — nu de la cei care „verifică și revin".</p>
+      </div>
+      <div class="principle-card">
+        <div class="p-num">04</div>
+        <div class="p-title">Emoție vs. logică</div>
+        <p class="p-body">Mașinile se cumpără emoțional și se justifică rațional. Rolul tău e să alimentezi emoția corectă, apoi să oferi logica necesară pentru a convinge partenerul/soția/contabilul.</p>
+      </div>
+      <div class="principle-card">
+        <div class="p-num">05</div>
+        <div class="p-title">Follow-up agresiv</div>
+        <p class="p-body">80% din vânzări se fac după al 5-lea contact. Vânzătorii mediocri renunță după primul „mă mai gândesc". Campionii au sistem, nu speranță.</p>
+      </div>
+      <div class="principle-card">
+        <div class="p-num">06</div>
+        <div class="p-title">Îmbunătățire zilnică</div>
+        <p class="p-body">Elliott face roleplay 2 ore pe zi, în fiecare zi. Pregătirea este competitivul tău avantaj. Piața Iași-Bacău se schimbă — tu trebuie să fii mereu cu un pas înainte.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: PROCESUL -->
+  <section class="section">
+    <div class="section-label">Procesul Elliott</div>
+    <h2 class="section-title">Cei <em>7 Pași</em> spre Semnătură</h2>
+    <p class="lead">Un sistem repetat perfect bate talentul nepregătit în orice zi din săptămână.</p>
+
+    <div class="formula">
+      <div class="formula-step">Întâmpinare</div>
+      <div class="formula-arrow">→</div>
+      <div class="formula-step">Calificare</div>
+      <div class="formula-arrow">→</div>
+      <div class="formula-step">Selecție</div>
+      <div class="formula-arrow">→</div>
+      <div class="formula-step">Prezentare</div>
+      <div class="formula-arrow">→</div>
+      <div class="formula-step">Test Drive</div>
+      <div class="formula-arrow">→</div>
+      <div class="formula-step">Negociere</div>
+      <div class="formula-arrow">→</div>
+      <div class="formula-step">Închidere</div>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <h4>Întâmpinarea — Primele 30 de secunde fac totul</h4>
+          <p>Nu mergi cu „Cu ce vă pot ajuta?" — este o invitație la „Mă uit doar". În schimb: <strong>„Bună ziua! Cris mă numesc, sunt consultantul dumneavoastră de astăzi. Ați ajuns în locul potrivit — hai să găsim exact ce căutați."</strong> Zâmbet real, strângere de mână fermă, contact vizual. Elliott spune că în primele 30 de secunde, clientul decide dacă îți acordă sau nu putere.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="p-num">02</div>
+        <div class="step-content">
+          <h4>Calificarea — Pune întrebări, nu interoga</h4>
+          <p>Trebuie să afli: <strong>buget, termen, decizie, nevoie reală.</strong> Folosește tehnica „BANT emoțional" — întrebări care par conversație, dar extrag informații critice. „Ce vă aduce la noi astăzi?" · „Pentru ce folosiți mașina în principal?" · „Aveți ceva în schimb sau pleacă direct cu bani?" · „Cine mai este implicat în decizie?"</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <h4>Selecția vehiculului — Nu oferi opțiuni infinite</h4>
+          <p>Elliott avertizează: prea multe opțiuni paralizează. Pe baza calificării, propune <strong>maxim 2 variante</strong>, cu justificare clară. „Pe baza a ce mi-ați spus, am două opțiuni perfecte pentru dumneavoastră." Ghidezi, nu lași clientul să se piardă singur în showroom.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-content">
+          <h4>Prezentarea — Feature → Avantaj → Beneficiu personal</h4>
+          <p>Nu enumera dotări ca un catalog. Leagă fiecare feature de viața clientului. „Sistemul de asistență la frânare automată — asta înseamnă că dacă cineva taie în față pe autostradă, mașina reacționează chiar înainte să apuci să frânezi tu. Înseamnă că familia dumneavoastră este mai în siguranță."</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">05</div>
+        <div class="step-content">
+          <h4>Test Drive-ul — Momentul cumpărării emoționale</h4>
+          <p>Elliott spune că test drive-ul este închiderea. <strong>Tu trebuie să conduci prima jumătate, să îi explici cum simte mașina, apoi să dai volanul.</strong> „Vă rugăm simțiți răspunsul direcției... acum accelerați un pic... da? Ăsta e motorul." Tăcerea după este aur — lasă-i să simtă, nu comenta excesiv.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">06</div>
+        <div class="step-content">
+          <h4>Negocierea — Ancorează valoarea, nu prețul</h4>
+          <p>Înainte de a discuta prețul, construiește valoarea la maximum. „Înainte de a vorbi despre cifre, haideți să ne asigurăm că aceasta este mașina perfectă pentru dumneavoastră — pentru că prețul nu contează dacă mașina nu e cea potrivită." Această reancorare îți dă controlul conversației despre bani.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">07</div>
+        <div class="step-content">
+          <h4>Închiderea — Cere. Direct. Fără scuze.</h4>
+          <p>Elliott este explicit: <strong>vânzătorii mediocri se tem să ceară.</strong> „Deci, dacă reușim să ne înțelegem la cifre astăzi, plecați cu mașina sau avem alte nelămuriri?" — închidere alternativă. Sau direct: „Ce ne mai oprește să facem asta astăzi?"</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: SCENARII -->
+  <section class="section">
+    <div class="section-label">Scenarii Reale</div>
+    <h2 class="section-title">Obiecții & <em>Răspunsuri</em></h2>
+    <p class="lead">Fiecare obiecție este o cerere deghizată de mai multă informație sau siguranță. Răspunsul corect deschide ușa — cel greșit o închide definitiv.</p>
+
+    <!-- SCENARIU 1 -->
+    <div class="scenario">
+      <div class="scenario-header">
+        <div class="scenario-icon">💰</div>
+        <div>
+          <div class="scenario-title">Scenariu 1: „E prea scump"</div>
+          <div class="scenario-subtitle">Cea mai frecventă obiecție — și cea mai ușor de depășit corect</div>
+        </div>
+      </div>
+      <div class="scenario-body">
+        <div class="objection-label">Obiecție</div>
+        <div class="objection">E prea scump. Am văzut ceva similar mai ieftin la alt dealer.</div>
+        <div class="response-block">
+          <div class="response-label">Tehnica Elliott — „Izolarea și refacerea valorii"</div>
+          <div class="script-box">
+            „Înțeleg perfect — și apreciez că îmi spuneți direct. Haideți să clarificăm ceva: când spuneți că e scump, vă referiți la prețul total, la rata lunară, sau comparați cu ceva anume?<br><br>
+            [Ascultă răspunsul]<br><br>
+            Știți, am mulți clienți care mi-au spus același lucru înainte, și după ce am comparat efectiv — dotările, garanția, costul de întreținere pe 3 ani — au realizat că varianta mai ieftină costa mai mult. Permiteți-mi 5 minute să vă arăt cifrele reale."
+          </div>
+        </div>
+        <div class="tip-box">Nu reduceți prețul imediat. Asta confirmă că a existat marjă ascunsă. Refaceți valoarea mai întâi — reducerea vine ca bonus, nu ca punct de plecare.</div>
+      </div>
+    </div>
+
+    <!-- SCENARIU 2 -->
+    <div class="scenario">
+      <div class="scenario-header">
+        <div class="scenario-icon">🤔</div>
+        <div>
+          <div class="scenario-title">Scenariu 2: „Mă mai gândesc"</div>
+          <div class="scenario-subtitle">Clasicul „ieșire de urgență" — trebuie abordat cu empatie și urgență reală</div>
+        </div>
+      </div>
+      <div class="scenario-body">
+        <div class="objection-label">Obiecție</div>
+        <div class="objection">Vă mulțumesc, mă mai gândesc și vă sun eu.</div>
+        <div class="response-block">
+          <div class="response-label">Tehnica Elliott — „Descoperă adevărata obiecție"</div>
+          <div class="script-box">
+            „Perfect, apreciez că sunteți sincer. Haideți să fim și eu sincer cu dumneavoastră — în experiența mea, când cineva spune 'mă mai gândesc', de obicei există o întrebare specifică la care nu am răspuns complet.<br><br>
+            Dacă ar fi să identificați un singur lucru care vă face ezitant în momentul ăsta, care ar fi acela?"<br><br>
+            [Tăcere. Lasă-l să vorbească.]<br><br>
+            „Mulțumesc că mi-ați spus. Deci dacă rezolvăm [obiecția reală], suntem pregătiți să mergem mai departe astăzi?"
+          </div>
+        </div>
+        <div class="tip-box">Elliott numește asta „sapa" — sapi până găsești rădăcina adevărată. 90% din „mă gândesc" are în spate: preț, soț/soție neconvinși, sau frică de decizie greșită.</div>
+      </div>
+    </div>
+
+    <!-- SCENARIU 3 -->
+    <div class="scenario">
+      <div class="scenario-header">
+        <div class="scenario-icon">👫</div>
+        <div>
+          <div class="scenario-title">Scenariu 3: „Trebuie să vorbesc cu soția/soțul"</div>
+          <div class="scenario-subtitle">Decidentul absent — strategia de includere</div>
+        </div>
+      </div>
+      <div class="scenario-body">
+        <div class="objection-label">Obiecție</div>
+        <div class="objection">Îmi place, dar trebuie să mai vorbesc cu soția mea înainte să decid.</div>
+        <div class="response-block">
+          <div class="response-label">Tehnica Elliott — „Implică decidentul acum"</div>
+          <div class="script-box">
+            „Absolut, decizia asta o luați împreună și asta arată că aveți un parteneriat solid — respect asta.<br><br>
+            Haideți să facem ceva: sunați-o acum, o punem pe telefon sau pe video. Vreau să îi prezint și ei exact ce v-am arătat dumneavoastră — îi răspund la orice întrebare în timp real. Dacă e ok, mergem mai departe astăzi; dacă nu, cel puțin aveți toate informațiile.<br><br>
+            Ce spuneți, o sunăm?"
+          </div>
+        </div>
+        <div class="tip-box">Obiectivul nu e să forțezi decizia — e să eviți situația în care clientul pleacă și partenerul îl convinge să meargă la alt dealer. Implică-i pe ambii în procesul tău.</div>
+      </div>
+    </div>
+
+    <!-- SCENARIU 4 -->
+    <div class="scenario">
+      <div class="scenario-header">
+        <div class="scenario-icon">🔄</div>
+        <div>
+          <div class="scenario-title">Scenariu 4: „Am văzut mai bine la concurență"</div>
+          <div class="scenario-subtitle">Comparația cu competitorul — teritoriu periculos dacă nu ești pregătit</div>
+        </div>
+      </div>
+      <div class="scenario-body">
+        <div class="objection-label">Obiecție</div>
+        <div class="objection">La dealer-ul X am văzut același tip de mașină cu 1.500 euro mai puțin.</div>
+        <div class="response-block">
+          <div class="response-label">Tehnica Elliott — „Compară merele cu merele"</div>
+          <div class="script-box">
+            „Excelent că faceți comparații — asta vă protejează investiția. Hai să ne uităm împreună: ce dotări exacte are varianta lor?<br><br>
+            [Compară transparent dotare cu dotare]<br><br>
+            Văd că la ei lipsesc [X, Y, Z]. Dacă le adăugați separat, ajungeți la [preț similar sau mai mare]. Plus că service-ul nostru este la Iași și Bacău — nu trebuie să mergeți în altă parte pentru garanție sau revizie.<br><br>
+            Deci întrebarea reală este: vreți să cumpărați un preț sau să cumpărați valoare și liniște?"
+          </div>
+        </div>
+        <div class="tip-box">Nu vorbi niciodată de rău concurența. Compară faptele. Folosește proximitatea dealerului Autopadova din Iași/Bacău ca avantaj concret în argumentare.</div>
+      </div>
+    </div>
+
+    <!-- SCENARIU 5 -->
+    <div class="scenario">
+      <div class="scenario-header">
+        <div class="scenario-icon">📊</div>
+        <div>
+          <div class="scenario-title">Scenariu 5: „Rata e prea mare"</div>
+          <div class="scenario-subtitle">Obiecția de finanțare — reconstruiți percepția valorii zilnice</div>
+        </div>
+      </div>
+      <div class="scenario-body">
+        <div class="objection-label">Obiecție</div>
+        <div class="objection">Am văzut că rata lunară e prea mare pentru bugetul meu.</div>
+        <div class="response-block">
+          <div class="response-label">Tehnica Elliott — „Metoda descompunerii zilnice"</div>
+          <div class="script-box">
+            „Înțeleg — 450 euro pe lună pare mult. Haideți să vedem altfel: asta înseamnă 15 euro pe zi. Adică prețul a două cafele și un prânz.<br><br>
+            Pentru 15 euro pe zi, conduceți un [model] nou, cu garanție 3 ani, consum redus față de mașina actuală, fără reparații neprevăzute.<br><br>
+            Acum, dacă economiziți [X lei] pe combustibil și evitați 2-3 reparații pe an, diferența reală față de ce cheltuiți acum e mult mai mică decât pare. Să facem calculul împreună?"
+          </div>
+        </div>
+        <div class="tip-box">Elliott numește aceasta „defalcarea la absurd". Transforma suma mare în unitate mică și familiară. Adaugă comparația cu costul real al mașinii vechi pentru a ancora corect.</div>
+      </div>
+    </div>
+
+    <!-- SCENARIU 6 -->
+    <div class="scenario">
+      <div class="scenario-header">
+        <div class="scenario-icon">⏰</div>
+        <div>
+          <div class="scenario-title">Scenariu 6: „Nu e momentul potrivit"</div>
+          <div class="scenario-subtitle">Obiecția de timing — creează urgență reală, nu artificială</div>
+        </div>
+      </div>
+      <div class="scenario-body">
+        <div class="objection-label">Obiecție</div>
+        <div class="objection">Nu știu, poate mai aștept câteva luni să văd ce se întâmplă cu prețurile.</div>
+        <div class="response-block">
+          <div class="response-label">Tehnica Elliott — „Costul inacțiunii"</div>
+          <div class="script-box">
+            „Înțeleg logica — și e o întrebare inteligentă. Dar haideți să calculăm costul așteptării:<br><br>
+            În timp ce așteptați, continuați să cheltuiți [X] pe reparații/combustibil la mașina actuală. Dacă prețurile cresc cu 3% în 6 luni — cum s-a întâmplat ultimii ani — înseamnă [suma] mai mult.<br><br>
+            Mai mult, oferta de finanțare de astăzi — [X% dobândă] — nu este garantată. Băncile ajustează dobânzile regulat.<br><br>
+            Deci întrebarea nu este 'să aștept sau nu' — ci 'cât mă costă să aștept?'"
+          </div>
+        </div>
+        <div class="tip-box">Urgența Elliott nu este niciodată fabricată. Folosești fapte reale: stocuri limitate, dobânzi variabile, costuri reale ale așteptării. Clientul trebuie să simtă că decizia lui de azi este rațională.</div>
+      </div>
+    </div>
+
+    <!-- SCENARIU 7 -->
+    <div class="scenario">
+      <div class="scenario-header">
+        <div class="scenario-icon">🏷️</div>
+        <div>
+          <div class="scenario-title">Scenariu 7: Clientul cere discount suplimentar la final</div>
+          <div class="scenario-subtitle">„Ultima cerere" — momentul cel mai delicat al negocierii</div>
+        </div>
+      </div>
+      <div class="scenario-body">
+        <div class="objection-label">Situație</div>
+        <div class="objection">Am ajuns la un preț, dar la semnătură clientul mai cere 500 euro reducere suplimentară.</div>
+        <div class="response-block">
+          <div class="response-label">Tehnica Elliott — „Schimbul de valoare, nu reducerea"</div>
+          <div class="script-box">
+            „Apreciez că suntem atât de aproape — asta îmi arată că vreți mașina aceasta. Hai să fim sinceri: am dat tot ce aveam în prețul acesta.<br><br>
+            Ce pot face este să adaug valoare în alt fel: [un an de mentenanță inclus / set de cauciucuri de iarnă / kit de protecție / 2 revizii gratuite].<br><br>
+            Asta valorează efectiv [X euro] pentru dumneavoastră — mai mult decât reducerea cerută. Merge?"
+          </div>
+        </div>
+        <div class="tip-box">Schimbul în natură păstrează prețul corect și percepia valorii. Nu micsora niciodată prețul la ultima cerere fără a primi ceva în schimb — altfel înveți clientul că prețul tău era oricum negociabil.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: FOLLOW-UP -->
+  <section class="section">
+    <div class="section-label">Sistemul Post-Vizită</div>
+    <h2 class="section-title">Follow-Up <em>Profesionist</em></h2>
+    <p class="lead">Elliott spune că vânzătorii pierd bani nu pentru că au prezentat rău, ci pentru că nu urmăresc. Sistemul de follow-up este averea ta ascunsă.</p>
+
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Interval</th>
+          <th>Acțiune</th>
+          <th>Ce spui</th>
+          <th>Obiectiv</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>2 ore</strong> după vizită</td>
+          <td>SMS/WhatsApp</td>
+          <td>„A fost o plăcere să vă cunosc. Am atașat oferta și câteva comparații de care am vorbit. Rămân la dispoziție."</td>
+          <td>Rămâi top of mind</td>
+        </tr>
+        <tr>
+          <td><strong>Ziua 2</strong></td>
+          <td>Apel telefonic</td>
+          <td>„Sunați pentru că am găsit o informație suplimentară care vă ajută" — nu „ați decis ceva?"</td>
+          <td>Adaugă valoare, nu presiune</td>
+        </tr>
+        <tr>
+          <td><strong>Ziua 5</strong></td>
+          <td>Email cu comparativ</td>
+          <td>Trimite un comparativ complet model/versiune/cost total deținere pe 3 ani</td>
+          <td>Combate concurența cu fapte</td>
+        </tr>
+        <tr>
+          <td><strong>Ziua 10</strong></td>
+          <td>Apel cu urgență reală</td>
+          <td>„Stocul pentru [model/culoare] s-a redus. Am rezervat unitatea pentru încă 48 ore dacă vreți să blocăm."</td>
+          <td>Creează urgență legitimă</td>
+        </tr>
+        <tr>
+          <td><strong>Luna 1</strong></td>
+          <td>Touch de valoare</td>
+          <td>Trimite un articol relevant, o ofertă de service, sau un update de model</td>
+          <td>Relație pe termen lung</td>
+        </tr>
+        <tr>
+          <td><strong>Luna 3+</strong></td>
+          <td>Check-in și referință</td>
+          <td>„Cum merge decizia? Orice schimbare în situație, sunt primul număr de sunat."</td>
+          <td>Referințe și retargeting</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="pullquote">
+      <p class="pullquote-text">„Cel mai bun vânzător nu e cel mai bun la prezentare. E cel mai bun la follow-up."</p>
+      <div class="pullquote-attr">— Andy Elliott</div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: TIPURI DE CLIENȚI -->
+  <section class="section">
+    <div class="section-label">Psihologia clientului</div>
+    <h2 class="section-title">4 Tipuri de <em>Cumpărători</em></h2>
+    <p class="lead">Elliott împarte cumpărătorii în 4 profiluri. Recunoașterea rapidă îți permite să adaptezi abordarea în primele 5 minute.</p>
+
+    <div class="principle-grid">
+      <div class="principle-card">
+        <div class="p-num">D</div>
+        <div class="p-title">Dominant — „Controlorul"</div>
+        <p class="p-body"><strong>Semne:</strong> Vorbește rapid, întrerupe, vrea să fie el în control.<br><br><strong>Abordare:</strong> Dă-i control — „Ce variantă vi se pare mai interesantă?" Fii direct, fără fiorituri. Nu pierdeți timp. Prezintă pe scurt, lasă-l să conducă.</p>
+      </div>
+      <div class="principle-card">
+        <div class="p-num">I</div>
+        <div class="p-title">Influent — „Socializatorul"</div>
+        <p class="p-body"><strong>Semne:</strong> Prietenos, povestitor, entuziast, vrea să placă și să fie plăcut.<br><br><strong>Abordare:</strong> Construiește relație mai întâi. Râzi cu el. Folosește testimoniale: „Am un client de la Bacău care a luat exact asta și mi-a zis..."</p>
+      </div>
+      <div class="principle-card">
+        <div class="p-num">S</div>
+        <div class="p-title">Stabil — „Grijuliul"</div>
+        <p class="p-body"><strong>Semne:</strong> Liniștit, ascultă mult, evită conflictul, vrea siguranță.<br><br><strong>Abordare:</strong> Nu grăbi. Asigurări de garanție, service, suport post-vânzare. „Nu sunteți singur după ce plecați de la noi."</p>
+      </div>
+      <div class="principle-card">
+        <div class="p-num">C</div>
+        <div class="p-title">Conștiincios — „Analistul"</div>
+        <p class="p-body"><strong>Semne:</strong> Multime de întrebări tehnice, vrea date, comparații, specificații exacte.<br><br><strong>Abordare:</strong> Pregătirte cu date. Nu spune niciodată „cred că" — spune „conform specificațiilor tehnice". Dă-i timp să proceseze.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6: TEHNICI AVANSATE -->
+  <section class="section">
+    <div class="section-label">Tehnici avansate Elliott</div>
+    <h2 class="section-title">Arme <em>Secrete</em> în Vânzări</h2>
+
+    <div class="scenario">
+      <div class="scenario-header">
+        <div class="scenario-icon">🎯</div>
+        <div>
+          <div class="scenario-title">Tehnica „Takeway" — Retragerea ofertei</div>
+          <div class="scenario-subtitle">Paradoxal dar puternic — funcționează cu clienții care tergiversează excesiv</div>
+        </div>
+      </div>
+      <div class="scenario-body">
+        <div class="script-box">
+          „Știți, am vorbit mult astăzi și apreciez că ați venit. Dar dacă mai aveți multe ezitări, poate mașina aceasta nu este cea potrivită pentru dumneavoastră acum. Poate ar trebui să mai așteptați.<br><br>
+          Nu vreau să vă creez presiune — vreau să faceți decizia potrivită pentru situația dumneavoastră."
+        </div>
+        <div class="tip-box">Elliott folosește tehnica rarității psihologice. Când oamenii simt că pot pierde ceva, dorința crește. Folosiți cu grijă — numai când ați epuizat celelalte metode și clientul este în buclă.</div>
+      </div>
+    </div>
+
+    <div class="scenario">
+      <div class="scenario-header">
+        <div class="scenario-icon">📖</div>
+        <div>
+          <div class="scenario-title">Tehnica „Poveștii Clientului Similar"</div>
+          <div class="scenario-subtitle">Dovada socială — cel mai puternic instrument de influență</div>
+        </div>
+      </div>
+      <div class="scenario-body">
+        <div class="script-box">
+          „Haideți să vă spun ceva interesant. Acum 3 săptămâni, a venit un client de la Iași — antreprenor, ca dumneavoastră — cu exact aceeași ezitare legată de preț.<br><br>
+          Am făcut împreună calculul de cost total pe 3 ani. Azi mi-a trimis mesaj că a economisit deja X lei față de mașina anterioară.<br><br>
+          Ce credeți că l-a convins în final?"
+          <br><br>[Pauză — lasă clientul să ghicească sau să întrebe]
+        </div>
+        <div class="tip-box">Poveștile reale — sau construite realist — activează empatia și reduc rezistența. Clientul se identifică cu „cineva ca el" care a luat decizia corectă. Personalizați mereu contextul: Iași, Bacău, tipul de business.</div>
+      </div>
+    </div>
+
+    <div class="scenario">
+      <div class="scenario-header">
+        <div class="scenario-icon">🔒</div>
+        <div>
+          <div class="scenario-title">Tehnica „Commitment Ladder" — Angajamente progresive</div>
+          <div class="scenario-subtitle">Mici da-uri duc la marele DA</div>
+        </div>
+      </div>
+      <div class="scenario-body">
+        <div class="script-box">
+          Construiești o serie de angajamente mici:<br><br>
+          „Această culoare vi se potrivește?" → DA<br>
+          „Cutia automată este mai confortabilă pentru dumneavoastră?" → DA<br>
+          „Pachetul de siguranță este important cu familia?" → DA<br>
+          „Livrarea în 2 săptămâni vi se potrivește?" → DA<br><br>
+          „Deci avem: culoarea, transmisia, pachetul de siguranță, și data de livrare. Să mergem la birou să facem actele?"
+        </div>
+        <div class="tip-box">Psihologic, după o serie de da-uri, al cincilea „da" — semnarea — pare logic și firesc. Elliott antrenează vânzătorii să construiască această scară conștient, nu la întâmplare.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 7: CHECKLIST -->
+  <section class="section">
+    <div class="section-label">Pregătire zilnică</div>
+    <h2 class="section-title">Checklist-ul <em>Campionului</em></h2>
+    <p class="lead">Elliott verifică aceste lucruri în fiecare dimineață. Adoptați-le ca ritual, nu ca listă.</p>
+
+    <ul class="checklist">
+      <li>Am studiat cel puțin o obiecție frecventă și am pregătit 3 variante de răspuns?</li>
+      <li>Știu top 3 promoții active astăzi (preț, finanțare, echipare)?</li>
+      <li>Am contactat minim 5 clienți din portofoliu pentru follow-up?</li>
+      <li>Am citit ceva despre competitorii noștri direcți în piața Iași-Bacău?</li>
+      <li>Sunt pregătit mental — am făcut roleplay sau vizualizare pentru scenariile dificile?</li>
+      <li>Arăt profesionist? Haine, limbaj, energie — clientul te scanează din parcare.</li>
+      <li>Știu stocul exact: ce e disponibil, ce vine, ce se poate comanda?</li>
+      <li>Am actualizat CRM-ul cu toate interacțiunile de ieri?</li>
+      <li>Am setat 3 obiective clare pentru ziua de astăzi (nu vagi, ci specifice și măsurabile)?</li>
+      <li>Mentalitate: Astăzi ajut oameni să ia cea mai bună decizie pentru viața lor.</li>
+    </ul>
+  </section>
+
+  <!-- CLOSING -->
+  <div class="closing">
+    <h2>Închide sau <span>Fii Închis</span></h2>
+    <p>Fiecare interacțiune cu un client este o alegere: tu conduci procesul sau el te conduce pe tine. Alege să fii campion în fiecare conversație.</p>
+  </div>
+</div>
+
+<footer>
+  Autopadova Training Series · Iași &amp; Bacău · Metodologie Andy Elliott, adaptată pentru piața românească
+</footer>
+
+</body>
+</html>
