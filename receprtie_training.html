@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Autopadova — Script Primire Clienti | Training Intern</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:    #0D1B3E;
+  --navy2:   #1A2E5A;
+  --blue:    #185FA5;
+  --blue2:   #378ADD;
+  --blue-lt: #E6F1FB;
+  --blue-md: #B5D4F4;
+  --green:   #3B6D11;
+  --green-bg:#EAF3DE;
+  --red:     #A32D2D;
+  --red-bg:  #FCEBEB;
+  --amber:   #854F0B;
+  --amber-bg:#FAEEDA;
+  --gray-dk: #2C2C2A;
+  --gray-md: #5F5E5A;
+  --gray-lt: #F1EFE8;
+  --white:   #ffffff;
+  --bg:      #F7F6F2;
+  --card:    #ffffff;
+  --border:  rgba(0,0,0,0.08);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Barlow', sans-serif;
+  background: var(--bg);
+  color: var(--gray-dk);
+  min-height: 100vh;
+}
+
+/* ── HEADER ── */
+.site-header {
+  background: var(--navy);
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+}
+.header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  height: 56px;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.logo-badge {
+  background: var(--blue);
+  color: white;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  padding: 4px 12px;
+  border-radius: 4px;
+}
+.logo-text {
+  color: var(--blue-md);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}
+.header-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--white);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.progress-bar-wrap {
+  width: 140px;
+  height: 4px;
+  background: var(--navy2);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  background: var(--blue2);
+  border-radius: 2px;
+  transition: width 0.4s ease;
+  width: 0%;
+}
+
+/* ── NAV TABS ── */
+.tab-nav {
+  background: var(--navy2);
+  border-bottom: 2px solid var(--blue);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.tab-nav::-webkit-scrollbar { display: none; }
+.tab-nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  padding: 0 24px;
+}
+.tab-btn {
+  background: none;
+  border: none;
+  color: var(--blue-md);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 12px 18px;
+  cursor: pointer;
+  white-space: nowrap;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.tab-btn:hover { color: white; border-bottom-color: var(--blue2); }
+.tab-btn.active { color: white; border-bottom-color: var(--blue2); background: rgba(56,138,221,0.12); }
+.tab-num {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--blue);
+  color: white;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.tab-btn.active .tab-num { background: var(--blue2); }
+.tab-done .tab-num { background: var(--green) !important; }
+
+/* ── MAIN ── */
+.main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 24px 60px;
+}
+
+/* ── PANEL ── */
+.panel { display: none; animation: fadeIn 0.3s ease; }
+.panel.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ── SECTION HERO ── */
+.section-hero {
+  background: var(--navy);
+  border-radius: 12px;
+  padding: 28px 32px;
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+}
+.section-hero::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 180px;
+  height: 100%;
+  background: var(--navy2);
+  clip-path: polygon(30% 0, 100% 0, 100% 100%, 0% 100%);
+}
+.section-hero-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 64px;
+  font-weight: 800;
+  color: var(--blue);
+  line-height: 1;
+  flex-shrink: 0;
+  z-index: 1;
+}
+.section-hero-content { z-index: 1; }
+.section-hero-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.section-hero-sub {
+  font-size: 14px;
+  color: var(--blue-md);
+  font-weight: 400;
+}
+
+/* ── SCRIPT LINES ── */
+.script-grid { display: flex; flex-direction: column; gap: 8px; margin-bottom: 28px; }
+
+.script-line {
+  display: flex;
+  gap: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid transparent;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.script-line:hover { transform: translateX(3px); box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+
+.tag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  writing-mode: horizontal-tb;
+  min-width: 78px;
+  padding: 12px 10px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+.tag-spune  { background: var(--blue);  color: white; }
+.tag-actiune{ background: var(--green); color: white; }
+.tag-evita  { background: var(--red);   color: white; }
+.tag-tip    { background: var(--amber); color: white; }
+
+.line-text {
+  flex: 1;
+  padding: 12px 16px;
+  font-size: 14px;
+  line-height: 1.6;
+  display: flex;
+  align-items: center;
+}
+.line-spune  { background: var(--blue-lt);  color: #0C447C; border-color: var(--blue-md); font-style: italic; }
+.line-actiune{ background: var(--green-bg); color: #27500A; border-color: #C0DD97; }
+.line-evita  { background: var(--red-bg);   color: #791F1F; border-color: #F7C1C1; }
+.line-tip    { background: var(--amber-bg); color: #633806; border-color: #FAC775; }
+
+/* ── SCENARIO CARDS ── */
+.scenario-grid { display: flex; flex-direction: column; gap: 20px; margin-bottom: 28px; }
+.scenario-card {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--card);
+  transition: box-shadow 0.2s;
+}
+.scenario-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.09); }
+.scenario-header {
+  background: var(--navy);
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.scenario-label {
+  background: var(--blue);
+  color: white;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 3px 10px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+.scenario-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.client-says {
+  background: var(--red-bg);
+  border-left: 4px solid var(--red);
+  padding: 12px 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.client-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--red);
+  text-transform: uppercase;
+  white-space: nowrap;
+  padding-top: 2px;
+  flex-shrink: 0;
+}
+.client-text {
+  font-size: 14px;
+  color: #791F1F;
+  font-style: italic;
+  line-height: 1.5;
+}
+.response-steps { padding: 0; }
+.response-step {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+}
+.response-step:last-child { border: none; }
+.step-label-cell {
+  background: var(--gray-lt);
+  padding: 12px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--blue);
+  min-width: 160px;
+  max-width: 160px;
+  display: flex;
+  align-items: flex-start;
+  line-height: 1.4;
+  border-right: 1px solid var(--border);
+}
+.step-label-cell.avoid { color: var(--red); background: var(--red-bg); }
+.step-text-cell {
+  padding: 12px 16px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--gray-dk);
+  flex: 1;
+}
+.step-text-cell.avoid { color: var(--red); font-style: italic; background: var(--red-bg); }
+
+/* ── CHECKLIST ── */
+.checklist-section { margin-bottom: 24px; }
+.checklist-section-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--blue);
+  background: var(--blue-lt);
+  padding: 8px 16px;
+  border-left: 4px solid var(--blue);
+  margin-bottom: 2px;
+}
+.checklist-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 12px 16px;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 0.15s;
+  user-select: none;
+}
+.checklist-item:hover { background: var(--gray-lt); }
+.checklist-item.checked { background: var(--green-bg); }
+.checkbox {
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  border: 2px solid var(--blue-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+  transition: all 0.2s;
+  background: white;
+}
+.checklist-item.checked .checkbox {
+  background: var(--green);
+  border-color: var(--green);
+  color: white;
+}
+.checkbox-tick { display: none; font-size: 13px; color: white; }
+.checklist-item.checked .checkbox-tick { display: block; }
+.checklist-item.checked .checkbox-empty { display: none; }
+.checkbox-empty { width: 6px; height: 6px; border-radius: 50%; background: var(--blue-md); }
+.item-text { font-size: 14px; line-height: 1.5; color: var(--gray-dk); flex: 1; }
+.checklist-item.checked .item-text { color: var(--green); text-decoration: line-through; opacity: 0.7; }
+
+/* ── CHECKLIST PROGRESS ── */
+.checklist-progress {
+  background: var(--card);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.progress-circle {
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+}
+.progress-info { flex: 1; }
+.progress-count { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 700; color: var(--navy); }
+.progress-label { font-size: 13px; color: var(--gray-md); margin-top: 2px; }
+.progress-track { width: 100%; height: 8px; background: var(--gray-lt); border-radius: 4px; overflow: hidden; margin-top: 8px; }
+.progress-track-fill { height: 100%; background: var(--green); border-radius: 4px; transition: width 0.4s ease; }
+.reset-btn {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 12px;
+  color: var(--gray-md);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.reset-btn:hover { background: var(--red-bg); color: var(--red); border-color: var(--red); }
+
+/* ── KPI GRID ── */
+.kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 20px; }
+.kpi-card {
+  background: var(--navy);
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+}
+.kpi-card-label { font-size: 11px; color: var(--blue-md); font-weight: 500; margin-bottom: 6px; line-height: 1.3; }
+.kpi-card-desc { font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 4px; line-height: 1.4; }
+.kpi-card-icon { font-size: 22px; margin-bottom: 8px; }
+
+/* ── COVER PANEL ── */
+.cover-panel {
+  background: var(--navy);
+  border-radius: 14px;
+  padding: 48px;
+  margin-bottom: 28px;
+  position: relative;
+  overflow: hidden;
+}
+.cover-panel::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 320px; height: 320px;
+  border-radius: 50%;
+  background: var(--navy2);
+  opacity: 0.6;
+}
+.cover-panel::after {
+  content: '';
+  position: absolute;
+  bottom: -40px; left: 40%;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  background: rgba(24,95,165,0.15);
+}
+.cover-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 52px;
+  font-weight: 800;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1.05;
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 1;
+}
+.cover-title span { color: var(--blue2); }
+.cover-sub {
+  font-size: 16px;
+  color: var(--blue-md);
+  margin-bottom: 28px;
+  position: relative;
+  z-index: 1;
+}
+.cover-brands {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+  margin-bottom: 32px;
+}
+.cover-brand {
+  background: var(--navy2);
+  color: var(--blue-md);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 4px;
+  border: 1px solid rgba(181,212,244,0.2);
+}
+.cover-framework {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  position: relative;
+  z-index: 1;
+  line-height: 1.7;
+}
+.cover-framework strong { color: var(--blue2); }
+.cover-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 28px;
+}
+.toc-card {
+  background: var(--card);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  padding: 0;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.toc-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.1); border-color: var(--blue-md); }
+.toc-card-header {
+  background: var(--navy);
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.toc-card-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--blue2);
+  line-height: 1;
+}
+.toc-card-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1.2;
+}
+.toc-card-body {
+  padding: 12px 14px;
+  font-size: 12px;
+  color: var(--gray-md);
+  line-height: 1.5;
+}
+
+/* ── ROLEPLAY MODE ── */
+.roleplay-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(13,27,62,0.92);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.roleplay-overlay.open { display: flex; }
+.roleplay-box {
+  background: var(--card);
+  border-radius: 14px;
+  max-width: 600px;
+  width: 100%;
+  overflow: hidden;
+  animation: slideUp 0.3s ease;
+}
+@keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.rp-header {
+  background: var(--navy);
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.rp-title { font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 700; color: white; text-transform: uppercase; letter-spacing: 0.05em; }
+.rp-close { background: none; border: none; color: var(--blue-md); font-size: 22px; cursor: pointer; line-height: 1; }
+.rp-body { padding: 24px; }
+.rp-client {
+  background: var(--red-bg);
+  border-left: 4px solid var(--red);
+  padding: 14px 16px;
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 20px;
+}
+.rp-client-label { font-size: 11px; font-weight: 700; color: var(--red); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+.rp-client-text { font-size: 15px; color: #791F1F; font-style: italic; line-height: 1.5; }
+.rp-instruction { font-size: 13px; color: var(--gray-md); margin-bottom: 16px; }
+.rp-reveal-btn {
+  background: var(--blue);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.2s;
+  margin-bottom: 12px;
+}
+.rp-reveal-btn:hover { background: var(--navy); }
+.rp-answer { display: none; border-top: 1px solid var(--border); padding-top: 16px; margin-top: 4px; }
+.rp-answer.visible { display: block; }
+.rp-answer-item { display: flex; gap: 10px; margin-bottom: 10px; }
+.rp-answer-label { font-size: 11px; font-weight: 700; color: var(--blue); min-width: 100px; padding-top: 2px; }
+.rp-answer-text { font-size: 13px; color: var(--gray-dk); line-height: 1.6; flex: 1; }
+.rp-next-btn {
+  background: var(--green);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+  margin-top: 12px;
+}
+
+/* ── PRINCIPLE BOX ── */
+.principle-box {
+  background: var(--navy);
+  border-radius: 10px;
+  padding: 20px 24px;
+  margin-top: 24px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.principle-icon { font-size: 28px; flex-shrink: 0; }
+.principle-text { font-size: 14px; color: var(--blue-md); line-height: 1.7; }
+.principle-text strong { color: white; }
+
+/* ── FLOATING ROLEPLAY BTN ── */
+.fab {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  background: var(--blue);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 14px 22px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(24,95,165,0.5);
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 99;
+}
+.fab:hover { background: var(--navy); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(24,95,165,0.4); }
+.fab-dot { width: 8px; height: 8px; border-radius: 50%; background: #5DCAA5; animation: pulse 1.5s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.4)} }
+
+@media (max-width: 680px) {
+  .main { padding: 20px 16px 80px; }
+  .cover-title { font-size: 36px; }
+  .cover-grid { grid-template-columns: repeat(2,1fr); }
+  .kpi-grid { grid-template-columns: repeat(2,1fr); }
+  .step-label-cell { min-width: 100px; max-width: 100px; font-size: 11px; }
+  .section-hero { padding: 20px; }
+  .section-hero-num { font-size: 44px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="logo">
+      <span class="logo-badge">AUTOPADOVA</span>
+      <span class="logo-text">Training Intern</span>
+    </div>
+    <div class="header-title" id="current-section-title">Script Primire Clienti</div>
+    <div>
+      <div style="font-size:10px;color:var(--blue-md);text-align:right;margin-bottom:4px" id="progress-label-top">Progres 0%</div>
+      <div class="progress-bar-wrap"><div class="progress-bar-fill" id="main-progress-bar"></div></div>
+    </div>
+  </div>
+</header>
+
+<!-- TAB NAV -->
+<nav class="tab-nav">
+  <div class="tab-nav-inner">
+    <button class="tab-btn active" onclick="goTab(0)" id="tab-0">
+      <span class="tab-num">&#9632;</span> Prezentare
+    </button>
+    <button class="tab-btn" onclick="goTab(1)" id="tab-1">
+      <span class="tab-num">1</span> Sosire
+    </button>
+    <button class="tab-btn" onclick="goTab(2)" id="tab-2">
+      <span class="tab-num">2</span> Check-in
+    </button>
+    <button class="tab-btn" onclick="goTab(3)" id="tab-3">
+      <span class="tab-num">3</span> Asteptare
+    </button>
+    <button class="tab-btn" onclick="goTab(4)" id="tab-4">
+      <span class="tab-num">4</span> Livrare
+    </button>
+    <button class="tab-btn" onclick="goTab(5)" id="tab-5">
+      <span class="tab-num">5</span> Scenarii
+    </button>
+    <button class="tab-btn" onclick="goTab(6)" id="tab-6">
+      <span class="tab-num">6</span> Checklist
+    </button>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main class="main">
+
+<!-- ── PANEL 0: COVER ── -->
+<div class="panel active" id="panel-0">
+  <div class="cover-panel">
+    <div class="cover-title">Script de<br><span>Primire Clienti</span></div>
+    <div class="cover-sub">Manual de Training Intern — Receptie Service &nbsp;|&nbsp; Iasi &amp; Bacau</div>
+    <div class="cover-brands">
+      <span class="cover-brand">IVECO</span>
+      <span class="cover-brand">JEEP</span>
+      <span class="cover-brand">SUZUKI</span>
+      <span class="cover-brand">FIAT PROFESSIONAL</span>
+      <span class="cover-brand">ALFA ROMEO</span>
+    </div>
+    <div class="cover-framework">
+      <strong>Cum sa folosesti acest training:</strong> Parcurge fiecare etapa in ordine. Fiecare linie de script este marcata cu tipul de actiune — <strong style="color:#5DCAA5">SPUNE</strong>, <strong style="color:#97C459">ACTIUNE</strong>, <strong style="color:#F09595">EVITA</strong>, <strong style="color:#EF9F27">TIP</strong>. Foloseste butonul <strong>ROLE-PLAY</strong> pentru a exersa scenariile dificile. Bifeaza checklist-ul zilnic pentru a urmari progresul.<br><br>
+      <strong>Framework:</strong> DealerPRO Training (200K in 200 Days) &nbsp;|&nbsp; Andy Elliott Methodology
+    </div>
+  </div>
+
+  <div class="cover-grid">
+    <div class="toc-card" onclick="goTab(1)">
+      <div class="toc-card-header">
+        <span class="toc-card-num">1</span>
+        <span class="toc-card-title">Sosirea clientului</span>
+      </div>
+      <div class="toc-card-body">Primele 7 secunde — impactul decisiv. Script exact pentru primire, contact vizual, utilizarea numelui.</div>
+    </div>
+    <div class="toc-card" onclick="goTab(2)">
+      <div class="toc-card-header">
+        <span class="toc-card-num">2</span>
+        <span class="toc-card-title">Check-in</span>
+      </div>
+      <div class="toc-card-body">Inregistrarea vizitei — ascultare activa. Cum preiei informatia corect fara sa creezi asteptari false.</div>
+    </div>
+    <div class="toc-card" onclick="goTab(3)">
+      <div class="toc-card-header">
+        <span class="toc-card-num">3</span>
+        <span class="toc-card-title">Asteptarea</span>
+      </div>
+      <div class="toc-card-body">Proactiv, nu reactiv. Cum gestionezi asteptarea clientului si transformi timpul mort in oportunitate.</div>
+    </div>
+    <div class="toc-card" onclick="goTab(4)">
+      <div class="toc-card-header">
+        <span class="toc-card-num">4</span>
+        <span class="toc-card-title">Livrarea</span>
+      </div>
+      <div class="toc-card-body">Ultimele 30 de secunde. Cum livrezi vehiculul, explici factura si transformi clientul in ambasador.</div>
+    </div>
+    <div class="toc-card" onclick="goTab(5)">
+      <div class="toc-card-header">
+        <span class="toc-card-num">5</span>
+        <span class="toc-card-title">Scenarii dificile</span>
+      </div>
+      <div class="toc-card-body">4 scenarii cu raspunsuri model — client nervos, obiectii pret, comparatie concurenta, urgente fara programare.</div>
+    </div>
+    <div class="toc-card" onclick="goTab(6)">
+      <div class="toc-card-header">
+        <span class="toc-card-num">6</span>
+        <span class="toc-card-title">Checklist zilnic</span>
+      </div>
+      <div class="toc-card-body">Standard minim obligatoriu — 16 puncte de verificat in 3 momente ale zilei. Bifabil interactiv.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── PANEL 1: SOSIRE ── -->
+<div class="panel" id="panel-1">
+  <div class="section-hero">
+    <div class="section-hero-num">1</div>
+    <div class="section-hero-content">
+      <div class="section-hero-title">Sosirea clientului</div>
+      <div class="section-hero-sub">Primele 7 secunde — impactul decisiv</div>
+    </div>
+  </div>
+  <div class="script-grid">
+    <div class="script-line">
+      <div class="tag tag-actiune">Actiune</div>
+      <div class="line-text line-actiune">Ridica-te in picioare imediat ce clientul intra pe usa. Contact vizual direct, zambet natural — nu fortat.</div>
+    </div>
+    <div class="script-line">
+      <div class="tag tag-spune">Spune</div>
+      <div class="line-text line-spune">„Buna ziua! Bine ati venit la Autopadova. Cum va pot ajuta astazi?"</div>
+    </div>
+    <div class="script-line">
+      <div class="tag tag-actiune">Actiune</div>
+      <div class="line-text line-actiune">Inregistreaza-i imediat numele. Foloseste-l de <strong>minimum 3 ori</strong> pe tot parcursul vizitei.</div>
+    </div>
+    <div class="script-line">
+      <div class="tag tag-spune">Spune</div>
+      <div class="line-text line-spune">„Imi puteti spune numele dvs., va rog, ca sa va pot asista mai bine?"</div>
+    </div>
+    <div class="script-line">
+      <div class="tag tag-spune">Spune</div>
+      <div class="line-text line-spune">„Bine ati venit, domnule / doamna [Nume]! Va rog sa ma urmati."</div>
+    </div>
+    <div class="script-line">
+      <div class="tag tag-evita">Evita</div>
+      <div class="line-text line-evita">„Aveti programare?" — suna ca o bariera. Inlocuieste cu: <em>„Va gasesc colegul care va va prelua imediat."</em></div>
+    </div>
+    <div class="script-line">
+      <div class="tag tag-evita">Evita</div>
+      <div class="line-text line-evita">Sa continui sa tastezi sau sa vorbesti la telefon cand intra clientul. Orice activitate se opreste.</div>
+    </div>
+    <div class="script-line">
+      <div class="tag tag-tip">Tip</div>
+      <div class="line-text line-tip">Clientii IVECO / fleet vin adesea pe fuga. Rapiditatea preluarii = respect fata de timpul lor.</div>
+    </div>
+    <div class="script-line">
+      <div class="tag tag-tip">Tip</div>
+      <div class="line-text line-tip">Clientul decide in primele <strong>7 secunde</strong> daca se simte binevenit. Receptia NU e administrativa — este <strong>prima vanzare</strong>.</div>
+    </div>
+  </div>
+  <div class="principle-box">
+    <div class="principle-icon">&#9654;</div>
+    <div class="principle-text"><strong>Regula de aur — Andy Elliott:</strong> Nu exista a doua sansa pentru o prima impresie. Fiecare client care intra pe usa este o oportunitate de fidelizare pe termen lung. Tratati-l ca atare din prima secunda.</div>
+  </div>
+</div>
+
+<!-- ── PANEL 2: CHECK-IN ── -->
+<div class="panel" id="panel-2">
+  <div class="section-hero">
+    <div class="section-hero-num">2</div>
+    <div class="section-hero-content">
+      <div class="section-hero-title">Check-in</div>
+      <div class="section-hero-sub">Inregistrarea vizitei — ascultare activa</div>
+    </div>
+  </div>
+  <div class="script-grid">
+    <div class="script-line">
+      <div class="tag tag-spune">Spune</div>
+      <div class="line-text line-spune">„Domnule [Nume], va rog sa imi spuneti ce anume ati observat la vehicul — orice detaliu conteaza."</div>
+    </div>
+    <div class="script-line">
+      <div class="tag tag-actiune">Actiune</div>
+      <div class="line-text line-actiune">Asculta <strong>fara sa intrerupi</strong>. Noteaza exact ce spune clientul. Nu interpreta prematur.</div>
+    </div>
+    <div class="script-line">
+      <div class="tag tag-spune">Spune</div>
+      <div class="line-text line-spune">„Inteleg. Am notat tot ce mi-ati spus. Tehnicianul nostru va face o inspectie completa si va contactam inainte de orice lucrare."</div>
+    </div>
+    <div class="script-line">
+      <div class="tag tag-spune">Spune</div>
+      <div class="line-text line-spune">„Estimam ca revenim cu un diagnostic in aproximativ [X] ore. Este convenabil pentru dvs.?"</div>
+    </div>
+    <div class="script-line">
+      <div class="tag tag-actiune">Actiune</div>
+      <div class="line-text line-actiune">Ofera apa sau cafea. Arata zona de asteptare. Mentioneaza WiFi disponibil daca exista.</div>
+    </div>
+    <div class="script-line">
+      <div class="tag tag-spune">Spune</div>
+      <div class="line-text line-spune">„Daca plecati intre timp, va sunam pe [numar] inainte de a demara orice lucrare."</div>
+    </div>
+    <div class="script-line">
+      <div class="tag tag-evita">Evita</div>
+      <div class="line-text line-evita">Sa dai estimari de pret fara diagnostic complet. Generezi asteptari gresite si posibile conflicte ulterioare.</div>
+    </div>
+    <div class="script-line">
+      <div class="tag tag-evita">Evita</div>
+      <div class="line-text line-evita">Sa spui <em>„probabil e..."</em> sau <em>„de obicei inseamna..."</em> — clientul va retine cifra ca promisiune.</div>
+    </div>
+    <div class="script-line">
+      <div class="tag tag-tip">Tip</div>
+      <div class="line-text line-tip">Daca clientul e fleet / transport: intreaba daca are urgenta operationala — vehiculul imobilizat = pierdere directa pentru business-ul lui.</div>
+    </div>
+  </div>
+  <div class="principle-box">
+    <div class="principle-icon">&#9654;</div>
+    <div class="principle-text"><strong>Principiu DealerPRO:</strong> Clientul nu vine sa cumpere o reparatie. Vine sa i se rezolve o problema. Cu cat asculti mai bine la check-in, cu atat recomandarile tale vor fi mai relevante si rata de acceptare mai mare.</div>
+  </div>
+</div>
+
+<!-- ── PANEL 3: ASTEPTARE ── -->
+<div class="panel" id="panel-3">
+  <div class="section-hero">
+    <div class="section-hero-num">3</div>
+    <div class="section-hero-content">
+      <div class="section-hero-title">Gestionarea asteptarii</div>
+      <div class="section-hero-sub">Proactiv, nu reactiv — clientul nu trebuie sa vina el la tine</div>
+    </div>
+  </div>
+  <div class="script-grid">
+    <div class="script-line">
+      <div class="tag tag-actiune">Actiune</div>
+      <div class="line-text line-actiune">Daca timpul estimat se depaseste cu mai mult de <strong>20 de minute</strong> — informezi tu primul, nu astepti sa fie intrebat.</div>
+    </div>
+    <div class="script-line">
+      <div class="tag tag-spune">Spune</div>
+      <div class="line-text line-spune">„Domnule [Nume], va informez ca tehnicianul are nevoie de inca aproximativ [X] minute. Va multumesc pentru rabdare."</div>
+    </div>
+    <div class="script-line">
+      <div class="tag tag-spune">Spune</div>
+      <div class="line-text line-spune">„Intre timp, am verificat istoricul vehiculului — in [X] luni urmeaza [revizie / operatiune]. Doriti sa programam din timp?"</div>
+    </div>
+    <div class="script-line">
+      <div class="tag tag-actiune">Actiune</div>
+      <div class="line-text line-actiune">Verifica clientul din ochi la fiecare 20–25 de minute. Un simplu zambet si nod din cap ii arata ca nu l-ai uitat.</div>
+    </div>
+    <div class="script-line">
+      <div class="tag tag-spune">Spune</div>
+      <div class="line-text line-spune">„Pot sa va aduc o cafea sau apa intre timp?"</div>
+    </div>
+    <div class="script-line">
+      <div class="tag tag-tip">Tip</div>
+      <div class="line-text line-tip">Asteptarea = <strong>oportunitate de vanzare blanda</strong>. Brosuri, oferte active, pachete service bundle pentru flotele IVECO / Fiat Professional.</div>
+    </div>
+    <div class="script-line">
+      <div class="tag tag-tip">Tip</div>
+      <div class="line-text line-tip">Daca clientul lucreaza pe laptop in sala de asteptare — nu il deranja inutil. Un update scurt si la obiect e suficient.</div>
+    </div>
+    <div class="script-line">
+      <div class="tag tag-evita">Evita</div>
+      <div class="line-text line-evita">Sa lasi clientul sa astepte fara nicio actualizare mai mult de <strong>30 de minute</strong>. Tacerea = indiferenta in perceptia clientului.</div>
+    </div>
+    <div class="script-line">
+      <div class="tag tag-evita">Evita</div>
+      <div class="line-text line-evita">Sa promiti ca „mai are 5 minute" daca nu esti sigur. Mai bine dai o estimare mai larga decat sa dezamagesti a doua oara.</div>
+    </div>
+  </div>
+  <div class="principle-box">
+    <div class="principle-icon">&#9654;</div>
+    <div class="principle-text"><strong>Regula de aur:</strong> Clientul care asteptata si este actualizat proactiv se simte respectat. Clientul care asteptata in tacere se simte uitat. Diferenta dintre cei doi nu e timpul de asteptare — e comunicarea ta.</div>
+  </div>
+</div>
+
+<!-- ── PANEL 4: LIVRARE ── -->
+<div class="panel" id="panel-4">
+  <div class="section-hero">
+    <div class="section-hero-num">4</div>
+    <div class="section-hero-content">
+      <div class="section-hero-title">Livrarea vehiculului</div>
+      <div class="section-hero-sub">Ultimele 30 de secunde conteaza la fel ca primele</div>
+    </div>
+  </div>
+  <div class="script-grid">
+    <div class="script-line">
+      <div class="tag tag-actiune">Actiune</div>
+      <div class="line-text line-actiune">Nu inmana factura fara explicatie. Prezinta ce s-a facut, de ce, si ce urmeaza. Clientul trebuie sa plece cu <strong>intelegere</strong>, nu cu semne de intrebare.</div>
+    </div>
+    <div class="script-line">
+      <div class="tag tag-spune">Spune</div>
+      <div class="line-text line-spune">„Domnule [Nume], am finalizat [lucrarea]. Am rezolvat [problema]. Vehiculul dvs. este pregatit — permiteti-mi sa va explic ce am efectuat."</div>
+    </div>
+    <div class="script-line">
+      <div class="tag tag-actiune">Actiune</div>
+      <div class="line-text line-actiune">Prezinta factura linie cu linie pentru clientul nou sau pentru lucrari mai complexe. Nu grabi acest moment.</div>
+    </div>
+    <div class="script-line">
+      <div class="tag tag-spune">Spune</div>
+      <div class="line-text line-spune">„Mai avem o recomandare pentru vizita urmatoare: [X]. Nu este urgent acum, dar este bine sa il planificam din timp."</div>
+    </div>
+    <div class="script-line">
+      <div class="tag tag-spune">Spune</div>
+      <div class="line-text line-spune">„Va vom contacta in <strong>24–48 de ore</strong> sa verificam ca totul este in regula. Este bine daca va sunam pe [numar]?"</div>
+    </div>
+    <div class="script-line">
+      <div class="tag tag-actiune">Actiune</div>
+      <div class="line-text line-actiune">Insoteste clientul pana la vehicul daca este posibil. Deschide usa sau ajuta cu bagajele daca are.</div>
+    </div>
+    <div class="script-line">
+      <div class="tag tag-spune">Spune</div>
+      <div class="line-text line-spune">„Va multumim ca ati ales Autopadova, domnule [Nume]. Ne vedem data viitoare!"</div>
+    </div>
+    <div class="script-line">
+      <div class="tag tag-evita">Evita</div>
+      <div class="line-text line-evita">Sa inmânezi factura si sa te intorci imediat la calculator. Lipsa contactului la final transmite ca banii au contat, nu clientul.</div>
+    </div>
+    <div class="script-line">
+      <div class="tag tag-tip">Tip</div>
+      <div class="line-text line-tip">Clientul care pleaca multumit devine ambasador. Un singur client multumit poate aduce <strong>3–5 referinte noi</strong> — valoros mai ales pentru flote IVECO.</div>
+    </div>
+  </div>
+  <div class="principle-box">
+    <div class="principle-icon">&#9654;</div>
+    <div class="principle-text"><strong>Principiu DealerPRO:</strong> Costul de achizitie al unui client nou este de 5–7x mai mare decat costul de retentie. Clientul care pleaca multumit azi este clientul care revine si recomanda maine. Fiecare livrare este o investitie in viitorul dealershipului.</div>
+  </div>
+</div>
+
+<!-- ── PANEL 5: SCENARII ── -->
+<div class="panel" id="panel-5">
+  <div class="section-hero">
+    <div class="section-hero-num">5</div>
+    <div class="section-hero-content">
+      <div class="section-hero-title">Scenarii dificile</div>
+      <div class="section-hero-sub">Raspunsuri model — exerseaza prin role-play</div>
+    </div>
+  </div>
+  <div class="scenario-grid">
+
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <span class="scenario-label">Scenariul A</span>
+        <span class="scenario-title">Clientul nervos din cauza intarzierii</span>
+      </div>
+      <div class="client-says">
+        <span class="client-label">Clientul spune:</span>
+        <span class="client-text">„Astept de 2 ore! Nimeni nu mi-a spus nimic!"</span>
+      </div>
+      <div class="response-steps">
+        <div class="response-step">
+          <div class="step-label-cell">Pasul 1 — Valideaza (nu te justifica):</div>
+          <div class="step-text-cell">„Aveti dreptate, domnule [Nume]. Imi cer scuze ca nu v-am actualizat la timp — asta nu ar fi trebuit sa se intample."</div>
+        </div>
+        <div class="response-step">
+          <div class="step-label-cell">Pasul 2 — Actioneaza imediat:</div>
+          <div class="step-text-cell">„Ma duc acum sa verific statusul exact si revin in 3 minute cu un raspuns clar."</div>
+        </div>
+        <div class="response-step">
+          <div class="step-label-cell">Pasul 3 — Compenseaza daca e cazul:</div>
+          <div class="step-text-cell">„Intre timp, permiteti-mi sa va ofer o cafea / sa verific daca putem prioritiza lucrarea dvs."</div>
+        </div>
+        <div class="response-step">
+          <div class="step-label-cell avoid">NU spune niciodata:</div>
+          <div class="step-text-cell avoid">„Nu e vina mea, a fost aglomerat." / „Toata lumea asteapta."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <span class="scenario-label">Scenariul B</span>
+        <span class="scenario-title">Obiectie de pret</span>
+      </div>
+      <div class="client-says">
+        <span class="client-label">Clientul spune:</span>
+        <span class="client-text">„E prea scump pentru o simpla revizie."</span>
+      </div>
+      <div class="response-steps">
+        <div class="response-step">
+          <div class="step-label-cell">Regula de baza:</div>
+          <div class="step-text-cell">Nu reduci pretul imediat. Prezinti <strong>valoarea</strong> mai intai.</div>
+        </div>
+        <div class="response-step">
+          <div class="step-label-cell">Raspuns recomandat:</div>
+          <div class="step-text-cell">„Inteleg, domnule [Nume]. Pretul include manopera executata de tehnicieni certificati [brand], piese originale cu garantie si verificarea tuturor sistemelor de siguranta. La un service independent nu aveti aceste garantii si nici istoricul inregistrat la producator — care conteaza atat pentru garantie, cat si la revanzarea vehiculului."</div>
+        </div>
+        <div class="response-step">
+          <div class="step-label-cell">Daca insista:</div>
+          <div class="step-text-cell">„Putem vedea impreuna ce prioritizam acum si ce planificam pentru vizita urmatoare, fara sa compromitem siguranta."</div>
+        </div>
+        <div class="response-step">
+          <div class="step-label-cell avoid">NU spune niciodata:</div>
+          <div class="step-text-cell avoid">„Da, stim ca suntem mai scumpi." — cedezi terenul psihologic imediat.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <span class="scenario-label">Scenariul C</span>
+        <span class="scenario-title">Comparatie cu service independent</span>
+      </div>
+      <div class="client-says">
+        <span class="client-label">Clientul spune:</span>
+        <span class="client-text">„La service-ul X din cartier e cu 30% mai ieftin."</span>
+      </div>
+      <div class="response-steps">
+        <div class="response-step">
+          <div class="step-label-cell">Raspuns recomandat:</div>
+          <div class="step-text-cell">„Il inteleg, domnule [Nume]. Noi nu concuram pe pret cu service-urile independente — concuram pe ce primiti in plus: diagnosticare cu echipament oficial [brand], piese OEM originale (nu aftermarket), garantie pe lucrare si istoricul inregistrat la producator."</div>
+        </div>
+        <div class="response-step">
+          <div class="step-label-cell">Inchide cu:</div>
+          <div class="step-text-cell">„Daca vehiculul este in garantie sau il vindeti in viitor, istoricul service oficial face o diferenta reala. Va las sa decideti — sunt disponibil daca aveti intrebari."</div>
+        </div>
+        <div class="response-step">
+          <div class="step-label-cell avoid">NU spune niciodata:</div>
+          <div class="step-text-cell avoid">„Da, stim ca suntem mai scumpi." / „Nu pot face nimic la pret."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <span class="scenario-label">Scenariul D</span>
+        <span class="scenario-title">Client fara programare — situatie urgenta</span>
+      </div>
+      <div class="client-says">
+        <span class="client-label">Clientul spune:</span>
+        <span class="client-text">„Nu am programare dar am o problema urgenta cu vehiculul."</span>
+      </div>
+      <div class="response-steps">
+        <div class="response-step">
+          <div class="step-label-cell">Primul raspuns:</div>
+          <div class="step-text-cell">„Buna ziua, domnule [Nume]! Inteleg ca e urgent. Verificam imediat ce putem face astazi." <em>[Verifici cu Service Manager in max 2 minute]</em></div>
+        </div>
+        <div class="response-step">
+          <div class="step-label-cell">Optiunea A — ai capacitate:</div>
+          <div class="step-text-cell">„Putem prelua vehiculul acum si revenim cu diagnosticul pana la ora [X]."</div>
+        </div>
+        <div class="response-step">
+          <div class="step-label-cell">Optiunea B — nu ai capacitate:</div>
+          <div class="step-text-cell">„Nu avem disponibilitate azi, dar il programam maine dimineata prima ora. Daca este ceva critic de siguranta, verificam rapid daca este sigur sa conduci pana atunci."</div>
+        </div>
+        <div class="response-step">
+          <div class="step-label-cell avoid">NU spune niciodata:</div>
+          <div class="step-text-cell avoid">„Nu aveti programare, nu putem face nimic." — clientul pierdut acum nu revine.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── PANEL 6: CHECKLIST ── -->
+<div class="panel" id="panel-6">
+  <div class="section-hero">
+    <div class="section-hero-num">6</div>
+    <div class="section-hero-content">
+      <div class="section-hero-title">Checklist zilnic</div>
+      <div class="section-hero-sub">Standard minim obligatoriu — Receptie Autopadova</div>
+    </div>
+  </div>
+
+  <div class="checklist-progress">
+    <svg class="progress-circle" viewBox="0 0 64 64">
+      <circle cx="32" cy="32" r="28" fill="none" stroke="#E6F1FB" stroke-width="5"/>
+      <circle cx="32" cy="32" r="28" fill="none" stroke="#3B6D11" stroke-width="5"
+              stroke-dasharray="175.9" stroke-dashoffset="175.9"
+              stroke-linecap="round" transform="rotate(-90 32 32)"
+              id="circle-progress"/>
+    </svg>
+    <div class="progress-info">
+      <div class="progress-count"><span id="checked-count">0</span> / <span id="total-count">16</span></div>
+      <div class="progress-label">puncte completate astazi</div>
+      <div class="progress-track"><div class="progress-track-fill" id="track-fill" style="width:0%"></div></div>
+    </div>
+    <button class="reset-btn" onclick="resetChecklist()">&#10006; Reseteaza</button>
+  </div>
+
+  <div class="checklist-section">
+    <div class="checklist-section-title">Dimineata — inainte de deschidere</div>
+    <div class="checklist-item" onclick="toggleCheck(this)">
+      <div class="checkbox"><span class="checkbox-empty"></span><span class="checkbox-tick">&#10003;</span></div>
+      <div class="item-text">Receptia este curata, ordonata — fara dosare sau hartii vizibile pentru clienti</div>
+    </div>
+    <div class="checklist-item" onclick="toggleCheck(this)">
+      <div class="checkbox"><span class="checkbox-empty"></span><span class="checkbox-tick">&#10003;</span></div>
+      <div class="item-text">Cafeaua / apa pregatita in zona de asteptare</div>
+    </div>
+    <div class="checklist-item" onclick="toggleCheck(this)">
+      <div class="checkbox"><span class="checkbox-empty"></span><span class="checkbox-tick">&#10003;</span></div>
+      <div class="item-text">Programarile zilei revizuite — stii numele si motivul fiecarui client care vine</div>
+    </div>
+    <div class="checklist-item" onclick="toggleCheck(this)">
+      <div class="checkbox"><span class="checkbox-empty"></span><span class="checkbox-tick">&#10003;</span></div>
+      <div class="item-text">Statusul fiecarui vehicul ramas in atelier din ziua precedenta verificat</div>
+    </div>
+    <div class="checklist-item" onclick="toggleCheck(this)">
+      <div class="checkbox"><span class="checkbox-empty"></span><span class="checkbox-tick">&#10003;</span></div>
+      <div class="item-text">Materialele promotionale / brosuri aranjate vizibil pe receptie</div>
+    </div>
+  </div>
+
+  <div class="checklist-section">
+    <div class="checklist-section-title">Pe parcursul zilei</div>
+    <div class="checklist-item" onclick="toggleCheck(this)">
+      <div class="checkbox"><span class="checkbox-empty"></span><span class="checkbox-tick">&#10003;</span></div>
+      <div class="item-text">Fiecare client este salutat in primele 15 secunde de la intrare</div>
+    </div>
+    <div class="checklist-item" onclick="toggleCheck(this)">
+      <div class="checkbox"><span class="checkbox-empty"></span><span class="checkbox-tick">&#10003;</span></div>
+      <div class="item-text">Numele clientului folosit de minimum 3 ori per vizita</div>
+    </div>
+    <div class="checklist-item" onclick="toggleCheck(this)">
+      <div class="checkbox"><span class="checkbox-empty"></span><span class="checkbox-tick">&#10003;</span></div>
+      <div class="item-text">Estimarea timpului comunicata la check-in cu confirmare verbala</div>
+    </div>
+    <div class="checklist-item" onclick="toggleCheck(this)">
+      <div class="checkbox"><span class="checkbox-empty"></span><span class="checkbox-tick">&#10003;</span></div>
+      <div class="item-text">Update proactiv daca exista depasire de timp (nu astepti sa fie intrebat de client)</div>
+    </div>
+    <div class="checklist-item" onclick="toggleCheck(this)">
+      <div class="checkbox"><span class="checkbox-empty"></span><span class="checkbox-tick">&#10003;</span></div>
+      <div class="item-text">Factura explicata inainte de plata — zero surprize pe bon</div>
+    </div>
+    <div class="checklist-item" onclick="toggleCheck(this)">
+      <div class="checkbox"><span class="checkbox-empty"></span><span class="checkbox-tick">&#10003;</span></div>
+      <div class="item-text">Recomandare pentru vizita viitoare mentionata la livrare</div>
+    </div>
+    <div class="checklist-item" onclick="toggleCheck(this)">
+      <div class="checkbox"><span class="checkbox-empty"></span><span class="checkbox-tick">&#10003;</span></div>
+      <div class="item-text">Clientul insotit pana la iesire sau vehicul</div>
+    </div>
+  </div>
+
+  <div class="checklist-section">
+    <div class="checklist-section-title">La final de zi</div>
+    <div class="checklist-item" onclick="toggleCheck(this)">
+      <div class="checkbox"><span class="checkbox-empty"></span><span class="checkbox-tick">&#10003;</span></div>
+      <div class="item-text">Follow-up programat pentru clientii din ziua curenta (contact in 24–48h)</div>
+    </div>
+    <div class="checklist-item" onclick="toggleCheck(this)">
+      <div class="checkbox"><span class="checkbox-empty"></span><span class="checkbox-tick">&#10003;</span></div>
+      <div class="item-text">Orice reclamatie sau situatie dificila raportata Service Manager-ului</div>
+    </div>
+    <div class="checklist-item" onclick="toggleCheck(this)">
+      <div class="checkbox"><span class="checkbox-empty"></span><span class="checkbox-tick">&#10003;</span></div>
+      <div class="item-text">Zona de asteptare curata si reaprovizionata pentru ziua urmatoare</div>
+    </div>
+    <div class="checklist-item" onclick="toggleCheck(this)">
+      <div class="checkbox"><span class="checkbox-empty"></span><span class="checkbox-tick">&#10003;</span></div>
+      <div class="item-text">Programarile zilei urmatoare verificate in DMS</div>
+    </div>
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-card-label">CSI Score receptie</div>
+      <div class="kpi-card-desc">Survey SMS / email post-vizita</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-card-label">Timp check-in</div>
+      <div class="kpi-card-desc">Target: sub 5 minute de la intrare la RO</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-card-label">Rata upsell</div>
+      <div class="kpi-card-desc">% clienti cu servicii aditionale acceptate</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-card-label">Follow-up realizat</div>
+      <div class="kpi-card-desc">% clienti contactati in 48h post-service</div>
+    </div>
+  </div>
+
+  <div class="principle-box" style="margin-top:24px">
+    <div class="principle-icon">&#9654;</div>
+    <div class="principle-text"><strong>Principiul fundamental (DealerPRO / Andy Elliott):</strong> Training (ce sa faci) + Coaching (cum sa faci) + Accountability (sa faci) = REZULTATE. Acest checklist este instrumentul tau zilnic de accountability. Completeaza-l sincer — pentru tine, nu pentru altii.</div>
+  </div>
+</div>
+
+</main>
+
+<!-- ROLE-PLAY BUTTON -->
+<button class="fab" onclick="openRoleplay()">
+  <div class="fab-dot"></div>
+  ROLE-PLAY
+</button>
+
+<!-- ROLE-PLAY OVERLAY -->
+<div class="roleplay-overlay" id="rp-overlay">
+  <div class="roleplay-box">
+    <div class="rp-header">
+      <span class="rp-title">&#9654; Sesiune Role-Play</span>
+      <button class="rp-close" onclick="closeRoleplay()">&#10005;</button>
+    </div>
+    <div class="rp-body" id="rp-body"></div>
+  </div>
+</div>
+
+<script>
+const TABS = ['Prezentare','Sosire','Check-in','Asteptare','Livrare','Scenarii','Checklist'];
+let currentTab = 0;
+let rpIndex = 0;
+
+const RP_SCENARIOS = [
+  {
+    title: 'Scenariul A — Intarziere',
+    client: 'Astept de 2 ore! Nimeni nu mi-a spus nimic!',
+    steps: [
+      {label:'Pasul 1 — Valideaza:', text:'Aveti dreptate, domnule [Nume]. Imi cer scuze ca nu v-am actualizat la timp — asta nu ar fi trebuit sa se intample.'},
+      {label:'Pasul 2 — Actioneaza:', text:'Ma duc acum sa verific statusul exact si revin in 3 minute cu un raspuns clar.'},
+      {label:'Pasul 3 — Compenseaza:', text:'Intre timp, permiteti-mi sa va ofer o cafea / sa verific daca putem prioritiza lucrarea dvs.'},
+      {label:'NU spune niciodata:', text:'Nu e vina mea, a fost aglomerat. / Toata lumea asteapta.', avoid:true}
+    ]
+  },
+  {
+    title: 'Scenariul B — Pret prea mare',
+    client: 'E prea scump pentru o simpla revizie.',
+    steps: [
+      {label:'Raspuns recomandat:', text:'Inteleg, domnule [Nume]. Pretul include tehnicieni certificati [brand], piese originale cu garantie si verificarea tuturor sistemelor de siguranta. La un service independent nu aveti aceste garantii si nici istoricul la producator.'},
+      {label:'Daca insista:', text:'Putem vedea impreuna ce prioritizam acum si ce planificam pentru vizita urmatoare, fara sa compromitem siguranta.'},
+      {label:'NU spune niciodata:', text:'Da, stim ca suntem mai scumpi.', avoid:true}
+    ]
+  },
+  {
+    title: 'Scenariul C — Concurenta mai ieftina',
+    client: 'La service-ul X din cartier e cu 30% mai ieftin.',
+    steps: [
+      {label:'Raspuns recomandat:', text:'Il inteleg, domnule [Nume]. Noi nu concuram pe pret cu service-urile independente — concuram pe ce primiti in plus: echipament oficial [brand], piese OEM, garantie pe lucrare si istoricul la producator.'},
+      {label:'Inchide cu:', text:'Daca vehiculul este in garantie sau il vindeti in viitor, istoricul service oficial face o diferenta reala. Va las sa decideti.'},
+      {label:'NU spune niciodata:', text:'Da, stim ca suntem mai scumpi. / Nu pot face nimic la pret.', avoid:true}
+    ]
+  },
+  {
+    title: 'Scenariul D — Urgent fara programare',
+    client: 'Nu am programare dar am o problema urgenta.',
+    steps: [
+      {label:'Primul raspuns:', text:'Buna ziua, domnule [Nume]! Inteleg ca e urgent. Verificam imediat ce putem face astazi. [Verifici cu Service Manager in 2 minute]'},
+      {label:'Daca ai capacitate:', text:'Putem prelua vehiculul acum si revenim cu diagnosticul pana la ora [X].'},
+      {label:'Daca nu ai capacitate:', text:'Il programam maine dimineata prima ora. Daca e ceva critic, verificam rapid daca e sigur sa conduci pana atunci.'},
+      {label:'NU spune niciodata:', text:'Nu aveti programare, nu putem face nimic.', avoid:true}
+    ]
+  }
+];
+
+function goTab(i) {
+  document.querySelectorAll('.panel').forEach((p,j) => p.classList.toggle('active', j===i));
+  document.querySelectorAll('.tab-btn').forEach((b,j) => b.classList.toggle('active', j===i));
+  currentTab = i;
+  document.getElementById('current-section-title').textContent = TABS[i];
+  window.scrollTo({top:0, behavior:'smooth'});
+  updateMainProgress();
+}
+
+function updateMainProgress() {
+  const pct = Math.round((currentTab / (TABS.length - 1)) * 100);
+  document.getElementById('main-progress-bar').style.width = pct + '%';
+  document.getElementById('progress-label-top').textContent = 'Progres ' + pct + '%';
+}
+
+function toggleCheck(el) {
+  el.classList.toggle('checked');
+  updateChecklist();
+}
+
+function updateChecklist() {
+  const items = document.querySelectorAll('.checklist-item');
+  const total = items.length;
+  const done = document.querySelectorAll('.checklist-item.checked').length;
+  document.getElementById('checked-count').textContent = done;
+  document.getElementById('total-count').textContent = total;
+  const pct = total > 0 ? (done / total * 100) : 0;
+  document.getElementById('track-fill').style.width = pct + '%';
+  const circ = document.getElementById('circle-progress');
+  const circumference = 175.9;
+  circ.style.strokeDashoffset = circumference - (circumference * pct / 100);
+  if (done === total && total > 0) {
+    document.getElementById('tab-6').classList.add('tab-done');
+  } else {
+    document.getElementById('tab-6').classList.remove('tab-done');
+  }
+}
+
+function resetChecklist() {
+  document.querySelectorAll('.checklist-item').forEach(el => el.classList.remove('checked'));
+  updateChecklist();
+}
+
+function openRoleplay() {
+  rpIndex = 0;
+  renderRP();
+  document.getElementById('rp-overlay').classList.add('open');
+}
+
+function closeRoleplay() {
+  document.getElementById('rp-overlay').classList.remove('open');
+}
+
+function renderRP() {
+  const sc = RP_SCENARIOS[rpIndex];
+  const stepsHTML = sc.steps.map(s => `
+    <div class="rp-answer-item">
+      <div class="rp-answer-label" style="${s.avoid ? 'color:#A32D2D' : ''}">${s.label}</div>
+      <div class="rp-answer-text" style="${s.avoid ? 'color:#A32D2D;font-style:italic' : ''}">${s.text}</div>
+    </div>
+  `).join('');
+
+  document.getElementById('rp-body').innerHTML = `
+    <div style="font-size:11px;font-weight:700;color:var(--gray-md);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px">
+      Scenariul ${rpIndex+1} din ${RP_SCENARIOS.length}
+    </div>
+    <div class="rp-client">
+      <div class="rp-client-label">Clientul spune:</div>
+      <div class="rp-client-text">„${sc.client}"</div>
+    </div>
+    <div class="rp-instruction">Gandeste-te la raspunsul tau, apoi apasa pentru a vedea scriptul recomandat.</div>
+    <button class="rp-reveal-btn" onclick="document.getElementById('rp-ans').classList.add('visible');this.style.display='none'">
+      &#9656; Arata raspunsul recomandat
+    </button>
+    <div class="rp-answer" id="rp-ans">
+      <div style="font-size:11px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px">&#10003; Raspuns model</div>
+      ${stepsHTML}
+      <div style="display:flex;gap:10px;margin-top:16px">
+        ${rpIndex < RP_SCENARIOS.length - 1
+          ? `<button class="rp-next-btn" onclick="rpIndex++;renderRP()">Scenariul urmator &#8594;</button>`
+          : `<button class="rp-next-btn" onclick="rpIndex=0;renderRP()">&#8635; Repeta de la inceput</button>`}
+        <button onclick="closeRoleplay()" style="background:none;border:1px solid var(--border);border-radius:8px;padding:10px 16px;font-family:var(--font-sans,sans-serif);font-size:13px;cursor:pointer;color:var(--gray-md)">Inchide</button>
+      </div>
+    </div>
+  `;
+}
+
+document.getElementById('rp-overlay').addEventListener('click', function(e) {
+  if (e.target === this) closeRoleplay();
+});
+
+updateChecklist();
+</script>
+</body>
+</html>
