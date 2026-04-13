@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Coach Vânzări Iveco — Autopadova</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<title>Coach Vânzări Iveco — Autopadova v3</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg:       #f5f6f8;
@@ -70,22 +70,8 @@ body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-s
 .logo-sep { color: var(--text3); margin: 0 2px; }
 .logo-sub { font-size: 10px; color: var(--text3); font-weight: 400; letter-spacing: .06em; text-transform: uppercase; }
 .topbar-right { display: flex; align-items: center; gap: 8px; }
-.api-input {
-  background: var(--bg3); border: 1px solid var(--border2);
-  border-radius: var(--r); padding: 5px 11px;
-  font-size: 12px; color: var(--text2);
-  font-family: 'Fira Code', monospace;
-  width: 210px; transition: all .2s;
-}
-.api-input:focus { outline: none; border-color: var(--red); color: var(--text); }
-.api-btn {
-  background: var(--red); color: #fff; border: none;
-  border-radius: var(--r); padding: 5px 14px;
-  font-size: 12px; font-weight: 600; cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
-  transition: background .15s;
-}
-.api-btn:hover { background: var(--red2); }
+
+
 .pill-status {
   font-size: 10px; font-weight: 600;
   font-family: 'Space Grotesk', sans-serif;
@@ -651,8 +637,14 @@ body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-s
   <div class="topbar-right">
     <div class="pill-status" id="iveco-nr1">🏆 #1 România &gt;3,5t</div>
     <button class="btn-tco" onclick="openTCO()">📊 Calculator TCO</button>
-    <input type="password" class="api-input" id="api-key" placeholder="sk-ant-... API Key Anthropic" />
-    <button class="api-btn" onclick="saveKey()">Salvează</button>
+    <div style="display:flex;align-items:center;gap:6px;">
+      <input type="password" id="api-key"
+        placeholder="sk-ant-api03-..."
+        style="width:200px;padding:5px 10px;border-radius:6px;border:1px solid var(--border2);background:var(--bg3);color:var(--text);font-size:12px;font-family:monospace;outline:none;"
+        oninput="localStorage.setItem('ap_api_key',this.value);updateKeyStatus()"
+        title="Introdu cheia Anthropic API" />
+      <span id="key-status" style="font-size:15px;" title="Status cheie">🔴</span>
+    </div>
   </div>
 </div>
 
@@ -997,10 +989,7 @@ body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-s
       <div class="empty-truck">🚛</div>
       <h2>Coach Vânzări Iveco</h2>
       <p>Completează datele clientului în panoul din stânga și pornește sesiunea pentru briefing personalizat și coaching live în timp real.</p>
-      <div class="api-hint">
-        <span>⚠</span>
-        <span>Introdu API Key Anthropic (sk-ant-...) în bara de sus înainte de start</span>
-      </div>
+
       <p style="color:var(--text3);font-size:11px;margin-top:8px">IVECO #1 România · Cotă piață 18,2% · Autopadova Iași & Bacău</p>
     </div>
   </div>
@@ -1012,16 +1001,29 @@ const API = 'https://api.anthropic.com/v1/messages';
 let D = {}, hist = [], curStage = 0, researchText = '';
 
 /* ---------- KEY ---------- */
-function saveKey() {
-  const k = document.getElementById('api-key').value.trim();
-  if (k) { localStorage.setItem('ap_key', k); showToast('✓ API Key salvat'); }
-  else alert('Introdu mai întâi un API Key valid.');
-}
+function saveKey() {}
 function getKey() {
-  const s = localStorage.getItem('ap_key');
-  if (s) document.getElementById('api-key').value = s;
-  return document.getElementById('api-key').value.trim();
+  const el = document.getElementById('api-key');
+  return (el ? el.value.trim() : '') || localStorage.getItem('ap_api_key') || '';
 }
+function updateKeyStatus() {
+  const k = getKey();
+  const el = document.getElementById('key-status');
+  if (!el) return;
+  if (k.startsWith('sk-ant-') && k.length > 30) {
+    el.textContent = '🟢'; el.title = 'Cheie validă';
+  } else if (k.length > 0) {
+    el.textContent = '🟡'; el.title = 'Format nerecunoscut';
+  } else {
+    el.textContent = '🔴'; el.title = 'Nicio cheie introdusă';
+  }
+}
+window.addEventListener('DOMContentLoaded', function() {
+  const saved = localStorage.getItem('ap_api_key');
+  const el = document.getElementById('api-key');
+  if (saved && el) { el.value = saved; }
+  updateKeyStatus();
+});
 function showToast(msg, type) {
   const t = document.createElement('div'); t.className = 'toast';
   if (type === 'err') t.style.background = '#e8351a';
@@ -1056,8 +1058,6 @@ function resetAll() {
 async function startResearch() {
   const co = gv('co'), model = gv('model');
   if (!co || !model) { alert('Completează cel puțin firma clientului și modelul Iveco.'); return; }
-  if (!getKey()) { alert('Introdu API Key Anthropic în bara de sus.'); return; }
-
   D = { agent: gv('agent')||'agent', model, ver: gv('ver'), pret: gv('pret'),
         units: gv('units')||'1', deliv: gv('deliv'), co, cui: gv('cui'),
         loc: gv('loc'), cn: gv('cn'), cr: gv('cr'), fln: gv('fln'),
@@ -1177,7 +1177,7 @@ Răspunde EXCLUSIV cu JSON valid. Fără backticks, fără text în afara JSON. 
     document.getElementById('proceed-area').style.display = '';
   } catch(e) {
     document.getElementById('rs-dot').className = 'dot dot-err';
-    document.getElementById('rs-text').textContent = 'Eroare la generare profil. Verifică API Key — poți continua oricum.';
+    document.getElementById('rs-text').textContent = 'Eroare la generare profil. Verifică conexiunea — poți continua oricum.';
     document.getElementById('proceed-area').style.display = '';
   }
 }
@@ -1286,7 +1286,7 @@ function sysPrompt() {
     : 'N/A';
   return `Ești un coach senior de vânzări pentru Autopadova — dealer autorizat IVECO în Iași și Bacău, România. Metodologie: Andy Elliott adaptată vânzări comerciale LCV & camioane.
 
-Context brand: IVECO este liderul pieței românești segment >3,5t cu 18,2% cotă (2024). Autopadova oferă service autorizat, piese originale, leasing IVECO Financial Services, program IVECO Drivers Fidelity Club.
+Context brand: IVECO Daily deține 27% cotă de piață România segment LCV în 2025 — lider absolut. Autopadova oferă service autorizat, piese originale, leasing IVECO Financial Services, program IVECO Drivers Fidelity Club.
 
 ════════════════════════════════════
 KNOWLEDGE BASE PRODUS — IVECO DAILY MY24
@@ -1475,6 +1475,50 @@ Limbaj corect:
 
 Greșeli de evitat: comparare preț sticker, calificare volum prea târziu, lăsat «mă gândesc» fără follow-up fix, neutilizarea argumentului #1 România.
 
+════════════════════════════════════
+METODOLOGIE SHLOMI LEIBOVITZ — LAYER DE PROCES
+(SalesMentor.co.il — 33 ani experiență vânzări, combinată cu Andy Elliott)
+════════════════════════════════════
+
+## ATRACȚIE vs. PRESIUNE
+• Vinde din poziție de valoare — nu din disperare. „Te vreau, dar nu am nevoie de tine."
+• Certitudinea în produs și dealer se transmite direct. Un agent nesigur pierde înainte să înceapă.
+• Insistența cu empatie = serviciu: dacă Daily + Autopadova e cea mai bună alegere pentru client, renunțul ușor îl dezavantajează.
+
+## ÎNTREBĂRILE CALITATIVE (inima vânzării)
+Cel care întreabă conduce — nu cel care vorbește mai mult.
+• Deschise: „Cum arată o zi tipică pentru vehiculul dvs.?"
+• De durere: „Care e cel mai mare cost sau problemă cu vehiculul actual?"
+• De viitor: „Dacă service-ul ar costa jumătate, ce impact ar fi în afacere?"
+• De confirmare (pre-closing): „Dacă rezolvăm asta, mergem înainte?"
+→ NU prezenta produsul înainte de a confirma nevoia reală.
+
+## FORMULA OBIECȚII — A→Î→R→S
+• A — Acceptare (fără să dai dreptate): „Înțeleg perfect ce spuneți."
+• Î — Înțelegere profundă: „Când spuneți scump — vă referiți la prețul inițial sau costul total pe 5 ani?"
+• R — Reformulare în beneficiu: „Deci dacă TCO-ul ar fi mai mic decât Sprinter, acesta nu mai e un obstacol?"
+• S — Soluție concretă + Closing imediat.
+
+## FOLLOW-UP CREATIV (nu «v-ați mai gândit?»)
+80% din vânzări complexe se închid între contactul 5 și 12. Fiecare contact = un motiv/valoare, nu o rugăminte.
+• Z1: ofertă personalizată + TCO comparativ
+• Z3: apel cu referință din sectorul clientului
+• Z7: conținut relevant (articol, studiu de caz)
+• Z14: invitație test drive sau vizită dealer
+• Z30: reactivare cu element nou (stoc, ofertă specială, referință din rețea)
+
+## PROFILUL CLIENTULUI — ADAPTAT
+CLIENT MIC (PFA/microîntreprindere): NU decide pe TCO grafice. Decide pe rată lunară, liniște, relație.
+→ Traduce: garanție 5 ani = „zero surprize", service -50% = „știi exact ce cheltuiești", Iași/Bacău = „suntem lângă tine".
+CLIENT FLEET (B2B, 10+ vehicule): Decide pe TCO total, disponibilitate, SLA service.
+→ Prezintă cifre, comparații, IVECO ON pentru management flotă.
+
+## AVANTAJE EXCLUSIVE AUTOPADOVA (folosește la orice etapă)
+• Garanție extinsă: 4 ani fără limită km SAU 5 ani / 200.000 km (vs. standard 3 ani / 120.000 km)
+• Mentenanță -50% față de tariful standard → economie 2.000–3.500€ la 60.000 km/an
+• Service autorizat Iași + Bacău — imobilizare minimă
+• IVECO ON 5 ani gratuit — telematică, diagnosticare remote, OTA updates
+
 ROLUL TĂU: Dai replici exacte, cuvânt cu cuvânt, pe care agentul ${D.agent} le poate folosi imediat. Direct, energic, fără teorie. Bullet points • pentru pași/replici. Maximum 350 cuvinte per răspuns. Totul în română.`;
 }
 
@@ -1534,7 +1578,7 @@ async function callAI(userMsg) {
     document.getElementById('chat').scrollTop = 9999;
   } catch(e) {
     const el = document.getElementById(lid);
-    if (el) el.innerHTML = `<div class="ai-lbl">Coach Iveco</div><span style="color:var(--red2)">Eroare: ${e.message}. Verifică API Key.</span>`;
+    if (el) el.innerHTML = `<div class="ai-lbl">Coach Iveco</div><span style="color:var(--red2)">Eroare: ${e.message}. Contactează administratorul.</span>`;
   }
 }
 
@@ -1988,7 +2032,7 @@ function exportTCOText() {
 }
 
 /* ---------- INIT ---------- */
-window.onload = () => { getKey(); };
+window.onload = () => {};
 </script>
 </body>
 </html>

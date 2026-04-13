@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Training Roleplay v4 — Autopadova Sales Team</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f14;
+    --surface: #151820;
+    --card: #1c2030;
+    --border: #252a3a;
+    --accent: #ff6b2b;
+    --accent2: #3b82f6;
+    --accent3: #10b981;
+    --yellow: #f59e0b;
+    --text: #e8eaf0;
+    --muted: #7a8099;
+    --red: #ef4444;
+    --admin: #a855f7;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Nunito', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,107,43,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,107,43,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  /* ── HEADER ── */
+  header {
+    text-align: center;
+    padding: 36px 20px 24px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 24px;
+    position: relative;
+  }
+  .header-tag {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    background: rgba(255,107,43,0.1);
+    border: 1px solid rgba(255,107,43,0.3);
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(26px, 5vw, 40px);
+    font-weight: 800;
+    line-height: 1.1;
+    background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 6px;
+  }
+  .subtitle { color: var(--muted); font-size: 14px; }
+  .subtitle strong { color: var(--text); }
+
+  /* ── ADMIN BANNER ── */
+  .admin-banner {
+    display: none;
+    background: rgba(168,85,247,0.1);
+    border: 1px solid rgba(168,85,247,0.35);
+    border-radius: 10px;
+    padding: 10px 16px;
+    margin-bottom: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--admin);
+    display: none;
+    align-items: center;
+    gap: 10px;
+  }
+  .admin-banner.visible { display: flex; }
+  .admin-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--admin);
+    animation: pulse 1.5s ease infinite;
+    flex-shrink: 0;
+  }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.7)} }
+
+  /* ── TOP BAR ── */
+  .top-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .btn-admin-toggle {
+    background: var(--card);
+    border: 1px solid rgba(168,85,247,0.4);
+    color: var(--admin);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    padding: 10px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+    letter-spacing: 0.5px;
+  }
+  .btn-admin-toggle:hover,
+  .btn-admin-toggle.active {
+    background: rgba(168,85,247,0.15);
+    border-color: var(--admin);
+  }
+
+  /* ── PROGRESS ── */
+  .progress-wrap { margin-bottom: 22px; }
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+    margin-bottom: 5px;
+  }
+  .progress-track {
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--yellow));
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+
+  /* ── AGENT GRID ── */
+  .section-label {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .agents-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-bottom: 26px;
+  }
+  @media (max-width: 600px) { .agents-grid { grid-template-columns: repeat(3, 1fr); } }
+
+  .agent-btn {
+    background: var(--card);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .agent-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .agent-btn.costel::before  { background: linear-gradient(135deg, rgba(255,107,43,0.15), transparent); }
+  .agent-btn.vlad::before    { background: linear-gradient(135deg, rgba(59,130,246,0.15), transparent); }
+  .agent-btn.calin::before  { background: linear-gradient(135deg, rgba(16,185,129,0.15), transparent); }
+  .agent-btn.iulian::before  { background: linear-gradient(135deg, rgba(245,158,11,0.15), transparent); }
+  .agent-btn.liviu::before   { background: linear-gradient(135deg, rgba(139,92,246,0.15), transparent); }
+  .agent-btn:hover::before, .agent-btn.active::before { opacity: 1; }
+  .agent-btn.costel { --clr: var(--accent); }
+  .agent-btn.vlad   { --clr: var(--accent2); }
+  .agent-btn.calin { --clr: var(--accent3); }
+  .agent-btn.iulian { --clr: var(--yellow); }
+  .agent-btn.liviu  { --clr: #8b5cf6; }
+  .agent-btn:hover, .agent-btn.active {
+    border-color: var(--clr);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+  }
+  .agent-avatar {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    border: 2px solid var(--clr, var(--border));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 16px;
+    color: var(--clr, var(--muted));
+    margin: 0 auto 7px;
+    background: rgba(0,0,0,0.3);
+    position: relative; z-index: 1;
+    transition: all 0.2s;
+  }
+  .agent-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700; font-size: 13px;
+    position: relative; z-index: 1;
+  }
+  .agent-status {
+    font-size: 10px; color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+    margin-top: 3px;
+    position: relative; z-index: 1;
+  }
+  .agent-btn.done .agent-status { color: var(--accent3); }
+  .agent-btn.done .agent-avatar { background: rgba(16,185,129,0.15); border-color: var(--accent3); color: var(--accent3); }
+  .agent-btn.disabled-agent { opacity: 0.35; pointer-events: none; }
+
+  /* ── ADMIN: skip all button ── */
+  .admin-actions {
+    display: none;
+    margin-bottom: 20px;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .admin-actions.visible { display: flex; }
+  .btn-admin {
+    background: rgba(168,85,247,0.12);
+    border: 1px solid rgba(168,85,247,0.35);
+    color: var(--admin);
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    padding: 9px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-admin:hover { background: rgba(168,85,247,0.22); }
+
+  /* ── ROLEPLAY AREA ── */
+  #roleplay-area { display: none; }
+  .situation-header {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 18px; padding: 14px 18px;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+  .situation-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; padding: 4px 10px;
+    border-radius: 20px;
+    background: rgba(255,107,43,0.15);
+    color: var(--accent);
+    border: 1px solid rgba(255,107,43,0.3);
+    white-space: nowrap;
+  }
+  .situation-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 16px; }
+
+  /* ── SCENARIO CARD ── */
+  .scenario-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    margin-bottom: 14px;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+  .scenario-card.locked { opacity: 0.38; pointer-events: none; }
+  .scenario-card.scenario-answered {
+    background: rgba(16,185,129,0.04);
+    border-color: rgba(16,185,129,0.2);
+  }
+  .scenario-top {
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: flex-start; gap: 14px;
+  }
+  .scenario-num {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 26px;
+    color: var(--accent); line-height: 1;
+    min-width: 28px;
+  }
+  .scenario-answered .scenario-num { color: var(--accent3); }
+  .scenario-label {
+    font-size: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--muted); margin-bottom: 3px;
+  }
+  .scenario-question { font-size: 14px; font-weight: 600; line-height: 1.45; }
+  .client-tag {
+    display: inline-block;
+    font-size: 11px; font-family: 'JetBrains Mono', monospace;
+    padding: 3px 8px; border-radius: 4px;
+    background: rgba(59,130,246,0.1);
+    color: var(--accent2);
+    border: 1px solid rgba(59,130,246,0.2);
+    margin-top: 5px;
+  }
+  .scenario-input-area { padding: 14px 18px; }
+  .scenario-input-area textarea {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    padding: 11px 14px;
+    color: var(--text);
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    resize: vertical;
+    min-height: 82px;
+    outline: none;
+    transition: border-color 0.2s;
+    line-height: 1.5;
+  }
+  .scenario-input-area textarea:focus { border-color: var(--accent); }
+  .scenario-input-area textarea::placeholder { color: var(--muted); }
+  .scenario-input-area textarea:disabled { opacity: 0.65; cursor: not-allowed; }
+  .scenario-actions {
+    display: flex; gap: 10px;
+    margin-top: 9px; justify-content: flex-end; align-items: center;
+  }
+  .hint-text { font-size: 11px; color: var(--muted); font-style: italic; flex: 1; }
+  .btn {
+    font-family: 'Syne', sans-serif; font-weight: 700;
+    font-size: 13px; padding: 8px 16px;
+    border-radius: 8px; border: none;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .btn-primary { background: var(--accent); color: white; }
+  .btn-primary:hover { background: #ff8447; transform: translateY(-1px); }
+  .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+  .btn-secondary {
+    background: transparent; color: var(--muted);
+    border: 1px solid var(--border); font-size: 12px; padding: 7px 12px;
+  }
+  .btn-secondary:hover { color: var(--text); border-color: var(--muted); }
+
+  /* ── FEEDBACK ── */
+  .feedback-box {
+    display: none;
+    margin-top: 12px; padding: 14px 16px;
+    border-radius: 9px; font-size: 13px; line-height: 1.6;
+    border-left: 3px solid;
+  }
+  .feedback-box.good   { background: rgba(16,185,129,0.07); border-color: var(--accent3); color: #6ee7b7; }
+  .feedback-box.bad    { background: rgba(239,68,68,0.07); border-color: var(--red); color: #fca5a5; }
+  .feedback-box.partial{ background: rgba(245,158,11,0.07); border-color: var(--yellow); color: #fde68a; }
+  .feedback-icon { font-size: 16px; margin-bottom: 5px; display: block; }
+
+  /* ── LOADING ── */
+  .loading-dots { display: inline-flex; gap: 4px; align-items: center; }
+  .loading-dots span {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--accent);
+    animation: dotBounce 1.2s ease-in-out infinite;
+  }
+  .loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+  .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes dotBounce { 0%,80%,100%{transform:scale(0.6);opacity:0.4} 40%{transform:scale(1);opacity:1} }
+
+  /* ── NEXT ── */
+  .next-area { display: none; text-align: center; padding: 18px; }
+  .btn-next-agent {
+    background: linear-gradient(135deg, var(--accent), #ff8c42);
+    color: white; font-family: 'Syne', sans-serif;
+    font-weight: 700; font-size: 14px;
+    padding: 13px 28px; border-radius: 9px;
+    border: none; cursor: pointer; transition: all 0.2s;
+  }
+  .btn-next-agent:hover { transform: translateY(-2px); box-shadow: 0 7px 20px rgba(255,107,43,0.3); }
+
+  /* ── FINAL ANALYSIS ── */
+  #final-analysis { display: none; }
+  .analysis-header { text-align: center; padding: 28px 20px 20px; margin-bottom: 20px; }
+  .analysis-header h2 {
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 30px;
+    background: linear-gradient(135deg, var(--yellow), var(--accent));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    margin-bottom: 6px;
+  }
+  .analysis-loading {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 14px; padding: 50px 20px; color: var(--muted);
+  }
+  .analysis-content {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 26px;
+    font-size: 14px; line-height: 1.75; display: none;
+  }
+  .analysis-content h3 {
+    font-family: 'Syne', sans-serif; font-weight: 700;
+    font-size: 17px; color: var(--accent);
+    margin: 22px 0 10px;
+  }
+  .analysis-content h3:first-child { margin-top: 0; }
+  .analysis-content p { margin-bottom: 10px; }
+  .analysis-content strong { color: var(--yellow); }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-tag">🎯 Autopadova · IVECO Daily MY24 Diesel</div>
+    <h1>Training Roleplay<br>Sesiune de Vânzări</h1>
+    <p class="subtitle">Agenți: <strong>Costel · Vlad · Calin · Iulian · Liviu</strong></p>
+  </header>
+
+  <!-- ADMIN BANNER -->
+  <div class="admin-banner" id="adminBanner">
+    <div class="admin-dot"></div>
+    <span>MOD ADMIN ACTIV — răspunsurile demo sunt pre-completate automat</span>
+  </div>
+
+  <!-- TOP BAR: API KEY INPUT + ADMIN TOGGLE -->
+  <div class="top-bar" style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;">
+    <div style="display:flex;align-items:center;gap:8px;">
+      <input type="password" id="rp-api-key"
+        placeholder="sk-ant-api03-... (cheie Anthropic)"
+        style="width:260px;padding:6px 10px;border-radius:7px;border:1px solid #252a3a;background:#1c2030;color:#e8eaf0;font-size:12px;font-family:monospace;outline:none;"
+        oninput="localStorage.setItem('ap_api_key',this.value);updateRPKeyStatus()"
+        title="Cheie Anthropic API" />
+      <span id="rp-key-status" style="font-size:15px;" title="Status cheie">🔴</span>
+    </div>
+    <button class="btn-admin-toggle" id="adminToggle" onclick="toggleAdmin()">👁 ADMIN</button>
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="progress-wrap">
+    <div class="progress-label">
+      <span>PROGRES SESIUNE</span>
+      <span id="progress-text">0 / 15 răspunsuri</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+    </div>
+  </div>
+
+  <!-- SELECT AGENT -->
+  <div id="select-agent-section">
+    <div class="section-label">Selectează agentul</div>
+
+    <!-- ADMIN ACTIONS -->
+    <div class="admin-actions" id="adminActions">
+      <button class="btn-admin" onclick="adminFillAll()">⚡ Auto-completează toți agenții</button>
+      <button class="btn-admin" onclick="adminSkipToAnalysis()">📊 Salt direct la Analiză Finală</button>
+    </div>
+
+    <div class="agents-grid">
+      <div class="agent-btn costel" id="abtn-costel" onclick="selectAgent('costel')">
+        <div class="agent-avatar">C</div>
+        <div class="agent-name">Costel</div>
+        <div class="agent-status" id="status-costel">— în așteptare —</div>
+      </div>
+      <div class="agent-btn vlad" id="abtn-vlad" onclick="selectAgent('vlad')">
+        <div class="agent-avatar">V</div>
+        <div class="agent-name">Vlad</div>
+        <div class="agent-status" id="status-vlad">— în așteptare —</div>
+      </div>
+      <div class="agent-btn calin" id="abtn-calin" onclick="selectAgent('calin')">
+        <div class="agent-avatar">Co</div>
+        <div class="agent-name">Calin</div>
+        <div class="agent-status" id="status-calin">— în așteptare —</div>
+      </div>
+      <div class="agent-btn iulian" id="abtn-iulian" onclick="selectAgent('iulian')">
+        <div class="agent-avatar">I</div>
+        <div class="agent-name">Iulian</div>
+        <div class="agent-status" id="status-iulian">— în așteptare —</div>
+      </div>
+      <div class="agent-btn liviu" id="abtn-liviu" onclick="selectAgent('liviu')">
+        <div class="agent-avatar">L</div>
+        <div class="agent-name">Liviu</div>
+        <div class="agent-status" id="status-liviu">— în așteptare —</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROLEPLAY AREA -->
+  <div id="roleplay-area">
+    <div class="situation-header">
+      <div class="situation-badge" id="agent-badge">AGENT</div>
+      <div>
+        <div class="scenario-label">SIMULARE ROLEPLAY · 3 SITUAȚII · DAILY DIESEL</div>
+        <div class="situation-title" id="agent-full-name">Nume Agent</div>
+      </div>
+      <button class="btn btn-secondary" onclick="backToSelect()" style="margin-left:auto;">← Înapoi</button>
+    </div>
+    <div id="scenarios-container"></div>
+    <div class="next-area" id="next-area">
+      <p style="color:var(--muted);font-size:13px;margin-bottom:12px;">Toate cele 3 situații completate ✓</p>
+      <button class="btn-next-agent" onclick="finishAgent()">Finalizează sesiunea acestui agent →</button>
+    </div>
+  </div>
+
+  <!-- FINAL ANALYSIS -->
+  <div id="final-analysis">
+    <div class="analysis-header">
+      <div class="header-tag">📊 Raport Final</div>
+      <h2>Analiza Echipei</h2>
+      <p class="subtitle">IVECO Daily MY24 Diesel · <strong>Autopadova Iași & Bacău</strong> · Metodologie Andy Elliott + Shlomi Leibovitz</p>
+    </div>
+    <div class="analysis-loading" id="analysis-loading">
+      <div class="loading-dots"><span></span><span></span><span></span></div>
+      <span>Se generează analiza echipei...</span>
+    </div>
+    <div class="analysis-content" id="analysis-content"></div>
+  </div>
+
+</div><!-- /container -->
+
+<script>
+// API key loaded from localStorage (shared cu coach app)
+function getAPIKey() {
+  const el = document.getElementById('rp-api-key');
+  return (el && el.value.trim()) || localStorage.getItem('ap_api_key') || '';
+}
+function updateRPKeyStatus() {
+  const k = getAPIKey();
+  const el = document.getElementById('rp-key-status');
+  if (!el) return;
+  if (k.startsWith('sk-ant-') && k.length > 30) { el.textContent = '🟢'; el.title = 'Cheie validă'; }
+  else if (k.length > 0) { el.textContent = '🟡'; el.title = 'Format nerecunoscut'; }
+  else { el.textContent = '🔴'; el.title = 'Nicio cheie'; }
+}
+window.addEventListener('DOMContentLoaded', function() {
+  const saved = localStorage.getItem('ap_api_key');
+  const el = document.getElementById('rp-api-key');
+  if (saved && el) { el.value = saved; }
+  updateRPKeyStatus();
+});
+
+// ═══════════════════════════════════════════════
+// SCENARIOS — 100% Diesel, comercial, closing
+// ═══════════════════════════════════════════════
+const SCENARIOS = {
+  costel: {
+    name: 'Costel',
+    focus: 'Closing & Urgență',
+    situations: [
+      {
+        label: 'Client care amână semnarea',
+        question: '„Oferta e bună, dar vreau să aștept până după vacanță să semnez. Sunt plecat 3 săptămâni."',
+        hint: 'Creează urgență reală: stoc limitat, prețuri valabile până la o dată, ofertă de finanțare cu termen. Propune rezervarea cu acont mic acum.'
+      },
+      {
+        label: 'Client care vrea să consulte soția / partenerul',
+        question: '„Totul sună bine, dar trebuie să vorbesc cu soția mea înainte să dau banii."',
+        hint: 'Nu forța. Implică partenerul în decizie — propune o întâlnire comună sau trimite oferta scrisă acasă. Fixează un follow-up concret în 48h.'
+      },
+      {
+        label: 'Client care a semnat deja în altă parte',
+        question: '„Ieri am semnat pentru un Sprinter. Îmi pare rău că nu am venit mai devreme la voi."',
+        hint: 'Nu ataca concurența. Empatizează, lasă ușa deschisă pentru viitor, întreabă dacă mai are colegi sau parteneri cu nevoi similare — transformă pierderea în referral.'
+      }
+    ],
+    adminAnswers: [
+      'Înțeleg perfect — și respect decizia dumneavoastră. Dar am o singură îngrijorare: vehiculul pe care îl avem în stoc în configurația discutată este ultimul disponibil. Nu pot garanta că va fi aici la întoarcerea dumneavoastră. Ce-ar fi să îl rezervăm cu un acont de 500€ — complet rambursabil dacă vă răzgândiți — și aveți liniștea că vehiculul e al dumneavoastră? Cele 3 săptămâni le petreceți fără griji.',
+      'Perfect, e firesc să vă consultați. Vă propun să îi trimit soției dumneavoastră un rezumat scris al ofertei — simplu, clar, cu toate beneficiile incluse — ca să puteți discuta acasă pe baza unor date concrete. Și să stabilim o întâlnire joi sau vineri, dacă e posibil să veniți împreună. Dacă are întrebări, sunt disponibil și la telefon oricând.',
+      'Îmi pare rău că nu ne-am întâlnit mai devreme — dar mă bucur că ați venit. Sper că Sprinter-ul vă va servi bine. Dacă la un moment dat aveți nevoie de un al doilea vehicul sau dacă aveți parteneri de afaceri cu nevoi de transport, vă rog să ne țineți în minte. Avem clienți care au ajuns la noi prin recomandări și îi tratăm cu aceeași atenție. Vă las cartea mea de vizită.'
+    ]
+  },
+  vlad: {
+    name: 'Vlad',
+    focus: 'Obiecții comerciale & Concurență',
+    situations: [
+      {
+        label: 'Client care a primit o ofertă mai ieftină de la alt dealer IVECO',
+        question: '„Un alt dealer IVECO mi-a dat un preț cu 1.200€ mai mic pentru același vehicul. De ce să cumpăr de la voi?"',
+        hint: 'Nu intra în război de prețuri. Diferențiază Autopadova pe servicii: garanție extinsă exclusivă, pachete întreținere -50%, service local, relație pe termen lung.'
+      },
+      {
+        label: 'Client care vrea discount pentru că plătește cash',
+        question: '„Plătesc integral cash azi. Ce reducere specială îmi dați față de ofertă?"',
+        hint: 'Cash-ul e avantaj pentru client, nu neapărat pentru dealer (nu există cost de finanțare la IVECO Financial Services). Pivotează spre valoare adăugată, nu spre reducere de preț.'
+      },
+      {
+        label: 'Client care compară cu un vehicul second-hand',
+        question: '„Am găsit un Sprinter second-hand din 2021 cu 80.000 km la un preț cu 15.000€ mai mic. Nu e mai inteligent să iau aia?"',
+        hint: 'Compară costul real: fără garanție, service necunoscut, consum mai mare, fără telematică, risc tehnic. Daily nou cu leasing poate fi mai ieftin lunar decât Sprinter cash second-hand.'
+      }
+    ],
+    adminAnswers: [
+      'Apreciez că sunteți direct cu mine. Prețul unui vehicul este doar o parte din ce cumpărați. La Autopadova, oferta include garanție extinsă de 4 ani fără limită de km — aceasta nu e standard la toți dealerii. Pachetele noastre de întreținere sunt la 50% din prețul de listă. Avem service propriu în Iași și Bacău. Pe 4 ani de utilizare, aceste diferențe valorează mult mai mult de 1.200€. Dacă celălalt dealer vă oferă același pachet de servicii, vă rog să îmi arătați oferta și discutăm.',
+      'Plata cash înseamnă că nu plătiți dobândă — asta e avantajul dumneavoastră, nu al nostru. Prețul vehiculului rămâne același indiferent de metoda de plată. Dar dacă semnați astăzi, pot să includ pachetul de întreținere pe primul an gratuit — o valoare reală de aproximativ 800€. Aceasta este oferta mea. Dacă preferați finanțare prin IFS, rata lunară e competitivă și păstrați lichiditatea pentru afacere.',
+      'Înțeleg că diferența de preț e tentantă. Dar haideți să o calculăm corect: un Sprinter din 2021 cu 80.000 km nu mai are garanție — orice defecțiune e pe cheltuiala dumneavoastră. Service-ul poate fi mai scump pe un vehicul mai vechi. Consumul e mai mare față de MY24. Și nu aveți telematică inclusă. Un Daily nou în leasing pe 48 luni poate însemna o rată de 480-520€/lună — cu garanție totală, zero griji tehnice și costuri de exploatare mai mici. Vreți să facem calculul comparativ?'
+    ]
+  },
+  calin: {
+    name: 'Calin',
+    focus: 'Reactivare client & Follow-up',
+    situations: [
+      {
+        label: 'Client care nu a răspuns la 3 apeluri',
+        question: '„A, da, scuze că nu v-am sunat înapoi. Am fost foarte ocupat. Probabil nu mai cumpăr acum."',
+        hint: 'Nu cere scuze pentru că ai sunat. Ascultă ce s-a schimbat, reancorează pe nevoia inițială, propune o întâlnire scurtă de 20 minute — nu o vânzare.'
+      },
+      {
+        label: 'Client care a primit oferta dar tace de 2 săptămâni',
+        question: '„Da, am oferta, o am aici. N-am apucat să mă uit încă."',
+        hint: 'Ajută clientul să avanseze: propune să o parcurgeți împreună la telefon acum (5 min), sau stabilește o întâlnire. Nu lăsa oferta în „purgatoriu".'
+      },
+      {
+        label: 'Client vechi care revine după 2 ani',
+        question: '„Am mai luat un Daily de la voi în 2022. Îl schimb acum. Ce ofertă aveți pentru un client fidel?"',
+        hint: 'Recunoaște loialitatea concret — nu generic. Prezintă beneficiile MY24 față de MY22, propune parte-pay pe vehiculul actual, și pachetul de fidelitate Autopadova.'
+      }
+    ],
+    adminAnswers: [
+      'Mulțumesc că ați răspuns. Știu că sunteți ocupat și nu vreau să vă iau mult timp. Aveți un minut acum? Îmi spuneți rapid ce s-a schimbat față de când am vorbit — poate nevoia s-a modificat și pot să vă ofer altceva mai potrivit. Dacă momentul nu e bun, stabilim noi o zi concretă — eu mă adaptez la programul dumneavoastră.',
+      'Perfect, e chiar bine că vă am la telefon. Haideți să o parcurgem împreună în 5 minute — eu vă explic pe scurt elementele cheie și dacă aveți întrebări le clarificăm instant. De obicei clienții care văd oferta cu cineva alături iau decizia mult mai repede. Sunteți disponibil acum 5 minute sau preferați mâine dimineață?',
+      'Mă bucur că reveniți — clienții fideli sunt cei mai importanți pentru noi. Pe vehiculul din 2022 vă facem o evaluare parte-pay corectă — în general valoarea de revânzare a Daily-urilor e bună pe piață. MY24 față de vehiculul dumneavoastră actual are garanție 3 ani inclusă, bord digital nou, bara față în 3 segmente care reduce costurile la incidente mici, și toate sistemele ADAS standard. Plus pachetele noastre de întreținere la 50% reducere. Când puteți trece pe la noi cu vehiculul pentru evaluare?'
+    ]
+  },
+  iulian: {
+    name: 'Iulian',
+    focus: 'Calificarea oportunității & Decizia de cumpărare',
+    situations: [
+      {
+        label: 'Client care vrea să cumpere dar nu are CUI',
+        question: '„Mă interesează vehiculul dar firma nu e înregistrată încă. Mai durează vreo 2 luni. Pot cumpăra acum?"',
+        hint: 'Clarifică opțiunile: achiziție pe persoană fizică (implicații TVA, deducere), rezervare cu acont, sau revenire la deschiderea firmei. Nu improviza sfaturi fiscale — redirecționează la contabil.'
+      },
+      {
+        label: 'Client care vrea vehicul pentru fiu fără experiență în afaceri',
+        question: '„Fiul meu tocmai a terminat facultatea și vrea să înceapă o firmă de transport. E prima lui mașină de lucru."',
+        hint: 'Tratează-l ca pe un start-up: propune o configurație accesibilă, leasing cu avans mic, și subliniază suportul Autopadova pe termen lung. Nu oversell — construiește relație.'
+      },
+      {
+        label: 'Client care nu știe ce versiune să aleagă',
+        question: '„Am nevoie de un Daily dar nu știu dacă furgon, sasiu sau cabină dublă. Cum aleg?"',
+        hint: 'Nu ghici. Pune întrebări: ce transportă, câți oameni, dacă carosează, dacă face livrări sau aplicații speciale. Ghidează spre varianta corectă prin întrebări, nu prin catalog.'
+      }
+    ],
+    adminAnswers: [
+      'Felicitări pentru că ați decis să porniți afacerea! Situația cu firma în curs de înregistrare e frecventă. Câteva opțiuni: puteți rezerva vehiculul cu un acont acum și finalizăm când CUI-ul e activ — stocul e asigurat. Alternativ, dacă doriți să achiziționați imediat pe persoană fizică, există implicații diferite la TVA și deducere pe care vă recomand să le clarificați cu contabilul dumneavoastră înainte de a decide. Eu vă pregătesc oferta completă între timp.',
+      'E un start excelent pentru fiul dumneavoastră. Primul vehicul de lucru e important să fie de încredere și să nu fie o povară financiară. Vă recomand să începem cu o configurație standard 35S furgon — vehicul solid, costuri de exploatare previzibile, garanție 3 ani. Prin IVECO Financial Services avansul poate fi de la 10%, rata lunară accesibilă. Și noi suntem aici în Iași și Bacău pe toată durata — service, consiliere, orice problemă. Construim o relație pe termen lung.',
+      'Excelentă întrebare — alegerea caroseriei depinde complet de ce veți face cu vehiculul. Câteva întrebări rapide: transportați marfă ambalată sau vrac? Lucrați singur sau aveți colegi care merg cu dumneavoastră în mașină? Planificați să puneți o caroserie specială — platformă, izoterm, lift? Dacă îmi răspundeți la astea, în 2 minute vă spun exact ce configurație vi se potrivește și de ce. Nu are rost să alegeți din catalog fără să știm ce faceți concret.'
+    ]
+  },
+  liviu: {
+    name: 'Liviu',
+    focus: 'Upsell, Pachete & Valoare totală',
+    situations: [
+      {
+        label: 'Client care refuză pachetul de întreținere',
+        question: '„Mă descurc eu cu service-ul, am un mecanic de încredere. Nu am nevoie de pachetul vostru."',
+        hint: 'Nu atacă mecanicul. Explică ce include pachetul Autopadova: prețuri fixe, piese originale, garanție menținută, programare prioritară — și calculează costul comparat.'
+      },
+      {
+        label: 'Client care vrea să economisească și refuză cutia automată',
+        question: '„Hi-Matic e cu 2.000€ în plus. Manuala e suficientă pentru ce fac eu."',
+        hint: 'Nu forța. Întreabă despre rutele și condițiile de utilizare. Dacă e urban sau semi-urban cu trafic, calculează uzura ambreiajului și confortul șoferului ca argumente concrete.'
+      },
+      {
+        label: 'Client mulțumit, semnează — moment de upsell',
+        question: '„Bine, am decis. Luăm Daily-ul în configurația de bază. Unde semnez?"',
+        hint: 'Moment de upsell: propune 1-2 opțiuni cu valoare reală — pachet întreținere, senzori parcare, garanție extinsă. Nu îngreuna procesul, propune scurt și lasă clientul să decidă.'
+      }
+    ],
+    adminAnswers: [
+      'Respect că aveți un mecanic de încredere. Pachetul nostru nu e un concurent pentru el — e complementar. Acoperă reviziile programate la prețuri fixe cu piese originale IVECO, ceea ce menține garanția activă. Dacă faceți o reparație la un service neautorizat, garanția extinsă de 4 ani poate fi afectată. Mecanicul dumneavoastră poate face alte lucrări în continuare. Prețul pachetului nostru e redus cu 50% față de tariful standard — e o asigurare, nu o cheltuială.',
+      'Perfect, manuala e o alegere bună pentru multe aplicații. O întrebare: faceți și livrări în oraș sau trafic urban des? Ambreiajul pe un vehicul de lucru greu în trafic urban se schimbă în medie la 80.000-100.000 km — costul e 600-900€ inclusiv manoperă. Hi-Matic recuperează cei 2.000€ în primul ambreiaj evitat, plus confortul șoferului pe toată ziua. Dacă rutele sunt în principal extra-urban, manuala e corectă. Dacă e și urban, merită calculat.',
+      'Excelent! Felicitări pentru decizie. Înainte să semnăm, un singur lucru rapid: pachetul de întreținere pe 2 ani costă X€ — dar la prețul nostru redus cu 50% înseamnă Y€ economie față de plătit individual. Și senzori de parcare spate, dacă nu sunt în configurație, adaugă 280€ și evită prima lovitură în parcare. Ambele opțiuni le putem include în contractul de azi. Dacă nu, mergem înainte — important e că ați luat decizia corectă.'
+    ]
+  }
+};
+
+// ═══════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════
+let currentAgent = null;
+let answeredCount = 0;
+let agentCompleted = {};
+let allAnswers = {};
+let scenarioAnswered = {};
+let isAdmin = false;
+
+// ═══════════════════════════════════════════════
+// ADMIN MODE
+// ═══════════════════════════════════════════════
+function toggleAdmin() {
+  isAdmin = !isAdmin;
+  const toggle = document.getElementById('adminToggle');
+  const banner = document.getElementById('adminBanner');
+  const actions = document.getElementById('adminActions');
+  toggle.classList.toggle('active', isAdmin);
+  banner.classList.toggle('visible', isAdmin);
+  actions.classList.toggle('visible', isAdmin);
+}
+
+async function adminFillAll() {
+  const apiKey = getAPIKey();
+  // Fill each agent sequentially
+  for (const agentId of Object.keys(SCENARIOS)) {
+    if (agentCompleted[agentId]) continue;
+    await adminFillAgent(agentId, apiKey);
+  }
+}
+
+async function adminFillAgent(agentId, apiKey) {
+  const data = SCENARIOS[agentId];
+  if (!allAnswers[agentId]) allAnswers[agentId] = {};
+
+  for (let idx = 0; idx < 3; idx++) {
+    const answer = data.adminAnswers[idx];
+    allAnswers[agentId][idx] = answer;
+
+    // Get quick AI feedback
+    const fb = await getAIFeedback(agentId, idx, answer, apiKey);
+    allAnswers[agentId]['fb' + idx] = fb.text;
+    allAnswers[agentId]['score' + idx] = fb.score;
+    scenarioAnswered[agentId + '_' + idx] = true;
+    answeredCount++;
+  }
+
+  agentCompleted[agentId] = true;
+  const btn = document.getElementById('abtn-' + agentId);
+  if (btn) {
+    btn.classList.add('done');
+    document.getElementById('status-' + agentId).textContent = '✓ Completat (ADMIN)';
+  }
+  updateProgress();
+}
+
+async function adminSkipToAnalysis() {
+  const apiKey = getAPIKey();
+  // Fill all agents silently with demo answers + fake feedback
+  for (const agentId of Object.keys(SCENARIOS)) {
+    if (agentCompleted[agentId]) continue;
+    if (!allAnswers[agentId]) allAnswers[agentId] = {};
+    SCENARIOS[agentId].situations.forEach((s, idx) => {
+      const ans = SCENARIOS[agentId].adminAnswers[idx];
+      allAnswers[agentId][idx] = ans;
+      allAnswers[agentId]['fb' + idx] = '✅ Răspuns complet demonstrativ (ADMIN).';
+      allAnswers[agentId]['score' + idx] = 'good';
+      scenarioAnswered[agentId + '_' + idx] = true;
+      answeredCount++;
+    });
+    agentCompleted[agentId] = true;
+    const btn = document.getElementById('abtn-' + agentId);
+    if (btn) { btn.classList.add('done'); document.getElementById('status-' + agentId).textContent = '✓ Demo'; }
+  }
+  updateProgress();
+  setTimeout(showFinalAnalysis, 300);
+}
+
+// ═══════════════════════════════════════════════
+// AI FEEDBACK HELPER
+// ═══════════════════════════════════════════════
+async function getAIFeedback(agentId, idx, answer, apiKey) {
+  const s = SCENARIOS[agentId].situations[idx];
+
+  const systemPrompt = `Ești un coach senior de vânzări la Autopadova — dealer autorizat IVECO în Iași și Bacău, România.
+Evaluezi răspunsuri de vânzări pentru IVECO Daily MY24 Diesel, aplicând metodologia Shlomi Leibovitz (SalesMentor.co.il).
+
+═══ METODOLOGIE DE EVALUARE (Shlomi Leibovitz) ═══
+Evaluezi pe 5 criterii:
+1. ATRACȚIE vs. PRESIUNE — Agentul emană siguranță și valoare, nu disperare.
+2. TRASEUL VÂNZĂRII — Răspunsul urmărește logic etapa corectă (calificare/prezentare/obiecție/closing).
+3. FORMULA A→Î→R→S — Acceptare → Înțelegere profundă → Reformulare în beneficiu → Soluție + Closing.
+4. ANGAJAMENT CONCRET — Orice răspuns se termină cu un pas următor clar (nu cu „mai gândiți-vă").
+5. FOLLOW-UP STRUCTURAT — Dacă nu se închide acum, există o secvență clară de revenire cu valoare.
+
+═══ AVANTAJE EXCLUSIVE AUTOPADOVA ═══
+- Garanție extinsă: 4 ani fără limită km SAU 5 ani / 200.000 km (vs. standard 3 ani / 120.000 km)
+- Pachete mentenanță -50% față de tariful standard (economie 2.000–3.500€ la 60.000 km/an)
+- Service autorizat Iași + Bacău — imobilizare minimă
+- IVECO ON: telematică 5 ani gratuit, diagnosticare remote, OTA updates
+
+═══ ARGUMENTE PRODUS DAILY MY24 ═══
+- Motor 3.0L / 210CP / 470Nm — SINGURUL din segment
+- Volum 19,6 m³ — cel mai mare din clasă
+- Raza virare 10,4m vs. Sprinter 13,6m — avantaj urban critic
+- ADAS standard (LFA, ADDW, SCC) — opționale la concurență
+- MTMA 3,5t → 7,2t, sarcina utilă până la 1.415 kg
+- TCO lider pe roată dublă (7 ani); #2 pe roată simplă
+- Hi-Matic ZF 8 trepte disponibil pe toată gama
+- IVECO Financial Services: leasing 10–60 luni
+- Bara față 3 segmente: costuri M&R reduse la incidente minore
+- Cotă de piață 27% România 2025 — lider absolut >3,5t
+
+═══ PROFIL CLIENT ═══
+Client MIC: decide pe rată lunară, liniște, relație — NU pe TCO. Traduce avantajele în limbaj simplu.
+Client FLEET: decide pe TCO total, disponibilitate, SLA service. Prezintă cifre și comparații.
+
+Evaluează SCURT (max 6 rânduri). Începe cu ✅, ⚠️ sau ❌.
+Identifică CE a făcut bine și CE ar trebui îmbunătățit concret.
+Dacă lipsește angajamentul concret sau closing-ul — subliniază obligatoriu.
+Vorbește la persoana a II-a. Română.`;
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 300,
+        system: systemPrompt,
+        messages: [{
+          role: 'user',
+          content: `Situație: ${s.question}\nClient: ${s.label}\nHint: ${s.hint}\n\nRăspunsul agentului ${SCENARIOS[agentId].name}:\n"${answer}"\n\nEvaluează.`
+        }]
+      })
+    });
+    const data = await res.json();
+    const text = data.content?.[0]?.text || '⚠️ Evaluare indisponibilă.';
+    let score = 'partial';
+    if (text.startsWith('✅')) score = 'good';
+    else if (text.startsWith('❌')) score = 'bad';
+    return { text, score };
+  } catch {
+    return { text: '⚠️ Eroare la evaluare.', score: 'partial' };
+  }
+}
+
+// ═══════════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════════
+function updateProgress() {
+  const total = 15;
+  const pct = Math.round((answeredCount / total) * 100);
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-text').textContent = `${answeredCount} / ${total} răspunsuri`;
+}
+
+function selectAgent(id) {
+  if (agentCompleted[id]) return;
+  currentAgent = id;
+  document.getElementById('select-agent-section').style.display = 'none';
+  document.getElementById('roleplay-area').style.display = 'block';
+  document.getElementById('agent-badge').textContent = SCENARIOS[id].name.toUpperCase();
+  document.getElementById('agent-full-name').textContent = `${SCENARIOS[id].name} — ${SCENARIOS[id].focus}`;
+  document.getElementById('next-area').style.display = 'none';
+  renderScenarios(id);
+}
+
+function backToSelect() {
+  document.getElementById('roleplay-area').style.display = 'none';
+  document.getElementById('select-agent-section').style.display = 'block';
+}
+
+function finishAgent() {
+  agentCompleted[currentAgent] = true;
+  const btn = document.getElementById('abtn-' + currentAgent);
+  if (btn) { btn.classList.add('done'); document.getElementById('status-' + currentAgent).textContent = '✓ Completat'; }
+  backToSelect();
+  if (Object.keys(agentCompleted).length >= 5) setTimeout(showFinalAnalysis, 300);
+}
+
+// ═══════════════════════════════════════════════
+// RENDER SCENARIOS
+// ═══════════════════════════════════════════════
+function renderScenarios(agentId) {
+  const container = document.getElementById('scenarios-container');
+  container.innerHTML = '';
+  SCENARIOS[agentId].situations.forEach((s, idx) => {
+    const key = agentId + '_' + idx;
+    const isAnswered = !!scenarioAnswered[key];
+    const prevAnswer = allAnswers[agentId]?.[idx] || '';
+    const locked = idx > 0 && !scenarioAnswered[agentId + '_' + (idx - 1)];
+
+    const card = document.createElement('div');
+    card.className = 'scenario-card' + (isAnswered ? ' scenario-answered' : '') + (locked ? ' locked' : '');
+    card.id = `card-${agentId}-${idx}`;
+
+    const adminFill = isAdmin ? `<button class="btn btn-secondary" style="font-size:11px;border-color:rgba(168,85,247,0.4);color:#a855f7;" onclick="adminFillSingle('${agentId}',${idx})">⚡ Demo</button>` : '';
+
+    card.innerHTML = `
+      <div class="scenario-top">
+        <div class="scenario-num">${idx + 1}</div>
+        <div style="flex:1">
+          <div class="scenario-label">SITUAȚIE ${idx + 1} / 3</div>
+          <div class="scenario-question">${s.question}</div>
+          <div class="client-tag">👤 ${s.label}</div>
+        </div>
+      </div>
+      <div class="scenario-input-area">
+        <textarea id="ta-${agentId}-${idx}"
+          placeholder="Scrie răspunsul tău ca agent de vânzări..."
+          ${isAnswered ? 'disabled' : ''}
+        >${prevAnswer}</textarea>
+        <div class="scenario-actions">
+          <span class="hint-text">💡 ${s.hint}</span>
+          ${adminFill}
+          <button class="btn btn-primary"
+            id="btn-${agentId}-${idx}"
+            onclick="submitAnswer('${agentId}', ${idx})"
+            ${isAnswered ? 'disabled' : ''}>
+            ${isAnswered ? '✓ Trimis' : 'Trimite →'}
+          </button>
+        </div>
+        <div class="feedback-box" id="fb-${agentId}-${idx}"></div>
+      </div>`;
+
+    container.appendChild(card);
+
+    if (isAnswered && allAnswers[agentId]?.['fb' + idx]) {
+      const fb = document.getElementById(`fb-${agentId}-${idx}`);
+      fb.innerHTML = `<span class="feedback-icon">${allAnswers[agentId]['score'+idx]==='good'?'✅':allAnswers[agentId]['score'+idx]==='bad'?'❌':'⚠️'}</span>${allAnswers[agentId]['fb'+idx]}`;
+      fb.className = 'feedback-box ' + (allAnswers[agentId]['score' + idx] || 'partial');
+      fb.style.display = 'block';
+    }
+  });
+}
+
+// Admin fill single scenario
+async function adminFillSingle(agentId, idx) {
+  const apiKey = getAPIKey();
+  const answer = SCENARIOS[agentId].adminAnswers[idx];
+  const ta = document.getElementById(`ta-${agentId}-${idx}`);
+  const btn = document.getElementById(`btn-${agentId}-${idx}`);
+  if (ta) ta.value = answer;
+  if (btn) { btn.disabled = true; btn.innerHTML = '<div class="loading-dots"><span></span><span></span><span></span></div>'; }
+
+  const fb = await getAIFeedback(agentId, idx, answer, apiKey);
+
+  if (!allAnswers[agentId]) allAnswers[agentId] = {};
+  allAnswers[agentId][idx] = answer;
+  allAnswers[agentId]['fb' + idx] = fb.text;
+  allAnswers[agentId]['score' + idx] = fb.score;
+  scenarioAnswered[agentId + '_' + idx] = true;
+  answeredCount++;
+  updateProgress();
+
+  if (ta) ta.disabled = true;
+  if (btn) btn.textContent = '✓ Trimis';
+
+  const fbEl = document.getElementById(`fb-${agentId}-${idx}`);
+  fbEl.innerHTML = `<span class="feedback-icon">${fb.score==='good'?'✅':fb.score==='bad'?'❌':'⚠️'}</span>${fb.text}`;
+  fbEl.className = 'feedback-box ' + fb.score;
+  fbEl.style.display = 'block';
+  document.getElementById(`card-${agentId}-${idx}`).classList.add('scenario-answered');
+
+  const nextCard = document.getElementById(`card-${agentId}-${idx + 1}`);
+  if (nextCard) nextCard.classList.remove('locked');
+
+  const allDone = [0, 1, 2].every(i => scenarioAnswered[agentId + '_' + i]);
+  if (allDone) document.getElementById('next-area').style.display = 'block';
+}
+
+// ═══════════════════════════════════════════════
+// SUBMIT ANSWER (normal mode)
+// ═══════════════════════════════════════════════
+async function submitAnswer(agentId, idx) {
+  const apiKey = getAPIKey();
+
+  const ta = document.getElementById(`ta-${agentId}-${idx}`);
+  const btn = document.getElementById(`btn-${agentId}-${idx}`);
+  const answer = ta.value.trim();
+  if (answer.length < 20) { alert('Scrie un răspuns mai complet!'); return; }
+
+  ta.disabled = true;
+  btn.disabled = true;
+  btn.innerHTML = '<div class="loading-dots"><span></span><span></span><span></span></div>';
+
+  const fb = await getAIFeedback(agentId, idx, answer, apiKey);
+
+  if (!allAnswers[agentId]) allAnswers[agentId] = {};
+  allAnswers[agentId][idx] = answer;
+  allAnswers[agentId]['fb' + idx] = fb.text;
+  allAnswers[agentId]['score' + idx] = fb.score;
+  scenarioAnswered[agentId + '_' + idx] = true;
+  answeredCount++;
+  updateProgress();
+
+  btn.textContent = '✓ Trimis';
+  const fbEl = document.getElementById(`fb-${agentId}-${idx}`);
+  fbEl.innerHTML = `<span class="feedback-icon">${fb.score==='good'?'✅':fb.score==='bad'?'❌':'⚠️'}</span>${fb.text}`;
+  fbEl.className = 'feedback-box ' + fb.score;
+  fbEl.style.display = 'block';
+  document.getElementById(`card-${agentId}-${idx}`).classList.add('scenario-answered');
+
+  const nextCard = document.getElementById(`card-${agentId}-${idx + 1}`);
+  if (nextCard) nextCard.classList.remove('locked');
+
+  const allDone = [0, 1, 2].every(i => scenarioAnswered[agentId + '_' + i]);
+  if (allDone) document.getElementById('next-area').style.display = 'block';
+}
+
+// ═══════════════════════════════════════════════
+// FINAL ANALYSIS
+// ═══════════════════════════════════════════════
+async function showFinalAnalysis() {
+  document.getElementById('select-agent-section').style.display = 'none';
+  document.getElementById('roleplay-area').style.display = 'none';
+  document.getElementById('final-analysis').style.display = 'block';
+
+  const apiKey = getAPIKey();
+
+  let summary = '';
+  for (const [agentId, agentData] of Object.entries(allAnswers)) {
+    summary += `\n=== ${SCENARIOS[agentId].name} (${SCENARIOS[agentId].focus}) ===\n`;
+    SCENARIOS[agentId].situations.forEach((s, i) => {
+      summary += `Sit.${i+1}: ${s.question}\nRăspuns: ${agentData[i]||'(lipsă)'}\nEvaluare: ${agentData['fb'+i]||''}\n\n`;
+    });
+  }
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: `Ești directorul de training Autopadova — dealer IVECO Iași și Bacău.
+Analizezi performanța echipei de vânzări după un roleplay focusat pe vânzarea IVECO Daily MY24 Diesel: negociere, convingere, closing, profilare client și servicii post-vânzare.
+Fii direct, concret, constructiv. Scrie în română.`,
+        messages: [{
+          role: 'user',
+          content: `Date sesiune:\n${summary}\n\nGenerează analiza finală cu:\n1. **Scor per agent** (1-10) cu 1 rând de motivație per agent\n2. **Puncte forte comune** ale echipei (ce s-a aplicat bine)\n3. **Gaps principale** — ce argumente sau tehnici au lipsit frecvent\n4. **Top 3 acțiuni concrete** pentru training-ul de mâine\n5. **Mesaj motivant** pentru echipă (2-3 rânduri)\n\nFii specific și evită generalități. Română.`
+        }]
+      })
+    });
+
+    const data = await res.json();
+    const text = data.content?.[0]?.text || 'Eroare.';
+
+    document.getElementById('analysis-loading').style.display = 'none';
+    const content = document.getElementById('analysis-content');
+    content.style.display = 'block';
+
+    const html = text
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/^#{1,3}\s+(.+)$/gm, '<h3>$1</h3>')
+      .replace(/\n\n/g, '</p><p>')
+      .replace(/\n/g, '<br>');
+
+    content.innerHTML = '<p>' + html + '</p>';
+
+  } catch (err) {
+    document.getElementById('analysis-loading').innerHTML = `<p style="color:var(--red)">Eroare: ${err.message}</p>`;
+  }
+}
+</script>
+</body>
+</html>
