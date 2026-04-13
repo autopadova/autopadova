@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual de Vânzări — Autopadova / ROMIL</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=DM+Serif+Display:ital@0;1&display=swap');
+
+  :root {
+    --bg: #0a0c0f;
+    --surface: #111418;
+    --surface2: #181d24;
+    --border: #1f2733;
+    --accent: #e8a020;
+    --accent2: #c8320a;
+    --accent3: #1a7fd4;
+    --text: #e8eaed;
+    --text-dim: #8a9ab0;
+    --text-muted: #4a5568;
+    --green: #22c55e;
+    --red: #ef4444;
+    --chapter-w: 860px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ─── COVER ─── */
+  .cover {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 24px;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(232,160,32,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 40% at 80% 80%, rgba(26,127,212,0.08) 0%, transparent 60%),
+      var(--bg);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 39px,
+      rgba(255,255,255,0.018) 39px,
+      rgba(255,255,255,0.018) 40px
+    );
+    pointer-events: none;
+  }
+
+  .cover-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.35em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 48px;
+    opacity: 0.85;
+  }
+
+  .cover-tagline {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(42px, 8vw, 82px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #ffffff 30%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 24px;
+    max-width: 800px;
+  }
+
+  .cover-subtitle {
+    font-size: 18px;
+    color: var(--text-dim);
+    font-weight: 300;
+    max-width: 520px;
+    margin-bottom: 56px;
+    line-height: 1.6;
+  }
+
+  .cover-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 64px;
+  }
+
+  .pill {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: 13px;
+    color: var(--text-dim);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+
+  .pill.accent { border-color: var(--accent); color: var(--accent); }
+
+  .cover-meta {
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ─── NAV / TOC ─── */
+  .toc-section {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 64px 24px;
+  }
+
+  .toc-inner {
+    max-width: var(--chapter-w);
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  .toc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+  }
+
+  .toc-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    color: var(--text-dim);
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .toc-item:hover {
+    border-color: var(--accent);
+    color: var(--text);
+    transform: translateY(-1px);
+  }
+
+  .toc-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: var(--accent);
+    line-height: 1;
+    min-width: 28px;
+  }
+
+  /* ─── CHAPTERS ─── */
+  .chapter {
+    padding: 80px 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .chapter:nth-child(even) {
+    background: var(--surface);
+  }
+
+  .chapter-inner {
+    max-width: var(--chapter-w);
+    margin: 0 auto;
+  }
+
+  .chapter-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+
+  .chapter-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 72px;
+    line-height: 0.9;
+    color: var(--accent);
+    opacity: 0.25;
+    min-width: 80px;
+  }
+
+  .chapter-titles { flex: 1; }
+
+  .chapter-cat {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .chapter-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(26px, 5vw, 42px);
+    line-height: 1.15;
+    color: var(--text);
+  }
+
+  .chapter-intro {
+    font-size: 17px;
+    color: var(--text-dim);
+    line-height: 1.8;
+    margin-bottom: 40px;
+    font-style: italic;
+    border-left: 3px solid var(--accent);
+    padding-left: 20px;
+  }
+
+  /* ─── BODY ELEMENTS ─── */
+  h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: var(--text);
+    margin: 36px 0 14px;
+  }
+
+  h4 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 28px 0 10px;
+  }
+
+  p { margin-bottom: 16px; color: var(--text-dim); line-height: 1.8; }
+
+  strong { color: var(--text); font-weight: 600; }
+
+  /* ─── CARDS ─── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin: 24px 0;
+  }
+
+  .card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px 20px;
+  }
+
+  .card-icon {
+    font-size: 28px;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .card-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .card-body { font-size: 14px; color: var(--text-dim); line-height: 1.6; margin: 0; }
+
+  /* ─── ACCENT CARDS ─── */
+  .highlight-box {
+    background: linear-gradient(135deg, rgba(232,160,32,0.1), rgba(232,160,32,0.04));
+    border: 1px solid rgba(232,160,32,0.3);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin: 28px 0;
+  }
+
+  .highlight-box.blue {
+    background: linear-gradient(135deg, rgba(26,127,212,0.1), rgba(26,127,212,0.03));
+    border-color: rgba(26,127,212,0.3);
+  }
+
+  .highlight-box.red {
+    background: linear-gradient(135deg, rgba(200,50,10,0.1), rgba(200,50,10,0.03));
+    border-color: rgba(200,50,10,0.3);
+  }
+
+  .highlight-box.green {
+    background: linear-gradient(135deg, rgba(34,197,94,0.1), rgba(34,197,94,0.03));
+    border-color: rgba(34,197,94,0.3);
+  }
+
+  /* ─── SCRIPT BOX ─── */
+  .script-box {
+    background: #0d1117;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent3);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin: 16px 0;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .script-label {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--accent3);
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  .script-text {
+    font-size: 15px;
+    color: #c8d8e8;
+    line-height: 1.75;
+    font-style: italic;
+    margin: 0;
+  }
+
+  /* ─── STEPS ─── */
+  .steps { margin: 24px 0; }
+
+  .step {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+    align-items: flex-start;
+  }
+
+  .step-num {
+    background: var(--accent);
+    color: var(--bg);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .step-content { flex: 1; }
+  .step-title { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .step-desc { font-size: 14px; color: var(--text-dim); line-height: 1.6; margin: 0; }
+
+  /* ─── OBJ TABLE ─── */
+  .obj-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+
+  .obj-table th {
+    background: var(--surface2);
+    color: var(--accent);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 12px 16px;
+    text-align: left;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .obj-table td {
+    padding: 14px 16px;
+    font-size: 14px;
+    border-bottom: 1px solid rgba(31,39,51,0.6);
+    vertical-align: top;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  .obj-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+  .obj { color: var(--red); font-weight: 600; font-size: 13px; }
+  .resp { color: var(--text); }
+
+  /* ─── PRINCIPLE BLOCKS ─── */
+  .principle {
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    padding: 18px 20px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 12px;
+  }
+
+  .principle-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+  .principle-text { flex: 1; }
+  .principle-title { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .principle-desc { font-size: 14px; color: var(--text-dim); line-height: 1.6; margin: 0; }
+
+  /* ─── BADGE ─── */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+  .badge-green { background: rgba(34,197,94,0.12); color: var(--green); border: 1px solid rgba(34,197,94,0.3); }
+  .badge-red { background: rgba(239,68,68,0.12); color: var(--red); border: 1px solid rgba(239,68,68,0.3); }
+  .badge-amber { background: rgba(232,160,32,0.12); color: var(--accent); border: 1px solid rgba(232,160,32,0.3); }
+
+  /* ─── DIVIDER ─── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 36px 0;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 40px 24px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  footer strong { color: var(--accent); }
+
+  /* ─── QUOTE ─── */
+  .quote-block {
+    position: relative;
+    padding: 28px 32px 28px 48px;
+    margin: 32px 0;
+  }
+
+  .quote-block::before {
+    content: '"';
+    font-family: 'DM Serif Display', serif;
+    font-size: 100px;
+    color: var(--accent);
+    opacity: 0.2;
+    position: absolute;
+    top: -10px;
+    left: 4px;
+    line-height: 1;
+  }
+
+  .quote-block p {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: var(--text);
+    font-style: italic;
+    line-height: 1.55;
+  }
+
+  .quote-attr {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 10px;
+    margin-bottom: 0;
+    font-style: normal;
+  }
+
+  /* ─── FUNNEL ─── */
+  .funnel {
+    margin: 32px auto;
+    max-width: 520px;
+  }
+
+  .funnel-step {
+    padding: 14px 24px;
+    margin: 0 auto 6px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    transition: transform 0.2s;
+  }
+
+  .funnel-step:hover { transform: scaleX(1.01); }
+
+  .f1 { background: rgba(232,160,32,0.25); border: 1px solid rgba(232,160,32,0.4); width: 100%; }
+  .f2 { background: rgba(232,160,32,0.2); border: 1px solid rgba(232,160,32,0.3); width: 92%; }
+  .f3 { background: rgba(26,127,212,0.2); border: 1px solid rgba(26,127,212,0.35); width: 84%; }
+  .f4 { background: rgba(26,127,212,0.25); border: 1px solid rgba(26,127,212,0.4); width: 76%; }
+  .f5 { background: rgba(34,197,94,0.18); border: 1px solid rgba(34,197,94,0.35); width: 66%; }
+  .f6 { background: rgba(34,197,94,0.25); border: 1px solid rgba(34,197,94,0.4); width: 55%; }
+
+  .funnel-arrow {
+    text-align: center;
+    font-size: 18px;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 600px) {
+    .chapter-header { flex-direction: column; gap: 8px; }
+    .chapter-number { font-size: 48px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .obj-table { font-size: 13px; }
+    .obj-table th, .obj-table td { padding: 10px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════ COVER ═══════════════════════ -->
+<div class="cover" id="top">
+  <div class="cover-logo">Autopadova · ROMIL · Iași & Bacău</div>
+  <h1 class="cover-tagline">Manual de<br>Vânzări Profesionale</h1>
+  <p class="cover-subtitle">Metodologie adaptată după principiile Shlomi Leibovitz — Master în Vânzări, aplicată vânzării vehiculelor comerciale IVECO Daily MY24.</p>
+  <div class="cover-pills">
+    <span class="pill accent">IVECO Daily MY24</span>
+    <span class="pill">Calificarea clientului</span>
+    <span class="pill">Scenariul de vânzare</span>
+    <span class="pill">Obiecții & Closing</span>
+    <span class="pill">Follow-up creativ</span>
+    <span class="pill">TCO & Argumentare</span>
+  </div>
+  <div class="cover-meta">Versiunea 1.0 · 2025 · Uz intern exclusiv</div>
+</div>
+
+<!-- ═══════════════════════ TOC ═══════════════════════ -->
+<div class="toc-section">
+  <div class="toc-inner">
+    <div class="section-label">Cuprins</div>
+    <div class="toc-grid">
+      <a class="toc-item" href="#cap1"><span class="toc-num">01</span>Filosofia vânzătorului de top</a>
+      <a class="toc-item" href="#cap2"><span class="toc-num">02</span>Traseul vânzării</a>
+      <a class="toc-item" href="#cap3"><span class="toc-num">03</span>Scenariul de vânzare</a>
+      <a class="toc-item" href="#cap4"><span class="toc-num">04</span>Întrebări calitative</a>
+      <a class="toc-item" href="#cap5"><span class="toc-num">05</span>Tratarea obiecțiilor</a>
+      <a class="toc-item" href="#cap6"><span class="toc-num">06</span>Tehnici de închidere</a>
+      <a class="toc-item" href="#cap7"><span class="toc-num">07</span>Follow-up creativ</a>
+      <a class="toc-item" href="#cap8"><span class="toc-num">08</span>Argumentar IVECO Daily</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ CAP 1 ═══════════════════════ -->
+<div class="chapter" id="cap1">
+  <div class="chapter-inner">
+    <div class="chapter-header">
+      <div class="chapter-number">01</div>
+      <div class="chapter-titles">
+        <div class="chapter-cat">Mindset & Fundamente</div>
+        <h2 class="chapter-title">Filosofia Vânzătorului de Top</h2>
+      </div>
+    </div>
+
+    <p class="chapter-intro">Vânzarea nu este un joc de noroc. Este o disciplină profesională cu reguli clare, care se poate învăța și stapâni. Primii pași nu sunt tehnici — sunt mentali.</p>
+
+    <div class="quote-block">
+      <p>Îți vând ideea că ai nevoie de mine — dar nu sunt disperat să îți vând.</p>
+      <p class="quote-attr">— Shlomi Leibovitz, principiul atracției în vânzări</p>
+    </div>
+
+    <h3>Cele 3 condiții ale unui vânzător imun la obiecții</h3>
+
+    <div class="principle">
+      <div class="principle-icon">🧱</div>
+      <div class="principle-text">
+        <div class="principle-title">Stabilitate fermă în produs și dealer</div>
+        <div class="principle-desc">Ești atât de convins de valoarea IVECO Daily și a serviciilor Autopadova, încât nicio obiecție nu te poate dezechilibra. Nu poți fi „vândut" de client cu povești și scuze.</div>
+      </div>
+    </div>
+
+    <div class="principle">
+      <div class="principle-icon">🎯</div>
+      <div class="principle-text">
+        <div class="principle-title">Asumare completă a procesului</div>
+        <div class="principle-desc">Rolul tău nu se termină când ai dat datele tehnice. Tu ai responsabilitatea de a-l ajuta pe client să depășească temerile, îndoielile și obiceiurile vechi — și să ia o decizie bună pentru afacerea lui.</div>
+      </div>
+    </div>
+
+    <div class="principle">
+      <div class="principle-icon">🤝</div>
+      <div class="principle-text">
+        <div class="principle-title">Acceptarea diferenței de opinie</div>
+        <div class="principle-desc">Clientul are dreptul să fie sceptic. Nu îl judeci, nu îl respingi. Înțelegi că oamenii decid diferit — și te adaptezi fără să renunți la obiectiv.</div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <h3>Vânzător vs. Prezentator — care e diferența?</h3>
+
+    <div class="card-grid">
+      <div class="card">
+        <span class="card-icon">📋</span>
+        <div class="card-title">Prezentatorul</div>
+        <p class="card-body">Dă date tehnice, liste de prețuri și leaflet-uri. Crede că „informația vinde". Rămâne pasiv când clientul zice „mă mai gândesc".</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🏆</span>
+        <div class="card-title">Vânzătorul de Top</div>
+        <p class="card-body">Conduce conversația, descoperă nevoia reală, construiește dorința și ghidează clientul spre o decizie. Insistă cu grijă — pentru că asta înseamnă serviciu.</p>
+      </div>
+    </div>
+
+    <div class="highlight-box green">
+      <strong>Principiu cheie Autopadova:</strong> Insistența cu empatie este serviciu, nu presiune. Dacă știi că IVECO Daily cu garanție extinsă 5 ani / 200.000 km și pachet de mentenanță la 50% este cea mai bună alegere pentru clientul tău — este responsabilitatea ta să îl convingi. A renunța ușor înseamnă a-l lăsa să ia o decizie mai proastă.
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ CAP 2 ═══════════════════════ -->
+<div class="chapter" id="cap2">
+  <div class="chapter-inner">
+    <div class="chapter-header">
+      <div class="chapter-number">02</div>
+      <div class="chapter-titles">
+        <div class="chapter-cat">Structura procesului</div>
+        <h2 class="chapter-title">Traseul Vânzării</h2>
+      </div>
+    </div>
+
+    <p class="chapter-intro">Fiecare vânzare de succes urmează un traseu predictibil. Cunoașterea etapelor îți permite să știi mereu unde ești, ce urmează și cum avansezi — indiferent de tipul clientului.</p>
+
+    <div class="funnel">
+      <div class="funnel-step f1">📞 Calificare — Cine este clientul și ce are nevoie?</div>
+      <div class="funnel-arrow">↓</div>
+      <div class="funnel-step f2">🔍 Descoperire nevoie — Întrebări calitative</div>
+      <div class="funnel-arrow">↓</div>
+      <div class="funnel-step f3">🚚 Prezentare soluție — Daily MY24 adaptat la nevoie</div>
+      <div class="funnel-arrow">↓</div>
+      <div class="funnel-step f4">💰 TCO & Ofertă — Argumentare financiară</div>
+      <div class="funnel-arrow">↓</div>
+      <div class="funnel-step f5">⚡ Tratare obiecții — Convertire, nu capitulare</div>
+      <div class="funnel-arrow">↓</div>
+      <div class="funnel-step f6">✅ Închidere — Decizia de cumpărare</div>
+    </div>
+
+    <h3>Etapa 1 — Calificarea clientului</h3>
+    <p>Înainte de a prezenta orice vehicul, trebuie să înțelegi <strong>cu cine vorbești</strong>. Nu toți clienții au aceleași nevoi. Un PFA cu o singură mașină decide altfel decât un fleet manager cu 20 de unități.</p>
+
+    <h4>Întrebări de calificare esențiale</h4>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-title">Ce faceți cu vehiculul?</div>
+          <div class="step-desc">Livrări urbane, construcții, refrigerare, distribuție? Misiunea vehiculului dictează configura ția optimă.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-title">Câte vehicule aveți / planificați?</div>
+          <div class="step-desc">Fleet sau vehicul individual? Determină argumentele de TCO și prioritatea serviciului post-vânzare.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-title">Care este cel mai mare cost / problemă actuală?</div>
+          <div class="step-desc">Service scump? Indisponibilitate? Consum mare? Aceasta este „durerea" pe care Daily o rezolvă.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-title">Ce vehicul folosiți acum și de ce vreți să schimbați?</div>
+          <div class="step-desc">Identifici concurentul și motivul real al căutării — critic pentru argumentare.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <div class="step-title">Care este orizontul de decizie?</div>
+          <div class="step-desc">Urgență reală sau explorare? Determină intensitatea urmăririi și follow-up-ul.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight-box blue">
+      <strong>Regula profilării:</strong> Clientul mic (PFA, microîntreprindere) nu gândește în TCO — gândește în <em>rată lunară, garanție și cine îl ajută când are probleme.</em> Clientul fleet gândește în costuri totale, disponibilitate și SLA de service. Prezintă diferit pentru fiecare profil.
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ CAP 3 ═══════════════════════ -->
+<div class="chapter" id="cap3">
+  <div class="chapter-inner">
+    <div class="chapter-header">
+      <div class="chapter-number">03</div>
+      <div class="chapter-titles">
+        <div class="chapter-cat">Structura conversației</div>
+        <h2 class="chapter-title">Scenariul de Vânzare</h2>
+      </div>
+    </div>
+
+    <p class="chapter-intro">Un scenariu de vânzare nu te transformă în robot — te eliberează să fii creativ. Cei mai buni vânzători din lume au început de la un scenariu structurat. Odată stăpânit, acesta devine natural și personalizat.</p>
+
+    <div class="highlight-box">
+      <strong>De ce scenariul?</strong> Fără un scenariu, este imposibil de măsurat ce funcționează și ce nu. Cu un scenariu consistent, poți identifica exact unde se pierd oportunitățile și le poți corecta.
+    </div>
+
+    <h3>Structura apelului / întâlnirii inbound</h3>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-title">Deschidere & Mulțumire</div>
+          <div class="step-desc">Cel care mulțumește controlează. Tonul de gratitudine instalează imediat o dinamică pozitivă și pune vânzătorul într-o poziție de forță, nu de rugăminte.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="script-box">
+      <div class="script-label">Script recomandat — Apel inbound</div>
+      <p class="script-text">„Bună ziua, vorbesc cu domnul [Nume]? Bine ați găsit! Mă numesc [Prenume], reprezentantul Autopadova din [Iași / Bacău]. Vă mulțumesc că ați contactat dealership-ul nostru oficial IVECO — apreciez interesul dumneavoastră. Cum pot să vă fiu de ajutor astăzi?"</p>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-title">Ascultare activă — Calibrarea clientului</div>
+          <div class="step-desc">Lasă clientul să vorbească primele 60–90 de secunde fără să îl întrerupi. Identifică: ritmul vorbirii, nivelul de deschidere, vocabularul tehnic sau general.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight-box blue">
+      <strong>Regula oglinzii:</strong> Oamenii cooperează cu cei care le seamănă. Dacă clientul vorbește lent și precis — vorbești lent și precis. Dacă este direct și rapid — ești direct și rapid. Nu juca un rol, adaptează-te autentic.
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-title">Descoperirea nevoii reale</div>
+          <div class="step-desc">Nu prezenta produsul înainte de a înțelege nevoia. Clientul care simte că este înțeles este mult mai receptiv la soluție.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="script-box">
+      <div class="script-label">Script — Deschidere descoperire nevoie</div>
+      <p class="script-text">„Ca să vă pot propune configurația potrivită — nu vreau să vă pierd timpul cu variante irelevante — am câteva întrebări rapide. Ce utilizare principală aveți în vedere pentru vehicul? Și ce este cel mai important pentru dumneavoastră: costul inițial, costul de operare pe termen lung, sau disponibilitatea mașinii când aveți nevoie de ea?"</p>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-title">Concentrare 100% pe client</div>
+          <div class="step-desc">Elimini orice sursă de distragere în timp ce ești cu clientul. Telefonul în silențios, biroul ordonat, ochii pe client. Timpul cu clientul este timp sacru.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <div class="step-title">Prezentarea soluției pe nevoie confirmată</div>
+          <div class="step-desc">Prezinți Daily MY24 DUPĂ ce ai confirmat nevoia. Fiecare beneficiu pe care îl spui trebuie legat de o nevoie concretă a clientului din față.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="script-box">
+      <div class="script-label">Script — Prezentare orientată pe nevoie</div>
+      <p class="script-text">„Din ce mi-ați spus, aveți nevoie de un vehicul fiabil pentru livrări zilnice în urban, cu costuri de mentenanță predictibile. Exact pentru această situație, IVECO Daily MY24 este lider de segment: volum de 19,6 m³, cel mai mare motor din clasă — 210 CP, 470 Nm — și ADAS standard inclus, sisteme pe care concurența le oferă doar ca opționale. La Autopadova, beneficiați în plus de garanție extinsă 5 ani / 200.000 km și pachet de service la jumătate de preț față de tariful standard."</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ CAP 4 ═══════════════════════ -->
+<div class="chapter" id="cap4">
+  <div class="chapter-inner">
+    <div class="chapter-header">
+      <div class="chapter-number">04</div>
+      <div class="chapter-titles">
+        <div class="chapter-cat">Tehnica de dialog</div>
+        <h2 class="chapter-title">Întrebările Calitative</h2>
+      </div>
+    </div>
+
+    <p class="chapter-intro">Întrebările sunt inima vânzării. Nu cel care vorbește mai mult conduce — ci cel care întreabă mai bine. O întrebare bună construiește mai multă încredere decât zece argumente.</p>
+
+    <div class="quote-block">
+      <p>Întrebările calitative construiesc vânzarea — ele sunt adevărata diferență dintre un agent și un consultant de top.</p>
+      <p class="quote-attr">— Shlomi Leibovitz</p>
+    </div>
+
+    <h3>Tipuri de întrebări și când le folosești</h3>
+
+    <div class="card-grid">
+      <div class="card">
+        <span class="card-icon">🔓</span>
+        <div class="card-title">Întrebări deschise</div>
+        <p class="card-body">„Ce activitate desfășurați?" / „Cum arată o zi tipică de lucru pentru vehiculul dumneavoastră?" Deschid conversația și îți oferă informații bogate.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🎯</span>
+        <div class="card-title">Întrebări de durere</div>
+        <p class="card-body">„Care este cel mai mare cost sau problemă cu vehiculul actual?" Identifică motivul real de schimbare — baza argumentației tale.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🔮</span>
+        <div class="card-title">Întrebări de viitor</div>
+        <p class="card-body">„Dacă costul de service ar scădea la jumătate, ce impact ar avea asupra afacerii?" Fac clientul să simtă beneficiile înainte de cumpărare.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">✅</span>
+        <div class="card-title">Întrebări de confirmare</div>
+        <p class="card-body">„Dacă rezolvăm problema de disponibilitate și garanție, aveți alt motiv pentru care nu am merge înainte?" Testezi apropierea de decizie.</p>
+      </div>
+    </div>
+
+    <h3>Setul de întrebări Autopadova — aplicat pe Daily MY24</h3>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">Q1</div>
+        <div class="step-content">
+          <div class="step-title">„Câți km face vehiculul pe an și în ce condiții?"</div>
+          <div class="step-desc">Urban / extra-urban / construcții? Stabilești profilul de uzură și argumentul TCO relevant (avantajul Daily este maxim la rulaje mari).</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">Q2</div>
+        <div class="step-content">
+          <div class="step-title">„Cât plătiți acum pe an pentru service și reparații?"</div>
+          <div class="step-desc">Deschide discuția de TCO. Creezi un număr concret pe care Daily îl poate bate cu pachetul de mentenanță Autopadova (-50%).</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">Q3</div>
+        <div class="step-content">
+          <div class="step-title">„Câte zile pe an stă vehiculul în service și cât vă costă asta?"</div>
+          <div class="step-desc">Timpul de imobilizare este o pierdere de profit. Daily cu stoc și service rapid Autopadova rezolvă această problemă direct.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">Q4</div>
+        <div class="step-content">
+          <div class="step-title">„Garanția actuală ce acoperă și pentru cât timp?"</div>
+          <div class="step-desc">Pregătești comparația: standard 3 ani / 120.000 km vs. Autopadova 5 ani / 200.000 km — diferențiere imediată față de orice concurent.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">Q5</div>
+        <div class="step-content">
+          <div class="step-title">„Ce ar trebui să se întâmple ca să vă simțiți 100% confortabil să mergeți înainte?"</div>
+          <div class="step-desc">Întrebare de closing anticipat. Clientul îți spune exact ce trebuie să rezolvi — nu mai ghicești.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ CAP 5 ═══════════════════════ -->
+<div class="chapter" id="cap5">
+  <div class="chapter-inner">
+    <div class="chapter-header">
+      <div class="chapter-number">05</div>
+      <div class="chapter-titles">
+        <div class="chapter-cat">Convertire, nu capitulare</div>
+        <h2 class="chapter-title">Tratarea Obiecțiilor</h2>
+      </div>
+    </div>
+
+    <p class="chapter-intro">Obiecția nu este un refuz — este un semn de interes. Un client dezinteresat pur și simplu pleacă. Cel care obiectează încă este în joc. Tratarea obiecțiilor este punctul unde se câștigă sau se pierde vânzarea.</p>
+
+    <div class="highlight-box red">
+      <strong>Principiu fundamental:</strong> Problema nu este niciodată obiecția în sine — ci reacția ta la obiecție. Un vânzător bun primește obiecția cu calm, chiar cu entuziasm, și o folosește ca instrument de closing.
+    </div>
+
+    <h3>Cele 3 erori fatale în fața obiecțiilor</h3>
+
+    <div class="card-grid">
+      <div class="card">
+        <span class="card-icon">❌</span>
+        <div class="card-title">Capitularea imediată</div>
+        <p class="card-body">„Da, aveți dreptate, poate mai veniți când aveți timp." Clientul câștigă prin inacțiune — tu pierzi vânzarea.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">❌</span>
+        <div class="card-title">Contraargumentul agresiv</div>
+        <p class="card-body">Atacul direct al obiecției creează rezistență. Clientul simte că este atacat și se închide complet.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">❌</span>
+        <div class="card-title">Ignorarea obiecției</div>
+        <p class="card-body">Continuarea prezentării ca și cum obiecția nu a existat distruge complet încrederea și relevanța.</p>
+      </div>
+    </div>
+
+    <h3>Formula corectă: Acceptare → Înțelegere → Reformulare → Soluție</h3>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">A</div>
+        <div class="step-content">
+          <div class="step-title">Acceptare (fără să dai dreptate)</div>
+          <div class="step-desc">„Înțeleg perfect ce spuneți" / „Apreciez că mi-ați spus asta deschis" — validezi emoțional fără să confirmi că are dreptate.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">Î</div>
+        <div class="step-content">
+          <div class="step-title">Înțelegere profundă</div>
+          <div class="step-desc">„Ca să înțeleg mai bine — când spuneți că este scump, vă referiți la prețul inițial sau la costul total de deținere pe 5 ani?" Adânci obiecția pentru a o clarifica.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">R</div>
+        <div class="step-content">
+          <div class="step-title">Reformulare în beneficiu</div>
+          <div class="step-desc">„Deci, dacă înțeleg corect, dacă Total Cost of Ownership ar fi mai mic decât la Sprinter pe 5 ani, acesta nu mai este un obstacol?"</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">S</div>
+        <div class="step-content">
+          <div class="step-title">Soluție concretă + Closing</div>
+          <div class="step-desc">Dai argumentul specific, cu date concrete din TCO Autopadova, apoi închizi imediat cu o întrebare de avansare.</div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <h3>Tabel de obiecții frecvente — Daily MY24</h3>
+
+    <table class="obj-table">
+      <thead>
+        <tr>
+          <th>Obiecția clientului</th>
+          <th>Răspuns recomandat Autopadova</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="obj">„Este prea scump față de concurență."</span></td>
+          <td class="resp">„Înțeleg. Permiteți-mi 3 minute să vă arăt costul total pe 5 ani față de Sprinter. La km gemeni, Daily este cu aprox. 4.400€ mai ieftin total — și asta fără să includă garanția extinsă exclusivă Autopadova și pachetul de service la 50% din tariful standard."</td>
+        </tr>
+        <tr>
+          <td><span class="obj">„Mă mai gândesc / revin."</span></td>
+          <td class="resp">„Absolut, decizia este a dumneavoastră. Ca să nu pierdeți timp — ce anume vă face să mai așteptați? Dacă este ceva ce eu nu am clarificat suficient, prefer să o facem acum."</td>
+        </tr>
+        <tr>
+          <td><span class="obj">„Am un prieten care are Sprinter și este mulțumit."</span></td>
+          <td class="resp">„Sprinterul este un vehicul bun, fără discuție. Întrebați-l concret: cât a plătit pe service în ultimii 3 ani și câte zile a stat în service. Apoi comparăm cu ce vă oferim noi, cu garanție 5 ani / 200.000 km și service rapid în Iași și Bacău."</td>
+        </tr>
+        <tr>
+          <td><span class="obj">„Trebuie să mă consult cu asociatul / soția."</span></td>
+          <td class="resp">„Bineînțeles, este o decizie importantă. Cel mai bine — ce-ar fi să îi invitați aici sau să îi transmiteți oferta scrisă astăzi? Vă pregătesc un material complet pe care să îl prezentați dumneavoastră. Când ați putea să aveți un răspuns?"</td>
+        </tr>
+        <tr>
+          <td><span class="obj">„Nu am bugetul acum."</span></td>
+          <td class="resp">„Înțeleg. Tocmai de aceea avem structuri de finanțare cu rată accesibilă — unii clienți ai noștri plătesc practic rata din economia de la service și combustibil față de vehiculul anterior. Haideți să vedem care rată se potrivește fluxului dumneavoastră de numerar."</td>
+        </tr>
+        <tr>
+          <td><span class="obj">„Nu știu dacă IVECO este fiabil."</span></td>
+          <td class="resp">„Apreciez că ridicați asta direct. IVECO Daily deține 27% cotă de piață în România în 2025 — lider absolut în segment. Vă pot pune în legătură cu clienți Autopadova din zona dumneavoastră care îl folosesc zi de zi. Credibilitatea nu vine din ce spun eu — vine din ce spun colegii dumneavoastră de breaslă."</td>
+        </tr>
+        <tr>
+          <td><span class="obj">„Vreau să mai compar prețuri."</span></td>
+          <td class="resp">„Perfect, este corect să comparați. Când faceți comparația, asigurați-vă că includeți: garanția, pachetul de service, costul pieselor și disponibilitatea service-ului local. La aceiași parametri totali — Daily cu avantajele exclusive Autopadova câștigă în aproape orice scenariu. Vreți să vă las un calcul scris?"</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════════════════ CAP 6 ═══════════════════════ -->
+<div class="chapter" id="cap6">
+  <div class="chapter-inner">
+    <div class="chapter-header">
+      <div class="chapter-number">06</div>
+      <div class="chapter-titles">
+        <div class="chapter-cat">Decizia de cumpărare</div>
+        <h2 class="chapter-title">Tehnici de Închidere</h2>
+      </div>
+    </div>
+
+    <p class="chapter-intro">Closing-ul nu este un atac final — este concluzia logică a unui proces bine construit. Dacă ai descoperit nevoia corect și ai prezentat soluția potrivit, closing-ul vine natural. Rolul tău este să nu îl eviți.</p>
+
+    <div class="highlight-box">
+      <strong>Regula de aur:</strong> Niciodată nu pleci din întâlnire fără un angajament concret. Chiar dacă nu este semnătura, este un „da" la pasul următor: vizionare vehicul, test drive, ofertă scrisă, consultare financiară.
+    </div>
+
+    <h3>Tehnici de closing recomandate</h3>
+
+    <div class="card-grid">
+      <div class="card">
+        <span class="card-icon">❓</span>
+        <div class="card-title">Trial Close</div>
+        <p class="card-body">„Dacă rezolvăm problema garanției și rata se încadrează în buget, mergem înainte?" Testezi disponibilitatea fără presiune.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🔄</span>
+        <div class="card-title">Closing prin alternativă</div>
+        <p class="card-body">„Preferați varianta cu cutie manuală sau Hi-Matic? / Cu sau fără pachetul de mentenanță inclus?" Clientul alege între da și da.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">⏰</span>
+        <div class="card-title">Closing prin urgență reală</div>
+        <p class="card-body">„Vehiculul acesta este disponibil din stoc. Cel mai probabil va fi listat la alt client până săptămâna viitoare — vreți să îl rezervăm?" Urgenta trebuie să fie reală, nu inventată.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">📊</span>
+        <div class="card-title">Closing prin bilanț</div>
+        <p class="card-body">„Avem garanție extinsă, service rapid local, TCO superior și livrare din stoc. Mai este ceva care vă oprește?" Rezumi beneficiile și ceri decizia direct.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🤲</span>
+        <div class="card-title">Closing direct</div>
+        <p class="card-body">„Mergem înainte cu această configurație?" Simplu, direct, respectuos. Mulți vânzători nu pun această întrebare — și pierd vânzarea prin omisiune.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🔮</span>
+        <div class="card-title">Closing prin vizualizare</div>
+        <p class="card-body">„Imaginați-vă că acest Daily este deja în curtea dumneavoastră, în livrare, 5 ani fără griji de garanție. Cum se schimbă calculul afacerii dumneavoastră?" Faci clientul să simtă viitorul.</p>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="script-box">
+      <div class="script-label">Script — Closing complet pentru Daily MY24</div>
+      <p class="script-text">„Domnule [Nume], am înțeles că aveți nevoie de un vehicul fiabil pentru [misiunea identificată], cu costuri predictibile și service rapid în zonă. Daily MY24 rezolvă toate aceste puncte — și mai mult decât atât. La Autopadova, beneficiați de garanție 5 ani / 200.000 km și pachet de service la 50% din tarif, avantaje pe care nu le găsiți la niciun alt dealer din regiune. Vehiculul este disponibil din stoc. Mergem înainte?"</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ CAP 7 ═══════════════════════ -->
+<div class="chapter" id="cap7">
+  <div class="chapter-inner">
+    <div class="chapter-header">
+      <div class="chapter-number">07</div>
+      <div class="chapter-titles">
+        <div class="chapter-cat">Continuitate & diferențiere</div>
+        <h2 class="chapter-title">Follow-up Creativ</h2>
+      </div>
+    </div>
+
+    <p class="chapter-intro">Follow-up-ul creativ este elementul care te plasează deasupra concurenței. Nu „vă sunăm să vedem dacă v-ați mai gândit" — ci acțiuni concrete de valoare care mențin relația vie și îl aduc pe client înapoi.</p>
+
+    <div class="highlight-box">
+      <strong>Statistică esențială:</strong> 80% din vânzările complexe se închid între al 5-lea și al 12-lea contact. Cei mai mulți agenți renunță după 2–3 contacte. Perseverența structurată este avantajul tău competitiv.
+    </div>
+
+    <h3>Secvența de follow-up recomandată</h3>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">Z1</div>
+        <div class="step-content">
+          <div class="step-title">Zi 1 — Email / WhatsApp cu oferta personalizată</div>
+          <div class="step-desc">Ofertă scrisă clară, cu configurația discutată, calcul TCO pe 5 ani față de vehiculul actual / concurent, și avantajele exclusive Autopadova evidențiate.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">Z3</div>
+        <div class="step-content">
+          <div class="step-title">Zi 3 — Apel de verificare + valoare adăugată</div>
+          <div class="step-desc">„Am văzut că Daily MY24 a câștigat recent o livrare majoră pentru [client din același sector] — mi-a venit în minte dumneavoastră. Aveți câteva minute?"</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">Z7</div>
+        <div class="step-content">
+          <div class="step-title">Zi 7 — Conținut relevant, fără presiune</div>
+          <div class="step-desc">Articol, video sau studiu de caz din sectorul clientului. Arată că îl înțelegi și că ești partener, nu vânzător.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">Z14</div>
+        <div class="step-content">
+          <div class="step-title">Zi 14 — Invitație la test drive sau vizita la dealer</div>
+          <div class="step-desc">„Am o configurație exact ca cea discutată — vreți să veniți să o vedeți? Nu este nicio obligație, dar merită să o vedeți fizic."</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">Z30</div>
+        <div class="step-content">
+          <div class="step-title">Zi 30 — Reactivare cu element nou</div>
+          <div class="step-desc">O ofertă specială de stoc, un update de produs sau o referință din rețeaua clientului. Fiecare contact trebuie să aducă ceva de valoare — nu „v-ați mai decis?".</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight-box green">
+      <strong>Regula follow-up-ului creativ:</strong> Fiecare contact este un motiv, nu o rugăminte. Nu suni să întrebi dacă s-a gândit — suni cu o informație, o oportunitate sau o referință concretă. Clientul simte diferența imediat.
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ CAP 8 ═══════════════════════ -->
+<div class="chapter" id="cap8">
+  <div class="chapter-inner">
+    <div class="chapter-header">
+      <div class="chapter-number">08</div>
+      <div class="chapter-titles">
+        <div class="chapter-cat">Argumentar comercial</div>
+        <h2 class="chapter-title">Armele de Vânzare — IVECO Daily MY24 la Autopadova</h2>
+      </div>
+    </div>
+
+    <p class="chapter-intro">Cunoașterea produsului este fundația credibilității. Nu poți vinde convingător ceea ce nu cunoști profund. Acestea sunt argumentele concrete pe care le ai la dispoziție față de orice concurent.</p>
+
+    <h3>Avantaje exclusive Autopadova — de niciunde altundeva</h3>
+
+    <div class="card-grid">
+      <div class="card">
+        <span class="card-icon">🛡️</span>
+        <div class="card-title">Garanție extinsă 5 ani / 200.000 km</div>
+        <p class="card-body">Standard de piață: 3 ani / 120.000 km. Avantajul Autopadova: +2 ani / +80.000 km fără cost suplimentar. Un argument de liniște care vinde el singur la clienții mici și fleet deopotrivă.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🔧</span>
+        <div class="card-title">Pachet mentenanță la 50% discount</div>
+        <p class="card-body">Față de tariful standard de piață. În cifre: la un vehicul cu 60.000 km/an, economisești 2.000–3.500€ pe durata contractului față de un dealer concurent fără acest program.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">📍</span>
+        <div class="card-title">Prezență locală Iași & Bacău</div>
+        <p class="card-body">Service autorizat în ambele locații. Timp de imobilizare redus = pierderi mai mici de profit pentru client. Argumentul de proximitate bate orice comparație online de preț.</p>
+      </div>
+    </div>
+
+    <h3>IVECO Daily MY24 vs. Concurență — date de argumentare</h3>
+
+    <table class="obj-table">
+      <thead>
+        <tr>
+          <th>Parametru</th>
+          <th>Daily MY24</th>
+          <th>Mercedes Sprinter</th>
+          <th>VW Crafter</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Motor flagship</strong></td>
+          <td class="resp"><span class="badge badge-green">3.0L / 210CP / 470Nm</span></td>
+          <td>2.0L / 170CP</td>
+          <td>2.0L / 177CP</td>
+        </tr>
+        <tr>
+          <td><strong>Volum maxim</strong></td>
+          <td class="resp"><span class="badge badge-green">19,6 m³</span></td>
+          <td>17,0 m³</td>
+          <td>18,4 m³</td>
+        </tr>
+        <tr>
+          <td><strong>Rază de virare</strong></td>
+          <td class="resp"><span class="badge badge-green">10,4 m</span></td>
+          <td><span class="badge badge-red">13,6 m</span></td>
+          <td>12,5 m</td>
+        </tr>
+        <tr>
+          <td><strong>ADAS standard</strong></td>
+          <td class="resp"><span class="badge badge-green">LFA + ADDW + SCC</span></td>
+          <td>Opționale plătite</td>
+          <td>Parțial standard</td>
+        </tr>
+        <tr>
+          <td><strong>Sarcină utilă max</strong></td>
+          <td class="resp"><span class="badge badge-green">până la 1.415 kg</span></td>
+          <td>~1.200 kg</td>
+          <td>~1.200 kg</td>
+        </tr>
+        <tr>
+          <td><strong>Cotă piață RO 2025</strong></td>
+          <td class="resp"><span class="badge badge-green">27% — lider absolut</span></td>
+          <td>~22%</td>
+          <td>~15%</td>
+        </tr>
+        <tr>
+          <td><strong>TCO 7 ani (roți duble)</strong></td>
+          <td class="resp"><span class="badge badge-green">Cel mai bun din clasă</span></td>
+          <td>Mai scump cu ~6.000€</td>
+          <td>Mai scump cu ~5.200€</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <hr class="divider">
+
+    <h3>Argumentar pe tip de client</h3>
+
+    <div class="highlight-box">
+      <h4 style="color: var(--accent); font-size: 13px; letter-spacing: 0.1em; margin-bottom: 10px;">CLIENT MIC (PFA / microîntreprindere)</h4>
+      <p style="color: var(--text-dim); margin: 0; font-size: 15px;">Nu vorbești de TCO — vorbești de <strong style="color: var(--text);">rată lunară, liniște și relație</strong>. Garanția 5 ani înseamnă: „5 ani fără surprize." Pachetul de service înseamnă: „Știi de la început cât cheltuiești." Proximitatea Iași / Bacău înseamnă: „Suntem lângă tine când ai nevoie."</p>
+    </div>
+
+    <div class="highlight-box blue">
+      <h4 style="color: var(--accent3); font-size: 13px; letter-spacing: 0.1em; margin-bottom: 10px;">CLIENT FLEET (10+ vehicule)</h4>
+      <p style="color: var(--text-dim); margin: 0; font-size: 15px;">Argumentezi cu <strong style="color: var(--text);">TCO total, disponibilitate, SLA service și cotă de piață</strong>. „27% cotă de piață înseamnă că IVECO Daily este alegerea a 1 din 4 profesioniști din România. Există un motiv." Dai calcul Excel comparativ pe flotă. Livrabilul tău este un raport financiar, nu o brochure.</p>
+    </div>
+
+    <div class="highlight-box green">
+      <strong>Argumentul #1 care închide vânzarea la orice profil:</strong> „La Autopadova aveți garanție 5 ani / 200.000 km și service la jumătate de preț. Niciun alt dealer din Moldova nu vă poate oferi asta pe vehicule comerciale. Aceasta nu este o ofertă de produs — este un parteneriat pe termen lung."
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ FOOTER ═══════════════════════ -->
+<footer>
+  <p><strong>Autopadova / ROMIL</strong> — Iași & Bacău | Dealer autorizat IVECO, Fiat Professional, Jeep, Suzuki</p>
+  <p style="margin-top: 8px;">Manual intern de training vânzări · Metodologie adaptată după <strong>Shlomi Leibovitz — SalesMentor.co.il</strong> · Uz exclusiv echipă comercială</p>
+  <p style="margin-top: 8px; color: var(--text-muted);">Costel · Vlad · Călin · Iulian · Liviu — echipa care câștigă prin disciplină, nu noroc</p>
+</footer>
+
+</body>
+</html>
