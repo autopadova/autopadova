@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Autopadova — Sales Coach AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f5f7;
+    --surface: #ffffff;
+    --surface2: #f0f1f4;
+    --border: #e2e4ea;
+    --accent: #e85d26;
+    --accent2: #f97316;
+    --gold: #b45309;
+    --text: #1a1d26;
+    --text-muted: #5a6070;
+    --text-dim: #9aa0b2;
+    --green: #16a34a;
+    --blue: #2563eb;
+    --red: #dc2626;
+    --radius: 14px;
+    --radius-sm: 8px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* ── HEADER ── */
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 24px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+    gap: 16px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo-icon {
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    font-weight: 800;
+    font-family: 'Syne', sans-serif;
+    color: #fff;
+    flex-shrink: 0;
+  }
+
+  .logo-text {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  .logo-sub {
+    font-size: 10px;
+    color: var(--text-muted);
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* Stage indicator */
+  .stage-bar {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .stage-pill {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Syne', sans-serif;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .stage-pill.active {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border-color: transparent;
+    color: #fff;
+  }
+
+  .stage-pill:hover:not(.active) {
+    border-color: var(--accent);
+    color: var(--text);
+  }
+
+  /* Header right */
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .btn-copy {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 6px 12px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text-muted);
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .btn-copy:hover { border-color: var(--blue); color: var(--blue); }
+  .btn-copy.copied { border-color: var(--green); color: var(--green); }
+
+  .btn-clear {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 6px 12px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text-muted);
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.2s;
+  }
+
+  .btn-clear:hover { border-color: var(--red); color: var(--red); }
+
+  /* ── MAIN LAYOUT ── */
+  .main {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    width: 260px;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    flex-shrink: 0;
+  }
+
+  .sidebar-section {
+    padding: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sidebar-title {
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-dim);
+    margin-bottom: 10px;
+    font-family: 'Syne', sans-serif;
+  }
+
+  /* Client profile */
+  .profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .form-label {
+    font-size: 10px;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  .form-input, .form-select {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    font-size: 12px;
+    padding: 7px 10px;
+    font-family: 'Inter', sans-serif;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+
+  .form-input:focus, .form-select:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+
+  .form-select option { background: var(--surface2); }
+
+  /* Quick chips */
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .chip {
+    font-size: 10px;
+    padding: 4px 9px;
+    border-radius: 20px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 500;
+  }
+
+  .chip:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(232,93,38,0.08);
+  }
+
+  /* USP panel */
+  .usp-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .usp-item {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 8px 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .usp-item:hover {
+    border-color: var(--accent);
+    background: rgba(232,93,38,0.06);
+  }
+
+  .usp-title {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--accent2);
+    margin-bottom: 2px;
+  }
+
+  .usp-desc {
+    font-size: 10px;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  /* ── CHAT AREA ── */
+  .chat-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    scroll-behavior: smooth;
+  }
+
+  .messages::-webkit-scrollbar { width: 4px; }
+  .messages::-webkit-scrollbar-track { background: transparent; }
+  .messages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  /* Welcome */
+  .welcome {
+    text-align: center;
+    padding: 48px 24px;
+    opacity: 0;
+    animation: fadeIn 0.6s 0.2s ease forwards;
+  }
+
+  .welcome-icon {
+    width: 64px; height: 64px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border-radius: 20px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px;
+    margin: 0 auto 20px;
+    box-shadow: 0 12px 40px rgba(232,93,38,0.3);
+  }
+
+  .welcome h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 8px;
+  }
+
+  .welcome p {
+    font-size: 13px;
+    color: var(--text-muted);
+    max-width: 420px;
+    margin: 0 auto 24px;
+    line-height: 1.6;
+  }
+
+  .welcome-hints {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .hint-chip {
+    font-size: 11px;
+    padding: 8px 14px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 500;
+    text-align: left;
+    line-height: 1.4;
+  }
+
+  .hint-chip:hover {
+    border-color: var(--accent);
+    color: var(--text);
+    background: rgba(232,93,38,0.06);
+  }
+
+  /* Messages */
+  .msg {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    opacity: 0;
+    animation: slideUp 0.3s ease forwards;
+  }
+
+  .msg.user { flex-direction: row-reverse; }
+
+  .msg-avatar {
+    width: 32px; height: 32px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+    font-family: 'Syne', sans-serif;
+  }
+
+  .msg.user .msg-avatar {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 12px;
+  }
+
+  .msg.ai .msg-avatar {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #fff;
+    font-size: 12px;
+  }
+
+  .msg-body {
+    max-width: 72%;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .msg.user .msg-body { align-items: flex-end; }
+
+  .msg-bubble {
+    padding: 12px 16px;
+    border-radius: var(--radius);
+    font-size: 13px;
+    line-height: 1.65;
+    word-break: break-word;
+  }
+
+  .msg.user .msg-bubble {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #fff;
+    border-bottom-right-radius: 4px;
+  }
+
+  .msg.ai .msg-bubble {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-bottom-left-radius: 4px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+
+  .msg-time {
+    font-size: 10px;
+    color: var(--text-dim);
+    padding: 0 4px;
+  }
+
+  /* AI content formatting */
+  .msg.ai .msg-bubble strong {
+    color: var(--accent2);
+    font-weight: 600;
+  }
+
+  .msg.ai .msg-bubble em {
+    color: var(--gold);
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  .msg.ai .msg-bubble .stage-tag {
+    display: inline-block;
+    background: rgba(232,93,38,0.10);
+    border: 1px solid rgba(232,93,38,0.30);
+    color: var(--accent);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    font-family: 'Syne', sans-serif;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .msg.ai .msg-bubble .script-block {
+    background: rgba(180,83,9,0.07);
+    border-left: 3px solid var(--gold);
+    padding: 10px 12px;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    margin: 10px 0;
+    font-style: italic;
+    color: #92400e;
+    font-size: 12px;
+  }
+
+  .msg.ai .msg-bubble .next-step {
+    background: rgba(22,163,74,0.07);
+    border: 1px solid rgba(22,163,74,0.25);
+    border-radius: var(--radius-sm);
+    padding: 10px 12px;
+    margin-top: 10px;
+    font-size: 12px;
+    color: #166534;
+  }
+
+  .msg.ai .msg-bubble .next-step::before {
+    content: "▶ PASUL URMĂTOR: ";
+    font-weight: 700;
+    font-size: 10px;
+    font-family: 'Syne', sans-serif;
+    letter-spacing: 0.06em;
+    display: block;
+    margin-bottom: 4px;
+    color: var(--green);
+  }
+
+  .msg.ai .msg-bubble ul {
+    padding-left: 16px;
+    margin: 6px 0;
+  }
+
+  .msg.ai .msg-bubble li {
+    margin-bottom: 4px;
+    font-size: 13px;
+  }
+
+  .msg.ai .msg-bubble hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 10px 0;
+  }
+
+  /* Loading */
+  .typing {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    padding: 14px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    border-bottom-left-radius: 4px;
+    width: fit-content;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+
+  .typing span {
+    width: 6px; height: 6px;
+    background: var(--text-dim);
+    border-radius: 50%;
+    animation: bounce 1.2s infinite;
+  }
+
+  .typing span:nth-child(2) { animation-delay: 0.2s; }
+  .typing span:nth-child(3) { animation-delay: 0.4s; }
+
+  /* ── INPUT AREA ── */
+  .input-area {
+    padding: 16px 24px;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  .input-row {
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+  }
+
+  .input-wrap {
+    flex: 1;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    display: flex;
+    align-items: flex-end;
+    padding: 10px 14px;
+    gap: 8px;
+    transition: border-color 0.2s;
+  }
+
+  .input-wrap:focus-within { border-color: var(--accent); }
+
+  textarea {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text);
+    font-size: 13px;
+    font-family: 'Inter', sans-serif;
+    resize: none;
+    line-height: 1.5;
+    max-height: 100px;
+    min-height: 20px;
+    padding: 0;
+  }
+
+  textarea::placeholder { color: var(--text-dim); }
+
+  .send-btn {
+    width: 40px; height: 40px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s;
+    color: #fff;
+  }
+
+  .send-btn:hover { transform: scale(1.05); box-shadow: 0 4px 16px rgba(232,93,38,0.4); }
+  .send-btn:active { transform: scale(0.97); }
+  .send-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+  .send-btn svg { width: 18px; height: 18px; }
+
+  .input-hint {
+    font-size: 10px;
+    color: var(--text-dim);
+    text-align: center;
+    margin-top: 8px;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes bounce {
+    0%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-6px); }
+  }
+
+  /* ── SCROLLBAR ── */
+  .sidebar::-webkit-scrollbar { width: 4px; }
+  .sidebar::-webkit-scrollbar-track { background: transparent; }
+  .sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .sidebar { display: none; }
+    .stage-bar { display: none; }
+    .logo-sub { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">
+    <div class="logo-icon">AP</div>
+    <div>
+      <div class="logo-text">Sales Coach AI</div>
+      <div class="logo-sub">Autopadova · ROMIL · Andy Elliott & Leibovitz</div>
+    </div>
+  </div>
+  <div class="stage-bar" id="stageBar">
+    <div class="stage-pill active" onclick="setStage(this,'calificare')">1 · Calificare</div>
+    <div class="stage-pill" onclick="setStage(this,'descoperire')">2 · Descoperire</div>
+    <div class="stage-pill" onclick="setStage(this,'prezentare')">3 · Prezentare</div>
+    <div class="stage-pill" onclick="setStage(this,'tco')">4 · TCO & Ofertă</div>
+    <div class="stage-pill" onclick="setStage(this,'obiectii')">5 · Obiecții</div>
+    <div class="stage-pill" onclick="setStage(this,'inchidere')">6 · Închidere</div>
+  </div>
+  <div class="header-right">
+    <button class="btn-copy" id="copyBtn" onclick="copyConversation()">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      Copiază discuție
+    </button>
+    <button class="btn-clear" onclick="clearConversation()">↺ Reset</button>
+  </div>
+</header>
+
+<!-- MAIN -->
+<div class="main">
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <!-- Profile -->
+    <div class="sidebar-section">
+      <div class="sidebar-title">Profil Client</div>
+      <div class="profile-form">
+        <div class="form-field">
+          <div class="form-label">Tip client</div>
+          <select class="form-select" id="clientType" onchange="updateContext()">
+            <option value="">— selectează —</option>
+            <option value="pfa">PFA / Antreprenor individual</option>
+            <option value="imm">IMM fără flotă</option>
+            <option value="fleet">Fleet B2B (10+ vehicule)</option>
+            <option value="inbound">Inbound — a căutat activ</option>
+            <option value="cold">Cold / Outbound</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <div class="form-label">Utilizare principală</div>
+          <select class="form-select" id="useCase" onchange="updateContext()">
+            <option value="">— selectează —</option>
+            <option value="livrari">Livrări / Curierat urban</option>
+            <option value="constructii">Construcții / Șantier</option>
+            <option value="frigorific">Transport frigorific</option>
+            <option value="distributie">Distribuție FMCG</option>
+            <option value="forestier">Forestier / Civil Protection</option>
+            <option value="electric">Electric — LEZ/ZEZ</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <div class="form-label">Concurență menționată</div>
+          <select class="form-select" id="competitor" onchange="updateContext()">
+            <option value="">— necunoscut —</option>
+            <option value="sprinter">Mercedes Sprinter</option>
+            <option value="crafter">VW Crafter</option>
+            <option value="transit">Ford Transit</option>
+            <option value="master">Renault Master</option>
+            <option value="ducato">Fiat Ducato</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <div class="form-label">Notă rapidă (opțional)</div>
+          <input type="text" class="form-input" id="clientNote" placeholder="ex: 3 vehicule, km lunari..." onchange="updateContext()">
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick scenarios -->
+    <div class="sidebar-section">
+      <div class="sidebar-title">Scenarii rapide</div>
+      <div class="chips">
+        <div class="chip" onclick="sendQuick('Clientul spune că Sprinter-ul este mai de calitate decât Daily-ul. Cum răspund?')">🥊 Sprinter vs Daily</div>
+        <div class="chip" onclick="sendQuick('Clientul zice că este prea scump și vrea să se mai gândească. Ce fac acum?')">💸 Prea scump</div>
+        <div class="chip" onclick="sendQuick('Clientul a spus că trebuie să se consulte cu asociatul înainte să decidă. Cum procedez?')">🤝 Consultare partener</div>
+        <div class="chip" onclick="sendQuick('Cum prezint avantajele garanției extinse Autopadova față de un dealer concurent IVECO?')">🛡️ Garanție extinsă</div>
+        <div class="chip" onclick="sendQuick('Clientul vrea să compare cu alți dealeri. Ce argumente de dealer am?')">🏢 Dealer vs dealer</div>
+        <div class="chip" onclick="sendQuick('Clientul nu a mai cumpărat IVECO niciodată și nu știe dacă e fiabil. Cum îi construiesc încrederea?')">⚡ Construiesc încredere</div>
+        <div class="chip" onclick="sendQuick('Am nevoie de un script complet de trial close pentru un client flotă cu 5 vehicule.')">🎯 Trial Close flotă</div>
+        <div class="chip" onclick="sendQuick('Clientul spune că vrea să mai aștepte câteva luni să vadă cum evoluează piața. Ce fac?')">⏳ Mai aștept</div>
+      </div>
+    </div>
+
+    <!-- USP Arsenal -->
+    <div class="sidebar-section">
+      <div class="sidebar-title">Arsenal USP Daily MY24</div>
+      <div class="usp-list">
+        <div class="usp-item" onclick="sendQuick('Cum folosesc argumentul celor 210 CP și motor 3 litri față de concurență?')">
+          <div class="usp-title">⚙️ 210 CP · 3.0L F1C</div>
+          <div class="usp-desc">Singurul motor 3L în segment. 470 Nm. Rival: Sprinter max 190CP.</div>
+        </div>
+        <div class="usp-item" onclick="sendQuick('Cum argumentez raza de virare 10.4m față de Sprinter cu 13.6m pentru un client urban?')">
+          <div class="usp-title">🔄 Raza virare 10.4m</div>
+          <div class="usp-desc">vs. Sprinter 13.6m. Decisiv pentru operațiuni urbane.</div>
+        </div>
+        <div class="usp-item" onclick="sendQuick('Cum prezint volumul cargo 19.6m³ ca argument principal față de Crafter sau Transit?')">
+          <div class="usp-title">📦 Volum 19.6m³</div>
+          <div class="usp-desc">Cel mai mare din segment. Crafter: 18.3m³. Sprinter: 17m³.</div>
+        </div>
+        <div class="usp-item" onclick="sendQuick('Cum explic Hi-Matic ZF 8 trepte pe toată gama ca avantaj față de concurență?')">
+          <div class="usp-title">🚗 Hi-Matic ZF 8TR</div>
+          <div class="usp-desc">Automată pe toată gama 3.5t→7.2t. Concurența: parțial.</div>
+        </div>
+        <div class="usp-item" onclick="sendQuick('Explicați-mi cum să vând TCO-ul pe roată dublă unde Daily este lider față de Sprinter și Crafter.')">
+          <div class="usp-title">📊 TCO Lider RD</div>
+          <div class="usp-desc">Economie Sprinter -3.800€ / Crafter -1.960€ pe 7 ani.</div>
+        </div>
+        <div class="usp-item" onclick="sendQuick('Cum prezint eDaily și argumentele pentru zone LEZ/ZEZ la un client din curierat urban?')">
+          <div class="usp-title">⚡ eDaily · 240km WLTP</div>
+          <div class="usp-desc">Baterie 8 ani. 1-4 module. Singurul eLCV cu suspensie aer.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHAT -->
+  <div class="chat-container">
+    <div class="messages" id="messages">
+      <div class="welcome" id="welcome">
+        <div class="welcome-icon">🎯</div>
+        <h2>Sales Coach Autopadova</h2>
+        <p>Descrie situația cu clientul tău. Primești recomandări tactice bazate pe <strong>Andy Elliott</strong> + <strong>Leibovitz</strong>, adaptate la portofoliul <strong>Autopadova</strong>.</p>
+        <div class="welcome-hints">
+          <div class="hint-chip" onclick="sendQuick('Clientul a venit la showroom interesat de un Daily pentru livrări urbane, dar zice că are ofertă mai bună la Sprinter. E la etapa de prezentare. Ce fac?')">💬 Client la prezentare cu ofertă Sprinter</div>
+          <div class="hint-chip" onclick="sendQuick('Am un apel cu un manager de flotă cu 8 vehicule curente, toți Crafter. Vreau să îl calific și să știu ce întrebări să pun.')">📋 Calificare manager flotă Crafter</div>
+          <div class="hint-chip" onclick="sendQuick('PFA din construcții, vrea sasiu pentru caroserie frigorifică. Nu știe nimic de Daily. Cum încep conversația?')">🏗️ PFA — sasiu frigorific, client nou</div>
+          <div class="hint-chip" onclick="sendQuick('Clientul a primit oferta, a zis că se gândește, au trecut 5 zile. Cum fac follow-up fără să par disperat?')">⏱️ Follow-up după 5 zile de tăcere</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- INPUT -->
+    <div class="input-area">
+      <div class="input-row">
+        <div class="input-wrap">
+          <textarea
+            id="userInput"
+            placeholder="Descrie situația cu clientul... Ce a spus, ce obiecție a apărut, la ce etapă ești..."
+            rows="1"
+            onkeydown="handleKey(event)"
+            oninput="autoResize(this)"
+          ></textarea>
+        </div>
+        <button class="send-btn" id="sendBtn" onclick="sendMessage()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+        </button>
+      </div>
+      <div class="input-hint">Enter = trimite · Shift+Enter = linie nouă</div>
+    </div>
+  </div>
+</div>
+
+<script>
+const STAGES = {
+  calificare: "CALIFICARE (Etapa 1)",
+  descoperire: "DESCOPERIRE NEVOIE (Etapa 2)",
+  prezentare: "PREZENTARE SOLUȚIE (Etapa 3)",
+  tco: "TCO & OFERTĂ (Etapa 4)",
+  obiectii: "TRATARE OBIECȚII (Etapa 5)",
+  inchidere: "ÎNCHIDERE (Etapa 6)"
+};
+
+let currentStage = "calificare";
+let conversation = [];
+let isLoading = false;
+
+function buildSystemPrompt() {
+  const clientType = document.getElementById('clientType').value;
+  const useCase = document.getElementById('useCase').value;
+  const competitor = document.getElementById('competitor').value;
+  const clientNote = document.getElementById('clientNote').value;
+
+  const profileParts = [];
+  if (clientType) profileParts.push(`Tip client: ${clientType}`);
+  if (useCase) profileParts.push(`Utilizare: ${useCase}`);
+  if (competitor) profileParts.push(`Concurență menționată: ${competitor}`);
+  if (clientNote) profileParts.push(`Notă: ${clientNote}`);
+  const profileCtx = profileParts.length ? `\n\nCONTEXT CLIENT CURENT:\n${profileParts.join('\n')}` : '';
+
+  return `Ești Sales Coach AI pentru echipa de vânzări AUTOPADOVA (dealer IVECO, Jeep, Fiat Professional, Suzuki în Iași și Bacău, România). Coachezi agenți de vânzări în timp real în situații concrete cu clienți.
+
+METODOLOGIE DE BAZĂ:
+Combini principiile lui **Andy Elliott** (energie, urgență, asumare, closing direct, identitate de vânzător) cu **Shlomi Leibovitz** (atracție vs. presiune, calificare calitativă, obiecția ca instrument de closing, follow-up creativ cu valoare).
+
+TRASEUL VÂNZĂRII (6 etape):
+1. CALIFICARE → Identificare profil, buget, orizont decizie, vehicul curent
+2. DESCOPERIRE NEVOIE → Întrebări calitative, ascultare 60-90 sec, calibrare client
+3. PREZENTARE → Beneficiu legat de nevoie confirmată, nu lista de specificații
+4. TCO & OFERTĂ → Fleet: Excel TCO comparat. Client mic: rată lunară + zero surprize
+5. OBIECȚII → Formula A→Î→R→S (Acceptare, Înțelegere, Reformulare, Soluție+Closing)
+6. ÎNCHIDERE → Trial Close, Alternativă, Urgență reală, Direct, Vizualizare
+
+PRODUSE AUTOPADOVA (cunoaștere completă):
+- IVECO Daily MY24: Motor F1C 3.0L / 210 CP / 470 Nm (singurul în segment), volum cargo 19.6m³ (cel mai mare), rază virare 10.4m vs. Sprinter 13.6m, Hi-Matic ZF 8 trepte pe TOATĂ gama 3.5t→7.2t, MTMA 7.2t, Memory Foam (primul LCV), ADAS Level 2 standard, IVECO ON 5 ani gratuit, cotă piață 27% România 2025
+- eDaily: 1-4 baterii × 37kWh = max 148kWh, autonomie 240km WLTP, fast charge 115kW, baterie 8 ani garanție, unicul eLCV cu suspensie pneumatică
+- TCO Daily roată simplă 7 ani: locul 2 (Master primul cu ~745€ mai ieftin). Economie vs. Sprinter: -4.440€, vs. Crafter: -2.530€
+- TCO Daily roată dublă spate: LIDER. Economie vs. Sprinter: -3.800€, vs. Crafter: -1.960€, vs. Transit: -4.575€
+
+AVANTAJE EXCLUSIVE AUTOPADOVA (de menționat MEREU ca diferențiator de dealer):
+- Garanție extinsă: 4 ani fără limită km SAU 5 ani / 200.000 km (vs. standard 3 ani / 120.000 km)
+- Mentenanță -50% față de tariful standard
+- Service autorizat în Iași și Bacău
+- IVECO ON 5 ani gratuit inclus
+
+OBIECȚII FRECVENTE — RĂSPUNSURI RAPIDE:
+- "Prea scump" → TCO 5 ani Daily+garanție Autopadova vs. concurent. Diferența e în favoarea Daily.
+- "Mă mai gândesc" → "Ce anume vă face să mai așteptați? Prefer să clarificăm acum."
+- "Am un prieten cu Sprinter mulțumit" → "Întrebați-l: cât a plătit service în 3 ani și câte zile a stat în service."
+- "Trebuie să mă consult" → Implici persoana de decizie. Ofertă scrisă. Fixezi termen concret.
+- "Nu e IVECO fiabil" → "27% cotă de piață RO 2025. Cel mai vândut >3.5t. Contactați un client din zonă."
+- "Vreau să mai compar" → "Comparați cu: garanție, service local, cost total. La aceiași parametri, Daily câștigă."
+
+CLIENT MIC (PFA/IMM): Decide pe rată lunară + liniște + relație. NU pe TCO grafice. Argumente: rată -15% vs. Sprinter, zero surprize service 5 ani, suntem în Iași/Bacău, referință client local.
+
+CLIENT FLEET (10+ vehicule): Decide pe TCO total, disponibilitate, SLA. Prezintă: Excel TCO, IVECO ON flotă, garanție pe durata leasingului.
+
+ETAPA CURENTĂ: ${STAGES[currentStage]}${profileCtx}
+
+FORMAT RĂSPUNS (OBLIGATORIU):
+Răspunsurile tale trebuie să fie ACȚIONABILE și IMEDIAT UTILIZABILE. Structura:
+1. **[TAG ETAPĂ]** — identifică scurt unde se află vânzătorul în traseu
+2. **Diagnostic rapid** — ce s-a întâmplat, de ce reacționat clientul astfel
+3. **Acțiunea imediată** — exact CE să spună/facă ACUM (script concret între ghilimele sau bloc italic)
+4. **Logica din spate** — 1-2 rânduri de justificare Andy Elliott / Leibovitz
+5. **Pasul următor** — ce urmează după această acțiune
+
+Limbaj: Român profesional, direct, orientat pe acțiune. Fără fraze pompistice sau academice. Vorbești cu un agent care are clientul în față sau la telefon — timp limitat, urgență reală.
+Lungime optimă: 200-350 cuvinte. Nu mai mult dacă nu e necesar.`;
+}
+
+async function sendMessage(text) {
+  const input = document.getElementById('userInput');
+  const msg = text || input.value.trim();
+  if (!msg || isLoading) return;
+
+  if (!text) {
+    input.value = '';
+    input.style.height = 'auto';
+  }
+
+  hideWelcome();
+  appendMsg('user', msg);
+  conversation.push({ role: 'user', content: msg });
+
+  setLoading(true);
+  const typingEl = showTyping();
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: buildSystemPrompt(),
+        messages: conversation
+      })
+    });
+
+    const data = await res.json();
+    const reply = data.content?.find(b => b.type === 'text')?.text || 'Eroare: răspuns invalid.';
+
+    typingEl.remove();
+    appendMsg('ai', reply);
+    conversation.push({ role: 'assistant', content: reply });
+
+    // Auto-advance stage hint
+    autoDetectStage(msg);
+
+  } catch (err) {
+    typingEl.remove();
+    appendMsg('ai', '⚠️ Eroare de conexiune. Verifică conexiunea la internet și încearcă din nou.');
+  }
+
+  setLoading(false);
+}
+
+function sendQuick(text) {
+  document.getElementById('userInput').value = text;
+  sendMessage(text);
+}
+
+function autoDetectStage(msg) {
+  const lower = msg.toLowerCase();
+  const stageMap = [
+    { keys: ['calific', 'buget', 'câte vehicule', 'ce vehicul ai', 'orizont'], stage: 'calificare' },
+    { keys: ['nevoie', 'descoper', 'ascult', 'ce problem', 'de ce vrea'], stage: 'descoperire' },
+    { keys: ['prezent', 'argum', 'benefic', 'caracteristic', 'spun clientului'], stage: 'prezentare' },
+    { keys: ['tco', 'ofert', 'pret', 'cost', 'rata', 'finant'], stage: 'tco' },
+    { keys: ['obiect', 'scump', 'concurent', 'gândesc', 'sprinter', 'crafter'], stage: 'obiectii' },
+    { keys: ['închi', 'semn', 'decizie', 'trial close', 'closing'], stage: 'inchidere' }
+  ];
+
+  for (const { keys, stage } of stageMap) {
+    if (keys.some(k => lower.includes(k))) {
+      currentStage = stage;
+      updateStagePills();
+      break;
+    }
+  }
+}
+
+function updateStagePills() {
+  document.querySelectorAll('.stage-pill').forEach(p => {
+    p.classList.toggle('active', p.getAttribute('onclick').includes(currentStage));
+  });
+}
+
+function setStage(el, stage) {
+  currentStage = stage;
+  document.querySelectorAll('.stage-pill').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+}
+
+function updateContext() {
+  // Context updates silently for next message
+}
+
+function appendMsg(role, text) {
+  const messages = document.getElementById('messages');
+  const div = document.createElement('div');
+  div.className = `msg ${role}`;
+
+  const avatar = document.createElement('div');
+  avatar.className = 'msg-avatar';
+  avatar.textContent = role === 'ai' ? 'AI' : 'TU';
+
+  const body = document.createElement('div');
+  body.className = 'msg-body';
+
+  const bubble = document.createElement('div');
+  bubble.className = 'msg-bubble';
+
+  if (role === 'ai') {
+    bubble.innerHTML = formatAIText(text);
+  } else {
+    bubble.textContent = text;
+  }
+
+  const time = document.createElement('div');
+  time.className = 'msg-time';
+  time.textContent = new Date().toLocaleTimeString('ro-RO', { hour: '2-digit', minute: '2-digit' });
+
+  body.appendChild(bubble);
+  body.appendChild(time);
+  div.appendChild(avatar);
+  div.appendChild(body);
+  messages.appendChild(div);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+function formatAIText(text) {
+  // Bold
+  let html = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+  // Italic → script quotes
+  html = html.replace(/_(.*?)_/g, '<em>$1</em>');
+  // Stage tags [...]
+  html = html.replace(/\[([^\]]+ETAP[Ă\w\s·]+)\]/gi, '<span class="stage-tag">$1</span>');
+  // Script blocks (text between › or ❝ ❞ or «»)
+  html = html.replace(/[❝«](.*?)[❞»]/gs, '<div class="script-block">$1</div>');
+  // PASUL URMĂTOR block
+  html = html.replace(/PASUL URMĂTOR[:\s]*(.*?)(?=\n\n|\n[A-Z]|$)/gs, (m, p1) =>
+    `<div class="next-step">${p1.trim()}</div>`
+  );
+  // Bullet lists
+  html = html.replace(/^[-•]\s(.+)$/gm, '<li>$1</li>');
+  html = html.replace(/(<li>.*<\/li>)+/gs, '<ul>$&</ul>');
+  // Line breaks
+  html = html.replace(/\n\n/g, '<hr>').replace(/\n/g, '<br>');
+  return html;
+}
+
+function showTyping() {
+  const messages = document.getElementById('messages');
+  const div = document.createElement('div');
+  div.className = 'msg ai';
+  div.innerHTML = `
+    <div class="msg-avatar">AI</div>
+    <div class="msg-body">
+      <div class="typing"><span></span><span></span><span></span></div>
+    </div>`;
+  messages.appendChild(div);
+  messages.scrollTop = messages.scrollHeight;
+  return div;
+}
+
+function setLoading(val) {
+  isLoading = val;
+  document.getElementById('sendBtn').disabled = val;
+  document.getElementById('userInput').disabled = val;
+}
+
+function hideWelcome() {
+  const w = document.getElementById('welcome');
+  if (w) { w.style.display = 'none'; }
+}
+
+function clearConversation() {
+  conversation = [];
+  const messages = document.getElementById('messages');
+  messages.innerHTML = `
+    <div class="welcome" id="welcome">
+      <div class="welcome-icon">🎯</div>
+      <h2>Sales Coach Autopadova</h2>
+      <p>Descrie situația cu clientul tău. Primești recomandări tactice bazate pe <strong>Andy Elliott</strong> + <strong>Leibovitz</strong>, adaptate la portofoliul <strong>Autopadova</strong>.</p>
+      <div class="welcome-hints">
+        <div class="hint-chip" onclick="sendQuick('Clientul a venit la showroom interesat de un Daily pentru livrări urbane, dar zice că are ofertă mai bună la Sprinter. E la etapa de prezentare. Ce fac?')">💬 Client la prezentare cu ofertă Sprinter</div>
+        <div class="hint-chip" onclick="sendQuick('Am un apel cu un manager de flotă cu 8 vehicule curente, toți Crafter. Vreau să îl calific și să știu ce întrebări să pun.')">📋 Calificare manager flotă Crafter</div>
+        <div class="hint-chip" onclick="sendQuick('PFA din construcții, vrea sasiu pentru caroserie frigorifică. Nu știe nimic de Daily. Cum încep conversația?')">🏗️ PFA — sasiu frigorific, client nou</div>
+        <div class="hint-chip" onclick="sendQuick('Clientul a primit oferta, a zis că se gândește, au trecut 5 zile. Cum fac follow-up fără să par disperat?')">⏱️ Follow-up după 5 zile de tăcere</div>
+      </div>
+    </div>`;
+  currentStage = 'calificare';
+  document.querySelectorAll('.stage-pill').forEach((p, i) => p.classList.toggle('active', i === 0));
+}
+
+function copyConversation() {
+  if (conversation.length === 0) return;
+
+  const now = new Date().toLocaleString('ro-RO');
+  const clientType = document.getElementById('clientType');
+  const useCase = document.getElementById('useCase');
+  const competitor = document.getElementById('competitor');
+  const clientNote = document.getElementById('clientNote');
+
+  let header = `SESIUNE SALES COACH — AUTOPADOVA\n`;
+  header += `Data: ${now}\n`;
+  header += `Etapă: ${STAGES[currentStage]}\n`;
+  if (clientType.value) header += `Tip client: ${clientType.options[clientType.selectedIndex].text}\n`;
+  if (useCase.value) header += `Utilizare: ${useCase.options[useCase.selectedIndex].text}\n`;
+  if (competitor.value) header += `Concurență: ${competitor.options[competitor.selectedIndex].text}\n`;
+  if (clientNote.value) header += `Notă: ${clientNote.value}\n`;
+  header += `${'─'.repeat(50)}\n\n`;
+
+  const body = conversation.map(m => {
+    const role = m.role === 'user' ? '👤 AGENT' : '🤖 COACH AI';
+    // Strip HTML tags for plain text
+    const clean = m.content.replace(/<[^>]*>/g, '').replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>');
+    return `${role}:\n${clean}\n`;
+  }).join('\n' + '─'.repeat(50) + '\n\n');
+
+  const footer = `\n${'─'.repeat(50)}\nAutopadova Sales Coach AI · Andy Elliott + Shlomi Leibovitz\nwww.autopadova.com`;
+  const fullText = header + body + footer;
+
+  navigator.clipboard.writeText(fullText).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.classList.add('copied');
+    btn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Copiat!`;
+    setTimeout(() => {
+      btn.classList.remove('copied');
+      btn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copiază discuție`;
+    }, 2500);
+  });
+}
+
+
+function handleKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+}
+
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 100) + 'px';
+}
+</script>
+</body>
+</html>
