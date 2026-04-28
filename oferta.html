@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ofertă IVECO Daily — Autopadova</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@300;400;500;600&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: #f0f0f0;
+    font-family: 'Barlow', sans-serif;
+    color: #1a1a1a;
+  }
+
+  .email-wrapper {
+    max-width: 680px;
+    margin: 0 auto;
+    background: #ffffff;
+  }
+
+  /* HEADER */
+  .header {
+    background: #1a1a2e;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header-top {
+    background: #CC0000;
+    padding: 10px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .dealer-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    color: #ffffff;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .dealer-badge {
+    font-family: 'Barlow', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.85);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .header-hero {
+    background: linear-gradient(135deg, #0d0d1a 0%, #1a1a2e 50%, #0a0a15 100%);
+    padding: 40px 32px 32px;
+    position: relative;
+  }
+
+  .header-hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 20px,
+      rgba(204,0,0,0.03) 20px,
+      rgba(204,0,0,0.03) 21px
+    );
+  }
+
+  .iveco-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #CC0000;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .hero-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 52px;
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+
+  .hero-subtitle {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 24px;
+  }
+
+  .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .hero-tag {
+    background: rgba(204,0,0,0.15);
+    border: 1px solid rgba(204,0,0,0.4);
+    color: #ff6666;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 2px;
+  }
+
+  /* WHY DAILY */
+  .section {
+    padding: 32px;
+  }
+
+  .section-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: #CC0000;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 30px;
+    font-weight: 800;
+    color: #1a1a2e;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    letter-spacing: 0.5px;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .feature-item {
+    background: #f8f8f8;
+    border-left: 3px solid #CC0000;
+    padding: 12px 14px;
+  }
+
+  .feature-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: #1a1a2e;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 3px;
+  }
+
+  .feature-desc {
+    font-size: 12px;
+    color: #555;
+    line-height: 1.4;
+  }
+
+  /* DIVIDER */
+  .divider {
+    height: 4px;
+    background: linear-gradient(90deg, #CC0000 0%, #ff4444 50%, #CC0000 100%);
+    margin: 0 32px;
+  }
+
+  /* PRICE TABLE */
+  .price-section {
+    padding: 32px;
+    background: #fafafa;
+  }
+
+  table.price-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .price-table thead tr {
+    background: #1a1a2e;
+  }
+
+  .price-table thead th {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 11px 12px;
+    text-align: left;
+  }
+
+  .price-table thead th:last-child,
+  .price-table thead th:nth-child(3),
+  .price-table tbody td:last-child,
+  .price-table tbody td:nth-child(3) {
+    text-align: right;
+  }
+
+  .price-table tbody tr {
+    border-bottom: 1px solid #e8e8e8;
+    transition: background 0.2s;
+  }
+
+  .price-table tbody tr:nth-child(even) {
+    background: #f3f3f3;
+  }
+
+  .price-table tbody td {
+    padding: 10px 12px;
+    color: #333;
+    vertical-align: middle;
+  }
+
+  .model-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: #1a1a2e;
+    text-transform: uppercase;
+  }
+
+  .price-eur {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: #CC0000;
+    white-space: nowrap;
+  }
+
+  .rate-eur {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    color: #1a1a2e;
+    white-space: nowrap;
+  }
+
+  .table-note {
+    font-size: 11px;
+    color: #888;
+    margin-top: 10px;
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  /* BUSINESS CLASS */
+  .business-section {
+    background: linear-gradient(135deg, #1a1a2e 0%, #0d0d1a 100%);
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .business-section::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(204,0,0,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .business-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+
+  .business-sub {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+  }
+
+  .benefits-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .benefits-list li {
+    font-size: 13px;
+    color: rgba(255,255,255,0.85);
+    padding-left: 18px;
+    position: relative;
+    line-height: 1.4;
+  }
+
+  .benefits-list li::before {
+    content: '▸';
+    color: #CC0000;
+    position: absolute;
+    left: 0;
+    font-size: 11px;
+    top: 1px;
+  }
+
+  .warranty-banner {
+    margin-top: 20px;
+    background: rgba(204,0,0,0.15);
+    border: 1px solid rgba(204,0,0,0.4);
+    padding: 12px 16px;
+    border-radius: 2px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #ff8888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+  }
+
+  /* WHY AUTOPADOVA */
+  .why-section {
+    padding: 32px;
+    background: #ffffff;
+  }
+
+  .why-items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .why-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px;
+    border: 1px solid #e8e8e8;
+  }
+
+  .why-icon {
+    background: #CC0000;
+    color: white;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .why-text strong {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a1a2e;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .why-text span {
+    font-size: 12px;
+    color: #666;
+    line-height: 1.4;
+  }
+
+  /* CTA */
+  .cta-section {
+    background: #CC0000;
+    padding: 28px 32px;
+    text-align: center;
+  }
+
+  .cta-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+
+  .cta-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 20px;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: #ffffff;
+    color: #CC0000;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 12px 28px;
+    text-decoration: none;
+    border-radius: 2px;
+    display: inline-block;
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: #ffffff;
+    border: 2px solid rgba(255,255,255,0.6);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 10px 28px;
+    text-decoration: none;
+    border-radius: 2px;
+    display: inline-block;
+  }
+
+  /* FOOTER */
+  .footer {
+    background: #111111;
+    padding: 20px 32px;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .footer-location strong {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: #CC0000;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: block;
+    margin-bottom: 3px;
+  }
+
+  .footer-location span {
+    font-size: 11px;
+    color: #aaa;
+    line-height: 1.5;
+    display: block;
+  }
+
+  .footer-bottom {
+    border-top: 1px solid #2a2a2a;
+    padding-top: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-copy {
+    font-size: 10px;
+    color: #555;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 16px;
+  }
+
+  .footer-links a {
+    font-size: 11px;
+    color: #888;
+    text-decoration: none;
+    font-weight: 500;
+  }
+</style>
+</head>
+<body>
+
+<div class="email-wrapper">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-top">
+      <div class="dealer-name">AUTOPADOVA</div>
+      <div class="dealer-badge">Dealer Autorizat IVECO</div>
+    </div>
+    <div class="header-hero">
+      <div class="iveco-label">Ofertă Comercială Informativă</div>
+      <div class="hero-title">IVECO DAILY</div>
+      <div class="hero-subtitle">Gama Completă MY24</div>
+      <div class="hero-tags">
+        <span class="hero-tag">Până la 3.800 kg sarcină utilă</span>
+        <span class="hero-tag">19,6 m³ — cel mai mare din clasă</span>
+        <span class="hero-tag">Finanțare 0% până 30.06.2026</span>
+        <span class="hero-tag">eDaily 100% Electric</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHY DAILY -->
+  <div class="section">
+    <div class="section-label">Argumente tehnice</div>
+    <div class="section-title">De ce IVECO Daily?</div>
+    <div class="features-grid">
+      <div class="feature-item">
+        <div class="feature-name">Capacitate de Încărcare</div>
+        <div class="feature-desc">Până la 3.800 kg sarcină utilă</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-name">Volum Cargo</div>
+        <div class="feature-desc">Până la 19,6 m³ — lider absolut în clasă</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-name">Motorizare F1A/F1C</div>
+        <div class="feature-desc">136–210 CP Euro 6e, consum optimizat</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-name">Hi-Matic 8</div>
+        <div class="feature-desc">Cutie automată ZF — confort maxim la volan</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-name">eDaily Electric</div>
+        <div class="feature-desc">140 kW, autonomie urbană, ePTO 15 kW</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-name">CNG / Biometan</div>
+        <div class="feature-desc">Zero emisii nete, autonomie +600 km</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-name">ADAS Nivel 2</div>
+        <div class="feature-desc">Frânare autonomă, asistență bandă, detecție pietoni</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-name">IVECO ON Conectivitate</div>
+        <div class="feature-desc">Telematică, diagnoze remote, actualizări OTA</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-name">Board Digital</div>
+        <div class="feature-desc">Display 12,3″ + cluster digital, ergonomie superioară</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-name">Tracțiune 4x4</div>
+        <div class="feature-desc">Versiune off-road pentru orice teren</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- PRICE TABLE -->
+  <div class="price-section">
+    <div class="section-label">Liste de prețuri</div>
+    <div class="section-title">Prețuri de Listă — MY24</div>
+
+    <table class="price-table">
+      <thead>
+        <tr>
+          <th>Model / Versiune</th>
+          <th>Motor</th>
+          <th>Preț Listă (fără TVA)</th>
+          <th>Rată Lunară*</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="model-name">Furgon</div>
+            <div style="font-size:11px;color:#888;">3.500 kg, roată simplă, 12 m³</div>
+          </td>
+          <td>136 CP</td>
+          <td class="price-eur">32.800 €</td>
+          <td class="rate-eur">506 €/lună</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="model-name">Furgon</div>
+            <div style="font-size:11px;color:#888;">3.500 kg, roată simplă, 16 m³</div>
+          </td>
+          <td>136 CP</td>
+          <td class="price-eur">33.500 €</td>
+          <td class="rate-eur">517 €/lună</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="model-name">Furgon</div>
+            <div style="font-size:11px;color:#888;">3.500 kg, roată simplă, 18 m³</div>
+          </td>
+          <td>180 CP</td>
+          <td class="price-eur">39.500 €</td>
+          <td class="rate-eur">609 €/lună</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="model-name">Platformă</div>
+            <div style="font-size:11px;color:#888;">3.500 kg, roată dublă</div>
+          </td>
+          <td>160 CP</td>
+          <td class="price-eur">42.500 €</td>
+          <td class="rate-eur">656 €/lună</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="model-name">Platformă Lungă</div>
+            <div style="font-size:11px;color:#888;">5.200 kg (detarat 3.500 kg), 6.000 mm carosare</div>
+          </td>
+          <td>160 CP</td>
+          <td class="price-eur">44.200 €</td>
+          <td class="rate-eur">682 €/lună</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="model-name">Basculantă</div>
+            <div style="font-size:11px;color:#888;">3.500 kg, roată dublă</div>
+          </td>
+          <td>160 CP</td>
+          <td class="price-eur">44.000 €</td>
+          <td class="rate-eur">679 €/lună</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="model-name">Izoterma</div>
+            <div style="font-size:11px;color:#888;">3.500 kg, roată dublă, 8 europaleti</div>
+          </td>
+          <td>160 CP</td>
+          <td class="price-eur">52.000 €</td>
+          <td class="rate-eur">802 €/lună</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="model-name">Izoterma</div>
+            <div style="font-size:11px;color:#888;">7.200 kg, roată dublă, 8 europaleti</div>
+          </td>
+          <td>180 CP</td>
+          <td class="price-eur">58.800 €</td>
+          <td class="rate-eur">907 €/lună</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="table-note">
+      * Prețurile nu includ TVA. &nbsp;|&nbsp; Rata lunară calculată pentru 60 luni, avans 15%, fără asigurări și taxe.<br>
+      Prețurile de listă pot varia în funcție de configurație și numărul de unități.
+    </p>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- BUSINESS CLASS -->
+  <div class="business-section">
+    <div class="section-label" style="color:#ff6666;">Pachet exclusiv Autopadova</div>
+    <div class="business-title">IVECO Daily Business Class</div>
+    <div class="business-sub">Putere, Confort și Fără Griji</div>
+    <ul class="benefits-list">
+      <li>Garanție extinsă 4 ani fără limită de km</li>
+      <li>Sau 5 ani / 200.000 km</li>
+      <li>120.000 km revizii incluse</li>
+      <li>Conectivitate OTA gratuită 3 ani</li>
+      <li>50% reducere la ITP (Iași)</li>
+      <li>Tractare gratuită în garanție</li>
+      <li>Prioritate la revizii</li>
+      <li>Dobândă preferențială de la 0%</li>
+    </ul>
+    <div class="warranty-banner">Garanție Extinsă 2+2 sau 3+2 ani</div>
+  </div>
+
+  <!-- WHY AUTOPADOVA -->
+  <div class="why-section">
+    <div class="section-label">Partenerul tău de transport</div>
+    <div class="section-title">De ce Autopadova?</div>
+    <div class="why-items">
+      <div class="why-item">
+        <div class="why-icon">30</div>
+        <div class="why-text">
+          <strong>Consultanți specializați de 30 de ani</strong>
+          <span>Configurare vehicul adaptată misiunii tale, fără compromisuri</span>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-icon">%</div>
+        <div class="why-text">
+          <strong>Cotă de piață 23,9%</strong>
+          <span>IVECO lider în segmentul &gt;3,5t în România (APIA 2025)</span>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-icon">€</div>
+        <div class="why-text">
+          <strong>Finanțare 0% dobândă până 30.06.2026</strong>
+          <span>Leasing operațional, credit, asigurare CASCO — totul sub același acoperiș</span>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-icon">📦</div>
+        <div class="why-text">
+          <strong>Stock Disponibil + Livrare Rapidă</strong>
+          <span>Vehicule în stoc; carosare la cerere prin parteneri autorizați</span>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-icon">🔧</div>
+        <div class="why-text">
+          <strong>Rețea Service 365/24/7</strong>
+          <span>Autopadova Iași și Bacău — service, piese originale, garanție producător</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <div class="cta-title">Solicită oferta ta personalizată</div>
+    <div class="cta-sub">Contactează-ne astăzi — configurăm vehiculul perfect pentru activitatea ta</div>
+    <div class="cta-buttons">
+      <a href="tel:0757800900" class="btn-primary">📞 0757 800 900</a>
+      <a href="mailto:iveco@autopadova.ro" class="btn-secondary">✉ iveco@autopadova.ro</a>
+      <a href="https://iveco.autopadova.ro" class="btn-secondary">🌐 iveco.autopadova.ro</a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-grid">
+      <div class="footer-location">
+        <strong>Iași</strong>
+        <span>DN 28, km 61</span>
+      </div>
+      <div class="footer-location">
+        <strong>Bacău</strong>
+        <span>Calea Republicii 179</span>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 ROMIL SRL — Autopadova. Toate drepturile rezervate.</div>
+      <div class="footer-links">
+        <a href="https://www.autopadova.com">autopadova.com</a>
+        <a href="https://iveco.autopadova.ro">iveco.autopadova.ro</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
