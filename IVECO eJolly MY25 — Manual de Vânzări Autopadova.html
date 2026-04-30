@@ -1,0 +1,1531 @@
+<!DOCTYPE html>
+<!-- saved from url=(0064)file:///Users/crispascal/Downloads/manual_ejolly_autopadova.html -->
+<html lang="ro"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IVECO eJolly MY25 — Manual de Vânzări Autopadova</title>
+<link href="./IVECO eJolly MY25 — Manual de Vânzări Autopadova_files/css2" rel="stylesheet">
+<style>
+  :root {
+    --blue: #0055FF;
+    --blue-light: #3380FF;
+    --cyan: #00CFFF;
+    --dark: #050A14;
+    --dark2: #0A1220;
+    --dark3: #0F1A2E;
+    --dark4: #162238;
+    --text: #E8EDF5;
+    --text-dim: #7A90B0;
+    --accent: #00CFFF;
+    --green: #00E5A0;
+    --orange: #FF6B35;
+    --border: rgba(0,85,255,0.25);
+    --card-bg: rgba(15,26,46,0.8);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--dark);
+    color: var(--text);
+    font-family: 'Barlow', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ───── HERO ───── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0 8vw;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content:'';
+    position: absolute; inset:0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 50%, rgba(0,85,255,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 90% 20%, rgba(0,207,255,0.08) 0%, transparent 60%),
+      linear-gradient(180deg, var(--dark) 0%, var(--dark2) 100%);
+  }
+
+  .hero-grid {
+    position: absolute; inset:0;
+    background-image:
+      linear-gradient(rgba(0,85,255,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,85,255,0.06) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 80%);
+  }
+
+  .hero-eyebrow {
+    position: relative;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-eyebrow::before {
+    content:'';
+    width:40px; height:2px;
+    background: var(--cyan);
+  }
+
+  .hero-title {
+    position: relative;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(72px, 12vw, 160px);
+    font-weight: 900;
+    line-height: 0.88;
+    text-transform: uppercase;
+    letter-spacing: -2px;
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+
+  .hero-title .e {
+    color: var(--cyan);
+    -webkit-text-stroke: 0;
+  }
+  .hero-title .jolly {
+    color: var(--text);
+  }
+
+  .hero-subtitle {
+    position: relative;
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--text-dim);
+    margin-top: 20px;
+    max-width: 500px;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+
+  .hero-badges {
+    position: relative;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 40px;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+
+  .badge {
+    padding: 8px 16px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--cyan);
+    background: rgba(0,207,255,0.06);
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 40px; left: 50%;
+    transform: translateX(-50%);
+    display: flex; flex-direction: column;
+    align-items: center; gap: 8px;
+    font-size: 11px; letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    animation: bounce 2s infinite;
+  }
+  .hero-scroll::after {
+    content:'';
+    width:1px; height:40px;
+    background: linear-gradient(var(--border), transparent);
+  }
+
+  /* ───── NAV ───── */
+  nav {
+    position: fixed;
+    top:0; left:0; right:0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 8vw;
+    background: rgba(5,10,20,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    color: var(--text);
+  }
+  .nav-logo span { color: var(--cyan); }
+
+  .nav-links {
+    display: flex; gap: 32px;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--cyan); }
+
+  /* ───── SECTIONS ───── */
+  section {
+    padding: 100px 8vw;
+    position: relative;
+  }
+
+  .section-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::before {
+    content:'';
+    width:24px; height:2px;
+    background: var(--cyan);
+    flex-shrink:0;
+  }
+
+  .section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(40px, 5vw, 64px);
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 0.95;
+    letter-spacing: -1px;
+    margin-bottom: 48px;
+  }
+
+  /* ───── SPEC CARDS ───── */
+  .specs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 2px;
+  }
+
+  .spec-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 28px 24px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .spec-card::before {
+    content:'';
+    position: absolute;
+    top:0; left:0; right:0;
+    height:2px;
+    background: linear-gradient(90deg, var(--blue), var(--cyan));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .spec-card:hover { border-color: rgba(0,85,255,0.5); transform: translateY(-2px); }
+  .spec-card:hover::before { transform: scaleX(1); }
+
+  .spec-value {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 42px;
+    font-weight: 900;
+    color: var(--text);
+    line-height: 1;
+  }
+  .spec-value .unit {
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--cyan);
+    margin-left: 4px;
+  }
+
+  .spec-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-top: 8px;
+  }
+
+  .spec-note {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-top: 6px;
+    font-style: italic;
+  }
+
+  /* ───── BATTERY SECTION ───── */
+  .battery-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .battery-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .battery-card.featured {
+    border-color: rgba(0,207,255,0.4);
+  }
+  .battery-card.featured::after {
+    content: 'RECOMANDAT';
+    position: absolute;
+    top: 20px; right: -30px;
+    background: var(--cyan);
+    color: var(--dark);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    padding: 4px 40px;
+    transform: rotate(45deg);
+  }
+
+  .battery-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 16px;
+  }
+
+  .battery-kwh {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 80px;
+    font-weight: 900;
+    line-height: 1;
+    color: var(--text);
+  }
+  .battery-kwh span {
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--text-dim);
+  }
+
+  .battery-range {
+    margin-top: 16px;
+    font-size: 20px;
+    color: var(--green);
+    font-weight: 600;
+  }
+
+  .battery-stats {
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .battery-stat {
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+  }
+  .battery-stat .val {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .battery-stat .lbl {
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  /* ───── USP SECTION ───── */
+  .usp-section {
+    background: var(--dark2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .usp-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+  }
+
+  .usp-item {
+    padding: 48px 40px;
+    border-right: 1px solid var(--border);
+    position: relative;
+    transition: background 0.3s;
+  }
+  .usp-item:last-child { border-right: none; }
+  .usp-item:hover { background: rgba(0,85,255,0.05); }
+
+  .usp-icon {
+    font-size: 36px;
+    margin-bottom: 20px;
+    display: block;
+    filter: grayscale(0.3);
+  }
+
+  .usp-number {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: var(--blue-light);
+    margin-bottom: 12px;
+  }
+
+  .usp-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  .usp-title em {
+    font-style: normal;
+    color: var(--cyan);
+  }
+
+  .usp-desc {
+    font-size: 14px;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+
+  .usp-highlight {
+    margin-top: 16px;
+    padding: 10px 14px;
+    background: rgba(0,207,255,0.06);
+    border-left: 3px solid var(--cyan);
+    font-size: 13px;
+    color: var(--text);
+  }
+
+  /* ───── DIMENSIONS ───── */
+  .dim-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+
+  .dim-visual {
+    background: var(--dark3);
+    border: 1px solid var(--border);
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .dim-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .dim-row:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .dim-name {
+    font-size: 13px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .dim-values {
+    display: flex;
+    gap: 24px;
+  }
+
+  .dim-val-item {
+    text-align: right;
+  }
+  .dim-val-item .ver {
+    font-size: 10px;
+    color: var(--cyan);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .dim-val-item .num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .dim-usp {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .dim-usp-card {
+    background: var(--dark3);
+    border: 1px solid var(--border);
+    padding: 28px;
+    position: relative;
+  }
+  .dim-usp-card.hero-card {
+    border-color: var(--cyan);
+    background: rgba(0,207,255,0.05);
+  }
+
+  .dim-usp-card .tag {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 8px;
+  }
+  .dim-usp-card .title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .dim-usp-card .desc {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  /* ───── COMPARISON TABLE ───── */
+  .comp-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  .comp-table th {
+    padding: 16px 20px;
+    text-align: left;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    background: var(--dark3);
+    border-bottom: 1px solid var(--border);
+  }
+  .comp-table th.iveco-col {
+    color: var(--cyan);
+    background: rgba(0,207,255,0.08);
+  }
+  .comp-table td {
+    padding: 14px 20px;
+    border-bottom: 1px solid rgba(0,85,255,0.12);
+    color: var(--text-dim);
+  }
+  .comp-table td.iveco-col {
+    color: var(--text);
+    background: rgba(0,207,255,0.04);
+    font-weight: 600;
+  }
+  .comp-table td.row-label {
+    color: var(--text);
+    font-weight: 500;
+  }
+  .comp-table tr:hover td { background: rgba(0,85,255,0.04); }
+  .comp-table tr:hover td.iveco-col { background: rgba(0,207,255,0.08); }
+
+  .win { color: var(--green) !important; font-weight: 700 !important; }
+  .lose { color: #FF4444 !important; }
+
+  /* ───── ADAS ───── */
+  .adas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .adas-item {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 24px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    transition: border-color 0.3s;
+  }
+  .adas-item:hover { border-color: rgba(0,85,255,0.4); }
+
+  .adas-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--green);
+    flex-shrink:0;
+    margin-top: 5px;
+    box-shadow: 0 0 8px var(--green);
+  }
+  .adas-dot.opt { background: var(--cyan); box-shadow: 0 0 8px var(--cyan); }
+
+  .adas-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .adas-desc {
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+
+  /* ───── SALES SCRIPTS ───── */
+  .scripts-section { background: var(--dark2); }
+
+  .objection-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .objection-card {
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .objection-q {
+    background: var(--dark4);
+    padding: 20px 24px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--orange);
+    position: relative;
+    padding-left: 48px;
+  }
+  .objection-q::before {
+    content: '❝';
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    opacity: 0.5;
+    color: var(--orange);
+  }
+
+  .objection-a {
+    padding: 20px 24px;
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.7;
+    background: rgba(0,207,255,0.03);
+    border-top: 1px solid var(--border);
+  }
+  .objection-a strong { color: var(--cyan); }
+
+  /* ───── SERVICES ───── */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .service-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 32px 28px;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .service-card:hover {
+    border-color: rgba(0,85,255,0.5);
+    transform: translateY(-4px);
+  }
+
+  .service-icon {
+    font-size: 32px;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .service-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+  .service-type {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--blue-light);
+    margin-bottom: 12px;
+  }
+  .service-desc {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  /* ───── FOOTER ───── */
+  footer {
+    background: var(--dark2);
+    border-top: 1px solid var(--border);
+    padding: 48px 8vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .footer-brand {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 28px;
+    font-weight: 900;
+  }
+  .footer-brand span { color: var(--cyan); }
+
+  .footer-info {
+    text-align: right;
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+  .footer-info strong { color: var(--text); }
+
+  /* ───── LAUNCH BANNER ───── */
+  .launch-banner {
+    background: linear-gradient(135deg, rgba(0,85,255,0.15), rgba(0,207,255,0.08));
+    border: 1px solid rgba(0,207,255,0.3);
+    padding: 48px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .launch-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 44px;
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+  .launch-title em { font-style: normal; color: var(--cyan); }
+
+  .launch-date {
+    text-align: center;
+    border: 1px solid var(--cyan);
+    padding: 24px 40px;
+    flex-shrink: 0;
+  }
+  .launch-date .month {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--cyan);
+  }
+  .launch-date .year {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 56px;
+    font-weight: 900;
+    line-height: 1;
+    color: var(--text);
+  }
+  .launch-date .label {
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* ───── ANIMATIONS ───── */
+  @keyframes fadeUp {
+    from { opacity:0; transform: translateY(24px); }
+    to { opacity:1; transform: translateY(0); }
+  }
+  @keyframes bounce {
+    0%,100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  .reveal {
+    opacity:0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity:1;
+    transform: translateY(0);
+  }
+
+  /* ───── DIVIDER ───── */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 0;
+  }
+
+  /* responsive */
+  @media(max-width:900px){
+    .usp-grid, .battery-grid, .dim-wrapper, .objection-grid, .services-grid {
+      grid-template-columns: 1fr;
+    }
+    .nav-links { display:none; }
+    section { padding: 70px 6vw; }
+    .comp-table { font-size:12px; }
+    .comp-table th, .comp-table td { padding: 10px 12px; }
+    .launch-banner { padding: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">AUTO<span>PADOVA</span> × <span>IVECO</span></div>
+  <ul class="nav-links">
+    <li><a href="file:///Users/crispascal/Downloads/manual_ejolly_autopadova.html#specs">Specificații</a></li>
+    <li><a href="file:///Users/crispascal/Downloads/manual_ejolly_autopadova.html#baterii">Baterii</a></li>
+    <li><a href="file:///Users/crispascal/Downloads/manual_ejolly_autopadova.html#avantaje">Avantaje</a></li>
+    <li><a href="file:///Users/crispascal/Downloads/manual_ejolly_autopadova.html#dimensiuni">Dimensiuni</a></li>
+    <li><a href="file:///Users/crispascal/Downloads/manual_ejolly_autopadova.html#competitie">Competiție</a></li>
+    <li><a href="file:///Users/crispascal/Downloads/manual_ejolly_autopadova.html#vanzari">Vânzări</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-eyebrow">IVECO — MY25 — MANUAL DE VÂNZĂRI AUTOPADOVA</div>
+  <h1 class="hero-title">
+    <span class="e">e</span><span class="jolly">JOLLY</span>
+  </h1>
+  <p class="hero-subtitle">Furgonul electric urban de referință. Compact, spaţios, cu acces unde concurența nu poate intra.</p>
+  <div class="hero-badges">
+    <span class="badge">Permis B · GVW 2,8–3,2t</span>
+    <span class="badge">≤1,90m înălțime</span>
+    <span class="badge">352 km autonomie</span>
+    <span class="badge">NCAP 2024 Gold 67%</span>
+    <span class="badge">H2 2026 lansare RO</span>
+  </div>
+  <div class="hero-scroll">SCROLL</div>
+</div>
+
+<!-- SPECS -->
+<section id="specs">
+  <div class="section-label reveal">Specificații tehnice</div>
+  <h2 class="section-title reveal">Performanță<br>urbană definită</h2>
+
+  <div class="specs-grid reveal">
+    <div class="spec-card" style="transition-delay: 0ms;">
+      <div class="spec-value">100<span class="unit">kW</span></div>
+      <div class="spec-label">Putere motor</div>
+      <div class="spec-note">Motor sincron magneți permanenți / 3 perechi poli</div>
+    </div>
+    <div class="spec-card" style="transition-delay: 60ms;">
+      <div class="spec-value">270<span class="unit">Nm</span></div>
+      <div class="spec-label">Cuplu maxim</div>
+      <div class="spec-note">Disponibil imediat de la 0 RPM — accelerare rapidă în trafic</div>
+    </div>
+    <div class="spec-card" style="transition-delay: 120ms;">
+      <div class="spec-value">352<span class="unit">km</span></div>
+      <div class="spec-label">Autonomie WLTP max.</div>
+      <div class="spec-note">Cu bateria de 75 kWh / ciclu combinat WLTP 21°C</div>
+    </div>
+    <div class="spec-card" style="transition-delay: 180ms;">
+      <div class="spec-value">130<span class="unit">km/h</span></div>
+      <div class="spec-label">Viteză maximă</div>
+      <div class="spec-note">Adecvată pentru drumuri naționale și autostrăzi</div>
+    </div>
+    <div class="spec-card" style="transition-delay: 240ms;">
+      <div class="spec-value">1.175<span class="unit">kg</span></div>
+      <div class="spec-label">Sarcină utilă max.</div>
+      <div class="spec-note">Ambele versiuni de baterie — nu sacrifici capacitate pentru energie</div>
+    </div>
+    <div class="spec-card" style="transition-delay: 300ms;">
+      <div class="spec-value">1.000<span class="unit">kg</span></div>
+      <div class="spec-label">Capacitate tractare</div>
+      <div class="spec-note">Trailer mic, remorcă ușoară — flexibilitate pentru meseriași</div>
+    </div>
+    <div class="spec-card" style="transition-delay: 360ms;">
+      <div class="spec-value">6,6<span class="unit">m³</span></div>
+      <div class="spec-label">Volum max (L3 + mod.)</div>
+      <div class="spec-note">L2: 5,3–5,8 m³ / L3: 6,1–6,6 m³ cu perete modular extins</div>
+    </div>
+    <div class="spec-card" style="transition-delay: 420ms;">
+      <div class="spec-value">≤1,9<span class="unit">m</span></div>
+      <div class="spec-label">Înălțime — AVANTAJ CHEIE</div>
+      <div class="spec-note">Accesează parcări subterane, centre comerciale, zone restricționate</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- BATERII -->
+<section id="baterii" style="background: var(--dark2);">
+  <div class="section-label reveal">Pachet energetic</div>
+  <h2 class="section-title reveal">Două opțiuni<br>de baterie</h2>
+
+  <div class="battery-grid reveal">
+    <!-- Mic -->
+    <div class="battery-card">
+      <div class="battery-name">Baterie Mică — Entry</div>
+      <div class="battery-kwh">49<span> kWh</span></div>
+      <div class="battery-range">↗ Până la 224 km WLTP</div>
+      <div class="battery-stats">
+        <div class="battery-stat">
+          <div class="val">42 kWh</div>
+          <div class="lbl">Utilizabili</div>
+        </div>
+        <div class="battery-stat">
+          <div class="val">100 kW DC</div>
+          <div class="lbl">Încărcare rapidă</div>
+        </div>
+        <div class="battery-stat">
+          <div class="val">30 min</div>
+          <div class="lbl">20–80% DC</div>
+        </div>
+        <div class="battery-stat">
+          <div class="val">11 kW AC</div>
+          <div class="lbl">Wallbox</div>
+        </div>
+      </div>
+      <div style="margin-top:20px; padding:12px 16px; background:rgba(0,85,255,0.08); border-left:3px solid var(--blue); font-size:13px; color:var(--text-dim);">
+        Ideal pentru: trasee scurte urbane, încărcare nocturnă la bază. Cost de achiziție mai mic.
+      </div>
+    </div>
+
+    <!-- Mare -->
+    <div class="battery-card featured">
+      <div class="battery-name">Baterie Mare — Extended</div>
+      <div class="battery-kwh">75<span> kWh</span></div>
+      <div class="battery-range">↗ Până la 352 km WLTP</div>
+      <div class="battery-stats">
+        <div class="battery-stat">
+          <div class="val">69 kWh</div>
+          <div class="lbl">Utilizabili</div>
+        </div>
+        <div class="battery-stat">
+          <div class="val">100 kW DC</div>
+          <div class="lbl">Încărcare rapidă</div>
+        </div>
+        <div class="battery-stat">
+          <div class="val">35 min</div>
+          <div class="lbl">20–80% DC</div>
+        </div>
+        <div class="battery-stat">
+          <div class="val">11 kW AC</div>
+          <div class="lbl">Wallbox</div>
+        </div>
+      </div>
+      <div style="margin-top:20px; padding:12px 16px; background:rgba(0,207,255,0.08); border-left:3px solid var(--cyan); font-size:13px; color:var(--text);">
+        Ideal pentru: o zi completă de lucru fără reîncărcare. Flexibilitate maximă, risc zero de „range anxiety".
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:24px; background:var(--dark3); border:1px solid var(--border); padding:24px 32px; display:flex; gap:40px; flex-wrap:wrap; align-items:center;" class="reveal">
+    <div>
+      <div style="font-family:&#39;Barlow Condensed&#39;,sans-serif; font-size:14px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--cyan); margin-bottom:8px;">NMC LI-ION — Stellantis / CATL</div>
+      <div style="font-size:14px; color:var(--text-dim);">Chimie dovedită industrial, răcire cu apă, producători de top mondial.</div>
+    </div>
+    <div style="height:40px; width:1px; background:var(--border);"></div>
+    <div>
+      <div style="font-family:&#39;Barlow Condensed&#39;,sans-serif; font-size:14px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--cyan); margin-bottom:8px;">100 km în 15 minute</div>
+      <div style="font-size:14px; color:var(--text-dim);">Cu stație DC 100 kW — o pauză de cafea = autonomie pentru toată după-amiaza.</div>
+    </div>
+    <div style="height:40px; width:1px; background:var(--border);"></div>
+    <div>
+      <div style="font-family:&#39;Barlow Condensed&#39;,sans-serif; font-size:14px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--cyan); margin-bottom:8px;">Programare nocturnă</div>
+      <div style="font-size:14px; color:var(--text-dim);">Prin aplicația Easy eJolly sau IVECO ON — pleacă dimineața cu bateria plină.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- AVANTAJE COMPETITIVE -->
+<section id="avantaje" class="usp-section">
+  <div style="padding: 0 0 60px 0;" class="reveal">
+    <div class="section-label">Argumente de vânzări</div>
+    <h2 class="section-title">Top avantaje<br>competitive</h2>
+  </div>
+
+  <div class="usp-grid reveal">
+    <div class="usp-item">
+      <span class="usp-icon">🅿️</span>
+      <div class="usp-number">01 — AVANTAJ UNIC</div>
+      <h3 class="usp-title">Înălțime<br><em>≤1,90m</em></h3>
+      <p class="usp-desc">Singura versiune de furgon din clasa sa care intră în parcări subterane, parcări de mall și zone turistice cu restricție de înălțime. Concurența directă depășește 1,95–2,04m.</p>
+      <div class="usp-highlight">💬 Script: <em>"Clientul dumneavoastră lucrează în centru? eJolly parcheaza unde Transporter-ul nu intră."</em></div>
+    </div>
+    <div class="usp-item">
+      <span class="usp-icon">⚡</span>
+      <div class="usp-number">02 — PRODUCTIVITATE</div>
+      <h3 class="usp-title">Sarcină<br><em>1.175 kg</em></h3>
+      <p class="usp-desc">Sarcină utilă ridicată pentru dimensiunile vehiculului — ambele versiuni de baterie. Meșteșugarul pornește dimineața cu tot echipamentul și materialele necesare fără calcule de greutate.</p>
+      <div class="usp-highlight">💬 Script: <em>"Aceeași sarcină utilă indiferent de bateria aleasă — nu plătești mai puțin pentru mai mult."</em></div>
+    </div>
+    <div class="usp-item">
+      <span class="usp-icon">🛡️</span>
+      <div class="usp-number">03 — SIGURANȚĂ</div>
+      <h3 class="usp-title">ADAS<br><em>Nivel 2+</em></h3>
+      <p class="usp-desc">NCAP 2024 Gold 67%. Frenare autonomă de urgență, menținere bandă, cruise adaptiv, detectare pietoni și bicicliști — toate standard. Reducere directă a riscului de accident și costuri asigurare.</p>
+      <div class="usp-highlight">💬 Script: <em>"Asigurarea poate fi renegociată — vehiculul are sisteme identice cu o mașină premium."</em></div>
+    </div>
+  </div>
+
+  <div class="usp-grid reveal" style="border-top: 1px solid var(--border);">
+    <div class="usp-item">
+      <span class="usp-icon">📱</span>
+      <div class="usp-number">04 — CONECTIVITATE</div>
+      <h3 class="usp-title">Aplicație<br><em>Easy eJolly</em></h3>
+      <p class="usp-desc">Precondiționare cabină înainte de plecare, monitorizare autonomie în timp real, programare încărcare, gestionare vehicul de la distanță. Plus IVECO ON pentru management flotă.</p>
+      <div class="usp-highlight">💬 Script: <em>"Dimineața la 6 ai cabina caldă și bateria 100% — fără să te urci în mașine."</em></div>
+    </div>
+    <div class="usp-item">
+      <span class="usp-icon">🔌</span>
+      <div class="usp-number">05 — VERSATILITATE</div>
+      <h3 class="usp-title">Moduri<br><em>Teren variat</em></h3>
+      <p class="usp-desc">Moduri de conducere Sport/Normal/Eco. Opțional: Control Aderență cu moduri specializate Noroi, Zăpadă, Nisip. FWD cu motor sincron = comportament stabil și predictibil în toate condițiile.</p>
+      <div class="usp-highlight">💬 Script: <em>"Iarna pe gheață sau vara pe un drum de șantier — are mod dedicat pentru fiecare situație."</em></div>
+    </div>
+    <div class="usp-item">
+      <span class="usp-icon">💰</span>
+      <div class="usp-number">06 — ECONOMICS</div>
+      <h3 class="usp-title">Cost<br><em>operațional -70%</em></h3>
+      <p class="usp-desc">Energie electrică vs. motorină: economie estimată 65-75% per km în utilizare urbană. Zero taxă CO2, zero taxă zone ZEZ. Întreținere redusă: nu există ulei, filtru, ambreiaj, curea distribuție.</p>
+      <div class="usp-highlight">💬 Script: <em>"La 60.000 km/an, diferența față de diesel poate acoperi rata lunară."</em></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- DIMENSIUNI -->
+<section id="dimensiuni">
+  <div class="section-label reveal">Spațiu de încărcare</div>
+  <h2 class="section-title reveal">Compact exterior,<br>maxim interior</h2>
+
+  <div class="dim-wrapper reveal">
+    <div class="dim-visual">
+      <div style="font-family:&#39;Barlow Condensed&#39;,sans-serif; font-size:12px; font-weight:700; letter-spacing:4px; color:var(--cyan); text-transform:uppercase; margin-bottom:8px;">Dimensiuni compartiment — L2 vs L3</div>
+
+      <div class="dim-row">
+        <div class="dim-name">Lungime planșeu</div>
+        <div class="dim-values">
+          <div class="dim-val-item">
+            <div class="ver">L2</div>
+            <div class="num">2.512 mm</div>
+          </div>
+          <div class="dim-val-item">
+            <div class="ver">L3</div>
+            <div class="num">2.862 mm</div>
+          </div>
+        </div>
+      </div>
+      <div class="dim-row">
+        <div class="dim-name">Înălțime încărcare</div>
+        <div class="dim-values">
+          <div class="dim-val-item">
+            <div class="ver">L2/L3</div>
+            <div class="num">1.397 mm</div>
+          </div>
+        </div>
+      </div>
+      <div class="dim-row">
+        <div class="dim-name">Lățime maximă</div>
+        <div class="dim-values">
+          <div class="dim-val-item">
+            <div class="ver">L2/L3</div>
+            <div class="num">1.636 mm</div>
+          </div>
+        </div>
+      </div>
+      <div class="dim-row">
+        <div class="dim-name">Lățime între pasaje roată</div>
+        <div class="dim-values">
+          <div class="dim-val-item">
+            <div class="ver">L2/L3</div>
+            <div class="num">1.258 mm</div>
+          </div>
+        </div>
+      </div>
+      <div class="dim-row">
+        <div class="dim-name">Portieră laterală (H × L)</div>
+        <div class="dim-values">
+          <div class="dim-val-item">
+            <div class="ver">h × l</div>
+            <div class="num">1.241 × 935 mm</div>
+          </div>
+        </div>
+      </div>
+      <div class="dim-row">
+        <div class="dim-name">Uși spate (H × L)</div>
+        <div class="dim-values">
+          <div class="dim-val-item">
+            <div class="ver">h × l</div>
+            <div class="num">1.220 × 1.282 mm</div>
+          </div>
+        </div>
+      </div>
+      <div class="dim-row">
+        <div class="dim-name">Prag încărcare (fără sarcină)</div>
+        <div class="dim-values">
+          <div class="dim-val-item">
+            <div class="ver">L2</div>
+            <div class="num">539–608 mm</div>
+          </div>
+          <div class="dim-val-item">
+            <div class="ver">L3</div>
+            <div class="num">595–628 mm</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dim-usp">
+      <div class="dim-usp-card hero-card">
+        <div class="tag">⭐ Avantaj competitiv #1</div>
+        <div class="title">Înălțime ≤1,90m</div>
+        <div class="desc">Versiunea L2 scurt: 1.881 mm. Versiunea L2 sarcină crescută: 1.920 mm. Accesează parcări subterane cu restricție standard de 1,90–2,00m. Punctul cel mai înalt e la spate — antena se pliează la trecerea sub grindă.</div>
+      </div>
+      <div class="dim-usp-card">
+        <div class="tag">Modularitate</div>
+        <div class="title">Perete modular extins</div>
+        <div class="desc">Opțional: deschidere în peretele despărțitor pentru încărcături lungi. Volumul crește la 5,8 m³ (L2) sau 6,6 m³ (L3). Perfect pentru conducte, profile, scări — meseriași în construcții.</div>
+      </div>
+      <div class="dim-usp-card">
+        <div class="tag">Acces facilitat</div>
+        <div class="title">Uși 180° deschidere</div>
+        <div class="desc">Portieră laterală culisantă 935 × 1.241 mm + uși spate 180°. Lărgime utilă uși spate: 1.282 mm. Accesul la marfă este rapid și ergonomic în toate condițiile.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ADAS -->
+<section id="adas" style="background: var(--dark2);">
+  <div class="section-label reveal">Sisteme de asistență</div>
+  <h2 class="section-title reveal">ADAS Nivel 2+<br>Standard pe toată gama</h2>
+
+  <div class="adas-grid reveal">
+    <div class="adas-item" style="transition-delay: 0ms;">
+      <div class="adas-dot"></div>
+      <div>
+        <div class="adas-name">AEB — Frânare Autonomă Urgență</div>
+        <div class="adas-desc">Detectare pietoni și bicicliști. Standard pe toate versiunile. Reduce riscul de accident frontal în traficul urban.</div>
+      </div>
+    </div>
+    <div class="adas-item" style="transition-delay: 60ms;">
+      <div class="adas-dot"></div>
+      <div>
+        <div class="adas-name">Lane Keep Assist — Menținere Bandă</div>
+        <div class="adas-desc">Corecții active de direcție la deparasire involuntară. Standard. Alerte tactile, vizuale și sonore.</div>
+      </div>
+    </div>
+    <div class="adas-item" style="transition-delay: 120ms;">
+      <div class="adas-dot"></div>
+      <div>
+        <div class="adas-name">Recunoaștere Semne de Circulație</div>
+        <div class="adas-desc">Cameră frontală HD. Afișare pe tabloul de bord. Baza pentru Intelligent Speed Assist.</div>
+      </div>
+    </div>
+    <div class="adas-item" style="transition-delay: 180ms;">
+      <div class="adas-dot"></div>
+      <div>
+        <div class="adas-name">Oglindă Retrovizoare Digitală</div>
+        <div class="adas-desc">Ecran HD cu vedere posterioară + laterală unghi mort. Câmp vizual 180° cu cameră integrată.</div>
+      </div>
+    </div>
+    <div class="adas-item" style="transition-delay: 240ms;">
+      <div class="adas-dot opt"></div>
+      <div>
+        <div class="adas-name">Cruise Adaptiv Stop&amp;Go — Opțional</div>
+        <div class="adas-desc">Menținere distanță față, oprire și repornire automată în coloană. Conducere autonomă L2 complet.</div>
+      </div>
+    </div>
+    <div class="adas-item" style="transition-delay: 300ms;">
+      <div class="adas-dot opt"></div>
+      <div>
+        <div class="adas-name">Control Aderență — Noroi/Zăpadă/Nisip</div>
+        <div class="adas-desc">Opțional. 3 moduri specializate pentru suprafețe dificile. Activ până la 60–80 km/h în funcție de mod.</div>
+      </div>
+    </div>
+    <div class="adas-item" style="transition-delay: 360ms;">
+      <div class="adas-dot"></div>
+      <div>
+        <div class="adas-name">Parbriz Încălzit + Oglinzi</div>
+        <div class="adas-desc">Rezistențe invizibile pe toată suprafața. Activare cu un singur buton. Degivrare rapidă iarna.</div>
+      </div>
+    </div>
+    <div class="adas-item" style="transition-delay: 420ms;">
+      <div class="adas-dot opt"></div>
+      <div>
+        <div class="adas-name">Intelligent Speed Assist</div>
+        <div class="adas-desc">Setare automată limitator viteză pe baza semnelor detectate. Standard pe versiunile cu pachet ADAS extins.</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:16px; font-size:13px; color:var(--text-dim); padding:0 4px;" class="reveal">
+    ● Standard &nbsp;&nbsp; ● Opțional &nbsp;&nbsp; Clasificare NCAP 2024: <strong style="color:var(--cyan)">67% Gold</strong>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- COMPARATIE COMPETITORI -->
+<section id="competitie">
+  <div class="section-label reveal">Analiză competitivă</div>
+  <h2 class="section-title reveal">eJolly vs.<br>Competiție directă</h2>
+
+  <div class="reveal" style="overflow-x:auto;">
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th style="width:160px;">Criteriu</th>
+          <th class="iveco-col">eJOLLY (IVECO)</th>
+          <th>eTRANSIT Custom (Ford)</th>
+          <th>eTRANSPORTER (VW)</th>
+          <th>Trafic / Primastar (Nissan)</th>
+          <th>VITO (Mercedes)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="row-label">GVW</td>
+          <td class="iveco-col win">2,8–3,2 t</td>
+          <td>3,2 t</td>
+          <td>3,2 t</td>
+          <td>3,0 t</td>
+          <td>3,2 t</td>
+        </tr>
+        <tr>
+          <td class="row-label">Tracțiune</td>
+          <td class="iveco-col">FWD</td>
+          <td>RWD</td>
+          <td>RWD</td>
+          <td>FWD</td>
+          <td>FWD</td>
+        </tr>
+        <tr>
+          <td class="row-label">Baterie (mare)</td>
+          <td class="iveco-col">75 kWh</td>
+          <td>64 kWh</td>
+          <td>64 kWh</td>
+          <td>—</td>
+          <td>66 kWh</td>
+        </tr>
+        <tr>
+          <td class="row-label">Autonomie WLTP</td>
+          <td class="iveco-col win">352 km</td>
+          <td>307–320 km</td>
+          <td>357 km</td>
+          <td>—</td>
+          <td>307 km</td>
+        </tr>
+        <tr>
+          <td class="row-label">Sarcină utilă</td>
+          <td class="iveco-col win">1.175 kg</td>
+          <td>1.012–1.086 kg</td>
+          <td>1.092 kg</td>
+          <td>1.185 kg</td>
+          <td>883 kg</td>
+        </tr>
+        <tr>
+          <td class="row-label">Volum</td>
+          <td class="iveco-col">5,3–6,6 m³</td>
+          <td>5,8–6,8 m³</td>
+          <td>5,8–6,8 m³</td>
+          <td>5,8–8,9 m³</td>
+          <td>5,8–6,6 m³</td>
+        </tr>
+        <tr>
+          <td class="row-label">Înălțime vehicul</td>
+          <td class="iveco-col win">≤1,90 m ✓</td>
+          <td class="lose">1,959–2,04 m ✗</td>
+          <td class="lose">1,980 m ✗</td>
+          <td class="lose">1,971–2,49 m ✗</td>
+          <td>1,910 m</td>
+        </tr>
+        <tr>
+          <td class="row-label">Încărcare DC max</td>
+          <td class="iveco-col">100 kW</td>
+          <td>125 kW</td>
+          <td>125 kW</td>
+          <td>50 kW</td>
+          <td>80 kW</td>
+        </tr>
+        <tr>
+          <td class="row-label">NCAP 2024</td>
+          <td class="iveco-col">67% Gold</td>
+          <td>96% Platină</td>
+          <td>96% Platină</td>
+          <td>69% Gold</td>
+          <td>90% Platină</td>
+        </tr>
+        <tr>
+          <td class="row-label">Priza electrică V2L</td>
+          <td class="iveco-col win">5 kW ✓</td>
+          <td>V2L 2,3 kW</td>
+          <td>V2L 2,3 kW</td>
+          <td>Convertor 220V</td>
+          <td class="lose">N/A ✗</td>
+        </tr>
+        <tr>
+          <td class="row-label">Tractare</td>
+          <td class="iveco-col win">1.000 kg</td>
+          <td>2.000 kg</td>
+          <td>2.800 kg</td>
+          <td>2.500 kg</td>
+          <td>3.200 kg</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="margin-top:20px; display:flex; gap:24px; flex-wrap:wrap;" class="reveal">
+    <div style="padding:16px 24px; background:rgba(0,229,160,0.08); border:1px solid rgba(0,229,160,0.3); font-size:13px; color:var(--text);">
+      <span style="color:var(--green); font-weight:700;">✓ Câștigă</span> — Sarcina utilă cea mai bună (1.175 kg), Înălțimea sub 1,90m (avantaj unic), Alimentare V2L 5kW standard
+    </div>
+    <div style="padding:16px 24px; background:rgba(255,107,53,0.08); border:1px solid rgba(255,107,53,0.3); font-size:13px; color:var(--text);">
+      <span style="color:var(--orange); font-weight:700;">⚠ De menționat</span> — NCAP mai mic față de Transporter/Transit Custom. Tractare mai mică. Argumentați: ADAS L2+ compensează NCAP, tracțiunea FWD e suficientă pentru uz urban.
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SCRIPTURI VÂNZĂRI -->
+<section id="vanzari" class="scripts-section">
+  <div class="section-label reveal">Pregătire conversație</div>
+  <h2 class="section-title reveal">Răspunsuri la<br>obiecții frecvente</h2>
+
+  <div class="objection-grid reveal">
+    <div class="objection-card">
+      <div class="objection-q">„Nu ajunge autonomia pentru o zi"</div>
+      <div class="objection-a">eJolly 75 kWh = <strong>352 km WLTP</strong>. În ciclu urban real, consumul e mai mic — ajungi la 380-400 km. Dacă lucrezi în Iași sau Bacău, revii la bază cu bateria la 40-50%. <strong>Programezi încărcarea nocturnă din aplicație</strong> — dimineața ai 100%.</div>
+    </div>
+    <div class="objection-card">
+      <div class="objection-q">„Durează prea mult să încarc"</div>
+      <div class="objection-a">Cu stație DC 100 kW: <strong>100 km în 15 minute</strong>. De la 20 la 80% în 30 de minute — o pauză de masă. Încărcarea nocturnă pe wallbox 11 kW: <strong>gata în 6-7 ore</strong>. Nu e o problemă, e un obicei nou.</div>
+    </div>
+    <div class="objection-card">
+      <div class="objection-q">„E mai scump decât varianta diesel"</div>
+      <div class="objection-a">La <strong>50.000 km/an</strong> în urban: economie energie vs. motorină = 3.000-4.500 € per an. Fără ITP problematic, fără ulei, fără ambreiaj. <strong>Diferența de preț se amortizează în 2-3 ani</strong>. Business Class Autopadova include și finanțare 0%.</div>
+    </div>
+    <div class="objection-card">
+      <div class="objection-q">„Ce fac dacă se strică bateria?"</div>
+      <div class="objection-a">Bateria este produsă de <strong>Stellantis/CATL</strong>, cei mai mari producători mondiali. Garanție completă pe durata garanției vehiculului. Rețeaua IVECO Autopadova are tehnicieni certificați EV. Asistența rutieră inclusă în Business Class.</div>
+    </div>
+    <div class="objection-card">
+      <div class="objection-q">„Concurenta are mai mult volum"</div>
+      <div class="objection-a">Volumul e comparabil: 5,3-6,6 m³ vs. Transit Custom 5,8-6,8 m³ — <strong>diferența e de 0,5 m³</strong>. Dar eJolly are <strong>1.175 kg sarcină utilă</strong> față de 1.012-1.086 kg la Transit Custom. Pui mai mult în kg, chiar dacă e puțin mai mic în litri.</div>
+    </div>
+    <div class="objection-card">
+      <div class="objection-q">„Înălțimea de 1,90m nu mă ajută"</div>
+      <div class="objection-a">90% din parcările de mall și subterane au limita la 2,00m sau 1,90m. Clientul tău care lucrează în centru sau livrează la mall <strong>nu mai face ocol de 20 minute</strong>. Un singur timp câștigat pe zi = 4 ore pe lună. <strong>Asta e productivitate reală.</strong></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SERVICII -->
+<section id="servicii">
+  <div class="section-label reveal">Ecosistem digital</div>
+  <h2 class="section-title reveal">Servicii conectate<br>IVECO</h2>
+
+  <div class="services-grid reveal">
+    <div class="service-card" style="transition-delay: 0ms;">
+      <span class="service-icon">📱</span>
+      <div class="service-type">Standard Inclus</div>
+      <div class="service-name">Aplicație Easy eJolly</div>
+      <div class="service-desc">Control vehicul de la distanță: climatizare cabină, geamuri, lumini. Vizualizare autonomie și stare baterie. Programare încărcare (oră start, durată).</div>
+    </div>
+    <div class="service-card" style="transition-delay: 60ms;">
+      <span class="service-icon">🗺️</span>
+      <div class="service-type">Standard Inclus</div>
+      <div class="service-name">IVECO ON Access</div>
+      <div class="service-desc">Portal fleet management. Monitorizare stare vehicule. eRange Assurance — calculul autonom al autonomiei cu condiții meteo și trafic.</div>
+    </div>
+    <div class="service-card" style="transition-delay: 120ms;">
+      <span class="service-icon">⚙️</span>
+      <div class="service-type">Standard Inclus</div>
+      <div class="service-name">Monitorizare Uptime</div>
+      <div class="service-desc">Programare servicii și întreținere predictivă. Alerte proactive înainte de defecțiuni. Maximizare timp operational al flotei.</div>
+    </div>
+    <div class="service-card" style="transition-delay: 180ms;">
+      <span class="service-icon">🧭</span>
+      <div class="service-type">Premium Opțional</div>
+      <div class="service-name">TomTom Smart Routing</div>
+      <div class="service-desc">Navigare 3D cu rute optimizate pentru EV. Estimări precise autonomie pe rută. Selectare dimensiuni vehicul pentru evitare restricții.</div>
+    </div>
+    <div class="service-card" style="transition-delay: 240ms;">
+      <span class="service-icon">🔋</span>
+      <div class="service-type">Premium Opțional</div>
+      <div class="service-name">eCharge Management</div>
+      <div class="service-desc">Gestionare încărcare publică (rețea publică). Integrare wallbox privat. Card de încărcare unificat. Raportare costuri per vehicul.</div>
+    </div>
+    <div class="service-card" style="transition-delay: 300ms;">
+      <span class="service-icon">🏠</span>
+      <div class="service-type">Serviciu Autopadova</div>
+      <div class="service-name">eCharge Solutions</div>
+      <div class="service-desc">Instalare wallbox la depou sau acasă prin partener certificat. Studiu tehnic inclus. Finanțare disponibilă. Comisionare și service incluse.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- LANSARE -->
+<section style="background: var(--dark2);">
+  <div class="launch-banner reveal">
+    <div>
+      <div style="font-family:&#39;Barlow Condensed&#39;,sans-serif; font-size:12px; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:var(--cyan); margin-bottom:12px;">Planificare lansare România</div>
+      <div class="launch-title">eJolly —<br><em>H2 2026</em></div>
+      <div style="margin-top:16px; font-size:15px; color:var(--text-dim); max-width:420px; line-height:1.7;">Comenzi reprezentanță deschise din Martie 2026. Construiește pipeline acum — clienții care rezervă timpuriu au prioritate la livrare și beneficiază de condițiile de lansare.</div>
+    </div>
+
+    <div style="display:flex; gap:20px; flex-wrap:wrap;">
+      <div class="launch-date">
+        <div class="month">Comenzi</div>
+        <div class="year" style="font-size:32px;">MAR</div>
+        <div class="year">2026</div>
+        <div class="label">Deschidere</div>
+      </div>
+      <div class="launch-date" style="border-color:var(--green);">
+        <div class="month" style="color:var(--green);">Livrări</div>
+        <div class="year" style="font-size:32px; color:var(--green);">H2</div>
+        <div class="year">2026</div>
+        <div class="label">Disponibil</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick reference card -->
+  <div style="margin-top:48px;" class="reveal">
+    <div style="font-family:&#39;Barlow Condensed&#39;,sans-serif; font-size:12px; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:var(--cyan); margin-bottom:20px; display:flex; align-items:center; gap:12px;"><span style="width:24px;height:2px;background:var(--cyan);display:block;"></span>Card Rapid de Referință pentru Echipa de Vânzări</div>
+    <div style="background:var(--dark3); border:1px solid var(--border); padding:32px 40px; display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:24px;">
+      <div>
+        <div style="font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--cyan); margin-bottom:6px;">Baterie mică</div>
+        <div style="font-family:&#39;Barlow Condensed&#39;,sans-serif; font-size:22px; font-weight:800;">49 kWh → 224 km</div>
+      </div>
+      <div>
+        <div style="font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--cyan); margin-bottom:6px;">Baterie mare</div>
+        <div style="font-family:&#39;Barlow Condensed&#39;,sans-serif; font-size:22px; font-weight:800;">75 kWh → 352 km</div>
+      </div>
+      <div>
+        <div style="font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--cyan); margin-bottom:6px;">Sarcină utilă</div>
+        <div style="font-family:&#39;Barlow Condensed&#39;,sans-serif; font-size:22px; font-weight:800;">1.175 kg</div>
+      </div>
+      <div>
+        <div style="font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--cyan); margin-bottom:6px;">Înălțime cheie</div>
+        <div style="font-family:&#39;Barlow Condensed&#39;,sans-serif; font-size:22px; font-weight:800; color:var(--cyan);">≤1,90 m</div>
+      </div>
+      <div>
+        <div style="font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--cyan); margin-bottom:6px;">Motor</div>
+        <div style="font-family:&#39;Barlow Condensed&#39;,sans-serif; font-size:22px; font-weight:800;">100 kW / 270 Nm</div>
+      </div>
+      <div>
+        <div style="font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--cyan); margin-bottom:6px;">Reîncărcare rapidă</div>
+        <div style="font-family:&#39;Barlow Condensed&#39;,sans-serif; font-size:22px; font-weight:800;">100 km / 15 min</div>
+      </div>
+      <div>
+        <div style="font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--cyan); margin-bottom:6px;">Tractare</div>
+        <div style="font-family:&#39;Barlow Condensed&#39;,sans-serif; font-size:22px; font-weight:800;">1.000 kg</div>
+      </div>
+      <div>
+        <div style="font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--cyan); margin-bottom:6px;">NCAP 2024</div>
+        <div style="font-family:&#39;Barlow Condensed&#39;,sans-serif; font-size:22px; font-weight:800;">67% Gold</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">AUTO<span>PADOVA</span></div>
+  <div style="font-family:&#39;Barlow Condensed&#39;,sans-serif; font-size:13px; color:var(--text-dim); text-align:center;">
+    Document intern de training · Confidențial<br>
+    <span style="color:var(--cyan);">IVECO eJolly MY25</span> — Manual vânzări echipă Autopadova
+  </div>
+  <div class="footer-info">
+    <strong>Autopadova (ROMIL)</strong><br>
+    Dealer autorizat IVECO<br>
+    Iași · Bacău · România<br>
+    <span style="color:var(--cyan);">autopadova.com</span>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Stagger children in grids
+  document.querySelectorAll('.specs-grid, .adas-grid, .services-grid').forEach(grid => {
+    grid.querySelectorAll(':scope > *').forEach((child, i) => {
+      child.style.transitionDelay = `${i * 60}ms`;
+    });
+  });
+</script>
+
+
+
+</body></html>
