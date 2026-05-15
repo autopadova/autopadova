@@ -1,0 +1,1663 @@
+<!DOCTYPE html>
+<!-- saved from url=(0105)file:///Users/crispascal/Documents/Claude/Projects/Manualul%20Carosierului/Ghid_Interactiv_Caroserie.html -->
+<html lang="ro"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ghid Interactiv Caroserie — Autopadova SRL</title>
+<style>
+  :root {
+    --blue-dark: #1B3A6B;
+    --blue-med: #2E6DB4;
+    --orange: #E8621A;
+    --orange-light: #F5832E;
+    --gray-bg: #F2F5FA;
+    --gray-light: #E8EDF5;
+    --gray-text: #555;
+    --white: #ffffff;
+    --green: #27AE60;
+    --shadow: 0 4px 20px rgba(27,58,107,0.12);
+    --radius: 12px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: var(--gray-bg);
+    color: #222;
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue-med) 100%);
+    color: white;
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+  }
+
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .logo-area { display: flex; align-items: center; gap: 14px; }
+
+  .logo-badge {
+    background: var(--orange);
+    color: white;
+    font-weight: 800;
+    font-size: 18px;
+    padding: 8px 14px;
+    border-radius: 8px;
+    letter-spacing: 0.5px;
+  }
+
+  .header-title h1 { font-size: 20px; font-weight: 700; line-height: 1.2; }
+  .header-title p { font-size: 12px; opacity: 0.75; margin-top: 2px; }
+
+  .header-badge {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  /* MAIN LAYOUT */
+  main { max-width: 1100px; margin: 0 auto; padding: 28px 20px 60px; }
+
+  /* TABS NAV */
+  .tabs-nav {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+
+  .tab-btn {
+    padding: 10px 20px;
+    border: 2px solid var(--blue-med);
+    background: white;
+    color: var(--blue-med);
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .tab-btn:hover { background: var(--gray-light); }
+  .tab-btn.active {
+    background: var(--blue-dark);
+    border-color: var(--blue-dark);
+    color: white;
+  }
+
+  /* TAB PANELS */
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* SECTION TITLE */
+  .section-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--blue-dark);
+    margin-bottom: 6px;
+  }
+  .section-sub {
+    color: var(--gray-text);
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+
+  /* CAROSERIE CARDS GRID */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 18px;
+  }
+
+  .car-card {
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 2px solid transparent;
+  }
+  .car-card:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(27,58,107,0.18); }
+  .car-card.selected { border-color: var(--orange); }
+
+  .car-card-header {
+    background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue-med) 100%);
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .car-icon {
+    font-size: 32px;
+    flex-shrink: 0;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+  }
+
+  .car-card-header h3 { color: white; font-size: 16px; font-weight: 700; }
+  .car-card-header p { color: rgba(255,255,255,0.75); font-size: 12px; margin-top: 2px; }
+
+  .car-card-body { padding: 16px 18px; }
+
+  .tag-list { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+  .tag {
+    background: var(--gray-light);
+    color: var(--blue-dark);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+  .tag.orange { background: #FEE9DC; color: var(--orange); }
+  .tag.green { background: #D5F0E1; color: var(--green); }
+
+  .car-card-body p { font-size: 13px; color: var(--gray-text); line-height: 1.5; }
+
+  .expand-btn {
+    margin-top: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--blue-med);
+    font-size: 13px;
+    font-weight: 600;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+  .expand-btn:hover { color: var(--orange); }
+  .expand-btn svg { transition: transform 0.3s; }
+  .expand-btn.open svg { transform: rotate(180deg); }
+
+  .card-detail {
+    display: none;
+    border-top: 1px solid var(--gray-light);
+    margin-top: 14px;
+    padding-top: 14px;
+  }
+  .card-detail.open { display: block; }
+
+  .detail-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    margin-top: 8px;
+  }
+  .detail-table th {
+    background: var(--blue-dark);
+    color: white;
+    padding: 7px 10px;
+    text-align: left;
+  }
+  .detail-table td {
+    padding: 6px 10px;
+    border-bottom: 1px solid var(--gray-light);
+  }
+  .detail-table tr:nth-child(even) td { background: var(--gray-bg); }
+  .detail-table td:not(:first-child) { text-align: center; }
+
+  .detail-label { font-weight: 700; color: var(--blue-dark); font-size: 12px; margin-top: 12px; margin-bottom: 4px; }
+
+  /* WIZARD */
+  .wizard-wrap {
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  .wizard-progress {
+    background: var(--gray-light);
+    height: 6px;
+    position: relative;
+  }
+  .wizard-progress-fill {
+    background: var(--orange);
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.4s ease;
+  }
+
+  .wizard-header {
+    background: linear-gradient(135deg, var(--blue-dark), var(--blue-med));
+    color: white;
+    padding: 20px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .wizard-header h2 { font-size: 18px; }
+  .wizard-step-badge {
+    background: rgba(255,255,255,0.2);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .wizard-body { padding: 28px; }
+  .wizard-question { font-size: 18px; font-weight: 700; color: var(--blue-dark); margin-bottom: 8px; }
+  .wizard-hint { font-size: 13px; color: var(--gray-text); margin-bottom: 22px; }
+
+  .wizard-options { display: flex; flex-direction: column; gap: 10px; }
+
+  .wizard-opt {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+    border: 2px solid var(--gray-light);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: white;
+    text-align: left;
+    font-size: 15px;
+    font-weight: 500;
+  }
+  .wizard-opt:hover { border-color: var(--blue-med); background: var(--gray-bg); }
+  .wizard-opt.selected { border-color: var(--orange); background: #FEF3EC; }
+  .wizard-opt-icon { font-size: 22px; flex-shrink: 0; }
+  .wizard-opt-text { flex: 1; }
+  .wizard-opt-text small { display: block; font-size: 12px; color: var(--gray-text); font-weight: 400; }
+
+  .wizard-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--gray-light);
+    gap: 12px;
+  }
+
+  .btn {
+    padding: 11px 26px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+  }
+  .btn-primary { background: var(--orange); color: white; }
+  .btn-primary:hover { background: var(--orange-light); }
+  .btn-secondary { background: var(--gray-light); color: var(--blue-dark); }
+  .btn-secondary:hover { background: var(--gray-bg); }
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  /* RESULT */
+  .result-wrap {
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  .result-header {
+    background: linear-gradient(135deg, #1B6B3A, #27AE60);
+    color: white;
+    padding: 22px 28px;
+    text-align: center;
+  }
+  .result-header h2 { font-size: 20px; margin-bottom: 4px; }
+  .result-header p { opacity: 0.85; font-size: 14px; }
+
+  .result-body { padding: 28px; }
+
+  .result-recommendation {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    background: var(--gray-bg);
+    border-left: 4px solid var(--orange);
+    border-radius: 8px;
+    padding: 18px 20px;
+    margin-bottom: 20px;
+  }
+  .result-rec-icon { font-size: 40px; }
+  .result-rec-text h3 { font-size: 18px; color: var(--blue-dark); margin-bottom: 6px; }
+  .result-rec-text p { font-size: 13px; color: var(--gray-text); line-height: 1.5; }
+
+  .result-specs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  .spec-box {
+    background: var(--gray-bg);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .spec-box label { font-size: 11px; font-weight: 700; color: var(--gray-text); text-transform: uppercase; letter-spacing: 0.5px; }
+  .spec-box .spec-val { font-size: 15px; font-weight: 700; color: var(--blue-dark); margin-top: 4px; }
+
+  .result-partner {
+    background: linear-gradient(135deg, var(--blue-dark), var(--blue-med));
+    color: white;
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 20px;
+  }
+  .result-partner h4 { margin-bottom: 10px; font-size: 15px; opacity: 0.85; }
+  .result-partner .partner-name { font-size: 22px; font-weight: 800; letter-spacing: 0.5px; }
+  .result-partner p { font-size: 13px; opacity: 0.8; margin-top: 6px; }
+  .result-partner .contact-row { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 12px; font-size: 13px; }
+  .contact-item { display: flex; align-items: center; gap: 6px; }
+
+  .restart-btn {
+    display: block;
+    text-align: center;
+    background: var(--blue-dark);
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 14px;
+    border: none;
+    width: 100%;
+    transition: background 0.2s;
+  }
+  .restart-btn:hover { background: var(--blue-med); }
+
+  /* COMPARE TABLE */
+  .compare-scroll { overflow-x: auto; }
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 700px;
+    font-size: 13px;
+  }
+  .compare-table th {
+    background: var(--blue-dark);
+    color: white;
+    padding: 12px 14px;
+    text-align: left;
+    white-space: nowrap;
+  }
+  .compare-table th:first-child { border-radius: 8px 0 0 0; }
+  .compare-table th:last-child { border-radius: 0 8px 0 0; }
+  .compare-table td { padding: 10px 14px; border-bottom: 1px solid var(--gray-light); vertical-align: middle; }
+  .compare-table tr:nth-child(even) td { background: var(--gray-bg); }
+  .compare-table .icon-col { font-size: 20px; }
+  .check { color: var(--green); font-weight: 700; }
+  .cross { color: #ccc; }
+
+  /* CONTACT SECTION */
+  .contact-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+  .contact-card {
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 22px;
+    border-top: 4px solid var(--blue-dark);
+  }
+  .contact-card h3 { color: var(--blue-dark); font-size: 18px; margin-bottom: 4px; }
+  .contact-card .subtitle { color: var(--gray-text); font-size: 12px; margin-bottom: 16px; }
+  .contact-row { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; font-size: 13px; }
+  .contact-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .contact-val { color: #333; line-height: 1.5; }
+  .contact-label { font-size: 11px; color: var(--gray-text); }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .header-inner { flex-direction: column; align-items: flex-start; }
+    .header-badge { display: none; }
+    .result-specs { grid-template-columns: 1fr; }
+    .cards-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo-area">
+      <div class="logo-badge">AP</div>
+      <div class="header-title">
+        <h1>Ghid Interactiv Caroserie</h1>
+        <p>Autopadova SRL · Iași &amp; Bacău · Partener RUFUS</p>
+      </div>
+    </div>
+    <div class="header-badge">🔧 Toate mărcile de șasiu</div>
+  </div>
+</header>
+
+<main>
+
+  <!-- TABS NAV -->
+  <nav class="tabs-nav">
+    <button class="tab-btn" onclick="showTab(&#39;wizard&#39;)">🧭 Alege Caroseria</button>
+    <button class="tab-btn active" onclick="showTab(&#39;catalog&#39;)">📦 Catalog Caroserii</button>
+    <button class="tab-btn" onclick="showTab(&#39;compare&#39;)">⚖️ Comparație</button>
+    <button class="tab-btn" onclick="showTab(&#39;contact&#39;)">📞 Contact &amp; Servicii</button>
+  </nav>
+
+  <!-- TAB: WIZARD -->
+  <div id="tab-wizard" class="tab-panel">
+    <div class="section-title">🧭 Configurator Caroserie</div>
+    <p class="section-sub">Răspunde la câteva întrebări și primești recomandarea potrivită pentru afacerea ta.</p>
+
+    <div class="wizard-wrap" id="wizard-container">
+    <div class="wizard-progress">
+      <div class="wizard-progress-fill" style="width:0%"></div>
+    </div>
+    <div class="wizard-header">
+      <h2>Pas 1 din 4</h2>
+      <span class="wizard-step-badge">🚛 Pasul 1</span>
+    </div>
+    <div class="wizard-body">
+      <div class="wizard-question">Ce transportă clientul?</div>
+      <div class="wizard-hint">Tipul de marfă determină structura caroseriei</div>
+      <div class="wizard-options">
+        
+          <button class="wizard-opt " onclick="selectOpt(0, &#39;general&#39;)">
+            <span class="wizard-opt-icon">📦</span>
+            <span class="wizard-opt-text">
+              Mărfuri generale uscate
+              <small>Mobilier, electrocasnice, paleți, textile</small>
+            </span>
+            <span style="color:#ddd;font-size:20px">○</span>
+          </button>
+        
+          <button class="wizard-opt " onclick="selectOpt(0, &#39;food&#39;)">
+            <span class="wizard-opt-icon">🥩</span>
+            <span class="wizard-opt-text">
+              Alimente / produse perisabile
+              <small>Carne, lactate, legume-fructe, înghețată</small>
+            </span>
+            <span style="color:#ddd;font-size:20px">○</span>
+          </button>
+        
+          <button class="wizard-opt " onclick="selectOpt(0, &#39;bauturi&#39;)">
+            <span class="wizard-opt-icon">🍺</span>
+            <span class="wizard-opt-text">
+              Băuturi
+              <small>Bere, sucuri, ape minerale, vin</small>
+            </span>
+            <span style="color:#ddd;font-size:20px">○</span>
+          </button>
+        
+          <button class="wizard-opt " onclick="selectOpt(0, &#39;bulk&#39;)">
+            <span class="wizard-opt-icon">⛏️</span>
+            <span class="wizard-opt-text">
+              Materiale construcții / vrac
+              <small>Nisip, pietriș, piatră, pământ, cereale</small>
+            </span>
+            <span style="color:#ddd;font-size:20px">○</span>
+          </button>
+        
+      </div>
+      <div class="wizard-actions">
+        <button class="btn btn-secondary" onclick="prevStep()" disabled="">← Înapoi</button>
+        <div style="font-size:12px;color:#888"><span style="color:var(--blue-dark); font-size:18px">●</span> <span style="color:#ddd; font-size:18px">●</span> <span style="color:#ddd; font-size:18px">●</span> <span style="color:#ddd; font-size:18px">●</span></div>
+        <button class="btn btn-primary" onclick="nextStep()" disabled="">Continuă →</button>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- TAB: CATALOG -->
+  <div id="tab-catalog" class="tab-panel active">
+    <div class="section-title">📦 Catalog Tipuri de Caroserii</div>
+    <p class="section-sub">Toate tipurile disponibile prin RUFUS Iași. Apasă pe o caroserie pentru detalii și dimensiuni.</p>
+    <div class="cards-grid" id="cards-container">
+    <div class="car-card selected" id="card-lada-obloane">
+      <div class="car-card-header">
+        <div class="car-icon">🛻</div>
+        <div>
+          <h3>Ladă cu Obloane</h3>
+          <p>Transport mărfuri solide, vrac, agricultură</p>
+        </div>
+      </div>
+      <div class="car-card-body">
+        <div class="tag-list">
+          <span class="tag ">Marfă generală</span><span class="tag ">Agricultură</span><span class="tag ">Construcții</span>
+        </div>
+        <p>Platformă cu obloane metalice rabatabile pe trei laturi. Soluție clasică pentru transport materiale în vrac, agricultură, construcții. Obloanele se rabat complet pentru încărcare laterală și frontală.</p>
+
+        <div style="margin-top:12px">
+          
+          
+          <span class="tag">🎨 Branding</span> 
+        </div>
+
+        <button class="expand-btn open" onclick="toggleCard(&#39;lada-obloane&#39;)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          Ascunde dimensiuni
+        </button>
+
+        <div class="card-detail open">
+          <div class="detail-label">📐 Dimensiuni orientative pe tip șasiu</div>
+          <table class="detail-table">
+            <thead><tr><th>Model Șasiu</th><th>Lungime int. (mm)</th><th>Lățime int. (mm)</th><th>H obloane (mm)</th><th>Volum</th></tr></thead>
+            <tbody>
+              <tr><td>Daily 35C (3.0t)</td><td>3.300</td><td>2.050</td><td>400</td><td>—</td></tr><tr><td>Daily 35C (3.5t)</td><td>3.800</td><td>2.050</td><td>400</td><td>—</td></tr><tr><td>Daily 50C</td><td>4.200</td><td>2.200</td><td>450</td><td>—</td></tr><tr><td>Daily 65C</td><td>4.800</td><td>2.300</td><td>500</td><td>—</td></tr><tr><td>Eurocargo 75E</td><td>5.200</td><td>2.350</td><td>500</td><td>—</td></tr><tr><td>Eurocargo 120E</td><td>6.000</td><td>2.400</td><td>550</td><td>—</td></tr>
+            </tbody>
+          </table>
+          <div class="detail-label">🏭 Aplicații tipice</div>
+          <ul style="padding-left:18px; margin-top:4px">
+            <li style="font-size:12px; color:#555; margin-bottom:3px">Materiale de construcții</li><li style="font-size:12px; color:#555; margin-bottom:3px">Transport agricol</li><li style="font-size:12px; color:#555; margin-bottom:3px">Marfă paletizată</li><li style="font-size:12px; color:#555; margin-bottom:3px">Transport vrac</li>
+          </ul>
+          <div style="margin-top:12px; padding:10px 12px; background:#FEF3EC; border-radius:8px; font-size:12px; color:#555;">
+            <strong style="color:#E8621A">📋 Execuție:</strong> RUFUS Iași — omologare RAR inclusă în preț. Finanțare disponibilă prin leasing financiar sau operațional.
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="car-card " id="card-prelata">
+      <div class="car-card-header">
+        <div class="car-icon">🚛</div>
+        <div>
+          <h3>Ladă cu Obloane + Prelată</h3>
+          <p>Protecție la intemperii, transport textil, marfă mixtă</p>
+        </div>
+      </div>
+      <div class="car-card-body">
+        <div class="tag-list">
+          <span class="tag ">Marfă generală</span><span class="tag ">Textil</span><span class="tag ">Distribuție</span>
+        </div>
+        <p>Caroserie cu obloane metalice rabatabile completată cu sistem prelată pe structură de arcuri. Protejează marfa de ploaie și vânt, permițând totodată acces rapid lateral.</p>
+
+        <div style="margin-top:12px">
+          
+          
+          <span class="tag">🎨 Branding</span> 
+        </div>
+
+        <button class="expand-btn " onclick="toggleCard(&#39;prelata&#39;)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          Vezi dimensiuni pe șasiu
+        </button>
+
+        <div class="card-detail ">
+          <div class="detail-label">📐 Dimensiuni orientative pe tip șasiu</div>
+          <table class="detail-table">
+            <thead><tr><th>Model Șasiu</th><th>Lungime int. (mm)</th><th>Lățime int. (mm)</th><th>H totală (mm)</th><th>Volum</th></tr></thead>
+            <tbody>
+              <tr><td>Daily 35C</td><td>3.300</td><td>2.050</td><td>1.800</td><td>12.1 m³</td></tr><tr><td>Daily 50C</td><td>4.200</td><td>2.150</td><td>1.900</td><td>17.2 m³</td></tr><tr><td>Daily 65C</td><td>4.800</td><td>2.250</td><td>2.000</td><td>21.6 m³</td></tr><tr><td>Eurocargo 75E</td><td>5.200</td><td>2.350</td><td>2.100</td><td>25.7 m³</td></tr>
+            </tbody>
+          </table>
+          <div class="detail-label">🏭 Aplicații tipice</div>
+          <ul style="padding-left:18px; margin-top:4px">
+            <li style="font-size:12px; color:#555; margin-bottom:3px">Transport textil și confecții</li><li style="font-size:12px; color:#555; margin-bottom:3px">Marfă mixtă</li><li style="font-size:12px; color:#555; margin-bottom:3px">Distribuție regională</li><li style="font-size:12px; color:#555; margin-bottom:3px">Mobilier</li>
+          </ul>
+          <div style="margin-top:12px; padding:10px 12px; background:#FEF3EC; border-radius:8px; font-size:12px; color:#555;">
+            <strong style="color:#E8621A">📋 Execuție:</strong> RUFUS Iași — omologare RAR inclusă în preț. Finanțare disponibilă prin leasing financiar sau operațional.
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="car-card " id="card-box-all">
+      <div class="car-card-header">
+        <div class="car-icon">📦</div>
+        <div>
+          <h3>Box ALL — Marfă Generală</h3>
+          <p>Cutie tancată, marfă protejată, distribuție urbană</p>
+        </div>
+      </div>
+      <div class="car-card-body">
+        <div class="tag-list">
+          <span class="tag ">Marfă uscată</span><span class="tag orange">Distribuție</span><span class="tag ">Comerț</span>
+        </div>
+        <p>Caroserie tip cutie tancată din panouri sandwich aluminiu sau fibră. Protejează marfa complet de intemperii. Ușă spate batantă sau rulou. Acces lateral opțional. Soluție ideală pentru distribuție urbană.</p>
+
+        <div style="margin-top:12px">
+          
+          
+          <span class="tag">🎨 Branding</span> 
+        </div>
+
+        <button class="expand-btn " onclick="toggleCard(&#39;box-all&#39;)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          Vezi dimensiuni pe șasiu
+        </button>
+
+        <div class="card-detail ">
+          <div class="detail-label">📐 Dimensiuni orientative pe tip șasiu</div>
+          <table class="detail-table">
+            <thead><tr><th>Model Șasiu</th><th>Lungime int. (mm)</th><th>Lățime int. (mm)</th><th>Înălțime int. (mm)</th><th>Volum</th></tr></thead>
+            <tbody>
+              <tr><td>Daily 35C (3.0t)</td><td>3.200</td><td>1.980</td><td>1.950</td><td>12.4 m³</td></tr><tr><td>Daily 35C (3.5t)</td><td>3.700</td><td>2.000</td><td>2.050</td><td>15.2 m³</td></tr><tr><td>Daily 50C</td><td>4.100</td><td>2.100</td><td>2.100</td><td>18.1 m³</td></tr><tr><td>Daily 65C</td><td>4.700</td><td>2.200</td><td>2.200</td><td>22.8 m³</td></tr><tr><td>Daily 70C</td><td>5.200</td><td>2.250</td><td>2.300</td><td>27.0 m³</td></tr>
+            </tbody>
+          </table>
+          <div class="detail-label">🏭 Aplicații tipice</div>
+          <ul style="padding-left:18px; margin-top:4px">
+            <li style="font-size:12px; color:#555; margin-bottom:3px">Distribuție FMCG</li><li style="font-size:12px; color:#555; margin-bottom:3px">Transport electrocasnice</li><li style="font-size:12px; color:#555; margin-bottom:3px">Farmaceutice ambientale</li><li style="font-size:12px; color:#555; margin-bottom:3px">Comerț online – last mile</li>
+          </ul>
+          <div style="margin-top:12px; padding:10px 12px; background:#FEF3EC; border-radius:8px; font-size:12px; color:#555;">
+            <strong style="color:#E8621A">📋 Execuție:</strong> RUFUS Iași — omologare RAR inclusă în preț. Finanțare disponibilă prin leasing financiar sau operațional.
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="car-card " id="card-izoterm">
+      <div class="car-card-header">
+        <div class="car-icon">🌡️</div>
+        <div>
+          <h3>Autoizoterm / Frigorific</h3>
+          <p>Transport alimente temperatură controlată · ATP</p>
+        </div>
+      </div>
+      <div class="car-card-body">
+        <div class="tag-list">
+          <span class="tag green">ATP</span><span class="tag orange">Refrigerare</span><span class="tag green">Congelare</span>
+        </div>
+        <p>Caroserie izoterma cu panouri sandwich poliuretan (Liderfoam® 60–100mm) sau spumă injectată. Echipată cu agregat frigorific Carrier Transicold sau Alex Original. Conformă normei ATP pentru transport alimentar.</p>
+
+        <div style="margin-top:12px">
+          <span class="tag green">✅ ATP</span> 
+          <span class="tag orange">❄️ Temp. controlată</span> 
+          <span class="tag">🎨 Branding</span> 
+        </div>
+
+        <button class="expand-btn " onclick="toggleCard(&#39;izoterm&#39;)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          Vezi dimensiuni pe șasiu
+        </button>
+
+        <div class="card-detail ">
+          <div class="detail-label">📐 Dimensiuni orientative pe tip șasiu</div>
+          <table class="detail-table">
+            <thead><tr><th>Model Șasiu</th><th>Lungime int. (mm)</th><th>Lățime int. (mm)</th><th>Înălțime int. (mm)</th><th>Volum int.</th></tr></thead>
+            <tbody>
+              <tr><td>Daily 35C</td><td>2.900</td><td>1.780</td><td>1.750</td><td>9.0 m³</td></tr><tr><td>Daily 35CD</td><td>3.400</td><td>1.800</td><td>1.800</td><td>11.0 m³</td></tr><tr><td>Daily 50C</td><td>3.900</td><td>1.980</td><td>1.900</td><td>14.7 m³</td></tr><tr><td>Daily 50CD</td><td>4.300</td><td>2.000</td><td>2.000</td><td>17.2 m³</td></tr><tr><td>Daily 65C</td><td>4.700</td><td>2.100</td><td>2.050</td><td>20.2 m³</td></tr><tr><td>Daily 70C</td><td>5.100</td><td>2.150</td><td>2.100</td><td>23.0 m³</td></tr><tr><td>Eurocargo 75E</td><td>5.500</td><td>2.300</td><td>2.200</td><td>27.8 m³</td></tr>
+            </tbody>
+          </table>
+          <div class="detail-label">🏭 Aplicații tipice</div>
+          <ul style="padding-left:18px; margin-top:4px">
+            <li style="font-size:12px; color:#555; margin-bottom:3px">Transport carne și pește</li><li style="font-size:12px; color:#555; margin-bottom:3px">Produse lactate</li><li style="font-size:12px; color:#555; margin-bottom:3px">Legume-fructe</li><li style="font-size:12px; color:#555; margin-bottom:3px">Înghețată și congelate</li><li style="font-size:12px; color:#555; margin-bottom:3px">Medicamente cu lanț rece</li>
+          </ul>
+          <div style="margin-top:12px; padding:10px 12px; background:#FEF3EC; border-radius:8px; font-size:12px; color:#555;">
+            <strong style="color:#E8621A">📋 Execuție:</strong> RUFUS Iași — omologare RAR inclusă în preț. Finanțare disponibilă prin leasing financiar sau operațional.
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="car-card selected" id="card-basculanta">
+      <div class="car-card-header">
+        <div class="car-icon">⬆️</div>
+        <div>
+          <h3>Basculantă</h3>
+          <p>Descărcare rapidă prin basculare hidraulică</p>
+        </div>
+      </div>
+      <div class="car-card-body">
+        <div class="tag-list">
+          <span class="tag ">Vrac</span><span class="tag ">Construcții</span><span class="tag orange">HYVA/OMFB</span>
+        </div>
+        <p>Caroserie cu basculare hidraulică pe 3 direcții (spate + lateral). Kit-uri HYVA sau OMFB. Bena din oțel sau aliaj aluminiu. Sistem comandă din cabină. Ideală pentru transport nisip, pietriș, piatră spartă.</p>
+
+        <div style="margin-top:12px">
+          
+          
+          
+        </div>
+
+        <button class="expand-btn open" onclick="toggleCard(&#39;basculanta&#39;)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          Ascunde dimensiuni
+        </button>
+
+        <div class="card-detail open">
+          <div class="detail-label">📐 Dimensiuni orientative pe tip șasiu</div>
+          <table class="detail-table">
+            <thead><tr><th>Model Șasiu</th><th>Lungime benă (mm)</th><th>Lățime benă (mm)</th><th>H perete (mm)</th><th>Volum benă</th></tr></thead>
+            <tbody>
+              <tr><td>Daily 35C</td><td>3.000</td><td>1.900</td><td>350</td><td>2.0 m³</td></tr><tr><td>Daily 50C</td><td>3.500</td><td>2.050</td><td>400</td><td>2.9 m³</td></tr><tr><td>Daily 65C</td><td>4.000</td><td>2.200</td><td>450</td><td>3.9 m³</td></tr><tr><td>Eurocargo 75E</td><td>4.500</td><td>2.300</td><td>500</td><td>5.2 m³</td></tr><tr><td>Eurocargo 120E</td><td>5.500</td><td>2.400</td><td>600</td><td>7.9 m³</td></tr>
+            </tbody>
+          </table>
+          <div class="detail-label">🏭 Aplicații tipice</div>
+          <ul style="padding-left:18px; margin-top:4px">
+            <li style="font-size:12px; color:#555; margin-bottom:3px">Nisip, pietriș, piatră</li><li style="font-size:12px; color:#555; margin-bottom:3px">Pământ și excavații</li><li style="font-size:12px; color:#555; margin-bottom:3px">Cereale și produse agricole</li><li style="font-size:12px; color:#555; margin-bottom:3px">Deșeuri construcții</li>
+          </ul>
+          <div style="margin-top:12px; padding:10px 12px; background:#FEF3EC; border-radius:8px; font-size:12px; color:#555;">
+            <strong style="color:#E8621A">📋 Execuție:</strong> RUFUS Iași — omologare RAR inclusă în preț. Finanțare disponibilă prin leasing financiar sau operațional.
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="car-card " id="card-bauturi">
+      <div class="car-card-header">
+        <div class="car-icon">🍺</div>
+        <div>
+          <h3>Transport Băuturi</h3>
+          <p>Platformă laterală cu role și cărucior – distribuție HoReCa</p>
+        </div>
+      </div>
+      <div class="car-card-body">
+        <div class="tag-list">
+          <span class="tag orange">HoReCa</span><span class="tag ">Băuturi</span><span class="tag ">Distribuție</span>
+        </div>
+        <p>Configurație specială pentru distribuția băuturilor în butoaie și navete. Sistem role inox pe podea, rampe laterale rabatabile, cârlige pentru cărucior. Opțional: compartiment frigorific pentru beri/sucuri.</p>
+
+        <div style="margin-top:12px">
+          
+          
+          <span class="tag">🎨 Branding</span> 
+        </div>
+
+        <button class="expand-btn " onclick="toggleCard(&#39;bauturi&#39;)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          Vezi dimensiuni pe șasiu
+        </button>
+
+        <div class="card-detail ">
+          <div class="detail-label">📐 Dimensiuni orientative pe tip șasiu</div>
+          <table class="detail-table">
+            <thead><tr><th>Model Șasiu</th><th>Lungime int. (mm)</th><th>Lățime int. (mm)</th><th>H totală (mm)</th><th>Obs.</th></tr></thead>
+            <tbody>
+              <tr><td>Daily 35C</td><td>3.200</td><td>2.000</td><td>1.900</td><td>—</td></tr><tr><td>Daily 50C</td><td>4.000</td><td>2.100</td><td>2.000</td><td>—</td></tr><tr><td>Eurocargo 75E</td><td>5.000</td><td>2.300</td><td>2.100</td><td>—</td></tr>
+            </tbody>
+          </table>
+          <div class="detail-label">🏭 Aplicații tipice</div>
+          <ul style="padding-left:18px; margin-top:4px">
+            <li style="font-size:12px; color:#555; margin-bottom:3px">Distribuție bere la butoi</li><li style="font-size:12px; color:#555; margin-bottom:3px">Sucuri și ape minerale</li><li style="font-size:12px; color:#555; margin-bottom:3px">Vinuri și spirtoase</li><li style="font-size:12px; color:#555; margin-bottom:3px">Livrare HoReCa Iași/Bacău</li>
+          </ul>
+          <div style="margin-top:12px; padding:10px 12px; background:#FEF3EC; border-radius:8px; font-size:12px; color:#555;">
+            <strong style="color:#E8621A">📋 Execuție:</strong> RUFUS Iași — omologare RAR inclusă în preț. Finanțare disponibilă prin leasing financiar sau operațional.
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="car-card " id="card-platforma-auto">
+      <div class="car-card-header">
+        <div class="car-icon">🚗</div>
+        <div>
+          <h3>Platformă Auto</h3>
+          <p>Transport vehicule – autotractate, avarii, dealeri</p>
+        </div>
+      </div>
+      <div class="car-card-body">
+        <div class="tag-list">
+          <span class="tag orange">Dealeri</span><span class="tag ">Asistență rutieră</span><span class="tag ">Vehicule</span>
+        </div>
+        <p>Platformat specializat pentru transportul autovehiculelor. Rampă hidraulică sau mecanică de urcare, sistem ancorare 4 puncte, glisiere aluminiu. Pot transporta 1–2 autoturisme în funcție de șasiu.</p>
+
+        <div style="margin-top:12px">
+          
+          
+          
+        </div>
+
+        <button class="expand-btn " onclick="toggleCard(&#39;platforma-auto&#39;)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          Vezi dimensiuni pe șasiu
+        </button>
+
+        <div class="card-detail ">
+          <div class="detail-label">📐 Dimensiuni orientative pe tip șasiu</div>
+          <table class="detail-table">
+            <thead><tr><th>Model Șasiu</th><th>Lungime platformă (mm)</th><th>Lățime (mm)</th><th>H rampă</th><th>Capacitate</th></tr></thead>
+            <tbody>
+              <tr><td>Daily 35C</td><td>4.200</td><td>2.050</td><td>—</td><td>1 auto</td></tr><tr><td>Daily 50C</td><td>5.000</td><td>2.150</td><td>—</td><td>1–2 auto</td></tr><tr><td>Eurocargo 75E</td><td>6.500</td><td>2.300</td><td>—</td><td>2 auto</td></tr>
+            </tbody>
+          </table>
+          <div class="detail-label">🏭 Aplicații tipice</div>
+          <ul style="padding-left:18px; margin-top:4px">
+            <li style="font-size:12px; color:#555; margin-bottom:3px">Transport mașini avarie</li><li style="font-size:12px; color:#555; margin-bottom:3px">Distribuție dealeri auto</li><li style="font-size:12px; color:#555; margin-bottom:3px">Transport utilaje mici</li><li style="font-size:12px; color:#555; margin-bottom:3px">Recuperare vehicule</li>
+          </ul>
+          <div style="margin-top:12px; padding:10px 12px; background:#FEF3EC; border-radius:8px; font-size:12px; color:#555;">
+            <strong style="color:#E8621A">📋 Execuție:</strong> RUFUS Iași — omologare RAR inclusă în preț. Finanțare disponibilă prin leasing financiar sau operațional.
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="car-card " id="card-animale">
+      <div class="car-card-header">
+        <div class="car-icon">🐄</div>
+        <div>
+          <h3>Transport Animale</h3>
+          <p>Grilaje ventilate, drenaj podea, norme sanitar-veterinare</p>
+        </div>
+      </div>
+      <div class="car-card-body">
+        <div class="tag-list">
+          <span class="tag ">Agricultură</span><span class="tag green">Veterinar</span><span class="tag green">Norme EU</span>
+        </div>
+        <p>Caroserie cu grilaje metalice ventilate, podea cu scurgere și pardoseală anti-alunecare. Respectă normele europene de transport animale vii. Compartimentare internă ajustabilă.</p>
+
+        <div style="margin-top:12px">
+          
+          
+          
+        </div>
+
+        <button class="expand-btn " onclick="toggleCard(&#39;animale&#39;)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          Vezi dimensiuni pe șasiu
+        </button>
+
+        <div class="card-detail ">
+          <div class="detail-label">📐 Dimensiuni orientative pe tip șasiu</div>
+          <table class="detail-table">
+            <thead><tr><th>Model Șasiu</th><th>Lungime int. (mm)</th><th>Lățime int. (mm)</th><th>H int. (mm)</th><th>Capacitate orientativă</th></tr></thead>
+            <tbody>
+              <tr><td>Daily 35C</td><td>3.200</td><td>1.950</td><td>1.800</td><td>6 ovine</td></tr><tr><td>Daily 50C</td><td>4.000</td><td>2.100</td><td>2.000</td><td>4 bovine</td></tr><tr><td>Eurocargo 75E</td><td>5.200</td><td>2.300</td><td>2.100</td><td>8 bovine</td></tr>
+            </tbody>
+          </table>
+          <div class="detail-label">🏭 Aplicații tipice</div>
+          <ul style="padding-left:18px; margin-top:4px">
+            <li style="font-size:12px; color:#555; margin-bottom:3px">Bovine și ovine</li><li style="font-size:12px; color:#555; margin-bottom:3px">Porcine</li><li style="font-size:12px; color:#555; margin-bottom:3px">Transport ferme-abator</li><li style="font-size:12px; color:#555; margin-bottom:3px">Export animale</li>
+          </ul>
+          <div style="margin-top:12px; padding:10px 12px; background:#FEF3EC; border-radius:8px; font-size:12px; color:#555;">
+            <strong style="color:#E8621A">📋 Execuție:</strong> RUFUS Iași — omologare RAR inclusă în preț. Finanțare disponibilă prin leasing financiar sau operațional.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- TAB: COMPARE -->
+  <div id="tab-compare" class="tab-panel">
+    <div class="section-title">⚖️ Comparație Tipuri de Caroserii</div>
+    <p class="section-sub">Vizualizare rapidă a caracteristicilor principale pe toate tipurile.</p>
+    <div class="compare-scroll">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Tip Caroserie</th>
+            <th>Temp. controlată</th>
+            <th>Marfă generală</th>
+            <th>Alimente ATP</th>
+            <th>Basculare</th>
+            <th>Branding</th>
+            <th>Aplicație principală</th>
+          </tr>
+        </thead>
+        <tbody id="compare-body">
+    <tr>
+      <td class="icon-col">🛻</td>
+      <td><strong>Ladă cu Obloane</strong></td>
+      <td><span class="cross">—</span></td>
+      <td><span class="check">✔</span></td>
+      <td><span class="cross">—</span></td>
+      <td><span class="cross">—</span></td>
+      <td><span class="check">✔</span></td>
+      <td style="font-size:12px; color:#555">Transport mărfuri solide, vrac, agricultură</td>
+    </tr>
+  
+    <tr>
+      <td class="icon-col">🚛</td>
+      <td><strong>Ladă cu Obloane + Prelată</strong></td>
+      <td><span class="cross">—</span></td>
+      <td><span class="check">✔</span></td>
+      <td><span class="cross">—</span></td>
+      <td><span class="cross">—</span></td>
+      <td><span class="check">✔</span></td>
+      <td style="font-size:12px; color:#555">Protecție la intemperii, transport textil, marfă mixtă</td>
+    </tr>
+  
+    <tr>
+      <td class="icon-col">📦</td>
+      <td><strong>Box ALL — Marfă Generală</strong></td>
+      <td><span class="cross">—</span></td>
+      <td><span class="check">✔</span></td>
+      <td><span class="cross">—</span></td>
+      <td><span class="cross">—</span></td>
+      <td><span class="check">✔</span></td>
+      <td style="font-size:12px; color:#555">Cutie tancată, marfă protejată, distribuție urbană</td>
+    </tr>
+  
+    <tr>
+      <td class="icon-col">🌡️</td>
+      <td><strong>Autoizoterm / Frigorific</strong></td>
+      <td><span class="check">✔</span></td>
+      <td><span class="cross">—</span></td>
+      <td><span class="check">✔</span></td>
+      <td><span class="cross">—</span></td>
+      <td><span class="check">✔</span></td>
+      <td style="font-size:12px; color:#555">Transport alimente temperatură controlată · ATP</td>
+    </tr>
+  
+    <tr>
+      <td class="icon-col">⬆️</td>
+      <td><strong>Basculantă</strong></td>
+      <td><span class="cross">—</span></td>
+      <td><span class="check">✔</span></td>
+      <td><span class="cross">—</span></td>
+      <td><span class="check">✔</span></td>
+      <td><span class="cross">—</span></td>
+      <td style="font-size:12px; color:#555">Descărcare rapidă prin basculare hidraulică</td>
+    </tr>
+  
+    <tr>
+      <td class="icon-col">🍺</td>
+      <td><strong>Transport Băuturi</strong></td>
+      <td><span class="cross">—</span></td>
+      <td><span class="check">✔</span></td>
+      <td><span class="cross">—</span></td>
+      <td><span class="cross">—</span></td>
+      <td><span class="check">✔</span></td>
+      <td style="font-size:12px; color:#555">Platformă laterală cu role și cărucior – distribuție HoReCa</td>
+    </tr>
+  
+    <tr>
+      <td class="icon-col">🚗</td>
+      <td><strong>Platformă Auto</strong></td>
+      <td><span class="cross">—</span></td>
+      <td><span class="cross">—</span></td>
+      <td><span class="cross">—</span></td>
+      <td><span class="cross">—</span></td>
+      <td><span class="cross">—</span></td>
+      <td style="font-size:12px; color:#555">Transport vehicule – autotractate, avarii, dealeri</td>
+    </tr>
+  
+    <tr>
+      <td class="icon-col">🐄</td>
+      <td><strong>Transport Animale</strong></td>
+      <td><span class="cross">—</span></td>
+      <td><span class="cross">—</span></td>
+      <td><span class="cross">—</span></td>
+      <td><span class="cross">—</span></td>
+      <td><span class="cross">—</span></td>
+      <td style="font-size:12px; color:#555">Grilaje ventilate, drenaj podea, norme sanitar-veterinare</td>
+    </tr>
+  </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- TAB: CONTACT -->
+  <div id="tab-contact" class="tab-panel">
+    <div class="section-title">📞 Parteneri &amp; Servicii</div>
+    <p class="section-sub">Execuție și service caroserie prin RUFUS Iași. Omologare RAR inclusă.</p>
+    <div class="contact-cards" id="contact-container">
+    <div class="contact-card" style="border-top-color: var(--orange)">
+      <h3>RUFUS Iași</h3>
+      <p class="subtitle">Centrul de Carosare — Partener principal Autopadova SRL</p>
+      <div class="contact-row">
+        <span class="contact-icon">📍</span>
+        <div class="contact-val">Calea Chișinăului nr. 57, Iași</div>
+      </div>
+      <div class="contact-row">
+        <span class="contact-icon">📞</span>
+        <div>
+          <div class="contact-val">0232.234.005 / 0232.250.666</div>
+          <div class="contact-label">Tel fix</div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <span class="contact-icon">📱</span>
+        <div>
+          <div class="contact-val">0745.079.996 / 0786.159.729</div>
+          <div class="contact-label">Mobil</div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <span class="contact-icon">📟</span>
+        <div>
+          <div class="contact-val">0757.800.900</div>
+          <div class="contact-label">Infoline</div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <span class="contact-icon">🌐</span>
+        <div class="contact-val">www.cvc.ro</div>
+      </div>
+    </div>
+
+    <div class="contact-card">
+      <h3>Autopadova SRL — Iași</h3>
+      <p class="subtitle">Dealer Iveco, Fiat Professional, Jeep, Suzuki</p>
+      <div class="contact-row">
+        <span class="contact-icon">🌐</span>
+        <div class="contact-val">www.autopadova.ro</div>
+      </div>
+      <div class="contact-row">
+        <span class="contact-icon">📍</span>
+        <div class="contact-val">Iași &amp; Bacău, zona Moldova</div>
+      </div>
+      <div class="contact-row">
+        <span class="contact-icon">🔧</span>
+        <div>
+          <div class="contact-val">One-stop shop</div>
+          <div class="contact-label">Șasiu + Carosare + RAR + Finanțare</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-card">
+      <h3>Liderkit Spain</h3>
+      <p class="subtitle">Producător kit-uri caroserie modular — Europa</p>
+      <div class="contact-row">
+        <span class="contact-icon">🌐</span>
+        <div class="contact-val">liderkit.com</div>
+      </div>
+      <div class="contact-row">
+        <span class="contact-icon">✉️</span>
+        <div class="contact-val">export@liderkit.com</div>
+      </div>
+      <div class="contact-row">
+        <span class="contact-icon">📞</span>
+        <div class="contact-val">+34 953 67 80 41</div>
+      </div>
+      <div class="contact-row">
+        <span class="contact-icon">📦</span>
+        <div>
+          <div class="contact-val">Kit-uri modulare</div>
+          <div class="contact-label">Sandwich, Plywood, Isothermal, Aluminiu</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-card" style="background: linear-gradient(135deg, var(--blue-dark), var(--blue-med)); color: white; border-top-color: var(--orange)">
+      <h3 style="color:white">Servicii incluse</h3>
+      <p class="subtitle" style="color:rgba(255,255,255,0.7)">La orice carosare prin RUFUS + Autopadova</p>
+      
+        <div class="contact-row">
+          <span class="contact-icon">✅</span>
+          <div style="color:rgba(255,255,255,0.9); font-size:13px">Omologare RAR inclusă</div>
+        </div>
+      
+        <div class="contact-row">
+          <span class="contact-icon">💰</span>
+          <div style="color:rgba(255,255,255,0.9); font-size:13px">Leasing financiar sau operațional</div>
+        </div>
+      
+        <div class="contact-row">
+          <span class="contact-icon">🎨</span>
+          <div style="color:rgba(255,255,255,0.9); font-size:13px">Branding flotă pe caroserie</div>
+        </div>
+      
+        <div class="contact-row">
+          <span class="contact-icon">🔧</span>
+          <div style="color:rgba(255,255,255,0.9); font-size:13px">Service și reparații caroserie</div>
+        </div>
+      
+        <div class="contact-row">
+          <span class="contact-icon">📋</span>
+          <div style="color:rgba(255,255,255,0.9); font-size:13px">Conformitate ATP (frigorific)</div>
+        </div>
+      
+        <div class="contact-row">
+          <span class="contact-icon">🚛</span>
+          <div style="color:rgba(255,255,255,0.9); font-size:13px">Toate mărcile de șasiu acceptate</div>
+        </div>
+      
+    </div>
+  </div>
+  </div>
+
+</main>
+
+<script>
+// ─── DATA ─────────────────────────────────────────────────────────────────────
+
+const CAROSERII = [
+  {
+    id: 'lada-obloane',
+    icon: '🛻',
+    name: 'Ladă cu Obloane',
+    short: 'Transport mărfuri solide, vrac, agricultură',
+    tags: ['Marfă generală', 'Agricultură', 'Construcții'],
+    tagColors: ['', '', ''],
+    desc: 'Platformă cu obloane metalice rabatabile pe trei laturi. Soluție clasică pentru transport materiale în vrac, agricultură, construcții. Obloanele se rabat complet pentru încărcare laterală și frontală.',
+    freight: true, temp: false, atp: false, tip: false, brand: true,
+    aplicatii: ['Materiale de construcții', 'Transport agricol', 'Marfă paletizată', 'Transport vrac'],
+    dims: [
+      { model: 'Daily 35C (3.0t)', L: '3.300', l: '2.050', H: '400', volum: '—' },
+      { model: 'Daily 35C (3.5t)', L: '3.800', l: '2.050', H: '400', volum: '—' },
+      { model: 'Daily 50C', L: '4.200', l: '2.200', H: '450', volum: '—' },
+      { model: 'Daily 65C', L: '4.800', l: '2.300', H: '500', volum: '—' },
+      { model: 'Eurocargo 75E', L: '5.200', l: '2.350', H: '500', volum: '—' },
+      { model: 'Eurocargo 120E', L: '6.000', l: '2.400', H: '550', volum: '—' },
+    ],
+    dimCols: ['Model Șasiu', 'Lungime int. (mm)', 'Lățime int. (mm)', 'H obloane (mm)', 'Volum'],
+  },
+  {
+    id: 'prelata',
+    icon: '🚛',
+    name: 'Ladă cu Obloane + Prelată',
+    short: 'Protecție la intemperii, transport textil, marfă mixtă',
+    tags: ['Marfă generală', 'Textil', 'Distribuție'],
+    desc: 'Caroserie cu obloane metalice rabatabile completată cu sistem prelată pe structură de arcuri. Protejează marfa de ploaie și vânt, permițând totodată acces rapid lateral.',
+    freight: true, temp: false, atp: false, tip: false, brand: true,
+    aplicatii: ['Transport textil și confecții', 'Marfă mixtă', 'Distribuție regională', 'Mobilier'],
+    dims: [
+      { model: 'Daily 35C', L: '3.300', l: '2.050', H: '1.800', volum: '12.1 m³' },
+      { model: 'Daily 50C', L: '4.200', l: '2.150', H: '1.900', volum: '17.2 m³' },
+      { model: 'Daily 65C', L: '4.800', l: '2.250', H: '2.000', volum: '21.6 m³' },
+      { model: 'Eurocargo 75E', L: '5.200', l: '2.350', H: '2.100', volum: '25.7 m³' },
+    ],
+    dimCols: ['Model Șasiu', 'Lungime int. (mm)', 'Lățime int. (mm)', 'H totală (mm)', 'Volum'],
+  },
+  {
+    id: 'box-all',
+    icon: '📦',
+    name: 'Box ALL — Marfă Generală',
+    short: 'Cutie tancată, marfă protejată, distribuție urbană',
+    tags: ['Marfă uscată', 'Distribuție', 'Comerț'],
+    tagColors: ['', 'orange', ''],
+    desc: 'Caroserie tip cutie tancată din panouri sandwich aluminiu sau fibră. Protejează marfa complet de intemperii. Ușă spate batantă sau rulou. Acces lateral opțional. Soluție ideală pentru distribuție urbană.',
+    freight: true, temp: false, atp: false, tip: false, brand: true,
+    aplicatii: ['Distribuție FMCG', 'Transport electrocasnice', 'Farmaceutice ambientale', 'Comerț online – last mile'],
+    dims: [
+      { model: 'Daily 35C (3.0t)', L: '3.200', l: '1.980', H: '1.950', volum: '12.4 m³' },
+      { model: 'Daily 35C (3.5t)', L: '3.700', l: '2.000', H: '2.050', volum: '15.2 m³' },
+      { model: 'Daily 50C', L: '4.100', l: '2.100', H: '2.100', volum: '18.1 m³' },
+      { model: 'Daily 65C', L: '4.700', l: '2.200', H: '2.200', volum: '22.8 m³' },
+      { model: 'Daily 70C', L: '5.200', l: '2.250', H: '2.300', volum: '27.0 m³' },
+    ],
+    dimCols: ['Model Șasiu', 'Lungime int. (mm)', 'Lățime int. (mm)', 'Înălțime int. (mm)', 'Volum'],
+  },
+  {
+    id: 'izoterm',
+    icon: '🌡️',
+    name: 'Autoizoterm / Frigorific',
+    short: 'Transport alimente temperatură controlată · ATP',
+    tags: ['ATP', 'Refrigerare', 'Congelare'],
+    tagColors: ['green', 'orange', 'green'],
+    desc: 'Caroserie izoterma cu panouri sandwich poliuretan (Liderfoam® 60–100mm) sau spumă injectată. Echipată cu agregat frigorific Carrier Transicold sau Alex Original. Conformă normei ATP pentru transport alimentar.',
+    freight: false, temp: true, atp: true, tip: false, brand: true,
+    aplicatii: ['Transport carne și pește', 'Produse lactate', 'Legume-fructe', 'Înghețată și congelate', 'Medicamente cu lanț rece'],
+    dims: [
+      { model: 'Daily 35C', L: '2.900', l: '1.780', H: '1.750', volum: '9.0 m³' },
+      { model: 'Daily 35CD', L: '3.400', l: '1.800', H: '1.800', volum: '11.0 m³' },
+      { model: 'Daily 50C', L: '3.900', l: '1.980', H: '1.900', volum: '14.7 m³' },
+      { model: 'Daily 50CD', L: '4.300', l: '2.000', H: '2.000', volum: '17.2 m³' },
+      { model: 'Daily 65C', L: '4.700', l: '2.100', H: '2.050', volum: '20.2 m³' },
+      { model: 'Daily 70C', L: '5.100', l: '2.150', H: '2.100', volum: '23.0 m³' },
+      { model: 'Eurocargo 75E', L: '5.500', l: '2.300', H: '2.200', volum: '27.8 m³' },
+    ],
+    dimCols: ['Model Șasiu', 'Lungime int. (mm)', 'Lățime int. (mm)', 'Înălțime int. (mm)', 'Volum int.'],
+  },
+  {
+    id: 'basculanta',
+    icon: '⬆️',
+    name: 'Basculantă',
+    short: 'Descărcare rapidă prin basculare hidraulică',
+    tags: ['Vrac', 'Construcții', 'HYVA/OMFB'],
+    tagColors: ['', '', 'orange'],
+    desc: 'Caroserie cu basculare hidraulică pe 3 direcții (spate + lateral). Kit-uri HYVA sau OMFB. Bena din oțel sau aliaj aluminiu. Sistem comandă din cabină. Ideală pentru transport nisip, pietriș, piatră spartă.',
+    freight: true, temp: false, atp: false, tip: true, brand: false,
+    aplicatii: ['Nisip, pietriș, piatră', 'Pământ și excavații', 'Cereale și produse agricole', 'Deșeuri construcții'],
+    dims: [
+      { model: 'Daily 35C', L: '3.000', l: '1.900', H: '350', volum: '2.0 m³' },
+      { model: 'Daily 50C', L: '3.500', l: '2.050', H: '400', volum: '2.9 m³' },
+      { model: 'Daily 65C', L: '4.000', l: '2.200', H: '450', volum: '3.9 m³' },
+      { model: 'Eurocargo 75E', L: '4.500', l: '2.300', H: '500', volum: '5.2 m³' },
+      { model: 'Eurocargo 120E', L: '5.500', l: '2.400', H: '600', volum: '7.9 m³' },
+    ],
+    dimCols: ['Model Șasiu', 'Lungime benă (mm)', 'Lățime benă (mm)', 'H perete (mm)', 'Volum benă'],
+  },
+  {
+    id: 'bauturi',
+    icon: '🍺',
+    name: 'Transport Băuturi',
+    short: 'Platformă laterală cu role și cărucior – distribuție HoReCa',
+    tags: ['HoReCa', 'Băuturi', 'Distribuție'],
+    tagColors: ['orange', '', ''],
+    desc: 'Configurație specială pentru distribuția băuturilor în butoaie și navete. Sistem role inox pe podea, rampe laterale rabatabile, cârlige pentru cărucior. Opțional: compartiment frigorific pentru beri/sucuri.',
+    freight: true, temp: false, atp: false, tip: false, brand: true,
+    aplicatii: ['Distribuție bere la butoi', 'Sucuri și ape minerale', 'Vinuri și spirtoase', 'Livrare HoReCa Iași/Bacău'],
+    dims: [
+      { model: 'Daily 35C', L: '3.200', l: '2.000', H: '1.900', volum: '—' },
+      { model: 'Daily 50C', L: '4.000', l: '2.100', H: '2.000', volum: '—' },
+      { model: 'Eurocargo 75E', L: '5.000', l: '2.300', H: '2.100', volum: '—' },
+    ],
+    dimCols: ['Model Șasiu', 'Lungime int. (mm)', 'Lățime int. (mm)', 'H totală (mm)', 'Obs.'],
+  },
+  {
+    id: 'platforma-auto',
+    icon: '🚗',
+    name: 'Platformă Auto',
+    short: 'Transport vehicule – autotractate, avarii, dealeri',
+    tags: ['Dealeri', 'Asistență rutieră', 'Vehicule'],
+    tagColors: ['orange', '', ''],
+    desc: 'Platformat specializat pentru transportul autovehiculelor. Rampă hidraulică sau mecanică de urcare, sistem ancorare 4 puncte, glisiere aluminiu. Pot transporta 1–2 autoturisme în funcție de șasiu.',
+    freight: false, temp: false, atp: false, tip: false, brand: false,
+    aplicatii: ['Transport mașini avarie', 'Distribuție dealeri auto', 'Transport utilaje mici', 'Recuperare vehicule'],
+    dims: [
+      { model: 'Daily 35C', L: '4.200', l: '2.050', H: '—', volum: '1 auto' },
+      { model: 'Daily 50C', L: '5.000', l: '2.150', H: '—', volum: '1–2 auto' },
+      { model: 'Eurocargo 75E', L: '6.500', l: '2.300', H: '—', volum: '2 auto' },
+    ],
+    dimCols: ['Model Șasiu', 'Lungime platformă (mm)', 'Lățime (mm)', 'H rampă', 'Capacitate'],
+  },
+  {
+    id: 'animale',
+    icon: '🐄',
+    name: 'Transport Animale',
+    short: 'Grilaje ventilate, drenaj podea, norme sanitar-veterinare',
+    tags: ['Agricultură', 'Veterinar', 'Norme EU'],
+    tagColors: ['', 'green', 'green'],
+    desc: 'Caroserie cu grilaje metalice ventilate, podea cu scurgere și pardoseală anti-alunecare. Respectă normele europene de transport animale vii. Compartimentare internă ajustabilă.',
+    freight: false, temp: false, atp: false, tip: false, brand: false,
+    aplicatii: ['Bovine și ovine', 'Porcine', 'Transport ferme-abator', 'Export animale'],
+    dims: [
+      { model: 'Daily 35C', L: '3.200', l: '1.950', H: '1.800', volum: '6 ovine' },
+      { model: 'Daily 50C', L: '4.000', l: '2.100', H: '2.000', volum: '4 bovine' },
+      { model: 'Eurocargo 75E', L: '5.200', l: '2.300', H: '2.100', volum: '8 bovine' },
+    ],
+    dimCols: ['Model Șasiu', 'Lungime int. (mm)', 'Lățime int. (mm)', 'H int. (mm)', 'Capacitate orientativă'],
+  },
+];
+
+const WIZARD_STEPS = [
+  {
+    q: 'Ce transportă clientul?',
+    hint: 'Tipul de marfă determină structura caroseriei',
+    opts: [
+      { icon: '📦', label: 'Mărfuri generale uscate', sub: 'Mobilier, electrocasnice, paleți, textile', val: 'general' },
+      { icon: '🥩', label: 'Alimente / produse perisabile', sub: 'Carne, lactate, legume-fructe, înghețată', val: 'food' },
+      { icon: '🍺', label: 'Băuturi', sub: 'Bere, sucuri, ape minerale, vin', val: 'bauturi' },
+      { icon: '⛏️', label: 'Materiale construcții / vrac', sub: 'Nisip, pietriș, piatră, pământ, cereale', val: 'bulk' },
+    ]
+  },
+  {
+    q: 'Este necesară temperatura controlată?',
+    hint: 'Unele mărfuri necesită refrigerare sau congelare pe tot parcursul transportului',
+    opts: [
+      { icon: '❄️', label: 'Da — refrigerare (+2°C / +8°C)', sub: 'Carne, lactate, legume, produse farmaceutice', val: 'frig' },
+      { icon: '🧊', label: 'Da — congelare (până la -20°C)', sub: 'Înghețată, pește, carne congelată', val: 'congelare' },
+      { icon: '🌡️', label: 'Izoterm fără agregat (±ambient)', sub: 'Menține temperatura fără motor', val: 'izoterm' },
+      { icon: '✅', label: 'Nu — transport la temperatura ambiantă', sub: 'Marfă care nu necesită lanț de frig', val: 'nu' },
+    ]
+  },
+  {
+    q: 'Câte stopuri/livrări are pe zi?',
+    hint: 'Frecvența livrărilor influențează tipul ușii și accesul la marfă',
+    opts: [
+      { icon: '1️⃣', label: '1–3 stopuri pe zi', sub: 'Transport lung, descărcare finală', val: 'putine' },
+      { icon: '📍', label: '4–10 stopuri pe zi', sub: 'Distribuție medie, acces frecvent', val: 'mediu' },
+      { icon: '🏙️', label: 'Peste 10 stopuri (distribuție urbană)', sub: 'Last-mile, acces rapid lateral/spate', val: 'multe' },
+      { icon: '⬆️', label: 'Descărcare prin basculare', sub: 'Vrac, materiale, o singură descărcare', val: 'basc' },
+    ]
+  },
+  {
+    q: 'Branding / personalizare pe caroserie?',
+    hint: 'Caroseriile box permit aplicarea de branding complet pe exterior',
+    opts: [
+      { icon: '🎨', label: 'Da — branding full (logo, culori)', sub: 'Vehiculul devine reclamă mobilă', val: 'brand_da' },
+      { icon: '➡️', label: 'Basic — număr telefon / firmă', sub: 'Inscripționare minimă', val: 'brand_basic' },
+      { icon: '❌', label: 'Nu este necesar branding', sub: 'Caroserie standard, fără personalizare', val: 'brand_nu' },
+    ]
+  },
+];
+
+const RECOMMENDATIONS = {
+  'general_nu_putine': { id: 'lada-obloane', note: 'Platformă cu obloane clasică, acces facil, versatilă.' },
+  'general_nu_mediu': { id: 'prelata', note: 'Protecție la intemperii cu acces rapid pe 3 laturi.' },
+  'general_nu_multe': { id: 'box-all', note: 'Box ALL tâncat — accese multiple, ideal distribuție urban.' },
+  'general_nu_basc': { id: 'basculanta', note: 'Bena basculantă — descărcare rapidă fără manoperă.' },
+  'food_frig_putine': { id: 'izoterm', note: 'Frigorific ATP cu agregat Carrier — ideal transport interurban.' },
+  'food_frig_mediu': { id: 'izoterm', note: 'Frigorific ATP cu ușă rulou — acces rapid la distribuție.' },
+  'food_frig_multe': { id: 'izoterm', note: 'Frigorific cu ușă laterală + rulou spate — distribuție urbană.' },
+  'food_congelare_putine': { id: 'izoterm', note: 'Frigorific congelare ATP, panou Liderfoam® 100mm, -20°C.' },
+  'food_izoterm_putine': { id: 'izoterm', note: 'Izotermă fără agregat — economică pentru distanțe scurte.' },
+  'bauturi_nu_putine': { id: 'bauturi', note: 'Platformă băuturi cu role și rampe laterale — HoReCa.' },
+  'bauturi_nu_mediu': { id: 'bauturi', note: 'Configurație distribuție băuturi cu cărucior.' },
+  'bulk_nu_basc': { id: 'basculanta', note: 'Bena basculantă HYVA/OMFB — construcții și agricultură.' },
+  'bulk_nu_putine': { id: 'lada-obloane', note: 'Ladă cu obloane — soluție economică pentru transport vrac.' },
+};
+
+// ─── STATE ───────────────────────────────────────────────────────────────────
+let wizardStep = 0;
+let answers = {};
+let expandedCards = {};
+
+// ─── TABS ───────────────────────────────────────────────────────────────────
+function showTab(id) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ─── CATALOG ────────────────────────────────────────────────────────────────
+function renderCatalog() {
+  const container = document.getElementById('cards-container');
+  container.innerHTML = CAROSERII.map(c => `
+    <div class="car-card ${expandedCards[c.id] ? 'selected' : ''}" id="card-${c.id}">
+      <div class="car-card-header">
+        <div class="car-icon">${c.icon}</div>
+        <div>
+          <h3>${c.name}</h3>
+          <p>${c.short}</p>
+        </div>
+      </div>
+      <div class="car-card-body">
+        <div class="tag-list">
+          ${c.tags.map((t,i) => `<span class="tag ${c.tagColors && c.tagColors[i] ? c.tagColors[i] : ''}">${t}</span>`).join('')}
+        </div>
+        <p>${c.desc}</p>
+
+        <div style="margin-top:12px">
+          ${c.atp ? '<span class="tag green">✅ ATP</span> ' : ''}
+          ${c.temp ? '<span class="tag orange">❄️ Temp. controlată</span> ' : ''}
+          ${c.brand ? '<span class="tag">🎨 Branding</span> ' : ''}
+        </div>
+
+        <button class="expand-btn ${expandedCards[c.id] ? 'open' : ''}" onclick="toggleCard('${c.id}')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          ${expandedCards[c.id] ? 'Ascunde dimensiuni' : 'Vezi dimensiuni pe șasiu'}
+        </button>
+
+        <div class="card-detail ${expandedCards[c.id] ? 'open' : ''}">
+          <div class="detail-label">📐 Dimensiuni orientative pe tip șasiu</div>
+          <table class="detail-table">
+            <thead><tr>${c.dimCols.map(col => `<th>${col}</th>`).join('')}</tr></thead>
+            <tbody>
+              ${c.dims.map((row, i) => {
+                const vals = Object.values(row);
+                return `<tr>${vals.map((v, j) => `<td>${v}</td>`).join('')}</tr>`;
+              }).join('')}
+            </tbody>
+          </table>
+          <div class="detail-label">🏭 Aplicații tipice</div>
+          <ul style="padding-left:18px; margin-top:4px">
+            ${c.aplicatii.map(a => `<li style="font-size:12px; color:#555; margin-bottom:3px">${a}</li>`).join('')}
+          </ul>
+          <div style="margin-top:12px; padding:10px 12px; background:#FEF3EC; border-radius:8px; font-size:12px; color:#555;">
+            <strong style="color:#E8621A">📋 Execuție:</strong> RUFUS Iași — omologare RAR inclusă în preț. Finanțare disponibilă prin leasing financiar sau operațional.
+          </div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function toggleCard(id) {
+  expandedCards[id] = !expandedCards[id];
+  renderCatalog();
+}
+
+// ─── COMPARE ────────────────────────────────────────────────────────────────
+function renderCompare() {
+  const tbody = document.getElementById('compare-body');
+  const YES = '<span class="check">✔</span>';
+  const NO = '<span class="cross">—</span>';
+  tbody.innerHTML = CAROSERII.map(c => `
+    <tr>
+      <td class="icon-col">${c.icon}</td>
+      <td><strong>${c.name}</strong></td>
+      <td>${c.temp ? YES : NO}</td>
+      <td>${c.freight ? YES : NO}</td>
+      <td>${c.atp ? YES : NO}</td>
+      <td>${c.tip ? YES : NO}</td>
+      <td>${c.brand ? YES : NO}</td>
+      <td style="font-size:12px; color:#555">${c.short}</td>
+    </tr>
+  `).join('');
+}
+
+// ─── CONTACT ─────────────────────────────────────────────────────────────────
+function renderContact() {
+  const container = document.getElementById('contact-container');
+  container.innerHTML = `
+    <div class="contact-card" style="border-top-color: var(--orange)">
+      <h3>RUFUS Iași</h3>
+      <p class="subtitle">Centrul de Carosare — Partener principal Autopadova SRL</p>
+      <div class="contact-row">
+        <span class="contact-icon">📍</span>
+        <div class="contact-val">Calea Chișinăului nr. 57, Iași</div>
+      </div>
+      <div class="contact-row">
+        <span class="contact-icon">📞</span>
+        <div>
+          <div class="contact-val">0232.234.005 / 0232.250.666</div>
+          <div class="contact-label">Tel fix</div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <span class="contact-icon">📱</span>
+        <div>
+          <div class="contact-val">0745.079.996 / 0786.159.729</div>
+          <div class="contact-label">Mobil</div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <span class="contact-icon">📟</span>
+        <div>
+          <div class="contact-val">0757.800.900</div>
+          <div class="contact-label">Infoline</div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <span class="contact-icon">🌐</span>
+        <div class="contact-val">www.cvc.ro</div>
+      </div>
+    </div>
+
+    <div class="contact-card">
+      <h3>Autopadova SRL — Iași</h3>
+      <p class="subtitle">Dealer Iveco, Fiat Professional, Jeep, Suzuki</p>
+      <div class="contact-row">
+        <span class="contact-icon">🌐</span>
+        <div class="contact-val">www.autopadova.ro</div>
+      </div>
+      <div class="contact-row">
+        <span class="contact-icon">📍</span>
+        <div class="contact-val">Iași &amp; Bacău, zona Moldova</div>
+      </div>
+      <div class="contact-row">
+        <span class="contact-icon">🔧</span>
+        <div>
+          <div class="contact-val">One-stop shop</div>
+          <div class="contact-label">Șasiu + Carosare + RAR + Finanțare</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-card">
+      <h3>Liderkit Spain</h3>
+      <p class="subtitle">Producător kit-uri caroserie modular — Europa</p>
+      <div class="contact-row">
+        <span class="contact-icon">🌐</span>
+        <div class="contact-val">liderkit.com</div>
+      </div>
+      <div class="contact-row">
+        <span class="contact-icon">✉️</span>
+        <div class="contact-val">export@liderkit.com</div>
+      </div>
+      <div class="contact-row">
+        <span class="contact-icon">📞</span>
+        <div class="contact-val">+34 953 67 80 41</div>
+      </div>
+      <div class="contact-row">
+        <span class="contact-icon">📦</span>
+        <div>
+          <div class="contact-val">Kit-uri modulare</div>
+          <div class="contact-label">Sandwich, Plywood, Isothermal, Aluminiu</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-card" style="background: linear-gradient(135deg, var(--blue-dark), var(--blue-med)); color: white; border-top-color: var(--orange)">
+      <h3 style="color:white">Servicii incluse</h3>
+      <p class="subtitle" style="color:rgba(255,255,255,0.7)">La orice carosare prin RUFUS + Autopadova</p>
+      ${[
+        ['✅', 'Omologare RAR inclusă'],
+        ['💰', 'Leasing financiar sau operațional'],
+        ['🎨', 'Branding flotă pe caroserie'],
+        ['🔧', 'Service și reparații caroserie'],
+        ['📋', 'Conformitate ATP (frigorific)'],
+        ['🚛', 'Toate mărcile de șasiu acceptate'],
+      ].map(([icon, text]) => `
+        <div class="contact-row">
+          <span class="contact-icon">${icon}</span>
+          <div style="color:rgba(255,255,255,0.9); font-size:13px">${text}</div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+// ─── WIZARD ──────────────────────────────────────────────────────────────────
+function renderWizard() {
+  const container = document.getElementById('wizard-container');
+  if (wizardStep >= WIZARD_STEPS.length) {
+    showResult(container);
+    return;
+  }
+
+  const step = WIZARD_STEPS[wizardStep];
+  const progress = ((wizardStep) / WIZARD_STEPS.length) * 100;
+  const selectedVal = answers[wizardStep];
+
+  container.innerHTML = `
+    <div class="wizard-progress">
+      <div class="wizard-progress-fill" style="width:${progress}%"></div>
+    </div>
+    <div class="wizard-header">
+      <h2>Pas ${wizardStep + 1} din ${WIZARD_STEPS.length}</h2>
+      <span class="wizard-step-badge">${['🚛','🌡️','📍','🎨'][wizardStep]} Pasul ${wizardStep + 1}</span>
+    </div>
+    <div class="wizard-body">
+      <div class="wizard-question">${step.q}</div>
+      <div class="wizard-hint">${step.hint}</div>
+      <div class="wizard-options">
+        ${step.opts.map(o => `
+          <button class="wizard-opt ${selectedVal === o.val ? 'selected' : ''}" onclick="selectOpt(${wizardStep}, '${o.val}')">
+            <span class="wizard-opt-icon">${o.icon}</span>
+            <span class="wizard-opt-text">
+              ${o.label}
+              <small>${o.sub}</small>
+            </span>
+            ${selectedVal === o.val ? '<span style="color:var(--orange);font-size:20px">●</span>' : '<span style="color:#ddd;font-size:20px">○</span>'}
+          </button>
+        `).join('')}
+      </div>
+      <div class="wizard-actions">
+        <button class="btn btn-secondary" onclick="prevStep()" ${wizardStep === 0 ? 'disabled' : ''}>← Înapoi</button>
+        <div style="font-size:12px;color:#888">${[...Array(WIZARD_STEPS.length)].map((_, i) => `<span style="color:${i <= wizardStep ? 'var(--blue-dark)' : '#ddd'}; font-size:18px">●</span>`).join(' ')}</div>
+        <button class="btn btn-primary" onclick="nextStep()" ${!selectedVal ? 'disabled' : ''}>Continuă →</button>
+      </div>
+    </div>
+  `;
+}
+
+function selectOpt(step, val) {
+  answers[step] = val;
+  renderWizard();
+}
+
+function nextStep() {
+  if (answers[wizardStep]) {
+    wizardStep++;
+    renderWizard();
+  }
+}
+
+function prevStep() {
+  if (wizardStep > 0) {
+    wizardStep--;
+    renderWizard();
+  }
+}
+
+function showResult(container) {
+  // Build recommendation key
+  const freight = answers[0]; // general, food, bauturi, bulk
+  const temp = answers[1];    // frig, congelare, izoterm, nu
+  const stops = answers[2];   // putine, mediu, multe, basc
+  const brand = answers[3];
+
+  const key1 = `${freight}_${temp}_${stops}`;
+  const key2 = `${freight}_${temp}_putine`;
+  const rec = RECOMMENDATIONS[key1] || RECOMMENDATIONS[key2] || { id: 'box-all', note: 'Recomandare generală — consultați un agent Autopadova pentru configurare exactă.' };
+  const car = CAROSERII.find(c => c.id === rec.id);
+
+  container.innerHTML = `
+    <div class="result-wrap">
+      <div class="result-header">
+        <h2>✅ Recomandare Personalizată</h2>
+        <p>Bazată pe răspunsurile tale — configurabil cu RUFUS Iași</p>
+      </div>
+      <div class="result-body">
+        <div class="result-recommendation">
+          <div class="result-rec-icon">${car.icon}</div>
+          <div class="result-rec-text">
+            <h3>${car.name}</h3>
+            <p>${rec.note}</p>
+            <p style="margin-top:6px">${car.desc}</p>
+          </div>
+        </div>
+
+        <div class="result-specs">
+          <div class="spec-box">
+            <label>Temperatură controlată</label>
+            <div class="spec-val">${car.temp ? '❄️ Da — sistem frigorific' : '✅ Nu este necesar'}</div>
+          </div>
+          <div class="spec-box">
+            <label>Conformitate ATP</label>
+            <div class="spec-val">${car.atp ? '✅ ATP inclus' : '—'}</div>
+          </div>
+          <div class="spec-box">
+            <label>Branding posibil</label>
+            <div class="spec-val">${car.brand ? '🎨 Da — branding full' : '—'}</div>
+          </div>
+          <div class="spec-box">
+            <label>Omologare RAR</label>
+            <div class="spec-val">✅ Inclusă în preț</div>
+          </div>
+        </div>
+
+        <div class="result-partner">
+          <h4>Executant caroserie</h4>
+          <div class="partner-name">RUFUS Iași</div>
+          <p>Peste 1.000 vehicule carosate · 15 ani experiență · Toate mărcile de șasiu</p>
+          <div class="contact-row">
+            <div class="contact-item">📞 0745.079.996</div>
+            <div class="contact-item">📟 0757.800.900</div>
+            <div class="contact-item">📍 Calea Chișinăului 57, Iași</div>
+          </div>
+        </div>
+
+        <button class="restart-btn" onclick="restartWizard()">🔄 Configurează din nou</button>
+      </div>
+    </div>
+  `;
+}
+
+function restartWizard() {
+  wizardStep = 0;
+  answers = {};
+  renderWizard();
+}
+
+// ─── INIT ────────────────────────────────────────────────────────────────────
+renderWizard();
+renderCatalog();
+renderCompare();
+renderContact();
+</script>
+
+
+</body></html>
