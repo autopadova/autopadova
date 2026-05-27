@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<title>Organigrama pe Roluri – Autopadova Group</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, sans-serif; background: #F8F9FA; color: #1a1a1a; }
+
+.page-header {
+  background: linear-gradient(135deg, #0D47A1, #1565C0);
+  color: white; padding: 20px 32px 16px;
+  display: flex; justify-content: space-between; align-items: flex-end;
+}
+.page-header h1 { font-size: 18px; font-weight: 700; }
+.page-header .sub { font-size: 11px; opacity: 0.8; margin-top: 4px; }
+.page-header .date { font-size: 11px; opacity: 0.7; }
+
+.legend {
+  display: flex; gap: 10px; padding: 10px 32px;
+  background: white; border-bottom: 1px solid #e0e0e0; flex-wrap: wrap;
+}
+.leg-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: #555; }
+.leg-dot { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
+
+.org-container { padding: 24px 28px 40px; }
+
+/* ============ TOP: Leadership ============ */
+.leadership-tier {
+  display: flex; justify-content: center; margin-bottom: 8px;
+}
+.connector-down {
+  display: flex; justify-content: center;
+  height: 24px;
+}
+.connector-down::after {
+  content: ''; width: 2px; background: #90A4AE; display: block;
+}
+
+/* ============ ROLE LANES ============ */
+.lanes {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+  margin-top: 0;
+}
+
+.lane {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  display: flex; flex-direction: column;
+}
+
+.lane-header {
+  padding: 10px 10px 8px;
+  color: white;
+  text-align: center;
+}
+.lane-header .role-icon { font-size: 20px; display: block; margin-bottom: 4px; }
+.lane-header .role-title { font-size: 12px; font-weight: 700; line-height: 1.3; }
+.lane-header .role-desc { font-size: 9px; opacity: 0.85; margin-top: 3px; line-height: 1.3; }
+
+.lane-body { padding: 8px; flex: 1; display: flex; flex-direction: column; gap: 5px; }
+
+/* ROLE COLORS */
+.role-leadership { background: #0D47A1; }
+.role-revenue    { background: #1B5E20; }
+.role-cx         { background: #E65100; }
+.role-tech       { background: #4A148C; }
+.role-ops        { background: #006064; }
+.role-finance    { background: #BF360C; }
+.role-hr         { background: #37474F; }
+.role-facility   { background: #558B2F; }
+
+/* Card styles */
+.card {
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-size: 10px;
+  line-height: 1.35;
+  position: relative;
+}
+.card-title { font-weight: 700; color: #1a1a1a; }
+.card-sub { color: #555; font-size: 9px; margin-top: 1px; }
+.card-count {
+  display: inline-block; font-size: 9px; font-weight: 700;
+  padding: 1px 5px; border-radius: 8px; margin-top: 2px;
+}
+.card-vacant { font-size: 8px; font-style: italic; color: #e53935; margin-top: 1px; }
+
+/* Background tints per role */
+.bg-leadership { background: #E3F2FD; border-left: 3px solid #0D47A1; }
+.bg-revenue    { background: #E8F5E9; border-left: 3px solid #2E7D32; }
+.bg-cx         { background: #FFF3E0; border-left: 3px solid #E65100; }
+.bg-tech       { background: #F3E5F5; border-left: 3px solid #6A1B9A; }
+.bg-ops        { background: #E0F7FA; border-left: 3px solid #006064; }
+.bg-finance    { background: #FBE9E7; border-left: 3px solid #BF360C; }
+.bg-hr         { background: #ECEFF1; border-left: 3px solid #37474F; }
+.bg-facility   { background: #F1F8E9; border-left: 3px solid #558B2F; }
+
+/* Count badges */
+.cnt-leadership { background: #BBDEFB; color: #0D47A1; }
+.cnt-revenue    { background: #C8E6C9; color: #1B5E20; }
+.cnt-cx         { background: #FFE0B2; color: #E65100; }
+.cnt-tech       { background: #E1BEE7; color: #4A148C; }
+.cnt-ops        { background: #B2EBF2; color: #006064; }
+.cnt-finance    { background: #FFCCBC; color: #BF360C; }
+.cnt-hr         { background: #CFD8DC; color: #37474F; }
+.cnt-facility   { background: #DCEDC8; color: #558B2F; }
+
+.section-label {
+  font-size: 8px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.5px; color: #888; margin: 5px 0 3px; padding-left: 2px;
+}
+
+.divider { height: 1px; background: #f0f0f0; margin: 4px 0; }
+
+/* Summary bar */
+.summary {
+  display: flex; gap: 10px; padding: 12px 28px;
+  background: #263238; flex-wrap: wrap;
+}
+.sum-box { flex: 1; min-width: 100px; }
+.sum-val { font-size: 18px; font-weight: 700; color: white; }
+.sum-lbl { font-size: 9px; color: #90A4AE; margin-top: 2px; }
+
+@media print {
+  .page-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div>
+    <div class="sub">Autopadova Group · Administrator: Onofrei Gabriel</div>
+    <h1>Organigrama pe Roluri — AUTO PADOVA S.R.L.</h1>
+  </div>
+  <div class="date">26.05.2026</div>
+</div>
+
+<div class="legend">
+  <div class="leg-item"><div class="leg-dot" style="background:#0D47A1"></div> Conducere</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#1B5E20"></div> Venituri &amp; Creștere</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#E65100"></div> Experiența Clientului</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#4A148C"></div> Livrare Tehnică</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#006064"></div> Operațiuni &amp; Logistică</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#BF360C"></div> Control Financiar</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#37474F"></div> Oameni &amp; Cultură</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#558B2F"></div> Facilități</div>
+</div>
+
+<div class="org-container">
+
+  <!-- LEADERSHIP TOP -->
+  <div class="leadership-tier">
+    <div class="lane" style="max-width:520px; width:100%;">
+      <div class="lane-header role-leadership">
+        <span class="role-icon">🎯</span>
+        <div class="role-title">CONDUCERE STRATEGICĂ</div>
+        <div class="role-desc">Direcție, decizie, reprezentare</div>
+      </div>
+      <div class="lane-body" style="flex-direction:row; gap:8px;">
+        <div class="card bg-leadership" style="flex:1;">
+          <div class="card-title">Director General / Director Executiv</div>
+          <div class="card-sub">Onofrei Gabriel · Conducere grup</div>
+        </div>
+        <div class="card bg-leadership" style="flex:1;">
+          <div class="card-title">Asistent Manager</div>
+          <div class="card-sub">Suport decizional · Coordonare transversală</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="connector-down"></div>
+
+  <!-- 6 ROLE LANES -->
+  <div class="lanes">
+
+    <!-- 1. VENITURI -->
+    <div class="lane">
+      <div class="lane-header role-revenue">
+        <span class="role-icon">💰</span>
+        <div class="role-title">VENITURI &amp; CREȘTERE</div>
+        <div class="role-desc">Generare business nou</div>
+      </div>
+      <div class="lane-body">
+
+        <div class="section-label">Turisme — Iași (LTC)</div>
+        <div class="card bg-revenue">
+          <div class="card-title">Reprezentant Vânzări Turisme</div>
+          <span class="card-count cnt-revenue">×2</span>
+        </div>
+
+        <div class="section-label">Utilitare — Iași (LTC)</div>
+        <div class="card bg-revenue">
+          <div class="card-title">Reprezentant Vânzări IVECO</div>
+          <span class="card-count cnt-revenue">×3</span>
+        </div>
+
+        <div class="section-label">Bacău (BC)</div>
+        <div class="card bg-revenue">
+          <div class="card-title">Reprezentant Vânzări Iveco &amp; Suzuki</div>
+          <span class="card-count cnt-revenue">×2</span>
+        </div>
+
+        <div class="divider"></div>
+        <div class="section-label">Caroseri</div>
+        <div class="card bg-revenue">
+          <div class="card-title">Ing. Tehnolog / Repr. Vânzări Caroseri</div>
+          <div class="card-sub">Proiectare + Vânzare</div>
+        </div>
+
+        <div class="divider"></div>
+        <div class="section-label">Marketing</div>
+        <div class="card bg-revenue">
+          <div class="card-title">Specialist Marketing</div>
+          <div class="card-sub">Campanii · Social · Lead gen</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 2. EXPERIENTA CLIENT -->
+    <div class="lane">
+      <div class="lane-header role-cx">
+        <span class="role-icon">🤝</span>
+        <div class="role-title">EXPERIENȚA CLIENTULUI</div>
+        <div class="role-desc">Primul contact &amp; follow-up</div>
+      </div>
+      <div class="lane-body">
+
+        <div class="section-label">Vânzări</div>
+        <div class="card bg-cx">
+          <div class="card-title">Administrator Contracte Vânzări</div>
+          <span class="card-count cnt-cx">×2</span>
+        </div>
+        <div class="card bg-cx">
+          <div class="card-title">Adm. Contracte Service</div>
+        </div>
+
+        <div class="section-label">Recepție Service — Bacău</div>
+        <div class="card bg-cx">
+          <div class="card-title">Recepționer Service BC</div>
+          <span class="card-count cnt-cx">×3</span>
+        </div>
+        <div class="card bg-cx">
+          <div class="card-title">Recepționer Tinichigerie BC</div>
+        </div>
+
+        <div class="section-label">Recepție Service — Iași (LTC)</div>
+        <div class="card bg-cx">
+          <div class="card-title">Recepționer Service Turisme LTC</div>
+        </div>
+        <div class="card bg-cx">
+          <div class="card-title">Recepționer Service IVECO LTC</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 3. LIVRARE TEHNICA -->
+    <div class="lane">
+      <div class="lane-header role-tech">
+        <span class="role-icon">🔧</span>
+        <div class="role-title">LIVRARE TEHNICĂ</div>
+        <div class="role-desc">Execuție &amp; calitate</div>
+      </div>
+      <div class="lane-body">
+
+        <div class="card bg-tech" style="margin-bottom:4px;">
+          <div class="card-title">Director Tehnic</div>
+          <div class="card-sub">Supervizare tehnică globală</div>
+        </div>
+
+        <div class="section-label">Service Bacău</div>
+        <div class="card bg-tech">
+          <div class="card-title">Șef Service BC</div>
+        </div>
+        <div class="card bg-tech">
+          <div class="card-title">Tehnicieni Service BC</div>
+          <span class="card-count cnt-tech">×8</span>
+        </div>
+        <div class="card bg-tech">
+          <div class="card-title">Tinichigerie BC</div>
+          <span class="card-count cnt-tech">×3</span>
+        </div>
+        <div class="card bg-tech">
+          <div class="card-title">Vopsitorie BC</div>
+          <span class="card-count cnt-tech">×1</span>
+        </div>
+
+        <div class="section-label">Service Turisme — Iași</div>
+        <div class="card bg-tech">
+          <div class="card-title">Șef Atelier Turisme LTC</div>
+          <div class="card-vacant">⚠ post vacant</div>
+        </div>
+        <div class="card bg-tech">
+          <div class="card-title">Tehnicieni Turisme LTC</div>
+          <span class="card-count cnt-tech">×4</span>
+        </div>
+
+        <div class="section-label">Service IVECO — Iași</div>
+        <div class="card bg-tech">
+          <div class="card-title">Șef Service IVECO LTC</div>
+        </div>
+        <div class="card bg-tech">
+          <div class="card-title">Tehnicieni IVECO LTC</div>
+          <span class="card-count cnt-tech">×6</span>
+        </div>
+        <div class="card bg-tech">
+          <div class="card-title">Electrician / Diagnoză LTC</div>
+          <span class="card-count cnt-tech">×2</span>
+        </div>
+        <div class="card bg-tech">
+          <div class="card-title">Inginer Stație ITP LTC</div>
+        </div>
+
+        <div class="section-label">Caroseri</div>
+        <div class="card bg-tech">
+          <div class="card-title">Șef Echipă Caroseri</div>
+        </div>
+        <div class="card bg-tech">
+          <div class="card-title">Personal Direct Productiv Caroseri</div>
+          <span class="card-count cnt-tech">×6</span>
+        </div>
+        <div class="card bg-tech">
+          <div class="card-title">Tinichigerie LTC</div>
+          <span class="card-count cnt-tech">×3</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 4. OPERATIUNI -->
+    <div class="lane">
+      <div class="lane-header role-ops">
+        <span class="role-icon">📦</span>
+        <div class="role-title">OPERAȚIUNI &amp; LOGISTICĂ</div>
+        <div class="role-desc">Piese, parc, transport</div>
+      </div>
+      <div class="lane-body">
+
+        <div class="section-label">Logistică Piese</div>
+        <div class="card bg-ops">
+          <div class="card-title">Operator Logistică Piese BC</div>
+        </div>
+        <div class="card bg-ops">
+          <div class="card-title">Operator Logistică Piese IVECO LTC</div>
+        </div>
+        <div class="card bg-ops">
+          <div class="card-title">Operator Logistică Piese Turisme LTC</div>
+          <div class="card-vacant">⚠ post vacant</div>
+        </div>
+
+        <div class="section-label">Parc Auto &amp; Transport</div>
+        <div class="card bg-ops">
+          <div class="card-title">Conducător Activitate Transport</div>
+        </div>
+        <div class="card bg-ops">
+          <div class="card-title">Gestionar Parc Auto</div>
+        </div>
+        <div class="card bg-ops">
+          <div class="card-title">Șofer Autoturisme &amp; Camionete</div>
+          <span class="card-count cnt-ops">×2</span>
+        </div>
+
+        <div class="section-label">Caroseri — Coordonare</div>
+        <div class="card bg-ops">
+          <div class="card-title">Coordonator Activitate Caroseri</div>
+          <div class="card-sub">Planning · Livrări · Subcontractori</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 5. FINANCIAR -->
+    <div class="lane">
+      <div class="lane-header role-finance">
+        <span class="role-icon">📊</span>
+        <div class="role-title">CONTROL FINANCIAR</div>
+        <div class="role-desc">Raportare · Conformitate</div>
+      </div>
+      <div class="lane-body">
+
+        <div class="card bg-finance">
+          <div class="card-title">Director Economic</div>
+          <div class="card-sub">Strategie financiară grup</div>
+        </div>
+
+        <div class="section-label">Contabilitate</div>
+        <div class="card bg-finance">
+          <div class="card-title">Contabil Șef</div>
+        </div>
+        <div class="card bg-finance">
+          <div class="card-title">Economist Facturare BC</div>
+        </div>
+        <div class="card bg-finance">
+          <div class="card-title">Economist LTC</div>
+        </div>
+        <div class="card bg-finance">
+          <div class="card-title">Economist</div>
+        </div>
+
+        <div class="section-label">Analiză &amp; Stocuri</div>
+        <div class="card bg-finance">
+          <div class="card-title">Analist Stocuri</div>
+          <div class="card-sub">DMS · Inventar · Rapoarte</div>
+        </div>
+        <div class="card bg-finance">
+          <div class="card-title">Legator Manual</div>
+          <div class="card-sub">Arhivă · Documente</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 6. HR + FACILITATI -->
+    <div class="lane">
+      <div class="lane-header role-hr">
+        <span class="role-icon">👥</span>
+        <div class="role-title">OAMENI &amp; FACILITĂȚI</div>
+        <div class="role-desc">HR · Mentenanță</div>
+      </div>
+      <div class="lane-body">
+
+        <div class="section-label">Resurse Umane</div>
+        <div class="card bg-hr">
+          <div class="card-title">Director Resurse Umane</div>
+          <div class="card-sub">Recrutare · Training · Legislație muncii</div>
+        </div>
+
+        <div class="divider"></div>
+        <div class="section-label">Întreținere &amp; Reparații</div>
+        <div class="card bg-facility">
+          <div class="card-title">Responsabil Întreținere &amp; Reparații</div>
+        </div>
+        <div class="card bg-facility">
+          <div class="card-title">Personal Întreținere LTC</div>
+          <span class="card-count cnt-facility">×3</span>
+        </div>
+        <div class="card bg-facility">
+          <div class="card-title">Personal Întreținere BC</div>
+          <span class="card-count cnt-facility">×1</span>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- end lanes -->
+</div><!-- end org-container -->
+
+<!-- SUMMARY BAR -->
+<div class="summary">
+  <div class="sum-box">
+    <div class="sum-val" style="color:#64B5F6">~70+</div>
+    <div class="sum-lbl">Angajați total estimat</div>
+  </div>
+  <div class="sum-box">
+    <div class="sum-val" style="color:#A5D6A7">9</div>
+    <div class="sum-lbl">Vânzători activi</div>
+  </div>
+  <div class="sum-box">
+    <div class="sum-val" style="color:#CE93D8">~38</div>
+    <div class="sum-lbl">Tehnicieni &amp; productiv</div>
+  </div>
+  <div class="sum-box">
+    <div class="sum-val" style="color:#FFCC80">8</div>
+    <div class="sum-lbl">Recepționeri / CX</div>
+  </div>
+  <div class="sum-box">
+    <div class="sum-val" style="color:#EF9A9A">2</div>
+    <div class="sum-lbl">Posturi vacante</div>
+  </div>
+  <div class="sum-box">
+    <div class="sum-val" style="color:#80CBC4">3</div>
+    <div class="sum-lbl">Locații (LTC, BC + Caroseri)</div>
+  </div>
+</div>
+
+</body>
+</html>
