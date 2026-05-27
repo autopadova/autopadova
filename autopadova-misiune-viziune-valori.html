@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Autopadova — Misiune · Viziune · Valori</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #C8102E;
+    --gold: #A07C20;
+    --bg: #F7F5F2;
+    --bg2: #EFECE7;
+    --bg3: #FFFFFF;
+    --gold-bg: #FBF5E6;
+    --red-bg: #FDF1F3;
+    --text: #111111;
+    --text-mid: #333333;
+    --text-soft: #555555;
+    --border: #DEDBD5;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Outfit', sans-serif; font-weight: 300; overflow-x: hidden; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh; display: flex; flex-direction: column;
+    justify-content: center; padding: 80px 64px;
+    background: var(--bg3); border-bottom: 2px solid var(--border);
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -200px; right: -200px;
+    width: 700px; height: 700px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,16,46,0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: ''; position: absolute; bottom: -100px; left: -100px;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(160,124,32,0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .logo-line { display: flex; align-items: center; gap: 14px; margin-bottom: 80px; opacity:0; animation: fadeUp 0.8s ease 0.1s forwards; }
+  .logo-badge { width: 44px; height: 44px; background: var(--red); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 700; color: #fff; }
+  .logo-text { font-size: 11px; font-weight: 500; letter-spacing: 4px; text-transform: uppercase; color: var(--text-soft); }
+
+  .hero-eyebrow { font-size: 11px; letter-spacing: 5px; text-transform: uppercase; color: var(--red); margin-bottom: 20px; opacity:0; animation: fadeUp 0.8s ease 0.3s forwards; }
+
+  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(56px, 9vw, 120px); font-weight: 700; line-height: 0.92; letter-spacing: -3px; color: var(--text); opacity:0; animation: fadeUp 0.9s ease 0.4s forwards; }
+  .hero-title em { font-style: italic; color: var(--red); }
+
+  .hero-sub { max-width: 500px; margin-top: 36px; font-size: 17px; line-height: 1.8; color: var(--text-soft); opacity:0; animation: fadeUp 0.8s ease 0.65s forwards; }
+
+  .hero-since { margin-top: 60px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; opacity:0; animation: fadeUp 0.8s ease 0.85s forwards; }
+  .hero-since span { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); }
+  .since-line { height: 1px; width: 48px; background: var(--gold); opacity: 0.5; }
+
+  /* ── SECTIONS ── */
+  section { padding: 100px 64px; }
+
+  .section-label { font-size: 10px; letter-spacing: 6px; text-transform: uppercase; color: var(--red); margin-bottom: 14px; font-weight: 500; }
+
+  /* ── MISIUNE ── */
+  .misiune { background: var(--bg3); border-top: 1px solid var(--border); }
+
+  .misiune-inner { display: grid; grid-template-columns: 1fr 1.5fr; gap: 80px; align-items: start; }
+
+  .misiune-left h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 4vw, 56px); font-weight: 700; line-height: 1.05; color: var(--text); }
+  .misiune-left h2 span { display: block; color: var(--red); font-style: italic; }
+
+  .misiune-right p { font-size: 17px; line-height: 1.85; color: var(--text-mid); font-weight: 300; margin-bottom: 20px; }
+  .misiune-right p strong { color: var(--text); font-weight: 500; }
+
+  .stories { font-size: 15px; line-height: 1.9; color: var(--text-soft); border-left: 3px solid var(--border); padding-left: 24px; margin: 8px 0 20px 0; }
+  .stories em { display: block; margin-top: 14px; color: var(--text-mid); font-style: italic; font-size: 15px; }
+
+  .big-quote { font-family: 'Cormorant Garamond', serif; font-size: clamp(20px, 2.5vw, 28px); font-style: italic; color: var(--text); line-height: 1.5; border-left: 4px solid var(--red); padding-left: 28px; margin-top: 36px; }
+
+  /* ── VIZIUNE ── */
+  .viziune { background: var(--bg2); border-top: 1px solid var(--border); }
+
+  .viziune-inner { display: grid; grid-template-columns: 1.4fr 1fr; gap: 80px; align-items: start; }
+
+  .viziune-right h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 4vw, 56px); font-weight: 700; line-height: 1.05; color: var(--text); text-align: right; }
+  .viziune-right h2 span { display: block; color: var(--gold); font-style: italic; }
+
+  .viziune-left p { font-size: 17px; line-height: 1.85; color: var(--text-mid); font-weight: 300; margin-bottom: 20px; }
+  .viziune-left p strong { color: var(--text); font-weight: 500; }
+
+  .vision-statement { background: var(--bg3); border: 1px solid var(--border); border-left: 4px solid var(--gold); padding: 40px; margin-top: 36px; }
+  .vision-statement p { font-family: 'Cormorant Garamond', serif; font-size: clamp(18px, 2vw, 24px); font-style: italic; color: var(--text); line-height: 1.6; }
+
+  /* ── VALORI ── */
+  .valori { background: var(--bg3); border-top: 1px solid var(--border); }
+
+  .valori-header { text-align: center; margin-bottom: 72px; }
+  .valori-header h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(40px, 5vw, 72px); font-weight: 700; color: var(--text); letter-spacing: -2px; }
+  .valori-header h2 em { font-style: italic; color: var(--gold); }
+
+  .valori-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+
+  .valore-card { background: var(--bg); padding: 44px 36px; border-top: 3px solid transparent; transition: border-color 0.25s ease, transform 0.25s ease; cursor: default; }
+  .valore-card:hover { transform: translateY(-4px); }
+
+  .valore-card:nth-child(1):hover { border-top-color: var(--red); background: var(--red-bg); }
+  .valore-card:nth-child(2):hover { border-top-color: var(--gold); background: var(--gold-bg); }
+  .valore-card.quality { background: var(--gold-bg); border-top: 3px solid var(--gold); }
+  .valore-card.quality:hover { background: #F5EDCF; }
+  .valore-card:nth-child(4):hover { border-top-color: #2A6EAA; background: #F0F5FB; }
+  .valore-card:nth-child(5):hover { border-top-color: #27AE60; background: #F0FAF4; }
+  .valore-card:nth-child(6):hover { border-top-color: var(--red); background: var(--red-bg); }
+  .valore-card:nth-child(7):hover { border-top-color: var(--gold); background: var(--gold-bg); }
+
+  .valore-num { font-size: 10px; letter-spacing: 4px; color: var(--text-soft); margin-bottom: 16px; font-weight: 500; }
+  .valore-title { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 700; color: var(--text); margin-bottom: 14px; line-height: 1.1; }
+  .valore-card.quality .valore-title { color: var(--gold); }
+  .valore-desc { font-size: 15px; line-height: 1.7; color: var(--text-mid); font-weight: 300; }
+  .valore-bold { display: block; color: var(--text); font-weight: 500; font-size: 14px; margin-top: 14px; font-style: italic; }
+
+  /* ── SLOGAN ── */
+  .slogan { background: var(--red); padding: 80px 64px; text-align: center; position: relative; overflow: hidden; }
+  .slogan::before { content: '"'; position: absolute; top: -60px; left: 30px; font-family: 'Cormorant Garamond', serif; font-size: 400px; color: rgba(0,0,0,0.08); line-height: 1; pointer-events: none; }
+
+  .slogan h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(26px, 4vw, 60px); font-weight: 700; color: #fff; letter-spacing: -1px; line-height: 1.2; position: relative; z-index: 1; }
+  .slogan p { margin-top: 24px; font-size: 13px; color: rgba(255,255,255,0.65); letter-spacing: 3px; text-transform: uppercase; position: relative; z-index: 1; }
+
+  /* ── FOOTER ── */
+  .footer-strip { background: var(--text); padding: 36px 64px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  .footer-brands { display: flex; gap: 20px; flex-wrap: wrap; }
+  .brand-tag { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: #666; font-weight: 500; }
+  .footer-copy { font-size: 12px; color: #666; letter-spacing: 1px; }
+
+  .divider { height: 1px; background: linear-gradient(to right, transparent, rgba(200,16,46,0.3), transparent); margin: 0 64px; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+
+  @media (max-width: 768px) {
+    .hero { padding: 60px 32px; }
+    section { padding: 70px 32px; }
+    .misiune-inner, .viziune-inner { grid-template-columns: 1fr; gap: 40px; }
+    .viziune-right h2 { text-align: left; }
+    .valori-grid { grid-template-columns: 1fr; }
+    .footer-strip { flex-direction: column; gap: 20px; text-align: center; }
+    .slogan { padding: 60px 32px; }
+    .divider { margin: 0 32px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="logo-line">
+    <div class="logo-badge">AP</div>
+    <div class="logo-text">Autopadova SRL · Est. 1994</div>
+  </div>
+  <div class="hero-eyebrow">Identitate Strategică · Moldova · România</div>
+  <h1 class="hero-title">
+    Misiune<br><em>Viziune</em><br>Valori
+  </h1>
+  <p class="hero-sub">
+    Fundația pe care construim performanța echipei, relația cu clienții și poziția noastră de lider în Moldova — de 30 de ani.
+  </p>
+  <div class="hero-since">
+    <div class="since-line"></div>
+    <span>Iași · Bacău · România</span>
+    <div class="since-line"></div>
+    <span>Iveco · Fiat Professional · Jeep · Alfa Romeo · Suzuki · Leapmotor · Maserati</span>
+  </div>
+</div>
+
+<!-- MISIUNE -->
+<section class="misiune">
+  <div class="misiune-inner">
+    <div class="misiune-left">
+      <div class="section-label">01 — Misiune</div>
+      <h2>De ce<br><span>existăm</span></h2>
+    </div>
+    <div class="misiune-right">
+      <p>Autopadova există pentru a oferi <strong>soluții complete de mobilitate profesională și personală</strong> comunităților din Moldova — cu onestitate, expertiză tehnică, <strong>calitate garantată</strong> și angajament pe termen lung față de fiecare client.</p>
+      <p>De la vehiculul comercial care construiește o afacere, la SUV-ul care protejează o familie — <strong>noi suntem partenerul care rămâne după semnătură.</strong> Și care îți garantează că vehiculul livrat astăzi va fi îngrijit la același standard și peste 5 ani.</p>
+      <p>Pentru că un vehicul comercial poate <strong>clădi o afacere din nimic</strong>. Și mașina potrivită poate <strong>schimba o viață</strong>.</p>
+      <p class="stories">
+        Antreprenorul care semnează pentru primul său IVECO Daily — și construiește o companie în jurul lui.<br>
+        Familia care pleacă acasă cu primul Jeep, după ce a visat la el ani de zile.<br>
+        Tânăra care intră în showroom și iese la volan de Alfa Romeo — și nu se mai uită înapoi.
+        <em>Fiecare vehicul livrat poartă o poveste. Treaba noastră e să înceapă bine — și să continue tot bine.</em>
+      </p>
+      <div class="big-quote">„Vindem vehicule. Construim parteneriate. Schimbăm vieți."</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- VIZIUNE -->
+<section class="viziune">
+  <div class="viziune-inner">
+    <div class="viziune-left">
+      <p>Autopadova va fi, până în 2030, <strong>grupul dealer de referință din Moldova</strong> — recunoscut nu doar prin volumul de vânzări, ci prin calitatea relației cu clienții, prin expertiza în vehicule comerciale și prin capacitatea unică de a oferi soluții integrate: <strong>vehicul + finanțare + caroserie + service.</strong></p>
+      <p>Un singur partener. O singură conversație. <strong>Calitate fără compromis.</strong></p>
+      <div class="vision-statement">
+        <p>„Să fim prima alegere a antreprenorului și familiei din Moldova care vor un partener auto serios — cu standarde de calitate pe care le simt la fiecare interacțiune."</p>
+      </div>
+    </div>
+    <div class="viziune-right">
+      <div class="section-label">02 — Viziune</div>
+      <h2>Unde<br><span>mergem</span></h2>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- VALORI -->
+<section class="valori">
+  <div class="valori-header">
+    <div class="section-label">03 — Valori</div>
+    <h2>Ce ne<br><em>definește</em></h2>
+  </div>
+  <div class="valori-grid">
+
+    <div class="valore-card">
+      <div class="valore-num">01</div>
+      <div class="valore-title">Parteneriat Real</div>
+      <div class="valore-desc">
+        Relația cu clientul nu se termină la livrarea cheilor. Suntem prezenți înainte, în timpul și după fiecare tranzacție.
+        <span class="valore-bold">„Clientul nostru, colegul nostru."</span>
+      </div>
+    </div>
+
+    <div class="valore-card">
+      <div class="valore-num">02</div>
+      <div class="valore-title">Expertiză Autentică</div>
+      <div class="valore-desc">
+        Cunoaștem produsele pe care le vindem mai bine decât oricine altcineva din regiune. Formăm echipe, nu angajăm vânzători.
+        <span class="valore-bold">„Știm ce vindem. De aceea merităm încrederea ta."</span>
+      </div>
+    </div>
+
+    <div class="valore-card quality">
+      <div class="valore-num">03</div>
+      <div class="valore-title">Calitate Garantată</div>
+      <div class="valore-desc">
+        Service autorizat multimarcă, piese originale, tehnicieni certificați. Standardul nostru de calitate nu se negociază — nici la vânzare, nici la service, nici după.
+        <span class="valore-bold">„Calitatea nu e un slogan. E promisiunea pe care o onorăm la fiecare programare."</span>
+      </div>
+    </div>
+
+    <div class="valore-card">
+      <div class="valore-num">04</div>
+      <div class="valore-title">Soluție Completă</div>
+      <div class="valore-desc">
+        Vehicul + finanțare + caroserie + service autorizat — totul sub un singur acoperiș, cu un singur interlocutor responsabil.
+        <span class="valore-bold">„Nu vindem mașini. Oferim soluții."</span>
+      </div>
+    </div>
+
+    <div class="valore-card">
+      <div class="valore-num">05</div>
+      <div class="valore-title">Integritate în Afaceri</div>
+      <div class="valore-desc">
+        Spunem adevărul despre produs, preț și condiții. Preferăm un client informat unui client dezamăgit.
+        <span class="valore-bold">„Transparența construiește loialitate."</span>
+      </div>
+    </div>
+
+    <div class="valore-card">
+      <div class="valore-num">06</div>
+      <div class="valore-title">Performanță Continuă</div>
+      <div class="valore-desc">
+        Ne măsurăm rezultatele zilnic și ne îmbunătățim constant — procese, oameni, sisteme. Stagnarea nu este o opțiune.
+        <span class="valore-bold">„Ieri am vândut. Azi vindem mai bine."</span>
+      </div>
+    </div>
+
+    <div class="valore-card">
+      <div class="valore-num">07</div>
+      <div class="valore-title">Responsabilitate Locală</div>
+      <div class="valore-desc">
+        30 de ani în Moldova nu înseamnă doar prezență — înseamnă rădăcini, investiție în oameni și contribuție la economia regiunii.
+        <span class="valore-bold">„Suntem de aici. Rămânem aici."</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SLOGAN -->
+<div class="slogan">
+  <h2>
+    Mobilitate cu Scop.<br>
+    Calitate fără Compromis.<br>
+    Parteneriate care Contează.<br>
+    Vieți care se Schimbă.
+  </h2>
+  <p>Autopadova SRL · Iași &amp; Bacău · 1994 – prezent</p>
+</div>
+
+<!-- FOOTER -->
+<div class="footer-strip">
+  <div class="footer-brands">
+    <span class="brand-tag">IVECO</span>
+    <span class="brand-tag">Fiat Professional</span>
+    <span class="brand-tag">Jeep</span>
+    <span class="brand-tag">Alfa Romeo</span>
+    <span class="brand-tag">Suzuki</span>
+    <span class="brand-tag">Leapmotor</span>
+    <span class="brand-tag">Maserati</span>
+  </div>
+  <div class="footer-copy">autopadova.com · autopadova.ro</div>
+</div>
+
+</body>
+</html>

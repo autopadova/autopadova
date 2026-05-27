@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Autopadova — Cercul de Aur</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #C8102E;
+    --gold: #A07C20;
+    --bg: #F7F5F2;
+    --bg2: #EFECE7;
+    --bg3: #FFFFFF;
+    --gold-bg: #FBF5E6;
+    --red-bg: #FDF1F3;
+    --text: #111111;
+    --text-mid: #333333;
+    --text-soft: #555555;
+    --border: #DEDBD5;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Outfit', sans-serif; font-weight: 300; overflow-x: hidden; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 80px 40px; position: relative; overflow: hidden; text-align: center;
+    background: var(--bg3); border-bottom: 2px solid var(--border);
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 70%, rgba(200,16,46,0.05) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .ap-tag { display: flex; align-items: center; gap: 12px; justify-content: center; margin-bottom: 60px; opacity:0; animation: up 0.7s ease 0.1s forwards; }
+  .ap-box { width: 40px; height: 40px; background: var(--red); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 700; color: #fff; }
+  .ap-name-txt { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--text-soft); font-weight: 500; }
+
+  .hero-eyebrow { font-size: 11px; letter-spacing: 6px; text-transform: uppercase; color: var(--red); margin-bottom: 20px; opacity:0; animation: up 0.7s ease 0.2s forwards; }
+  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(52px, 9vw, 108px); font-weight: 700; line-height: 0.92; letter-spacing: -3px; color: var(--text); opacity:0; animation: up 0.8s ease 0.35s forwards; }
+  .hero-title em { font-style: italic; color: var(--red); }
+  .hero-sub { max-width: 520px; margin: 32px auto 0; font-size: 17px; line-height: 1.8; color: var(--text-soft); opacity:0; animation: up 0.7s ease 0.55s forwards; }
+  .hero-sub strong { color: var(--text); font-weight: 500; }
+  .scroll-hint { margin-top: 60px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #aaa; opacity:0; animation: up 0.7s ease 1s forwards; }
+
+  /* ── CERC VIZUAL ── */
+  .circle-section {
+    padding: 100px 40px; display: flex; align-items: center; justify-content: center;
+    background: var(--bg2); border-bottom: 1px solid var(--border);
+  }
+  .circle-wrap { position: relative; width: 580px; height: 580px; flex-shrink: 0; }
+  @media (max-width: 700px) { .circle-wrap { width: 300px; height: 300px; } }
+
+  .ring { position: absolute; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid; }
+  .ring-de-ce { width: 100%; height: 100%; top: 0; left: 0; background: rgba(200,16,46,0.06); border-color: rgba(200,16,46,0.25); animation: pulse-r 4s ease-in-out infinite; }
+  .ring-cum { width: 66.6%; height: 66.6%; top: 16.7%; left: 16.7%; background: rgba(160,124,32,0.07); border-color: rgba(160,124,32,0.3); animation: pulse-r 4s ease-in-out 0.5s infinite; }
+  .ring-ce { width: 33.3%; height: 33.3%; top: 33.35%; left: 33.35%; background: rgba(17,17,17,0.06); border-color: rgba(17,17,17,0.2); animation: pulse-r 4s ease-in-out 1s infinite; }
+  @keyframes pulse-r { 0%,100%{transform:scale(1);} 50%{transform:scale(1.012);} }
+
+  .ring-label { position: absolute; text-align: center; pointer-events: none; }
+  .label-de-ce { top: 6%; left: 50%; transform: translateX(-50%); }
+  .label-cum { top: 23%; left: 50%; transform: translateX(-50%); }
+  .label-ce { top: 50%; left: 50%; transform: translate(-50%,-50%); }
+
+  .ring-label .word { font-family: 'Cormorant Garamond', serif; font-weight: 700; line-height: 1; display: block; letter-spacing: 1px; }
+  .label-de-ce .word { font-size: clamp(28px, 5vw, 52px); color: var(--red); }
+  .label-cum .word { font-size: clamp(20px, 3.5vw, 38px); color: var(--gold); }
+  .label-ce .word { font-size: clamp(14px, 2.5vw, 26px); color: var(--text); }
+  .ring-label .sub { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--text-soft); display: block; margin-top: 4px; }
+
+  /* ── BLOCURI ── */
+  .block { display: grid; grid-template-columns: 110px 1fr; border-top: 1px solid var(--border); }
+
+  .block-accent {
+    padding: 80px 0 80px 40px;
+    display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start;
+    position: relative; overflow: hidden;
+  }
+  .block-de-ce .block-accent { background: var(--red-bg); border-right: 4px solid var(--red); }
+  .block-cum .block-accent { background: var(--gold-bg); border-right: 4px solid var(--gold); }
+  .block-ce .block-accent { background: var(--bg2); border-right: 4px solid var(--border); }
+
+  .block-letter { font-family: 'Cormorant Garamond', serif; font-size: clamp(80px, 10vw, 140px); font-weight: 700; line-height: 1; letter-spacing: -4px; opacity: 0.08; position: absolute; top: 16px; left: 4px; }
+  .block-de-ce .block-letter { color: var(--red); }
+  .block-cum .block-letter { color: var(--gold); }
+  .block-ce .block-letter { color: var(--text); }
+
+  .block-tag { font-size: 9px; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 10px; font-weight: 600; position: relative; z-index: 1; }
+  .block-de-ce .block-tag { color: var(--red); }
+  .block-cum .block-tag { color: var(--gold); }
+  .block-ce .block-tag { color: var(--text-soft); }
+
+  .block-word { font-family: 'Cormorant Garamond', serif; font-size: clamp(20px, 3vw, 34px); font-weight: 700; line-height: 1.05; position: relative; z-index: 1; writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg); }
+  .block-de-ce .block-word { color: var(--red); }
+  .block-cum .block-word { color: var(--gold); }
+  .block-ce .block-word { color: var(--text); }
+
+  .block-body { padding: 80px 72px; background: var(--bg3); }
+  .block-cum .block-body { background: var(--bg3); }
+  .block-ce .block-body { background: var(--bg); }
+
+  .block-headline { font-family: 'Cormorant Garamond', serif; font-size: clamp(26px, 3vw, 42px); font-weight: 700; line-height: 1.1; color: var(--text); margin-bottom: 28px; letter-spacing: -0.5px; }
+  .block-headline em { font-style: italic; }
+  .block-de-ce .block-headline em { color: var(--red); }
+  .block-cum .block-headline em { color: var(--gold); }
+  .block-ce .block-headline em { color: var(--text-soft); }
+
+  .block-text { font-size: 17px; line-height: 1.85; color: var(--text-mid); font-weight: 300; margin-bottom: 20px; max-width: 640px; }
+  .block-text strong { color: var(--text); font-weight: 500; }
+
+  .block-list { list-style: none; margin-top: 28px; display: flex; flex-direction: column; gap: 14px; }
+  .block-list li { display: flex; align-items: flex-start; gap: 16px; font-size: 15px; line-height: 1.65; color: var(--text-mid); }
+  .block-list li::before { content: '→'; font-size: 14px; margin-top: 2px; flex-shrink: 0; font-weight: 600; }
+  .block-de-ce .block-list li::before { color: var(--red); }
+  .block-cum .block-list li::before { color: var(--gold); }
+  .block-ce .block-list li::before { color: var(--text-soft); }
+  .block-list li strong { color: var(--text); font-weight: 600; }
+
+  .block-quote { font-family: 'Cormorant Garamond', serif; font-size: clamp(18px, 2vw, 24px); font-style: italic; color: var(--text); line-height: 1.55; margin-top: 40px; padding-top: 28px; border-top: 1px solid var(--border); }
+  .block-de-ce .block-quote { border-color: rgba(200,16,46,0.2); }
+  .block-cum .block-quote { border-color: rgba(160,124,32,0.2); }
+
+  /* ── SUMAR ── */
+  .summary { background: var(--red); padding: 80px 64px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+  .sum-item { padding: 0 40px 0 0; }
+  .sum-item + .sum-item { padding-left: 40px; border-left: 1px solid rgba(255,255,255,0.25); }
+  .sum-label { font-size: 10px; letter-spacing: 5px; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 14px; font-weight: 500; }
+  .sum-value { font-family: 'Cormorant Garamond', serif; font-size: clamp(18px, 2.5vw, 28px); font-weight: 700; color: #fff; line-height: 1.3; font-style: italic; }
+
+  /* ── FOOTER ── */
+  .footer-bar { background: var(--text); padding: 32px 64px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  .brand-strip { display: flex; gap: 20px; flex-wrap: wrap; }
+  .btag { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: #666; font-weight: 500; }
+  .fcopy { font-size: 11px; color: #666; letter-spacing: 1px; }
+
+  @keyframes up { from{opacity:0;transform:translateY(20px);} to{opacity:1;transform:translateY(0);} }
+
+  @media (max-width: 768px) {
+    .block { grid-template-columns: 1fr; }
+    .block-accent { padding: 28px 32px; flex-direction: row; align-items: center; gap: 16px; border-right: none; border-bottom: 4px solid; }
+    .block-de-ce .block-accent { border-bottom-color: var(--red); }
+    .block-cum .block-accent { border-bottom-color: var(--gold); }
+    .block-ce .block-accent { border-bottom-color: var(--border); }
+    .block-word { writing-mode: horizontal-tb; transform: none; font-size: 28px; }
+    .block-body { padding: 40px 32px; }
+    .summary { grid-template-columns: 1fr; gap: 32px; }
+    .sum-item + .sum-item { border-left: none; padding-left: 0; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 32px; }
+    .circle-section { padding: 60px 20px; }
+    .footer-bar { padding: 28px 32px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="ap-tag">
+    <div class="ap-box">AP</div>
+    <div class="ap-name-txt">Autopadova SRL · Est. 1994</div>
+  </div>
+  <div class="hero-eyebrow">Cercul de Aur al lui Simon Sinek · Aplicat</div>
+  <h1 class="hero-title">Cercul<br><em>de Aur</em></h1>
+  <p class="hero-sub">
+    <strong>Începe cu DE CE.</strong> Majoritatea companiilor știu ce fac și cum o fac.
+    Foarte puține știu de ce. Noi știm.
+  </p>
+  <div class="scroll-hint">↓ derulează pentru a explora</div>
+</div>
+
+<!-- CERC VIZUAL -->
+<div class="circle-section">
+  <div class="circle-wrap">
+    <div class="ring ring-de-ce"></div>
+    <div class="ring ring-cum"></div>
+    <div class="ring ring-ce"></div>
+    <div class="ring-label label-de-ce">
+      <span class="word">DE CE</span>
+      <span class="sub">Scop</span>
+    </div>
+    <div class="ring-label label-cum">
+      <span class="word">CUM</span>
+      <span class="sub">Proces</span>
+    </div>
+    <div class="ring-label label-ce">
+      <span class="word">CE</span>
+      <span class="sub">Ofertă</span>
+    </div>
+  </div>
+</div>
+
+<!-- BLOCURI -->
+<div class="blocks">
+
+  <!-- DE CE -->
+  <div class="block block-de-ce">
+    <div class="block-accent">
+      <div class="block-letter">D</div>
+      <div class="block-tag">Scop</div>
+      <div class="block-word">DE CE</div>
+    </div>
+    <div class="block-body">
+      <h2 class="block-headline">Credem că <em>mobilitatea schimbă vieți.</em></h2>
+      <p class="block-text">Nu doar deplasarea din punctul A în punctul B. O schimbare reală. Antreprenorul care semnează pentru primul său IVECO Daily și construiește o companie în jurul lui. Familia care ajunge în sfârșit acasă cu Jeep-ul lor. Tânăra profesionistă la volanul unui Alfa Romeo — pentru prima dată, și fără să se mai uite înapoi.</p>
+      <p class="block-text">Credem că <strong>fiecare persoană și fiecare afacere din Moldova merită un partener de încredere</strong> — unul care este prezent înainte de achiziție, la livrare și ani după. Un partener, nu un furnizor.</p>
+      <p class="block-text">Această convingere este motivul pentru care Autopadova există de 30 de ani — și de ce ne prezentăm în fiecare dimineață.</p>
+      <div class="block-quote">„Nu suntem în afacerea de a vinde vehicule. Suntem în afacerea de a schimba vieți."</div>
+    </div>
+  </div>
+
+  <!-- CUM -->
+  <div class="block block-cum">
+    <div class="block-accent">
+      <div class="block-letter">C</div>
+      <div class="block-tag">Proces</div>
+      <div class="block-word">CUM</div>
+    </div>
+    <div class="block-body">
+      <h2 class="block-headline">Prin <em>calitate garantată</em> și soluții integrate.</h2>
+      <p class="block-text">Ne onorăm convingerea prin expertiză profundă, standarde de calitate fără compromis și o ofertă completă pe care niciun competitor cu o singură marcă din Moldova nu o poate replica.</p>
+      <ul class="block-list">
+        <li><strong>Expertiza pe primul loc</strong> — echipele noastre cunosc fiecare produs pe care îl vindem mai bine decât oricine din regiune. Ne formăm obsesiv.</li>
+        <li><strong>Ofertă integrată</strong> — vehicul + finanțare + caroserie personalizată (RUFUS) + service autorizat multimarcă. Un singur acoperiș. O singură conversație.</li>
+        <li><strong>Calitate garantată</strong> — piese originale, tehnicieni certificați, service autorizat pentru fiecare marcă pe care o reprezentăm. Non-negociabil.</li>
+        <li><strong>Proces transparent</strong> — spunem adevărul despre produse, prețuri și termene. Întotdeauna. Un client informat este un client loial.</li>
+        <li><strong>Relație pe termen lung</strong> — monitorizăm, urmărim și rămânem prezenți. Clienții noștri nu au motive să caute în altă parte.</li>
+        <li><strong>Rețea cu două locații</strong> — Iași și Bacău, deservind întreaga Moldovă cu o acoperire de service pe care niciun competitor local nu o poate reproduce.</li>
+      </ul>
+      <div class="block-quote">„Calitatea nu e un slogan. E promisiunea pe care o onorăm la fiecare programare."</div>
+    </div>
+  </div>
+
+  <!-- CE -->
+  <div class="block block-ce">
+    <div class="block-accent">
+      <div class="block-letter">C</div>
+      <div class="block-tag">Ofertă</div>
+      <div class="block-word">CE</div>
+    </div>
+    <div class="block-body">
+      <h2 class="block-headline">Soluții complete de mobilitate — <em>comerciale și personale.</em></h2>
+      <p class="block-text">Autopadova este un grup dealer autorizat multimarcă, cu operațiuni în Iași și Bacău, 7 mărci reprezentate, un departament de caroserii și service autorizat complet pentru fiecare vehicul pe care îl vindem.</p>
+      <ul class="block-list">
+        <li><strong>IVECO</strong> — vehicule comerciale ușoare, medii și grele (Daily, Eurocargo, S-WAY, T-WAY); cotă de piață 23,9% în România segment >3,5t (APIA mart. 2025)</li>
+        <li><strong>Fiat Professional</strong> — Ducato, Scudo, Doblò; gamă electrică completă (E-Ducato, E-Scudo, E-Doblò); finanțare 0% disponibilă</li>
+        <li><strong>Jeep</strong> — Avenger, Renegade, Compass, Wrangler, Commander, Grand Cherokee; gamă plug-in hybrid 4xe</li>
+        <li><strong>Alfa Romeo</strong> — Giulia, Stelvio, Tonale; performanță italiană premium</li>
+        <li><strong>Suzuki</strong> — Swift, Vitara, S-Cross, eVitara, Jimny; gamă hibrid puternică</li>
+        <li><strong>Leapmotor</strong> — T03, C10; brand chinezesc de vehicule electrice care intră în Europa</li>
+        <li><strong>Maserati</strong> — Ghibli, Levante, Grecale, GranTurismo; segment ultra-premium</li>
+        <li><strong>Caroserii</strong> — toate mărcile de vehicule comerciale, în parteneriat cu RUFUS</li>
+      </ul>
+      <div class="block-quote">„Nu vindem mașini. Oferim soluții complete — vehicul, finanțare, caroserie și un partener care rămâne."</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- SUMAR -->
+<div class="summary">
+  <div class="sum-item">
+    <div class="sum-label">DE CE — Scop</div>
+    <div class="sum-value">Credem că mobilitatea schimbă vieți. Fiecare vehicul poartă o poveste.</div>
+  </div>
+  <div class="sum-item">
+    <div class="sum-label">CUM — Proces</div>
+    <div class="sum-value">Calitate garantată. Soluții integrate. Parteneriat pe termen lung.</div>
+  </div>
+  <div class="sum-item">
+    <div class="sum-label">CE — Ofertă</div>
+    <div class="sum-value">7 mărci. 2 locații. 1 partener complet de mobilitate.</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer-bar">
+  <div class="brand-strip">
+    <span class="btag">IVECO</span>
+    <span class="btag">Fiat Professional</span>
+    <span class="btag">Jeep</span>
+    <span class="btag">Alfa Romeo</span>
+    <span class="btag">Suzuki</span>
+    <span class="btag">Leapmotor</span>
+    <span class="btag">Maserati</span>
+  </div>
+  <span class="fcopy">autopadova.com · autopadova.ro</span>
+</div>
+
+</body>
+</html>
