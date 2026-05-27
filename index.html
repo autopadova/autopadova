@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Autopadova — Tools &amp; Resources</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c0f14;
+    --surface: #151921;
+    --surface-hover: #1c2230;
+    --border: #252d3a;
+    --text: #e4e8f0;
+    --text-muted: #7a8599;
+    --accent: #3b82f6;
+    --accent-glow: rgba(59,130,246,0.15);
+    --green: #22c55e;
+    --amber: #f59e0b;
+    --red: #ef4444;
+    --orange: #E8621A;
+    --radius: 12px;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  body::before {
+    content:'';
+    position:fixed; inset:0;
+    background-image:
+      linear-gradient(rgba(59,130,246,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(59,130,246,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events:none; z-index:0;
+  }
+  .container { position:relative; z-index:1; max-width:900px; margin:0 auto; padding:40px 20px 60px; }
+
+  /* ── HEADER ── */
+  .header { text-align:center; margin-bottom:40px; }
+  .logo-row { display:flex; align-items:center; justify-content:center; gap:14px; margin-bottom:14px; }
+  .logo-mark {
+    width:48px; height:48px;
+    background: linear-gradient(135deg, var(--accent), #6366f1);
+    border-radius:14px;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Space Mono',monospace; font-weight:700; font-size:22px; color:#fff;
+    box-shadow: 0 4px 24px rgba(59,130,246,0.3);
+  }
+  .logo-text { font-size:28px; font-weight:700; letter-spacing:-0.5px; }
+  .logo-text span { color:var(--accent); }
+  .subtitle { color:var(--text-muted); font-size:15px; margin-top:6px; }
+  .repo-badge {
+    display:inline-flex; align-items:center; gap:6px;
+    margin-top:14px; padding:7px 16px;
+    background:var(--surface); border:1px solid var(--border); border-radius:20px;
+    font-family:'Space Mono',monospace; font-size:12px; color:var(--text-muted);
+    text-decoration:none; transition:all 0.2s; cursor:pointer;
+  }
+  .repo-badge:hover { border-color:var(--accent); color:var(--accent); }
+  .repo-badge .dot {
+    width:7px; height:7px; border-radius:50%; background:var(--green);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+  /* ── TABS ── */
+  .tabs-nav {
+    display:flex; gap:6px; margin-bottom:20px; flex-wrap:wrap;
+  }
+  .tab-btn {
+    padding:8px 18px;
+    background:var(--surface); border:1px solid var(--border);
+    border-radius:8px; color:var(--text-muted);
+    font-family:'DM Sans',sans-serif; font-size:13px; font-weight:600;
+    cursor:pointer; transition:all 0.2s;
+  }
+  .tab-btn:hover { border-color:var(--accent); color:var(--accent); }
+  .tab-btn.active { background:var(--accent); border-color:var(--accent); color:#fff; }
+  .tab-panel { display:none; }
+  .tab-panel.active { display:block; }
+
+  /* ── STATUS BAR ── */
+  .status-bar {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:12px 16px;
+    background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+    margin-bottom:20px; font-size:13px; gap:12px; flex-wrap:wrap;
+  }
+  .status-left { display:flex; align-items:center; gap:8px; color:var(--text-muted); }
+  .status-left .count { color:var(--text); font-weight:700; }
+  .refresh-btn {
+    display:flex; align-items:center; gap:6px;
+    background:none; border:1px solid var(--border); color:var(--text-muted);
+    padding:6px 12px; border-radius:8px; cursor:pointer;
+    font-family:'DM Sans',sans-serif; font-size:12px; transition:all 0.2s;
+  }
+  .refresh-btn:hover { border-color:var(--accent); color:var(--accent); }
+  .refresh-btn.spinning svg { animation:spin 0.8s linear infinite; }
+  @keyframes spin { to { transform:rotate(360deg); } }
+
+  /* ── BREADCRUMB ── */
+  .breadcrumb {
+    display:flex; align-items:center; gap:4px;
+    margin-bottom:14px; font-size:13px; flex-wrap:wrap;
+  }
+  .breadcrumb a {
+    color:var(--accent); text-decoration:none; cursor:pointer;
+    padding:4px 8px; border-radius:6px; transition:background 0.2s;
+  }
+  .breadcrumb a:hover { background:var(--accent-glow); }
+  .breadcrumb .sep { color:var(--text-muted); }
+  .breadcrumb .current { color:var(--text-muted); padding:4px 8px; }
+
+  /* ── FILE CARDS (explorer view) ── */
+  .file-list { display:flex; flex-direction:column; gap:8px; }
+  .file-item {
+    display:flex; align-items:center; gap:14px;
+    padding:16px 18px;
+    background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+    text-decoration:none; color:var(--text);
+    transition:all 0.2s ease; cursor:pointer;
+    position:relative; overflow:hidden;
+  }
+  .file-item::before {
+    content:''; position:absolute; left:0; top:0; bottom:0; width:3px;
+    background:var(--accent); opacity:0; transition:opacity 0.2s;
+  }
+  .file-item:hover { background:var(--surface-hover); border-color:rgba(59,130,246,0.3); transform:translateX(4px); }
+  .file-item:hover::before { opacity:1; }
+  .file-icon {
+    width:40px; height:40px; border-radius:10px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:18px; flex-shrink:0;
+  }
+  .file-icon.html { background:rgba(239,68,68,0.12); color:#ef4444; }
+  .file-icon.js   { background:rgba(245,158,11,0.12); color:#f59e0b; }
+  .file-icon.css  { background:rgba(59,130,246,0.12); color:#3b82f6; }
+  .file-icon.md   { background:rgba(168,85,247,0.12); color:#a855f7; }
+  .file-icon.json { background:rgba(34,197,94,0.12);  color:#22c55e; }
+  .file-icon.img  { background:rgba(236,72,153,0.12); color:#ec4899; }
+  .file-icon.dir  { background:rgba(59,130,246,0.12); color:#3b82f6; }
+  .file-icon.other{ background:rgba(122,133,153,0.12);color:#7a8599; }
+  .file-info { flex:1; min-width:0; }
+  .file-name { font-weight:600; font-size:15px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .file-meta { font-size:12px; color:var(--text-muted); margin-top:2px; font-family:'Space Mono',monospace; }
+  .file-arrow { color:var(--text-muted); transition:all 0.2s; flex-shrink:0; }
+  .file-item:hover .file-arrow { color:var(--accent); transform:translateX(3px); }
+
+  /* ── SIMPLE LIST VIEW ── */
+  .simple-list { display:flex; flex-direction:column; gap:4px; }
+  .simple-item {
+    display:flex; align-items:center; gap:10px;
+    padding:10px 14px;
+    background:var(--surface); border:1px solid var(--border); border-radius:8px;
+    text-decoration:none; color:var(--text);
+    transition:all 0.15s; font-size:14px;
+  }
+  .simple-item:hover { background:var(--surface-hover); border-color:rgba(59,130,246,0.4); color:var(--accent); }
+  .simple-item .si-ext {
+    font-family:'Space Mono',monospace; font-size:10px;
+    color:var(--text-muted); background:var(--bg);
+    border:1px solid var(--border); border-radius:4px;
+    padding:1px 6px; flex-shrink:0; min-width:36px; text-align:center;
+  }
+  .simple-item .si-name { flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .simple-item .si-open {
+    font-size:11px; color:var(--text-muted); flex-shrink:0;
+    padding:3px 8px; border:1px solid var(--border); border-radius:5px;
+    transition:all 0.15s;
+  }
+  .simple-item:hover .si-open { border-color:var(--accent); color:var(--accent); }
+
+  /* ── LOADING / ERROR ── */
+  .loading { text-align:center; padding:80px 20px; color:var(--text-muted); }
+  .loading .spinner {
+    width:40px; height:40px;
+    border:3px solid var(--border); border-top-color:var(--accent);
+    border-radius:50%; animation:spin 0.8s linear infinite;
+    margin:0 auto 16px;
+  }
+  .error { text-align:center; padding:60px 20px; color:var(--red); }
+  .error p { color:var(--text-muted); font-size:14px; margin-top:8px; }
+
+  @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+
+  @media (max-width:600px) {
+    .container { padding:24px 14px 40px; }
+    .logo-text { font-size:22px; }
+    .file-item { padding:12px 14px; gap:10px; }
+    .file-icon { width:36px; height:36px; font-size:16px; }
+    .status-bar { flex-direction:column; gap:10px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="logo-row">
+      <div class="logo-mark">AP</div>
+      <div class="logo-text">Auto<span>padova</span></div>
+    </div>
+    <p class="subtitle">Sales &amp; Marketing Tools Repository</p>
+    <a class="repo-badge" href="https://github.com/autopadova/autopadova" target="_blank" rel="noopener">
+      <span class="dot"></span>
+      autopadova / autopadova
+    </a>
+  </header>
+
+  <!-- TABS -->
+  <nav class="tabs-nav">
+    <button class="tab-btn active" onclick="showTab('explorer', this)">📁 Explorer</button>
+    <button class="tab-btn" onclick="showTab('lista', this)">📋 Listă completă</button>
+  </nav>
+
+  <!-- TAB: EXPLORER -->
+  <div id="tab-explorer" class="tab-panel active">
+    <div class="status-bar">
+      <div class="status-left">
+        <span id="fileCount-exp"><span class="count">—</span> files</span>
+        <span>·</span>
+        <span id="lastLoaded-exp" style="color:var(--text-muted)">loading…</span>
+      </div>
+      <button class="refresh-btn" onclick="refresh('exp')" id="refreshBtn-exp">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/>
+          <path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/>
+        </svg>
+        Refresh
+      </button>
+    </div>
+    <nav class="breadcrumb" id="breadcrumb"></nav>
+    <div id="content-exp">
+      <div class="loading"><div class="spinner"></div><p>Fetching repository files…</p></div>
+    </div>
+  </div>
+
+  <!-- TAB: LISTA -->
+  <div id="tab-lista" class="tab-panel">
+    <div class="status-bar">
+      <div class="status-left">
+        <span id="fileCount-list"><span class="count">—</span> files</span>
+        <span>·</span>
+        <span id="lastLoaded-list" style="color:var(--text-muted)">loading…</span>
+      </div>
+      <button class="refresh-btn" onclick="refresh('list')" id="refreshBtn-list">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/>
+          <path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/>
+        </svg>
+        Refresh
+      </button>
+    </div>
+    <div id="content-list">
+      <div class="loading"><div class="spinner"></div><p>Fetching file list…</p></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const OWNER  = 'autopadova';
+const REPO   = 'autopadova';
+const BRANCH = 'main';
+const API    = `https://api.github.com/repos/${OWNER}/${REPO}/contents`;
+const GH     = `https://github.com/${OWNER}/${REPO}`;
+const PREVIEW = 'https://htmlpreview.github.io/?https://github.com/autopadova/autopadova/blob/main/';
+
+let currentPath = '';
+let listLoaded  = false;
+
+// ── HELPERS ──────────────────────────────────────────────────────────────────
+
+function getExt(name) {
+  const parts = name.split('.');
+  return parts.length > 1 ? parts.pop().toLowerCase() : '';
+}
+
+function getIcon(name, type) {
+  if (type === 'dir') return { emoji: '📂', cls: 'dir' };
+  const ext = getExt(name);
+  const map = {
+    html: { emoji: '🌐', cls: 'html' }, htm: { emoji: '🌐', cls: 'html' },
+    js:   { emoji: '⚡', cls: 'js'   }, mjs: { emoji: '⚡', cls: 'js'   },
+    css:  { emoji: '🎨', cls: 'css'  },
+    md:   { emoji: '📝', cls: 'md'   },
+    json: { emoji: '{ }',cls: 'json' },
+    png:  { emoji: '🖼',  cls: 'img'  }, jpg:  { emoji: '🖼', cls: 'img' },
+    jpeg: { emoji: '🖼',  cls: 'img'  }, gif:  { emoji: '🖼', cls: 'img' },
+    svg:  { emoji: '🖼',  cls: 'img'  }, webp: { emoji: '🖼', cls: 'img' },
+    pdf:  { emoji: '📄',  cls: 'other'},
+  };
+  return map[ext] || { emoji: '📄', cls: 'other' };
+}
+
+function formatSize(bytes) {
+  if (!bytes) return '';
+  if (bytes < 1024) return bytes + ' B';
+  if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+  return (bytes / 1048576).toFixed(1) + ' MB';
+}
+
+// Returns the URL to open a file (preview for HTML, raw for others)
+function getLink(item) {
+  if (item.type === 'dir') return null;
+  const ext = getExt(item.name);
+  if (['html', 'htm'].includes(ext)) {
+    return PREVIEW + encodeURIComponent(item.name);
+  }
+  return item.download_url || item.html_url;
+}
+
+function tsNow() {
+  return new Date().toLocaleTimeString('ro-RO', { hour:'2-digit', minute:'2-digit', second:'2-digit' });
+}
+
+// ── GITHUB API ────────────────────────────────────────────────────────────────
+
+async function fetchContents(path = '') {
+  const url = path ? `${API}/${encodeURIComponent(path)}?ref=${BRANCH}&t=${Date.now()}`
+                   : `${API}?ref=${BRANCH}&t=${Date.now()}`;
+  const res = await fetch(url, { cache: 'no-store' });
+  if (!res.ok) throw new Error(`GitHub API ${res.status}: ${res.statusText}`);
+  return res.json();
+}
+
+// ── BREADCRUMB ────────────────────────────────────────────────────────────────
+
+function renderBreadcrumb(path) {
+  const bc = document.getElementById('breadcrumb');
+  if (!path) { bc.innerHTML = ''; return; }
+  const parts = path.split('/');
+  let html = `<a onclick="navigate('')">🏠 root</a>`;
+  let acc  = '';
+  parts.forEach((p, i) => {
+    acc += (acc ? '/' : '') + p;
+    html += `<span class="sep">/</span>`;
+    if (i < parts.length - 1) {
+      const a = acc;
+      html += `<a onclick="navigate('${a}')">${p}</a>`;
+    } else {
+      html += `<span class="current">${p}</span>`;
+    }
+  });
+  bc.innerHTML = html;
+}
+
+// ── EXPLORER TAB ─────────────────────────────────────────────────────────────
+
+function renderExplorer(items) {
+  items.sort((a, b) => {
+    if (a.type === 'dir' && b.type !== 'dir') return -1;
+    if (a.type !== 'dir' && b.type === 'dir') return  1;
+    return a.name.localeCompare(b.name);
+  });
+
+  const fc = items.filter(i => i.type !== 'dir').length;
+  const dc = items.filter(i => i.type === 'dir').length;
+  document.getElementById('fileCount-exp').innerHTML =
+    `<span class="count">${fc}</span> fișiere` +
+    (dc ? ` · <span class="count">${dc}</span> foldere` : '');
+  document.getElementById('lastLoaded-exp').textContent = `actualizat ${tsNow()}`;
+
+  let html = '<div class="file-list">';
+  items.forEach((item, idx) => {
+    const icon = getIcon(item.name, item.type);
+    const link = getLink(item);
+    const size = formatSize(item.size);
+    const ext  = item.type === 'dir' ? 'folder' : (getExt(item.name) || 'file');
+    const delay = Math.min(idx * 35, 400);
+
+    if (item.type === 'dir') {
+      html += `
+        <div class="file-item" onclick="navigate('${item.path}')" style="animation:fadeIn 0.3s ease ${delay}ms both">
+          <div class="file-icon ${icon.cls}">${icon.emoji}</div>
+          <div class="file-info">
+            <div class="file-name">${item.name}</div>
+            <div class="file-meta">folder</div>
+          </div>
+          <div class="file-arrow">›</div>
+        </div>`;
+    } else {
+      html += `
+        <a class="file-item" href="${link}" target="_blank" rel="noopener" style="animation:fadeIn 0.3s ease ${delay}ms both">
+          <div class="file-icon ${icon.cls}">${icon.emoji}</div>
+          <div class="file-info">
+            <div class="file-name">${item.name}</div>
+            <div class="file-meta">${ext}${size ? ' · ' + size : ''}</div>
+          </div>
+          <div class="file-arrow">↗</div>
+        </a>`;
+    }
+  });
+  html += '</div>';
+  document.getElementById('content-exp').innerHTML = html;
+}
+
+async function navigate(path) {
+  currentPath = path;
+  renderBreadcrumb(path);
+  document.getElementById('content-exp').innerHTML =
+    `<div class="loading"><div class="spinner"></div><p>Se încarcă…</p></div>`;
+  try {
+    const items = await fetchContents(path);
+    renderExplorer(items);
+  } catch (err) {
+    document.getElementById('content-exp').innerHTML = `
+      <div class="error">
+        <h3>⚠ Nu s-au putut încărca fișierele</h3>
+        <p>${err.message}</p>
+        <button class="refresh-btn" style="margin:16px auto 0;display:flex" onclick="navigate('${path}')">Încearcă din nou</button>
+      </div>`;
+  }
+}
+
+// ── LIST TAB ──────────────────────────────────────────────────────────────────
+
+function renderList(items) {
+  const files = items
+    .filter(i => i.type !== 'dir')
+    .sort((a, b) => a.name.localeCompare(b.name));
+
+  document.getElementById('fileCount-list').innerHTML =
+    `<span class="count">${files.length}</span> fișiere`;
+  document.getElementById('lastLoaded-list').textContent = `actualizat ${tsNow()}`;
+
+  let html = '<div class="simple-list">';
+  files.forEach((item, idx) => {
+    const link = getLink(item);
+    const ext  = getExt(item.name) || '—';
+    const delay = Math.min(idx * 25, 400);
+    html += `
+      <a class="simple-item" href="${link}" target="_blank" rel="noopener"
+         style="animation:fadeIn 0.25s ease ${delay}ms both">
+        <span class="si-ext">${ext}</span>
+        <span class="si-name">${item.name}</span>
+        <span class="si-open">↗ deschide</span>
+      </a>`;
+  });
+  html += '</div>';
+  document.getElementById('content-list').innerHTML = html;
+}
+
+async function loadList() {
+  document.getElementById('content-list').innerHTML =
+    `<div class="loading"><div class="spinner"></div><p>Se încarcă lista…</p></div>`;
+  try {
+    const items = await fetchContents('');
+    renderList(items);
+    listLoaded = true;
+  } catch (err) {
+    document.getElementById('content-list').innerHTML = `
+      <div class="error">
+        <h3>⚠ Eroare la încărcare</h3>
+        <p>${err.message}</p>
+        <button class="refresh-btn" style="margin:16px auto 0;display:flex" onclick="loadList()">Încearcă din nou</button>
+      </div>`;
+  }
+}
+
+// ── TABS ──────────────────────────────────────────────────────────────────────
+
+function showTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+  // Load list lazily on first visit, then always refresh
+  if (id === 'lista') loadList();
+}
+
+// ── REFRESH ───────────────────────────────────────────────────────────────────
+
+function refresh(which) {
+  const btn = document.getElementById(`refreshBtn-${which}`);
+  btn.classList.add('spinning');
+  const done = () => setTimeout(() => btn.classList.remove('spinning'), 500);
+  if (which === 'exp') {
+    navigate(currentPath).finally(done);
+  } else {
+    loadList().finally(done);
+  }
+}
+
+// ── INIT ─────────────────────────────────────────────────────────────────────
+// Always fetch fresh on every page load
+navigate('');
+</script>
+</body>
+</html>
