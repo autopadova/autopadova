@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<!-- saved from url=(0251)file:///Users/crispascal/Library/Application%20Support/Claude/local-agent-mode-sessions/f2dff863-e5d8-433f-8710-5674e3773b6d/d19181ae-19b8-4d1e-bfe6-ee8452e5dcbc/local_a80aabbc-cd6f-4c3a-8f56-b119c4195f24/outputs/Organigrama_Salarizare_Autopadova.html -->
+<html lang="ro"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+  // === PROTECȚIE SIMPLĂ CU USERNAME + PAROLĂ ===
+  (function() {
+    var user = prompt("Introduceți username-ul:");
+    var pass = prompt("Introduceți parola:");
+
+    var validUser = "Autopadova";
+    var validPass = "Romil2026";
+
+    if (user !== validUser || pass !== validPass) {
+      document.body.innerHTML = "<h2 style='font-family:Arial; text-align:center; margin-top:40px; color:#b71c1c;'>Acces refuzat</h2>";
+      throw new Error("Acces blocat");
+    }
+  })();
+</script>
+<title>Organigrama + Salarizare – Autopadova Group</title>
+<script src="./Organigrama + Salarizare – Autopadova Group_files/xlsx.full.min.js"></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, sans-serif; background: #F8F9FA; color: #1a1a1a; }
+
+.page-header {
+  background: linear-gradient(135deg, #0D47A1, #1565C0);
+  color: white; padding: 20px 32px 16px;
+  display: flex; justify-content: space-between; align-items: flex-end;
+}
+.page-header h1 { font-size: 18px; font-weight: 700; }
+.page-header .sub { font-size: 11px; opacity: 0.8; margin-top: 4px; }
+.page-header .date { font-size: 11px; opacity: 0.7; }
+
+.legend {
+  display: flex; gap: 10px; padding: 10px 32px;
+  background: white; border-bottom: 1px solid #e0e0e0; flex-wrap: wrap;
+}
+.leg-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: #555; }
+.leg-dot { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
+
+.org-container { padding: 24px 28px 20px; }
+
+.leadership-tier { display: flex; justify-content: center; margin-bottom: 8px; }
+.connector-down { display: flex; justify-content: center; height: 24px; }
+.connector-down::after { content: ''; width: 2px; background: #90A4AE; display: block; }
+
+.lanes {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+}
+
+.lane {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  display: flex; flex-direction: column;
+}
+
+.lane-header { padding: 10px 10px 8px; color: white; text-align: center; }
+.lane-header .role-icon { font-size: 20px; display: block; margin-bottom: 4px; }
+.lane-header .role-title { font-size: 12px; font-weight: 700; line-height: 1.3; }
+.lane-header .role-desc { font-size: 9px; opacity: 0.85; margin-top: 3px; line-height: 1.3; }
+
+.lane-body { padding: 8px; flex: 1; display: flex; flex-direction: column; gap: 5px; }
+
+.role-leadership { background: #0D47A1; }
+.role-revenue    { background: #1B5E20; }
+.role-cx         { background: #E65100; }
+.role-tech       { background: #4A148C; }
+.role-ops        { background: #006064; }
+.role-finance    { background: #BF360C; }
+.role-hr         { background: #37474F; }
+.role-facility   { background: #558B2F; }
+
+.card { border-radius: 6px; padding: 6px 8px; font-size: 10px; line-height: 1.35; }
+.card-title { font-weight: 700; color: #1a1a1a; }
+.card-sub { color: #555; font-size: 9px; margin-top: 1px; }
+.card-count { display: inline-block; font-size: 9px; font-weight: 700; padding: 1px 5px; border-radius: 8px; margin-top: 2px; }
+.card-vacant { font-size: 8px; font-style: italic; color: #e53935; margin-top: 1px; }
+.card-highlight { border: 2px solid #0D47A1 !important; }
+
+.bg-leadership { background: #E3F2FD; border-left: 3px solid #0D47A1; }
+.bg-revenue    { background: #E8F5E9; border-left: 3px solid #2E7D32; }
+.bg-cx         { background: #FFF3E0; border-left: 3px solid #E65100; }
+.bg-tech       { background: #F3E5F5; border-left: 3px solid #6A1B9A; }
+.bg-ops        { background: #E0F7FA; border-left: 3px solid #006064; }
+.bg-finance    { background: #FBE9E7; border-left: 3px solid #BF360C; }
+.bg-hr         { background: #ECEFF1; border-left: 3px solid #37474F; }
+.bg-facility   { background: #F1F8E9; border-left: 3px solid #558B2F; }
+
+.cnt-revenue    { background: #C8E6C9; color: #1B5E20; }
+.cnt-cx         { background: #FFE0B2; color: #E65100; }
+.cnt-tech       { background: #E1BEE7; color: #4A148C; }
+.cnt-ops        { background: #B2EBF2; color: #006064; }
+.cnt-facility   { background: #DCEDC8; color: #558B2F; }
+
+.section-label {
+  font-size: 8px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.5px; color: #888; margin: 5px 0 3px; padding-left: 2px;
+}
+.divider { height: 1px; background: #f0f0f0; margin: 4px 0; }
+
+.summary {
+  display: flex; gap: 10px; padding: 12px 28px;
+  background: #263238; flex-wrap: wrap;
+}
+.sum-box { flex: 1; min-width: 100px; }
+.sum-val { font-size: 18px; font-weight: 700; color: white; }
+.sum-lbl { font-size: 9px; color: #90A4AE; margin-top: 2px; }
+
+/* ======= SALARY SECTION ======= */
+.sal-section {
+  padding: 24px 28px 32px;
+  background: #1C1C1C;
+}
+
+.sal-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.sal-section-title {
+  color: #90A4AE;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.sal-tools {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.tool-btn {
+  padding: 7px 14px;
+  border: none;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+  transition: opacity 0.15s;
+  display: flex; align-items: center; gap: 5px;
+}
+.tool-btn:hover { opacity: 0.82; }
+.btn-import   { background: #1565C0; color: white; }
+.btn-template { background: #006064; color: white; }
+.btn-export   { background: #2E7D32; color: white; }
+.btn-clear    { background: #455A64; color: white; }
+.btn-print    { background: #37474F; color: white; }
+
+.save-msg { font-size: 10px; color: #66BB6A; font-weight: 600; }
+.import-note { font-size: 9px; color: #546E7A; margin-top: 6px; }
+
+.sal-table-outer { overflow-x: auto; }
+
+.sal-table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 760px;
+  font-size: 10px;
+}
+
+.sal-table thead th {
+  background: #263238;
+  color: #78909C;
+  padding: 8px 5px;
+  text-align: center;
+  font-size: 9px;
+  font-weight: 700;
+  white-space: nowrap;
+  border-right: 1px solid #37474F;
+}
+.sal-table thead th.th-dept {
+  text-align: left;
+  padding-left: 14px;
+  min-width: 200px;
+  color: #B0BEC5;
+  font-size: 10px;
+}
+.sal-table thead th.th-annual {
+  background: #1A3320;
+  color: #81C784;
+  border-left: 2px solid #2E7D32;
+  min-width: 90px;
+}
+
+.sal-table tbody tr {
+  border-bottom: 1px solid #2A2A2A;
+  transition: background 0.1s;
+}
+.sal-table tbody tr:hover td { background: #252525; }
+.sal-table tbody tr:hover td.td-dept { background: #1E2E38; }
+
+.sal-table tbody td {
+  padding: 6px 4px;
+  text-align: center;
+  color: #CFD8DC;
+  font-size: 9.5px;
+  white-space: nowrap;
+  border-right: 1px solid #2A2A2A;
+  vertical-align: middle;
+}
+.sal-table tbody td.td-dept {
+  text-align: left;
+  padding-left: 14px;
+  font-weight: 700;
+  color: white;
+  font-size: 11px;
+  min-width: 200px;
+  white-space: normal;
+}
+.sal-table tbody td.td-annual {
+  color: #81C784;
+  font-weight: 700;
+  background: #0F1E10;
+  border-left: 2px solid #2E7D32;
+  white-space: nowrap;
+}
+
+.sal-table tfoot td {
+  background: #0D47A1;
+  color: white;
+  font-weight: 700;
+  padding: 9px 5px;
+  text-align: center;
+  font-size: 10px;
+  white-space: nowrap;
+  border-right: 1px solid #1565C0;
+}
+.sal-table tfoot td.td-dept {
+  text-align: left;
+  padding-left: 14px;
+  background: #0A356E;
+  font-size: 12px;
+}
+.sal-table tfoot td.td-annual {
+  background: #1B5E20;
+  border-left: 2px solid #2E7D32;
+}
+
+/* Salary inputs */
+.sal-input {
+  width: 80px;
+  border: 1px solid #37474F;
+  border-radius: 4px;
+  padding: 4px 6px;
+  font-size: 9.5px;
+  text-align: right;
+  color: #ECEFF1;
+  background: #1C2A30;
+  outline: none;
+  font-family: Arial, sans-serif;
+  -moz-appearance: textfield;
+}
+.sal-input::-webkit-outer-spin-button,
+.sal-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.sal-input:focus { border-color: #64B5F6; background: #0D2133; color: white; }
+.sal-input::placeholder { color: #455A64; }
+
+/* Dept color dots in table */
+.dept-dot {
+  display: inline-block;
+  width: 9px; height: 9px;
+  border-radius: 2px;
+  margin-right: 7px;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+/* Info bar */
+.info-bar {
+  margin-top: 16px;
+  padding: 10px 14px;
+  background: #263238;
+  border-radius: 6px;
+  font-size: 9px;
+  color: #78909C;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  line-height: 1.6;
+}
+
+/* Hidden file input */
+#xls-file-input { display: none; }
+
+@media print {
+  .sal-tools { display: none !important; }
+  .info-bar { display: none !important; }
+  .page-header, .summary, .sal-section { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .sal-table thead th, .sal-table tfoot td { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div>
+    <div class="sub">Autopadova Group · Managing Director: Cris Pascal</div>
+    <h1>Organigrama pe Roluri + Buget Salarizare — AUTO PADOVA S.R.L.</h1>
+  </div>
+  <div class="date">27.05.2026</div>
+</div>
+
+<div class="legend">
+  <div class="leg-item"><div class="leg-dot" style="background:#0D47A1"></div> Conducere</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#1B5E20"></div> Venituri &amp; Creștere</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#E65100"></div> Experiența Clientului</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#4A148C"></div> Livrare Tehnică</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#006064"></div> Operațiuni &amp; Logistică</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#BF360C"></div> Control Financiar</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#37474F"></div> Oameni &amp; Cultură</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#558B2F"></div> Facilități</div>
+</div>
+
+<div class="org-container">
+
+  <!-- LEADERSHIP TOP -->
+  <div class="leadership-tier">
+    <div class="lane" style="max-width:360px; width:100%;">
+      <div class="lane-header role-leadership">
+        <span class="role-icon">🎯</span>
+        <div class="role-title">CONDUCERE STRATEGICĂ</div>
+        <div class="role-desc">Direcție, decizie, reprezentare</div>
+      </div>
+      <div class="lane-body">
+        <div class="card bg-leadership card-highlight">
+          <div class="card-title">Managing Director</div>
+          <div class="card-sub">Cris Pascal · Conducere operațională grup</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="connector-down"></div>
+
+  <!-- 6 ROLE LANES -->
+  <div class="lanes">
+
+    <!-- 1. VENITURI -->
+    <div class="lane">
+      <div class="lane-header role-revenue">
+        <span class="role-icon">💰</span>
+        <div class="role-title">VENITURI &amp; CREȘTERE</div>
+        <div class="role-desc">Generare business nou</div>
+      </div>
+      <div class="lane-body">
+        <div class="section-label">Turisme — Iași (LTC)</div>
+        <div class="card bg-revenue">
+          <div class="card-title">Reprezentant Vânzări Turisme</div>
+          <span class="card-count cnt-revenue">×2</span>
+        </div>
+        <div class="section-label">Utilitare — Iași (LTC)</div>
+        <div class="card bg-revenue">
+          <div class="card-title">Reprezentant Vânzări IVECO</div>
+          <span class="card-count cnt-revenue">×3</span>
+        </div>
+        <div class="section-label">Bacău (BC)</div>
+        <div class="card bg-revenue">
+          <div class="card-title">Reprezentant Vânzări Iveco &amp; Suzuki</div>
+          <span class="card-count cnt-revenue">×2</span>
+        </div>
+        <div class="divider"></div>
+        <div class="section-label">Caroseri</div>
+        <div class="card bg-revenue">
+          <div class="card-title">Ing. Tehnolog / Repr. Vânzări Caroseri</div>
+          <div class="card-sub">Proiectare + Vânzare</div>
+        </div>
+        <div class="divider"></div>
+        <div class="section-label">Marketing</div>
+        <div class="card bg-revenue">
+          <div class="card-title">Specialist Marketing</div>
+          <div class="card-sub">Campanii · Social · Lead gen</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. EXPERIENTA CLIENT -->
+    <div class="lane">
+      <div class="lane-header role-cx">
+        <span class="role-icon">🤝</span>
+        <div class="role-title">EXPERIENȚA CLIENTULUI</div>
+        <div class="role-desc">Primul contact &amp; follow-up</div>
+      </div>
+      <div class="lane-body">
+        <div class="section-label">Vânzări</div>
+        <div class="card bg-cx">
+          <div class="card-title">Administrator Contracte Vânzări</div>
+          <span class="card-count cnt-cx">×2</span>
+        </div>
+        <div class="card bg-cx">
+          <div class="card-title">Adm. Contracte Service</div>
+        </div>
+        <div class="section-label">Recepție Service — Bacău</div>
+        <div class="card bg-cx">
+          <div class="card-title">Recepționer Service BC</div>
+          <span class="card-count cnt-cx">×3</span>
+        </div>
+        <div class="card bg-cx">
+          <div class="card-title">Recepționer Tinichigerie BC</div>
+        </div>
+        <div class="section-label">Recepție Service — Iași (LTC)</div>
+        <div class="card bg-cx">
+          <div class="card-title">Recepționer Service Turisme LTC</div>
+        </div>
+        <div class="card bg-cx">
+          <div class="card-title">Recepționer Service IVECO LTC</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. LIVRARE TEHNICA -->
+    <div class="lane">
+      <div class="lane-header role-tech">
+        <span class="role-icon">🔧</span>
+        <div class="role-title">LIVRARE TEHNICĂ</div>
+        <div class="role-desc">Execuție &amp; calitate</div>
+      </div>
+      <div class="lane-body">
+        <div class="card bg-tech" style="margin-bottom:4px;">
+          <div class="card-title">Director Tehnic</div>
+          <div class="card-sub">Supervizare tehnică globală</div>
+        </div>
+        <div class="section-label">Service Bacău</div>
+        <div class="card bg-tech">
+          <div class="card-title">Șef Service BC</div>
+        </div>
+        <div class="card bg-tech">
+          <div class="card-title">Tehnicieni Service BC</div>
+          <span class="card-count cnt-tech">×8</span>
+        </div>
+        <div class="card bg-tech">
+          <div class="card-title">Tinichigerie BC</div>
+          <span class="card-count cnt-tech">×3</span>
+        </div>
+        <div class="card bg-tech">
+          <div class="card-title">Vopsitorie BC</div>
+          <span class="card-count cnt-tech">×1</span>
+        </div>
+        <div class="section-label">Service Turisme — Iași</div>
+        <div class="card bg-tech">
+          <div class="card-title">Șef Atelier Turisme LTC</div>
+          <div class="card-vacant">⚠ post vacant</div>
+        </div>
+        <div class="card bg-tech">
+          <div class="card-title">Tehnicieni Turisme LTC</div>
+          <span class="card-count cnt-tech">×4</span>
+        </div>
+        <div class="section-label">Service IVECO — Iași</div>
+        <div class="card bg-tech">
+          <div class="card-title">Șef Service IVECO LTC</div>
+        </div>
+        <div class="card bg-tech">
+          <div class="card-title">Tehnicieni IVECO LTC</div>
+          <span class="card-count cnt-tech">×6</span>
+        </div>
+        <div class="card bg-tech">
+          <div class="card-title">Electrician / Diagnoză LTC</div>
+          <span class="card-count cnt-tech">×2</span>
+        </div>
+        <div class="card bg-tech">
+          <div class="card-title">Inginer Stație ITP LTC</div>
+        </div>
+        <div class="section-label">Caroseri</div>
+        <!-- GABRIEL ONOFREI MUTAT AICI -->
+        <div class="card bg-tech card-highlight" style="border:2px solid #7B1FA2;">
+          <div class="card-title">Șef Departament Caroserie</div>
+          <div class="card-sub">Gabriel Onofrei · Supervizare caroserie</div>
+        </div>
+        <div class="card bg-tech">
+          <div class="card-title">Șef Echipă Caroseri</div>
+        </div>
+        <div class="card bg-tech">
+          <div class="card-title">Personal Direct Productiv Caroseri</div>
+          <span class="card-count cnt-tech">×6</span>
+        </div>
+        <div class="card bg-tech">
+          <div class="card-title">Tinichigerie LTC</div>
+          <span class="card-count cnt-tech">×3</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. OPERATIUNI -->
+    <div class="lane">
+      <div class="lane-header role-ops">
+        <span class="role-icon">📦</span>
+        <div class="role-title">OPERAȚIUNI &amp; LOGISTICĂ</div>
+        <div class="role-desc">Piese, parc, transport</div>
+      </div>
+      <div class="lane-body">
+        <div class="section-label">Logistică Piese</div>
+        <div class="card bg-ops">
+          <div class="card-title">Operator Logistică Piese BC</div>
+        </div>
+        <div class="card bg-ops">
+          <div class="card-title">Operator Logistică Piese IVECO LTC</div>
+        </div>
+        <div class="card bg-ops">
+          <div class="card-title">Operator Logistică Piese Turisme LTC</div>
+          <div class="card-vacant">⚠ post vacant</div>
+        </div>
+        <div class="section-label">Parc Auto &amp; Transport</div>
+        <div class="card bg-ops">
+          <div class="card-title">Conducător Activitate Transport</div>
+        </div>
+        <div class="card bg-ops">
+          <div class="card-title">Gestionar Parc Auto</div>
+        </div>
+        <div class="card bg-ops">
+          <div class="card-title">Șofer Autoturisme &amp; Camionete</div>
+          <span class="card-count cnt-ops">×2</span>
+        </div>
+        <div class="section-label">Caroseri — Coordonare</div>
+        <div class="card bg-ops">
+          <div class="card-title">Coordonator Activitate Caroseri</div>
+          <div class="card-sub">Planning · Livrări · Subcontractori</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. FINANCIAR -->
+    <div class="lane">
+      <div class="lane-header role-finance">
+        <span class="role-icon">📊</span>
+        <div class="role-title">CONTROL FINANCIAR</div>
+        <div class="role-desc">Raportare · Conformitate</div>
+      </div>
+      <div class="lane-body">
+        <div class="card bg-finance">
+          <div class="card-title">Director Economic</div>
+          <div class="card-sub">Strategie financiară grup</div>
+        </div>
+        <div class="section-label">Contabilitate</div>
+        <div class="card bg-finance">
+          <div class="card-title">Contabil Șef</div>
+        </div>
+        <div class="card bg-finance">
+          <div class="card-title">Economist Facturare BC</div>
+        </div>
+        <div class="card bg-finance">
+          <div class="card-title">Economist LTC</div>
+        </div>
+        <div class="card bg-finance">
+          <div class="card-title">Economist</div>
+        </div>
+        <div class="section-label">Analiză &amp; Stocuri</div>
+        <div class="card bg-finance">
+          <div class="card-title">Analist Stocuri</div>
+          <div class="card-sub">DMS · Inventar · Rapoarte</div>
+        </div>
+        <div class="card bg-finance">
+          <div class="card-title">Legator Manual</div>
+          <div class="card-sub">Arhivă · Documente</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. HR + FACILITATI -->
+    <div class="lane">
+      <div class="lane-header role-hr">
+        <span class="role-icon">👥</span>
+        <div class="role-title">OAMENI &amp; FACILITĂȚI</div>
+        <div class="role-desc">HR · Mentenanță</div>
+      </div>
+      <div class="lane-body">
+        <!-- ASISTENT MANAGER MUTAT AICI -->
+        <div class="card bg-leadership" style="border-left:3px solid #0D47A1;">
+          <div class="card-title">Asistent Manager</div>
+          <div class="card-sub">Suport decizional · Coordonare transversală</div>
+        </div>
+        <div class="divider"></div>
+        <div class="section-label">Resurse Umane</div>
+        <div class="card bg-hr">
+          <div class="card-title">Director Resurse Umane</div>
+          <div class="card-sub">Recrutare · Training · Legislație muncii</div>
+        </div>
+        <div class="divider"></div>
+        <div class="section-label">Întreținere &amp; Reparații</div>
+        <div class="card bg-facility">
+          <div class="card-title">Responsabil Întreținere &amp; Reparații</div>
+        </div>
+        <div class="card bg-facility">
+          <div class="card-title">Personal Întreținere LTC</div>
+          <span class="card-count cnt-facility">×3</span>
+        </div>
+        <div class="card bg-facility">
+          <div class="card-title">Personal Întreținere BC</div>
+          <span class="card-count cnt-facility">×1</span>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end lanes -->
+</div><!-- end org-container -->
+
+<!-- SUMMARY BAR -->
+<div class="summary">
+  <div class="sum-box">
+    <div class="sum-val" style="color:#64B5F6">~72+</div>
+    <div class="sum-lbl">Angajați total estimat</div>
+  </div>
+  <div class="sum-box">
+    <div class="sum-val" style="color:#A5D6A7">9</div>
+    <div class="sum-lbl">Vânzători activi</div>
+  </div>
+  <div class="sum-box">
+    <div class="sum-val" style="color:#CE93D8">~39</div>
+    <div class="sum-lbl">Tehnicieni &amp; productiv</div>
+  </div>
+  <div class="sum-box">
+    <div class="sum-val" style="color:#FFCC80">8</div>
+    <div class="sum-lbl">Recepționeri / CX</div>
+  </div>
+  <div class="sum-box">
+    <div class="sum-val" style="color:#EF9A9A">2</div>
+    <div class="sum-lbl">Posturi vacante</div>
+  </div>
+  <div class="sum-box">
+    <div class="sum-val" style="color:#80CBC4">3</div>
+    <div class="sum-lbl">Locații (LTC, BC + Caroseri)</div>
+  </div>
+</div>
+
+<!-- ======= SALARY SECTION ======= -->
+<div class="sal-section">
+  <div class="sal-section-header">
+    <div>
+      <div class="sal-section-title">📈 BUGET SALARIZARE LUNARĂ — 2026</div>
+      <div style="font-size:10px; color:#546E7A; margin-top:4px;">Cost total salarial per departament (RON brut) · Ian–Dec</div>
+    </div>
+    <div class="sal-tools">
+      <input type="file" id="xls-file-input" accept=".xlsx,.xls,.csv" onchange="importXLS(this)">
+      <button class="tool-btn btn-import" onclick="document.getElementById(&#39;xls-file-input&#39;).click()">📥 Import XLS</button>
+      <button class="tool-btn btn-template" onclick="exportTemplate()">📋 Template XLS</button>
+      <button class="tool-btn btn-export" onclick="exportXLS()">📤 Export XLS</button>
+      <button class="tool-btn btn-clear" onclick="clearAll()">🗑 Șterge</button>
+      <button class="tool-btn btn-print" onclick="window.print()">🖨 Print</button>
+      <span class="save-msg" id="save-msg"></span>
+    </div>
+  </div>
+
+  <div class="sal-table-outer">
+    <table class="sal-table" id="sal-main-table">
+      <thead>
+        <tr>
+          <th class="th-dept">Departament</th>
+          <th>Ian</th><th>Feb</th><th>Mar</th><th>Apr</th><th>Mai</th><th>Iun</th>
+          <th>Iul</th><th>Aug</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th>
+          <th class="th-annual">Total Anual</th>
+        </tr>
+      </thead>
+      <tbody id="sal-tbody"><tr>
+      <td class="td-dept">
+        <span class="dept-dot" style="background:#0D47A1"></span>🎯 Conducere Strategică
+      </td>
+      <td><input class="sal-input" type="number" min="0" step="100" id="i-leadership-0" placeholder="0" oninput="recalc()" title="Ian — Conducere Strategică"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-leadership-1" placeholder="0" oninput="recalc()" title="Feb — Conducere Strategică"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-leadership-2" placeholder="0" oninput="recalc()" title="Mar — Conducere Strategică"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-leadership-3" placeholder="0" oninput="recalc()" title="Apr — Conducere Strategică"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-leadership-4" placeholder="0" oninput="recalc()" title="Mai — Conducere Strategică"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-leadership-5" placeholder="0" oninput="recalc()" title="Iun — Conducere Strategică"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-leadership-6" placeholder="0" oninput="recalc()" title="Iul — Conducere Strategică"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-leadership-7" placeholder="0" oninput="recalc()" title="Aug — Conducere Strategică"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-leadership-8" placeholder="0" oninput="recalc()" title="Sep — Conducere Strategică"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-leadership-9" placeholder="0" oninput="recalc()" title="Oct — Conducere Strategică"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-leadership-10" placeholder="0" oninput="recalc()" title="Nov — Conducere Strategică"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-leadership-11" placeholder="0" oninput="recalc()" title="Dec — Conducere Strategică"></td>
+      <td class="td-annual" id="ann-leadership">—</td></tr><tr>
+      <td class="td-dept">
+        <span class="dept-dot" style="background:#1B5E20"></span>💰 Venituri &amp; Creștere
+      </td>
+      <td><input class="sal-input" type="number" min="0" step="100" id="i-revenue-0" placeholder="0" oninput="recalc()" title="Ian — Venituri &amp; Creștere"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-revenue-1" placeholder="0" oninput="recalc()" title="Feb — Venituri &amp; Creștere"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-revenue-2" placeholder="0" oninput="recalc()" title="Mar — Venituri &amp; Creștere"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-revenue-3" placeholder="0" oninput="recalc()" title="Apr — Venituri &amp; Creștere"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-revenue-4" placeholder="0" oninput="recalc()" title="Mai — Venituri &amp; Creștere"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-revenue-5" placeholder="0" oninput="recalc()" title="Iun — Venituri &amp; Creștere"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-revenue-6" placeholder="0" oninput="recalc()" title="Iul — Venituri &amp; Creștere"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-revenue-7" placeholder="0" oninput="recalc()" title="Aug — Venituri &amp; Creștere"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-revenue-8" placeholder="0" oninput="recalc()" title="Sep — Venituri &amp; Creștere"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-revenue-9" placeholder="0" oninput="recalc()" title="Oct — Venituri &amp; Creștere"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-revenue-10" placeholder="0" oninput="recalc()" title="Nov — Venituri &amp; Creștere"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-revenue-11" placeholder="0" oninput="recalc()" title="Dec — Venituri &amp; Creștere"></td>
+      <td class="td-annual" id="ann-revenue">—</td></tr><tr>
+      <td class="td-dept">
+        <span class="dept-dot" style="background:#E65100"></span>🤝 Experiența Clientului
+      </td>
+      <td><input class="sal-input" type="number" min="0" step="100" id="i-cx-0" placeholder="0" oninput="recalc()" title="Ian — Experiența Clientului"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-cx-1" placeholder="0" oninput="recalc()" title="Feb — Experiența Clientului"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-cx-2" placeholder="0" oninput="recalc()" title="Mar — Experiența Clientului"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-cx-3" placeholder="0" oninput="recalc()" title="Apr — Experiența Clientului"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-cx-4" placeholder="0" oninput="recalc()" title="Mai — Experiența Clientului"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-cx-5" placeholder="0" oninput="recalc()" title="Iun — Experiența Clientului"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-cx-6" placeholder="0" oninput="recalc()" title="Iul — Experiența Clientului"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-cx-7" placeholder="0" oninput="recalc()" title="Aug — Experiența Clientului"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-cx-8" placeholder="0" oninput="recalc()" title="Sep — Experiența Clientului"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-cx-9" placeholder="0" oninput="recalc()" title="Oct — Experiența Clientului"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-cx-10" placeholder="0" oninput="recalc()" title="Nov — Experiența Clientului"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-cx-11" placeholder="0" oninput="recalc()" title="Dec — Experiența Clientului"></td>
+      <td class="td-annual" id="ann-cx">—</td></tr><tr>
+      <td class="td-dept">
+        <span class="dept-dot" style="background:#4A148C"></span>🔧 Livrare Tehnică
+      </td>
+      <td><input class="sal-input" type="number" min="0" step="100" id="i-tech-0" placeholder="0" oninput="recalc()" title="Ian — Livrare Tehnică"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-tech-1" placeholder="0" oninput="recalc()" title="Feb — Livrare Tehnică"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-tech-2" placeholder="0" oninput="recalc()" title="Mar — Livrare Tehnică"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-tech-3" placeholder="0" oninput="recalc()" title="Apr — Livrare Tehnică"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-tech-4" placeholder="0" oninput="recalc()" title="Mai — Livrare Tehnică"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-tech-5" placeholder="0" oninput="recalc()" title="Iun — Livrare Tehnică"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-tech-6" placeholder="0" oninput="recalc()" title="Iul — Livrare Tehnică"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-tech-7" placeholder="0" oninput="recalc()" title="Aug — Livrare Tehnică"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-tech-8" placeholder="0" oninput="recalc()" title="Sep — Livrare Tehnică"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-tech-9" placeholder="0" oninput="recalc()" title="Oct — Livrare Tehnică"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-tech-10" placeholder="0" oninput="recalc()" title="Nov — Livrare Tehnică"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-tech-11" placeholder="0" oninput="recalc()" title="Dec — Livrare Tehnică"></td>
+      <td class="td-annual" id="ann-tech">—</td></tr><tr>
+      <td class="td-dept">
+        <span class="dept-dot" style="background:#006064"></span>📦 Operațiuni &amp; Logistică
+      </td>
+      <td><input class="sal-input" type="number" min="0" step="100" id="i-ops-0" placeholder="0" oninput="recalc()" title="Ian — Operațiuni &amp; Logistică"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-ops-1" placeholder="0" oninput="recalc()" title="Feb — Operațiuni &amp; Logistică"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-ops-2" placeholder="0" oninput="recalc()" title="Mar — Operațiuni &amp; Logistică"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-ops-3" placeholder="0" oninput="recalc()" title="Apr — Operațiuni &amp; Logistică"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-ops-4" placeholder="0" oninput="recalc()" title="Mai — Operațiuni &amp; Logistică"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-ops-5" placeholder="0" oninput="recalc()" title="Iun — Operațiuni &amp; Logistică"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-ops-6" placeholder="0" oninput="recalc()" title="Iul — Operațiuni &amp; Logistică"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-ops-7" placeholder="0" oninput="recalc()" title="Aug — Operațiuni &amp; Logistică"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-ops-8" placeholder="0" oninput="recalc()" title="Sep — Operațiuni &amp; Logistică"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-ops-9" placeholder="0" oninput="recalc()" title="Oct — Operațiuni &amp; Logistică"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-ops-10" placeholder="0" oninput="recalc()" title="Nov — Operațiuni &amp; Logistică"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-ops-11" placeholder="0" oninput="recalc()" title="Dec — Operațiuni &amp; Logistică"></td>
+      <td class="td-annual" id="ann-ops">—</td></tr><tr>
+      <td class="td-dept">
+        <span class="dept-dot" style="background:#BF360C"></span>📊 Control Financiar
+      </td>
+      <td><input class="sal-input" type="number" min="0" step="100" id="i-finance-0" placeholder="0" oninput="recalc()" title="Ian — Control Financiar"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-finance-1" placeholder="0" oninput="recalc()" title="Feb — Control Financiar"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-finance-2" placeholder="0" oninput="recalc()" title="Mar — Control Financiar"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-finance-3" placeholder="0" oninput="recalc()" title="Apr — Control Financiar"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-finance-4" placeholder="0" oninput="recalc()" title="Mai — Control Financiar"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-finance-5" placeholder="0" oninput="recalc()" title="Iun — Control Financiar"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-finance-6" placeholder="0" oninput="recalc()" title="Iul — Control Financiar"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-finance-7" placeholder="0" oninput="recalc()" title="Aug — Control Financiar"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-finance-8" placeholder="0" oninput="recalc()" title="Sep — Control Financiar"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-finance-9" placeholder="0" oninput="recalc()" title="Oct — Control Financiar"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-finance-10" placeholder="0" oninput="recalc()" title="Nov — Control Financiar"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-finance-11" placeholder="0" oninput="recalc()" title="Dec — Control Financiar"></td>
+      <td class="td-annual" id="ann-finance">—</td></tr><tr>
+      <td class="td-dept">
+        <span class="dept-dot" style="background:#37474F"></span>👥 Oameni &amp; Facilități
+      </td>
+      <td><input class="sal-input" type="number" min="0" step="100" id="i-hr-0" placeholder="0" oninput="recalc()" title="Ian — Oameni &amp; Facilități"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-hr-1" placeholder="0" oninput="recalc()" title="Feb — Oameni &amp; Facilități"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-hr-2" placeholder="0" oninput="recalc()" title="Mar — Oameni &amp; Facilități"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-hr-3" placeholder="0" oninput="recalc()" title="Apr — Oameni &amp; Facilități"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-hr-4" placeholder="0" oninput="recalc()" title="Mai — Oameni &amp; Facilități"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-hr-5" placeholder="0" oninput="recalc()" title="Iun — Oameni &amp; Facilități"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-hr-6" placeholder="0" oninput="recalc()" title="Iul — Oameni &amp; Facilități"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-hr-7" placeholder="0" oninput="recalc()" title="Aug — Oameni &amp; Facilități"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-hr-8" placeholder="0" oninput="recalc()" title="Sep — Oameni &amp; Facilități"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-hr-9" placeholder="0" oninput="recalc()" title="Oct — Oameni &amp; Facilități"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-hr-10" placeholder="0" oninput="recalc()" title="Nov — Oameni &amp; Facilități"></td><td><input class="sal-input" type="number" min="0" step="100" id="i-hr-11" placeholder="0" oninput="recalc()" title="Dec — Oameni &amp; Facilități"></td>
+      <td class="td-annual" id="ann-hr">—</td></tr></tbody>
+      <tfoot>
+        <tr>
+          <td class="td-dept">🏢 TOTAL GRUP</td>
+          <td id="ft-0">—</td><td id="ft-1">—</td><td id="ft-2">—</td>
+          <td id="ft-3">—</td><td id="ft-4">—</td><td id="ft-5">—</td>
+          <td id="ft-6">—</td><td id="ft-7">—</td><td id="ft-8">—</td>
+          <td id="ft-9">—</td><td id="ft-10">—</td><td id="ft-11">—</td>
+          <td class="td-annual" id="ft-ann">—</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <div class="info-bar">
+    <span>💡 <b>Import XLS</b> — descarcă Template XLS, completează cu valorile lunare și importă înapoi.</span>
+    <span>☁️ <b>Colaborare</b> — păstrează fișierul template în <b>Google Drive / SharePoint</b>. Fiecare editor actualizează Excel-ul, iar managing directorul importă la zi.</span>
+    <span>💾 Datele se salvează automat în browser (localStorage) pe calculatorul curent.</span>
+  </div>
+</div>
+
+<script>
+// ========== DEPT DATA ==========
+const MONTHS = ['Ian','Feb','Mar','Apr','Mai','Iun','Iul','Aug','Sep','Oct','Nov','Dec'];
+
+const DEPTS = [
+  { id:'leadership', icon:'🎯', color:'#0D47A1', label:'Conducere Strategică',     xlsName:'Conducere Strategica' },
+  { id:'revenue',    icon:'💰', color:'#1B5E20', label:'Venituri & Creștere',       xlsName:'Venituri Crestere' },
+  { id:'cx',         icon:'🤝', color:'#E65100', label:'Experiența Clientului',     xlsName:'Experienta Clientului' },
+  { id:'tech',       icon:'🔧', color:'#4A148C', label:'Livrare Tehnică',           xlsName:'Livrare Tehnica' },
+  { id:'ops',        icon:'📦', color:'#006064', label:'Operațiuni & Logistică',    xlsName:'Operatiuni Logistica' },
+  { id:'finance',    icon:'📊', color:'#BF360C', label:'Control Financiar',         xlsName:'Control Financiar' },
+  { id:'hr',         icon:'👥', color:'#37474F', label:'Oameni & Facilități',       xlsName:'Oameni Facilitati' },
+];
+
+// ========== BUILD TABLE ROWS ==========
+function buildRows() {
+  const tbody = document.getElementById('sal-tbody');
+  tbody.innerHTML = '';
+  DEPTS.forEach(dept => {
+    const inputs = MONTHS.map((_, mi) =>
+      `<td><input class="sal-input" type="number" min="0" step="100"
+        id="i-${dept.id}-${mi}" placeholder="0"
+        oninput="recalc()" title="${MONTHS[mi]} — ${dept.label}"></td>`
+    ).join('');
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td class="td-dept">
+        <span class="dept-dot" style="background:${dept.color}"></span>${dept.icon} ${dept.label}
+      </td>
+      ${inputs}
+      <td class="td-annual" id="ann-${dept.id}">—</td>`;
+    tbody.appendChild(row);
+  });
+}
+
+// ========== CALC ==========
+function fmt(n) {
+  if (!n || n === 0) return '—';
+  return n.toLocaleString('ro-RO') + ' RON';
+}
+
+function getVal(id) {
+  const el = document.getElementById(id);
+  return el ? (parseFloat(el.value) || 0) : 0;
+}
+
+function recalc() {
+  let grandTotal = 0;
+  const monthTotals = new Array(12).fill(0);
+
+  DEPTS.forEach(dept => {
+    let deptTotal = 0;
+    MONTHS.forEach((_, mi) => {
+      const v = getVal(`i-${dept.id}-${mi}`);
+      deptTotal += v;
+      monthTotals[mi] += v;
+    });
+    grandTotal += deptTotal;
+    const annEl = document.getElementById(`ann-${dept.id}`);
+    if (annEl) annEl.textContent = fmt(deptTotal);
+  });
+
+  MONTHS.forEach((_, mi) => {
+    const el = document.getElementById(`ft-${mi}`);
+    if (el) el.textContent = fmt(monthTotals[mi]);
+  });
+  const annEl = document.getElementById('ft-ann');
+  if (annEl) annEl.textContent = fmt(grandTotal);
+
+  autoSave();
+}
+
+// ========== STORAGE ==========
+const STORAGE_KEY = 'autopadova_sal_v3';
+
+function autoSave() {
+  const data = {};
+  DEPTS.forEach(dept => {
+    MONTHS.forEach((_, mi) => {
+      const el = document.getElementById(`i-${dept.id}-${mi}`);
+      if (el && el.value) data[`${dept.id}-${mi}`] = el.value;
+    });
+  });
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  showMsg('✓ Salvat');
+}
+
+let msgTimer;
+function showMsg(txt) {
+  const el = document.getElementById('save-msg');
+  if (el) { el.textContent = txt; clearTimeout(msgTimer); msgTimer = setTimeout(() => el.textContent = '', 2500); }
+}
+
+function loadSaved() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+    const data = JSON.parse(raw);
+    Object.keys(data).forEach(k => {
+      const parts = k.split('-');
+      // key format: deptId-monthIdx
+      // deptId may contain dashes? No. Let's split by last dash
+      const mi = parts[parts.length - 1];
+      const deptId = parts.slice(0, parts.length - 1).join('-');
+      const el = document.getElementById(`i-${deptId}-${mi}`);
+      if (el) el.value = data[k];
+    });
+    recalc();
+  } catch(e) {}
+}
+
+function clearAll() {
+  if (!confirm('Ștergi toate datele de salarizare?\nAcțiunea nu poate fi anulată.')) return;
+  DEPTS.forEach(dept => {
+    MONTHS.forEach((_, mi) => {
+      const el = document.getElementById(`i-${dept.id}-${mi}`);
+      if (el) el.value = '';
+    });
+  });
+  localStorage.removeItem(STORAGE_KEY);
+  recalc();
+  showMsg('🗑 Date șterse');
+}
+
+// ========== XLS EXPORT (data) ==========
+function exportXLS() {
+  const rows = [['Departament', ...MONTHS, 'Total Anual']];
+  DEPTS.forEach(dept => {
+    const vals = MONTHS.map((_, mi) => parseFloat(document.getElementById(`i-${dept.id}-${mi}`)?.value) || 0);
+    const total = vals.reduce((a,b) => a+b, 0);
+    rows.push([dept.xlsName, ...vals, total]);
+  });
+  // Footer
+  const footerVals = MONTHS.map((_, mi) =>
+    DEPTS.reduce((s, dept) => s + (parseFloat(document.getElementById(`i-${dept.id}-${mi}`)?.value) || 0), 0)
+  );
+  rows.push(['TOTAL GRUP', ...footerVals, footerVals.reduce((a,b) => a+b, 0)]);
+
+  const ws = XLSX.utils.aoa_to_sheet(rows);
+  // Style column widths
+  ws['!cols'] = [{ wch: 28 }, ...MONTHS.map(() => ({ wch: 12 })), { wch: 15 }];
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Salarizare 2026');
+  XLSX.writeFile(wb, 'Autopadova_Salarizare_2026.xlsx');
+  showMsg('✓ Export complet');
+}
+
+// ========== XLS EXPORT (template) ==========
+function exportTemplate() {
+  const rows = [
+    ['TEMPLATE SALARIZARE — AUTOPADOVA 2026'],
+    ['Completați celulele galbene cu bugetul lunar total (RON brut) per departament'],
+    [],
+    ['Departament', ...MONTHS, 'Total Anual (auto)']
+  ];
+  DEPTS.forEach(dept => {
+    rows.push([dept.xlsName, ...new Array(12).fill(''), '=SUM(B'+( rows.length+1 )+':M'+(rows.length+1)+')']);
+  });
+  rows.push(['TOTAL GRUP', ...MONTHS.map((_, mi) => {
+    const row = 5;
+    return `=SUM(${String.fromCharCode(66+mi)}${row}:${String.fromCharCode(66+mi)}${row+DEPTS.length-1})`;
+  }), '']);
+
+  const ws = XLSX.utils.aoa_to_sheet(rows);
+  ws['!cols'] = [{ wch: 28 }, ...MONTHS.map(() => ({ wch: 12 })), { wch: 18 }];
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Template Salarizare');
+  XLSX.writeFile(wb, 'Template_Salarizare_Autopadova.xlsx');
+  showMsg('✓ Template descărcat');
+}
+
+// ========== XLS IMPORT ==========
+function importXLS(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const data = new Uint8Array(e.target.result);
+      const wb = XLSX.read(data, { type: 'array' });
+      const ws = wb.Sheets[wb.SheetNames[0]];
+      const rows = XLSX.utils.sheet_to_json(ws, { header: 1, defval: 0 });
+
+      // Find header row (contains month names)
+      let headerIdx = -1;
+      let colMap = {}; // monthName -> colIndex
+      for (let r = 0; r < rows.length; r++) {
+        const row = rows[r];
+        const hasMonths = MONTHS.some(m => row.some(cell => String(cell).includes(m)));
+        if (hasMonths) { headerIdx = r; break; }
+      }
+      if (headerIdx < 0) { alert('Nu am găsit header-ul cu lunile (Ian, Feb...) în fișier.'); return; }
+
+      const header = rows[headerIdx];
+      MONTHS.forEach((m, mi) => {
+        const ci = header.findIndex(h => String(h).includes(m));
+        if (ci >= 0) colMap[mi] = ci;
+      });
+
+      // Find dept column (col 0 typically)
+      let deptCol = 0;
+
+      let imported = 0;
+      for (let r = headerIdx + 1; r < rows.length; r++) {
+        const row = rows[r];
+        const deptCell = String(row[deptCol] || '').toLowerCase().trim();
+        if (!deptCell) continue;
+
+        const dept = DEPTS.find(d =>
+          deptCell.includes(d.xlsName.toLowerCase().substring(0,8)) ||
+          deptCell.includes(d.id) ||
+          d.xlsName.toLowerCase().split(' ').some(w => w.length > 4 && deptCell.includes(w))
+        );
+        if (!dept) continue;
+
+        MONTHS.forEach((_, mi) => {
+          const ci = colMap[mi];
+          if (ci === undefined) return;
+          const val = parseFloat(row[ci]) || 0;
+          const el = document.getElementById(`i-${dept.id}-${mi}`);
+          if (el) { el.value = val > 0 ? val : ''; }
+        });
+        imported++;
+      }
+
+      recalc();
+      input.value = '';
+      if (imported > 0) {
+        showMsg(`✓ Import OK — ${imported} departamente`);
+      } else {
+        alert('Nu am putut recunoaște departamentele din fișier.\nVerifică că numele departamentelor din XLS corespund cu template-ul.');
+      }
+    } catch(err) {
+      alert('Eroare la import: ' + err.message);
+    }
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+// ========== INIT ==========
+document.addEventListener('DOMContentLoaded', () => {
+  buildRows();
+  loadSaved();
+});
+</script>
+
+
+</body></html>
