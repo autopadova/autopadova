@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<!-- saved from url=(0250)file:///Users/crispascal/Library/Application%20Support/Claude/local-agent-mode-sessions/f2dff863-e5d8-433f-8710-5674e3773b6d/d19181ae-19b8-4d1e-bfe6-ee8452e5dcbc/local_fc3aad98-1cd0-43ae-8f3f-4293e60260ff/outputs/Ghid_Obiectii_Closing_Autopadova.html -->
+<html lang="ro"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ghid Obiecții &amp; Closing — Autopadova</title>
+<style>
+  :root {
+    --iveco-blue: #003087;
+    --iveco-light: #d6e4f7;
+    --fiat-red: #C8102E;
+    --fiat-light: #fce4e4;
+    --green: #1B7A3E;
+    --green-light: #d4edda;
+    --gray-bg: #f7f8fa;
+    --gray-border: #e0e4ea;
+    --text: #1a1a2e;
+    --muted: #6b7280;
+    --white: #fff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: var(--gray-bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: linear-gradient(135deg, var(--iveco-blue) 0%, #00459e 100%);
+    color: #fff;
+    padding: 36px 32px 28px;
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 4px 20px rgba(0,48,135,0.3);
+  }
+  .site-header h1 { font-size: 26px; font-weight: 800; letter-spacing: .5px; }
+  .site-header p { font-size: 13px; opacity: .8; margin-top: 4px; }
+  .header-badges { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+  .badge {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 20px; padding: 4px 14px;
+    font-size: 12px; font-weight: 600; color: #fff;
+    cursor: pointer; transition: all .2s;
+    user-select: none;
+  }
+  .badge:hover, .badge.active { background: rgba(255,255,255,0.35); }
+  .badge.active { border-color: #fff; }
+
+  /* ── LEGEND ── */
+  .legend {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 16px; padding: 24px 32px; background: #fff;
+    border-bottom: 2px solid var(--gray-border);
+  }
+  .legend-card {
+    border-radius: 10px; padding: 16px 20px;
+    border-left: 4px solid var(--iveco-blue);
+    background: var(--iveco-light);
+  }
+  .legend-card h3 { font-size: 13px; font-weight: 800; color: var(--iveco-blue); margin-bottom: 8px; letter-spacing: .5px; }
+  .legend-card ul { list-style: none; }
+  .legend-card ul li { font-size: 13px; color: var(--text); padding: 3px 0; }
+  .legend-card ul li::before { content: "→ "; color: var(--iveco-blue); font-weight: 700; }
+
+  /* ── MAIN ── */
+  .main { max-width: 1100px; margin: 0 auto; padding: 32px 24px 60px; }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    display: flex; align-items: center; gap: 14px;
+    padding: 20px 24px; border-radius: 12px;
+    margin-bottom: 20px; margin-top: 40px;
+  }
+  .section-header.fiat { background: linear-gradient(135deg, var(--fiat-red), #a00e25); }
+  .section-header.iveco { background: linear-gradient(135deg, var(--iveco-blue), #00459e); }
+  .section-header .num {
+    font-size: 36px; font-weight: 900; color: rgba(255,255,255,0.25);
+    line-height: 1;
+  }
+  .section-header .info h2 { font-size: 22px; font-weight: 800; color: #fff; }
+  .section-header .info p { font-size: 13px; color: rgba(255,255,255,0.75); margin-top: 2px; }
+
+  /* ── CARD ── */
+  .card {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    margin-bottom: 22px;
+    overflow: hidden;
+    transition: box-shadow .25s, transform .15s;
+    border: 1px solid var(--gray-border);
+  }
+  .card:hover { box-shadow: 0 6px 28px rgba(0,0,0,0.13); transform: translateY(-2px); }
+  .card.hidden { display: none; }
+
+  .card-header {
+    display: flex; align-items: flex-start;
+    gap: 14px; padding: 16px 20px 14px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .card.fiat .card-header { border-left: 5px solid var(--fiat-red); }
+  .card.iveco .card-header { border-left: 5px solid var(--iveco-blue); }
+
+  .card-num {
+    min-width: 40px; height: 40px;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 15px; font-weight: 800; color: #fff; flex-shrink: 0;
+  }
+  .card.fiat .card-num { background: var(--fiat-red); }
+  .card.iveco .card-num { background: var(--iveco-blue); }
+
+  .card-title { flex: 1; }
+  .card-title h3 { font-size: 16px; font-weight: 700; color: var(--text); line-height: 1.3; }
+  .card-title .tip-badge {
+    display: inline-block; margin-top: 5px;
+    font-size: 11px; font-weight: 700; padding: 2px 10px;
+    border-radius: 20px; color: #fff;
+  }
+  .card.fiat .tip-badge { background: var(--fiat-red); }
+  .card.iveco .tip-badge { background: var(--iveco-blue); }
+
+  .toggle-icon {
+    font-size: 20px; color: var(--muted);
+    transition: transform .3s; flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .card.open .toggle-icon { transform: rotate(180deg); }
+
+  /* ── BODY ── */
+  .card-body { display: none; padding: 0 20px 20px; }
+  .card.open .card-body { display: block; }
+
+  .client-says {
+    background: #fafafa; border: 1px dashed var(--gray-border);
+    border-radius: 10px; padding: 14px 16px; margin-bottom: 16px;
+    font-style: italic; color: #444; font-size: 14px;
+    position: relative;
+  }
+  .client-says::before {
+    content: "💬 CLIENTUL SPUNE:";
+    display: block; font-style: normal; font-size: 11px;
+    font-weight: 800; color: var(--muted); margin-bottom: 6px; letter-spacing: .5px;
+  }
+
+  .steps { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+  .step {
+    border-radius: 10px; padding: 12px 14px;
+    background: var(--green-light);
+    border-left: 4px solid var(--green);
+  }
+  .step-label {
+    font-size: 11px; font-weight: 800; color: var(--green);
+    letter-spacing: .5px; margin-bottom: 5px;
+  }
+  .step p { font-size: 13.5px; color: var(--text); line-height: 1.5; }
+
+  .closing-box {
+    border-radius: 10px; padding: 14px 16px;
+    position: relative; overflow: hidden;
+  }
+  .card.fiat .closing-box { background: var(--fiat-light); border-left: 4px solid var(--fiat-red); }
+  .card.iveco .closing-box { background: var(--iveco-light); border-left: 4px solid var(--iveco-blue); }
+
+  .closing-label {
+    font-size: 11px; font-weight: 800; letter-spacing: .5px; margin-bottom: 6px;
+  }
+  .card.fiat .closing-label { color: var(--fiat-red); }
+  .card.iveco .closing-label { color: var(--iveco-blue); }
+
+  .closing-script {
+    font-size: 14px; font-weight: 600; font-style: italic;
+    line-height: 1.55;
+  }
+  .card.fiat .closing-script { color: var(--fiat-red); }
+  .card.iveco .closing-script { color: var(--iveco-blue); }
+
+  /* ── SEARCH ── */
+  .search-bar {
+    padding: 20px 32px; background: #fff;
+    border-bottom: 1px solid var(--gray-border);
+    display: flex; align-items: center; gap: 12px;
+  }
+  .search-bar input {
+    flex: 1; padding: 10px 16px;
+    border: 2px solid var(--gray-border); border-radius: 8px;
+    font-size: 14px; outline: none; transition: border-color .2s;
+  }
+  .search-bar input:focus { border-color: var(--iveco-blue); }
+  .search-bar label { font-size: 13px; color: var(--muted); white-space: nowrap; }
+
+  /* ── STATS ── */
+  .stats { font-size: 13px; color: var(--muted); margin-bottom: 6px; text-align: right; }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center; padding: 28px;
+    font-size: 12px; color: var(--muted);
+    border-top: 1px solid var(--gray-border);
+    background: #fff; margin-top: 40px;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    .legend { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr; }
+    .site-header { padding: 20px 16px 16px; }
+    .site-header h1 { font-size: 19px; }
+    .main { padding: 16px 12px 40px; }
+    .search-bar { padding: 14px 16px; flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="site-header">
+  <h1>📋 Ghid Obiecții &amp; Closing — Autopadova</h1>
+  <p>Training Agenți Noi · 20 Situații Reale · Tehnicile A→Î→R→S și Closing</p>
+  <div class="header-badges">
+    <span class="badge active" data-filter="all">Toate (20)</span>
+    <span class="badge" data-filter="fiat">🔴 Fiat Professional (5)</span>
+    <span class="badge" data-filter="iveco">🔵 Iveco Daily MY24 (15)</span>
+  </div>
+</div>
+
+<!-- SEARCH -->
+<div class="search-bar">
+  <label for="search">🔍 Caută:</label>
+  <input type="text" id="search" placeholder="ex: preț, garanție, test drive, buget...">
+</div>
+
+<!-- LEGEND -->
+<div class="legend">
+  <div class="legend-card">
+    <h3>TEHNICA 1: A→Î→R→S (Tratarea Obiecțiilor)</h3>
+    <ul>
+      <li><strong>A — Acceptare</strong> — fără a da dreptate clientului</li>
+      <li><strong>Î — Înțelegere</strong> — adâncești obiecția cu o întrebare</li>
+      <li><strong>R — Reformulare</strong> — transformi obiecția în beneficiu</li>
+      <li><strong>S — Soluție</strong> — date concrete + avansezi imediat</li>
+    </ul>
+  </div>
+  <div class="legend-card">
+    <h3>TEHNICA 2: CLOSING (Închidere)</h3>
+    <ul>
+      <li><strong>Trial Close</strong> — testezi apropierea de decizie</li>
+      <li><strong>Alternativă</strong> — dai 2 opțiuni, niciuna nu e „Nu"</li>
+      <li><strong>Urgență</strong> — stoc limitat / ofertă expirabilă real</li>
+      <li><strong>Bilanț / Direct / Vizualizare</strong> — ceri decizia ferm</li>
+    </ul>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+<div class="stats" id="stats">20 situații afișate</div>
+
+<!-- FIAT SECTION -->
+<div class="section-header fiat" data-section="fiat" style="">
+  <div class="num">01</div>
+  <div class="info">
+    <h2>FIAT PROFESSIONAL</h2>
+    <p>Ducato · E-Ducato · Scudo · Doblò — dealer Autopadova Iași &amp; Bacău</p>
+  </div>
+</div>
+
+<div id="cards-container">
+
+<!-- ==================== FIAT 1 ==================== -->
+<div class="card fiat open" data-brand="fiat" data-text="preț ducato transit ford prea scump tco">
+  <div class="card-header" onclick="toggle(this)">
+    <div class="card-num">1</div>
+    <div class="card-title">
+      <h3>Prețul Ducato e mai mare decât Transitul</h3>
+      <span class="tip-badge">Obiecție preț</span>
+    </div>
+    <div class="toggle-icon">▼</div>
+  </div>
+  <div class="card-body">
+    <div class="client-says">"Am văzut oferte pentru Ford Transit cu 4.000€ mai puțin. Nu știu dacă merită diferența."</div>
+    <div class="steps">
+      <div class="step"><div class="step-label">A — ACCEPTARE</div><p>Înțeleg perfect — prețul de achiziție este primul lucru pe care îl comparăm cu toții.</p></div>
+      <div class="step"><div class="step-label">Î — ÎNȚELEGERE</div><p>Când spuneți 4.000€ diferență, vă referiți la prețul de catalog sau ați primit deja o ofertă finală cu TVA și pachet service de la Ford?</p></div>
+      <div class="step"><div class="step-label">R — REFORMULARE</div><p>Deci dacă TCO-ul pe 5 ani al Ducato ar fi echivalent sau mai mic decât Transitul, prețul inițial nu mai este un blocaj?</p></div>
+      <div class="step"><div class="step-label">S — SOLUȚIE</div><p>Ducato MY24 cu pachetul Autopadova: garanție 5 ani / 200.000 km + mentenanță -50% = economie reală de 3.500-4.500€ față de service standard. Diferența de preț inițial se recuperează din primul an de exploatare. Vă fac un calcul comparativ în 5 minute.</p></div>
+    </div>
+    <div class="closing-box">
+      <div class="closing-label">🎯 CLOSING: Bilanț + Direct</div>
+      <div class="closing-script">"Avem garanție superioară, cost service redus cu 50% și livrare din stoc. La acești parametri, Ducato câștigă clar. Mergem înainte cu configurația dvs.?"</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== FIAT 2 ==================== -->
+<div class="card fiat" data-brand="fiat" data-text="fiabilitate brand fiat probleme calitate">
+  <div class="card-header" onclick="toggle(this)">
+    <div class="card-num">2</div>
+    <div class="card-title">
+      <h3>Îndoieli privind fiabilitatea Fiat Professional</h3>
+      <span class="tip-badge">Obiecție brand</span>
+    </div>
+    <div class="toggle-icon">▼</div>
+  </div>
+  <div class="card-body">
+    <div class="client-says">"Fiat Professional... nu știu, am auzit că au mai multe probleme decât Mercedes sau VW. Un prieten a avut Ducato și s-a plâns."</div>
+    <div class="steps">
+      <div class="step"><div class="step-label">A — ACCEPTARE</div><p>Înțeleg îngrijorarea — reputația unui brand contează enorm când depinzi de vehicul zilnic.</p></div>
+      <div class="step"><div class="step-label">Î — ÎNȚELEGERE</div><p>Prietenul dvs. cu ce generație de Ducato a avut problemele? Și ce fel de probleme — mecanice, electrice, sau service slab în zonă?</p></div>
+      <div class="step"><div class="step-label">R — REFORMULARE</div><p>Deci dacă vă demonstrez că Ducato MY24 are o rată de fiabilitate documentată și că service-ul Autopadova în Iași/Bacău rezolvă orice problemă rapid, asta ar schimba perspectiva?</p></div>
+      <div class="step"><div class="step-label">S — SOLUȚIE</div><p>Ducato e cel mai vândut van &gt;3.5t în Europa — peste 30 de ani pe piață. MY24 vine cu sisteme ADAS, motorizare MultiJet III complet revizuită. Pot să vă pun în contact cu 2-3 clienți actuali din zonă care să vă spună direct experiența lor.</p></div>
+    </div>
+    <div class="closing-box">
+      <div class="closing-label">🎯 CLOSING: Trial Close</div>
+      <div class="closing-script">"Dacă vorbim cu un client actual care vă confirmă experiența pozitivă, aveți alt motiv care vă oprește de la decizie?"</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== FIAT 3 ==================== -->
+<div class="card fiat" data-brand="fiat" data-text="amânare mă gândesc timp nu decid">
+  <div class="card-header" onclick="toggle(this)">
+    <div class="card-num">3</div>
+    <div class="card-title">
+      <h3>Clientul amână — "mă mai gândesc"</h3>
+      <span class="tip-badge">Obiecție timp / amânare</span>
+    </div>
+    <div class="toggle-icon">▼</div>
+  </div>
+  <div class="card-body">
+    <div class="client-says">"E interesant ce mi-ați prezentat, dar lasă că mă mai gândesc câteva zile și vă sun eu."</div>
+    <div class="steps">
+      <div class="step"><div class="step-label">A — ACCEPTARE</div><p>Absolut, e o decizie importantă și este normal să vă gândiți.</p></div>
+      <div class="step"><div class="step-label">Î — ÎNȚELEGERE</div><p>Ca să vă pot ajuta mai bine: care e punctul specific la care nu v-ați hotărât încă — prețul, configurația, finanțarea sau altceva?</p></div>
+      <div class="step"><div class="step-label">R — REFORMULARE</div><p>Deci dacă rezolvăm acel punct specific acum, am putea merge înainte astăzi?</p></div>
+      <div class="step"><div class="step-label">S — SOLUȚIE</div><p>Vehiculul pe care l-am discutat este din stoc — nu pot garanta că e disponibil peste 3-4 zile. Oferta de mentenanță -50% e valabilă cu contractul semnat în această lună. Nu vreau să vă pierdeți aceste avantaje dintr-o amânare care nu vă aduce informații noi.</p></div>
+    </div>
+    <div class="closing-box">
+      <div class="closing-label">🎯 CLOSING: Urgență reală</div>
+      <div class="closing-script">"Vehiculul e din stocul curent — cel mai probabil ocupat până la finalul săptămânii. Să securizăm configurația dvs. acum. Ce spuneți?"</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== FIAT 4 ==================== -->
+<div class="card fiat" data-brand="fiat" data-text="alt dealer preț mai mic competiție discount">
+  <div class="card-header" onclick="toggle(this)">
+    <div class="card-num">4</div>
+    <div class="card-title">
+      <h3>Alt dealer Fiat Professional a oferit preț mai mic</h3>
+      <span class="tip-badge">Presiune preț / competiție dealer</span>
+    </div>
+    <div class="toggle-icon">▼</div>
+  </div>
+  <div class="card-body">
+    <div class="client-says">"Am primit o ofertă de la un alt dealer Fiat Professional cu 1.500€ mai puțin pentru același model."</div>
+    <div class="steps">
+      <div class="step"><div class="step-label">A — ACCEPTARE</div><p>Înțeleg — la prețuri similare e firesc să alegeți cea mai bună ofertă.</p></div>
+      <div class="step"><div class="step-label">Î — ÎNȚELEGERE</div><p>Oferta aceea include și garanție extinsă, pachet service și suport post-vânzare local? Sau e doar prețul vehiculului de bază?</p></div>
+      <div class="step"><div class="step-label">R — REFORMULARE</div><p>Deci dacă la Autopadova primiți același preț de vehicul PLUS garanție 5 ani și mentenanță -50% — avantaje pe care acel dealer nu le oferă — Autopadova devine alegerea clară?</p></div>
+      <div class="step"><div class="step-label">S — SOLUȚIE</div><p>Garanția extinsă și pachetul service Autopadova valorează minim 3.000-4.000€ pe durata contractului. Nu suntem cel mai ieftin la achiziție — suntem cel mai avantajos pe total cost de exploatare. Și suntem la 20 de minute de dvs. în Iași, nu la 200 km distanță.</p></div>
+    </div>
+    <div class="closing-box">
+      <div class="closing-label">🎯 CLOSING: Alternativă</div>
+      <div class="closing-script">"Vreți să facem o comparație scrisă ofertă vs. ofertă, cu TCO inclus? Sau preferați să mergem direct la semnarea contractului cu pachetul complet?"</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== FIAT 5 ==================== -->
+<div class="card fiat" data-brand="fiat" data-text="electric e-ducato autonomie încărcare rută">
+  <div class="card-header" onclick="toggle(this)">
+    <div class="card-num">5</div>
+    <div class="card-title">
+      <h3>Client interesat de E-Ducato — fără angajament clar</h3>
+      <span class="tip-badge">Curiozitate electric / nehotărâre</span>
+    </div>
+    <div class="toggle-icon">▼</div>
+  </div>
+  <div class="card-body">
+    <div class="client-says">"M-ar interesa E-Ducato dacă tot vorbim de electric, dar nu știu dacă e practic pentru ruta mea de 180 km pe zi."</div>
+    <div class="steps">
+      <div class="step"><div class="step-label">A — ACCEPTARE</div><p>Exact întrebarea corectă — autonomia reală e primul lucru de clarificat înainte de orice altceva.</p></div>
+      <div class="step"><div class="step-label">Î — ÎNȚELEGERE</div><p>Ruta de 180 km e continuă sau cu pauze intermediare? Aveți posibilitate de încărcare la sediu sau la domiciliu?</p></div>
+      <div class="step"><div class="step-label">R — REFORMULARE</div><p>Deci dacă E-Ducato acoperă ruta dvs. cu o încărcare nocturnă la sediu și fără stres de autonomie, acesta e vehiculul ideal — corect?</p></div>
+      <div class="step"><div class="step-label">S — SOLUȚIE</div><p>E-Ducato: autonomie reală 220-250 km. Încărcare overnight 11 kW la sediu — perfect pentru 180 km/zi. Cost per km cu 60-70% mai mic față de diesel. Calculăm economiile anuale pentru ruta dvs. concretă.</p></div>
+    </div>
+    <div class="closing-box">
+      <div class="closing-label">🎯 CLOSING: Vizualizare</div>
+      <div class="closing-script">"Imaginați-vă că plecați în fiecare dimineață cu E-Ducato încărcat la 100%, fără stație de alimentare, fără surprize de preț carburant — și la finalul anului aveți 8.000-10.000 lei mai mult în cont. Mergem înainte cu un test drive?"</div>
+    </div>
+  </div>
+</div>
+
+<!-- IVECO SECTION -->
+<div class="section-header iveco" data-section="iveco" style="">
+  <div class="num">02</div>
+  <div class="info">
+    <h2>IVECO DAILY MY24</h2>
+    <p>Daily MY24 · eDaily · Garanție 5 ani · Mentenanță -50% · IVECO ON — dealer Autopadova Iași &amp; Bacău</p>
+  </div>
+</div>
+
+<!-- ==================== IVECO 1 ==================== -->
+<div class="card iveco" data-brand="iveco" data-text="sprinter cunoscut piață rețea service">
+  <div class="card-header" onclick="toggle(this)">
+    <div class="card-num">6</div>
+    <div class="card-title">
+      <h3>Sprinterul e mai cunoscut în piața noastră</h3>
+      <span class="tip-badge">Obiecție brand / percepție piață</span>
+    </div>
+    <div class="toggle-icon">▼</div>
+  </div>
+  <div class="card-body">
+    <div class="client-says">"Toată lumea folosește Sprinter în zona noastră. Dacă ceva se strică, găsesc mecanic oriunde. Cu Iveco nu știu."</div>
+    <div class="steps">
+      <div class="step"><div class="step-label">A — ACCEPTARE</div><p>Înțeleg logica — infrastructura de service contează enorm în activitatea dvs. zilnică.</p></div>
+      <div class="step"><div class="step-label">Î — ÎNȚELEGERE</div><p>Când spuneți mecanic oriunde — ați avut situații în care vehiculul s-a defectat în afara Iașului și aveați nevoie de service urgent?</p></div>
+      <div class="step"><div class="step-label">R — REFORMULARE</div><p>Deci dacă Iveco Daily ar avea service autorizat local rapid și suport 24/7 prin IVECO ON, argumentul legat de rețeaua de service ar dispărea?</p></div>
+      <div class="step"><div class="step-label">S — SOLUȚIE</div><p>Autopadova are service autorizat IVECO în Iași și Bacău. IVECO ON 5 ani gratuit: telematică, diagnosticare remotă, alertă avarie în timp real. Daily = 27% cotă de piață RO 2025 — cel mai vândut în Moldova.</p></div>
+    </div>
+    <div class="closing-box">
+      <div class="closing-label">🎯 CLOSING: Trial Close</div>
+      <div class="closing-script">"Dacă service-ul local și IVECO ON rezolvă îngrijorarea privind reparațiile, mai există alt motiv care vă oprește de la Daily?"</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== IVECO 2 ==================== -->
+<div class="card iveco" data-brand="iveco" data-text="scump crafter vw preț achiziție tco">
+  <div class="card-header" onclick="toggle(this)">
+    <div class="card-num">7</div>
+    <div class="card-title">
+      <h3>Daily e prea scump față de VW Crafter</h3>
+      <span class="tip-badge">Obiecție preț principal</span>
+    </div>
+    <div class="toggle-icon">▼</div>
+  </div>
+  <div class="card-body">
+    <div class="client-says">"Am făcut comparație — Crafter-ul cu aceeași capacitate e cu 3.000€ mai ieftin la achiziție."</div>
+    <div class="steps">
+      <div class="step"><div class="step-label">A — ACCEPTARE</div><p>Prețul de intrare e un criteriu real, nu îl ignor.</p></div>
+      <div class="step"><div class="step-label">Î — ÎNȚELEGERE</div><p>Comparația a inclus același nivel de dotare și motorizare? Și Crafter-ul vine cu ce pachet de garanție și service?</p></div>
+      <div class="step"><div class="step-label">R — REFORMULARE</div><p>Deci dacă TCO-ul Daily pe 4 ani ar fi mai mic decât Crafter-ul, diferența de 3.000€ la achiziție devine irelevantă — ba chiar profitabilă?</p></div>
+      <div class="step"><div class="step-label">S — SOLUȚIE</div><p>Daily MY24 vs. Crafter pe 4 ani / 60.000 km/an: garanție Autopadova 4 ani nelimitat km vs. 3 ani/120k km; mentenanță -50%. Economie documentată: 4.500-6.000€ per vehicul. Vă fac tabelul comparativ acum.</p></div>
+    </div>
+    <div class="closing-box">
+      <div class="closing-label">🎯 CLOSING: Bilanț</div>
+      <div class="closing-script">"La aceiași parametri — garanție, service, TCO — Daily câștigă cu 1.500-3.000€ pe vehicul. Asta e economia dvs. reală. Avem stoc disponibil. Mergem?"</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== IVECO 3 ==================== -->
+<div class="card iveco" data-brand="iveco" data-text="buget lichiditate toamnă amânare timp">
+  <div class="card-header" onclick="toggle(this)">
+    <div class="card-num">8</div>
+    <div class="card-title">
+      <h3>Nu am buget acum, poate la toamnă</h3>
+      <span class="tip-badge">Obiecție timing / buget</span>
+    </div>
+    <div class="toggle-icon">▼</div>
+  </div>
+  <div class="card-body">
+    <div class="client-says">"Acum nu am lichiditate. Poate la toamnă dacă merge afacerea bine."</div>
+    <div class="steps">
+      <div class="step"><div class="step-label">A — ACCEPTARE</div><p>Înțeleg — gestionarea fluxului de cash e prioritară în orice afacere.</p></div>
+      <div class="step"><div class="step-label">Î — ÎNȚELEGERE</div><p>Când spuneți toamnă, vă gândiți la octombrie-noiembrie? Și în perioada asta, cu ce vehicul continuați activitatea — cel actual are vreun risc de imobilizare?</p></div>
+      <div class="step"><div class="step-label">R — REFORMULARE</div><p>Deci dacă o rată lunară prin IFS (finanțare IVECO) ar fi mai mică decât costul de service al vehiculului actual plus riscul imobilizării, decizia se schimbă?</p></div>
+      <div class="step"><div class="step-label">S — SOLUȚIE</div><p>IFS România: finanțare avans 0%, rată de la 850 lei/lună pentru Daily 35S. Adesea mai ieftin decât service-ul lunar al unui vehicul vechi. Calculăm împreună în 10 minute.</p></div>
+    </div>
+    <div class="closing-box">
+      <div class="closing-label">🎯 CLOSING: Alternativă</div>
+      <div class="closing-script">"Preferați să calculăm rata cu avans 10% și perioadă mai scurtă, sau avans 0% și 60 de luni? Ambele opțiuni se potrivesc bugetului lunar curent."</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== IVECO 4 ==================== -->
+<div class="card iveco" data-brand="iveco" data-text="asociat soție co-decizie consultare partener">
+  <div class="card-header" onclick="toggle(this)">
+    <div class="card-num">9</div>
+    <div class="card-title">
+      <h3>Trebuie să mă consult cu asociatul / soția</h3>
+      <span class="tip-badge">Decizie multiplu decidenți</span>
+    </div>
+    <div class="toggle-icon">▼</div>
+  </div>
+  <div class="card-body">
+    <div class="client-says">"E o decizie importantă, trebuie să discut cu asociatul meu. El e cel care se ocupă de finanțe."</div>
+    <div class="steps">
+      <div class="step"><div class="step-label">A — ACCEPTARE</div><p>Firesc — deciziile mari se iau împreună în afaceri solide.</p></div>
+      <div class="step"><div class="step-label">Î — ÎNȚELEGERE</div><p>Dacă eu vă pregătesc o ofertă scrisă completă cu TCO comparativ pe care să o prezentați asociatului dvs., ce obiecție credeți că ar ridica el primul?</p></div>
+      <div class="step"><div class="step-label">R — REFORMULARE</div><p>Deci dacă asociatul dvs. ar vedea că Daily costă mai puțin pe total în 4 ani față de alternativa actuală, decizia ar fi simplă pentru amândoi?</p></div>
+      <div class="step"><div class="step-label">S — SOLUȚIE</div><p>Vă pregătesc o prezentare de 1 pagină cu: prețul vehiculului, rata lunară, economie service 50%, garanție 5 ani — totul documentat. Pot participa și eu la întâlnirea cu asociatul dvs. — în persoană sau online.</p></div>
+    </div>
+    <div class="closing-box">
+      <div class="closing-label">🎯 CLOSING: Direct</div>
+      <div class="closing-script">"Când putem fixa întâlnirea cu asociatul dvs.? Marți sau joi — care e mai convenabil?"</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== IVECO 5 ==================== -->
+<div class="card iveco" data-brand="iveco" data-text="imobilizare service flotă pana defecțiuni">
+  <div class="card-header" onclick="toggle(this)">
+    <div class="card-num">10</div>
+    <div class="card-title">
+      <h3>Am prea multe vehicule în service, mă tem de imobilizări</h3>
+      <span class="tip-badge">Experiență negativă / frică de service</span>
+    </div>
+    <div class="toggle-icon">▼</div>
+  </div>
+  <div class="card-body">
+    <div class="client-says">"Am acum 3 mașini și una e mereu în service. Nu vreau o a patra problemă."</div>
+    <div class="steps">
+      <div class="step"><div class="step-label">A — ACCEPTARE</div><p>O mașină în service înseamnă bani pierduți zilnic — înțeleg perfect frustrarea.</p></div>
+      <div class="step"><div class="step-label">Î — ÎNȚELEGERE</div><p>Cele 3 vehicule actuale sunt ce marcă și vechime? Problema e frecvența defecțiunilor sau lipsa unui service rapid în zonă?</p></div>
+      <div class="step"><div class="step-label">R — REFORMULARE</div><p>Deci dacă Daily MY24 cu garanție 5 ani și service autorizat Autopadova în Iași ar reduce drastic imobilizările față de flota dvs. actuală, îl vedeți ca pe o soluție, nu o problemă în plus?</p></div>
+      <div class="step"><div class="step-label">S — SOLUȚIE</div><p>Daily MY24: cel mai mic indice de defecțiuni din segment la vehiculele &lt;2 ani. Garanție 5 ani = orice defecțiune remediată GRATUIT. IVECO ON: diagnosticare predictivă — prinde problema înainte de pană. Service Autopadova Iași: termen mediu 24-48h.</p></div>
+    </div>
+    <div class="closing-box">
+      <div class="closing-label">🎯 CLOSING: Vizualizare</div>
+      <div class="closing-script">"Imaginați-vă flota dvs. cu un Daily care merge 5 ani fără o singură factură de service neașteptată. Asta e exact ce oferim. Facem primul pas cu acest vehicul?"</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== IVECO 6 ==================== -->
+<div class="card iveco" data-brand="iveco" data-text="garanție faliment dealer risc siguranță">
+  <div class="card-header" onclick="toggle(this)">
+    <div class="card-num">11</div>
+    <div class="card-title">
+      <h3>Teamă că Autopadova poate da faliment</h3>
+      <span class="tip-badge">Obiecție risc dealer</span>
+    </div>
+    <div class="toggle-icon">▼</div>
+  </div>
+  <div class="card-body">
+    <div class="client-says">"Garanția 5 ani sună bine, dar dacă Autopadova dă faliment în 3 ani, ce se întâmplă?"</div>
+    <div class="steps">
+      <div class="step"><div class="step-label">A — ACCEPTARE</div><p>O întrebare corectă — garanția fără un dealer solid nu valorează nimic.</p></div>
+      <div class="step"><div class="step-label">Î — ÎNȚELEGERE</div><p>V-ați mai confruntat cu o situație similară cu alt dealer? Sau e o precauție generală?</p></div>
+      <div class="step"><div class="step-label">R — REFORMULARE</div><p>Deci dacă vă demonstrez că garanția IVECO e garantată de producător, nu doar de dealer, și că Autopadova există de peste 25 de ani pe piața din Moldova, precauția dvs. e acoperită?</p></div>
+      <div class="step"><div class="step-label">S — SOLUȚIE</div><p>Garanția extinsă e emisă de IVECO Financial Services — producătorul însuși, nu de dealer. Dacă un dealer dispare, garanția continuă prin rețeaua națională IVECO. Autopadova / ROMIL e prezentă în Iași și Bacău de peste 25 de ani.</p></div>
+    </div>
+    <div class="closing-box">
+      <div class="closing-label">🎯 CLOSING: Bilanț</div>
+      <div class="closing-script">"Garanție de la producător, dealer cu 25 ani de activitate, service local — toate riscurile sunt acoperite. Ce altceva ar trebui să știți înainte de a merge înainte?"</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== IVECO 7 ==================== -->
+<div class="card iveco" data-brand="iveco" data-text="motor mare supradimensionat urban consum configurație">
+  <div class="card-header" onclick="toggle(this)">
+    <div class="card-num">12</div>
+    <div class="card-title">
+      <h3>Daily are motor prea mare pentru nevoile mele</h3>
+      <span class="tip-badge">Obiecție configurație</span>
+    </div>
+    <div class="toggle-icon">▼</div>
+  </div>
+  <div class="card-body">
+    <div class="client-says">"Eu livrez în oraș, nu am nevoie de motor atât de puternic. Mi se pare că plătesc prea mult pentru ce folosesc."</div>
+    <div class="steps">
+      <div class="step"><div class="step-label">A — ACCEPTARE</div><p>Corect să optimizezi vehiculul pentru misiunea reală — nu ai de ce să plătești mai mult decât ai nevoie.</p></div>
+      <div class="step"><div class="step-label">Î — ÎNȚELEGERE</div><p>Ce greutate totală planificați să transportați și câți km faceți în oraș pe zi? Aveți și ieșiri pe autostradă sau e exclusiv urban?</p></div>
+      <div class="step"><div class="step-label">R — REFORMULARE</div><p>Deci dacă vă configurez un Daily 35S cu motorizarea F1A 140 CP — cel mai eficient la consum urban — care e exact ce aveți nevoie fără supraconsum, problema dispare?</p></div>
+      <div class="step"><div class="step-label">S — SOLUȚIE</div><p>Daily 35S cu F1A 140 CP: consum urban 7.2l/100km, cel mai mic din segment. Nu plătiți extra pentru putere neutilizată. Gama modulară Daily permite upgrade rapid la 40S sau 50S fără să schimbați contractul de service.</p></div>
+    </div>
+    <div class="closing-box">
+      <div class="closing-label">🎯 CLOSING: Alternativă</div>
+      <div class="closing-script">"Configurăm Daily 35S cu F1A 140 CP — economic și exact pe nevoile dvs. — sau preferați 35S cu 160 CP pentru flexibilitate viitoare? Ambele sunt din stoc."</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== IVECO 8 ==================== -->
+<div class="card iveco" data-brand="iveco" data-text="test drive condus probă vehicul încercare">
+  <div class="card-header" onclick="toggle(this)">
+    <div class="card-num">13</div>
+    <div class="card-title">
+      <h3>Clientul vrea test drive înainte de orice angajament</h3>
+      <span class="tip-badge">Cerere test drive</span>
+    </div>
+    <div class="toggle-icon">▼</div>
+  </div>
+  <div class="card-body">
+    <div class="client-says">"Nu cumpăr niciodată un vehicul fără să îl conduc primul. Vreau test drive, după mai discutăm."</div>
+    <div class="steps">
+      <div class="step"><div class="step-label">A — ACCEPTARE</div><p>Excelentă decizie — un vehicul comercial trebuie simțit la volan înainte de orice semnătură.</p></div>
+      <div class="step"><div class="step-label">Î — ÎNȚELEGERE</div><p>Câte zile ați vrea să îl testați și în ce condiții — livrări urbane, autostradă, sau ambele? Și e pentru dvs. sau îl va conduce șoferul?</p></div>
+      <div class="step"><div class="step-label">R — REFORMULARE</div><p>Deci dacă după test drive vehiculul satisface așteptările dvs. de confort și performanță, sunteți pregătit să mergem direct la ofertă și livrare?</p></div>
+      <div class="step"><div class="step-label">S — SOLUȚIE</div><p>Organizăm test drive mâine sau poimâine direct din stocul Autopadova Iași — vehicul disponibil, fără programare complicată. Puteți testa pe ruta dvs. reală de lucru, nu pe circuit.</p></div>
+    </div>
+    <div class="closing-box">
+      <div class="closing-label">🎯 CLOSING: Trial Close + Urgență</div>
+      <div class="closing-script">"Dacă testul de mâine confirmă ce v-am prezentat, semnăm săptămâna aceasta — vehiculul e din stoc și prețul de azi e valabil 7 zile. Fixăm testul pentru mâine la 10:00 sau 14:00?"</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== IVECO 9 ==================== -->
+<div class="card iveco" data-brand="iveco" data-text="discount reducere concurență alt dealer ofertă mai bună">
+  <div class="card-header" onclick="toggle(this)">
+    <div class="card-num">14</div>
+    <div class="card-title">
+      <h3>Concurența a oferit 3.000€ discount mai mult</h3>
+      <span class="tip-badge">Presiune discount / negociere</span>
+    </div>
+    <div class="toggle-icon">▼</div>
+  </div>
+  <div class="card-body">
+    <div class="client-says">"Am ofertă de la alt dealer IVECO cu 3.000€ reducere față de prețul vostru. Puteți egala?"</div>
+    <div class="steps">
+      <div class="step"><div class="step-label">A — ACCEPTARE</div><p>Un discount real de 3.000€ e semnificativ și înțeleg că îl luați în serios.</p></div>
+      <div class="step"><div class="step-label">Î — ÎNȚELEGERE</div><p>Oferta aceea include și pachetul service Autopadova — garanție 5 ani, mentenanță -50%? Sau e reducere doar la vehicul?</p></div>
+      <div class="step"><div class="step-label">R — REFORMULARE</div><p>Deci dacă pachetul nostru complet — discount echivalent prin economie service + garanție + suport local — depășește valoric acea ofertă de 3.000€, preferați să rămâneți cu Autopadova?</p></div>
+      <div class="step"><div class="step-label">S — SOLUȚIE</div><p>Nu coborâm artificial prețul vehiculului — în schimb, pachetul Autopadova adaugă 3.500-5.000€ valoare documentată pe durata contractului. Suntem mai avantajoși total, nu la prima linie a ofertei. Vă fac calculul în scris.</p></div>
+    </div>
+    <div class="closing-box">
+      <div class="closing-label">🎯 CLOSING: Bilanț</div>
+      <div class="closing-script">"La total valoare primită — nu la prima linie de preț — Autopadova câștigă cu minimum 500-2.000€ față de acea ofertă. Aveți calculul în față. Mergem înainte cu noi?"</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== IVECO 10 ==================== -->
+<div class="card iveco" data-brand="iveco" data-text="flotă 20 vehicule stoc livrare termen fleet">
+  <div class="card-header" onclick="toggle(this)">
+    <div class="card-num">15</div>
+    <div class="card-title">
+      <h3>Client fleet — îngrijorat de disponibilitatea stocului pentru 20 vehicule</h3>
+      <span class="tip-badge">Cerere flotă mare / livrare</span>
+    </div>
+    <div class="toggle-icon">▼</div>
+  </div>
+  <div class="card-body">
+    <div class="client-says">"Am nevoie de 20 de Daily-uri în maxim 60 de zile. Nu vreau să pierd timp dacă nu aveți stoc."</div>
+    <div class="steps">
+      <div class="step"><div class="step-label">A — ACCEPTARE</div><p>Înțeleg — pentru o flotă de 20 vehicule, termenul de livrare e la fel de important ca prețul.</p></div>
+      <div class="step"><div class="step-label">Î — ÎNȚELEGERE</div><p>Toate 20 sunt configurație identică sau aveți variante diferite — capacitate, caroserie, motorizare? Și sunt pentru Iași, Bacău sau distribuție națională?</p></div>
+      <div class="step"><div class="step-label">R — REFORMULARE</div><p>Deci dacă vă confirm disponibilitate pentru 20 vehicule în configurația dorită în termen de 45-60 zile, mergem la negocierea condițiilor fleet?</p></div>
+      <div class="step"><div class="step-label">S — SOLUȚIE</div><p>Autopadova are acces la stocul central IVECO România + comandă prioritară pentru fleet. Verificăm disponibilitatea exactă și vă confirmăm în 24h cu plan de livrare scris. Fleet 20+ vehicule: discount fleet, TCO dedicat, SLA service prioritar, manager de cont dedicat.</p></div>
+    </div>
+    <div class="closing-box">
+      <div class="closing-label">🎯 CLOSING: Direct</div>
+      <div class="closing-script">"Dați-mi configurația exactă — astăzi — și vă revin mâine dimineață cu confirmarea stocului și oferta fleet. Putem semna LOI săptămâna aceasta?"</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== IVECO 11 ==================== -->
+<div class="card iveco" data-brand="iveco" data-text="eDaily electric încărcare infrastructură wallbox">
+  <div class="card-header" onclick="toggle(this)">
+    <div class="card-num">16</div>
+    <div class="card-title">
+      <h3>Interesat de eDaily dar îngrijorat de infrastructura de încărcare</h3>
+      <span class="tip-badge">Obiecție electric / infrastructură</span>
+    </div>
+    <div class="toggle-icon">▼</div>
+  </div>
+  <div class="card-body">
+    <div class="client-says">"E-Daily mă interesează, dar nu știu unde îl încarc când sunt în deplasare. Nu am văzut mulți carcadori pentru camioane."</div>
+    <div class="steps">
+      <div class="step"><div class="step-label">A — ACCEPTARE</div><p>Infrastructura de încărcare e o preocupare legitimă — și nu ești singurul care o ridică.</p></div>
+      <div class="step"><div class="step-label">Î — ÎNȚELEGERE</div><p>Câți km are deplasarea tipică în afara bazei? Și aveți curent trifazat la sediu sau la depozit?</p></div>
+      <div class="step"><div class="step-label">R — REFORMULARE</div><p>Deci dacă eDaily acoperă 90% din rutele dvs. cu o încărcare nocturnă la sediu și vă ofer harta punctelor de încărcare disponibile pe coridoarele voastre, îngrijorarea dispare?</p></div>
+      <div class="step"><div class="step-label">S — SOLUȚIE</div><p>eDaily: autonomie reală 200-250 km. Încărcare overnight AC 11kW: 6-8 ore full. Autopadova asistă gratuit la instalarea wallbox-ului la sediu. Cost per km: 0,18 lei vs. 1,20 lei diesel — economie 85%. ROI investiție infrastructură: sub 18 luni.</p></div>
+    </div>
+    <div class="closing-box">
+      <div class="closing-label">🎯 CLOSING: Vizualizare</div>
+      <div class="closing-script">"Imaginați-vă că plecați în fiecare dimineață cu eDaily încărcat, fără stații, fără preț fluctuant — și salvați 30.000 lei pe an per vehicul. Facem un pilot cu 1-2 vehicule să validați în operațiunile dvs. reale?"</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== IVECO 12 ==================== -->
+<div class="card iveco" data-brand="iveco" data-text="șofer conduce crafter confort preferință influențator">
+  <div class="card-header" onclick="toggle(this)">
+    <div class="card-num">17</div>
+    <div class="card-title">
+      <h3>Șoferul preferă Crafter față de Daily</h3>
+      <span class="tip-badge">Influențator intern — șofer</span>
+    </div>
+    <div class="toggle-icon">▼</div>
+  </div>
+  <div class="card-body">
+    <div class="client-says">"Daily-ul e ok pentru mine ca proprietar, dar șoferul meu spune că Crafter-ul e mai confortabil și refuză să conducă Iveco."</div>
+    <div class="steps">
+      <div class="step"><div class="step-label">A — ACCEPTARE</div><p>Șoferul e cel care conduce 8 ore pe zi — preferința lui contează real în productivitate și retenție.</p></div>
+      <div class="step"><div class="step-label">Î — ÎNȚELEGERE</div><p>Șoferul a condus efectiv Daily MY24 sau bazează pe experiență cu generații mai vechi? Și care e reproșul concret — scaun, vizibilitate, zgomot, poziție de condus?</p></div>
+      <div class="step"><div class="step-label">R — REFORMULARE</div><p>Deci dacă șoferul dvs. ar testa Daily MY24 și ar confirma că e confortabil, decizia de achiziție e luată?</p></div>
+      <div class="step"><div class="step-label">S — SOLUȚIE</div><p>Daily MY24: scaun cu reglaje pe 12 axe, volan reglabil telescopic, spațiu pentru picioare superior față de Crafter L1. Zgomot interior redus cu 4dB față de generația anterioară. Organizăm test drive pentru șofer — pe ruta lui, cu condițiile lui.</p></div>
+    </div>
+    <div class="closing-box">
+      <div class="closing-label">🎯 CLOSING: Trial Close</div>
+      <div class="closing-script">"Organizăm test drive pentru șofer joi sau vineri? Dacă după test e convins, semnăm săptămâna viitoare."</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== IVECO 13 ==================== -->
+<div class="card iveco" data-brand="iveco" data-text="service independent contract refuza garanție mentenanță ieftin">
+  <div class="card-header" onclick="toggle(this)">
+    <div class="card-num">18</div>
+    <div class="card-title">
+      <h3>Clientul refuză contract service — vrea service independent</h3>
+      <span class="tip-badge">Obiecție contract service</span>
+    </div>
+    <div class="toggle-icon">▼</div>
+  </div>
+  <div class="card-body">
+    <div class="client-says">"Nu vreau pachet service obligatoriu. Prefer să mă duc la un service independent, e mai ieftin."</div>
+    <div class="steps">
+      <div class="step"><div class="step-label">A — ACCEPTARE</div><p>Înțeleg logica — flexibilitatea în service pare avantajoasă la prima vedere.</p></div>
+      <div class="step"><div class="step-label">Î — ÎNȚELEGERE</div><p>Service-ul independent v-a costat mai puțin în total față de dealer pe ultimii 2 ani, sau doar prețul per intervenție pare mai mic?</p></div>
+      <div class="step"><div class="step-label">R — REFORMULARE</div><p>Deci dacă vă demonstrez că pachetul service Autopadova la -50% față de tariful standard costă MAI PUȚIN decât service-ul independent și protejează garanția, decizia e simplă?</p></div>
+      <div class="step"><div class="step-label">S — SOLUȚIE</div><p>Pachetul mentenanță Autopadova: 120-150 lei/lună la 60.000 km/an. Service independent estimat: 180-250 lei/lună + risc anulare garanție. Pe 4 ani: diferență de 2.400-4.800 lei în favoarea pachetului Autopadova — plus garanția intactă.</p></div>
+    </div>
+    <div class="closing-box">
+      <div class="closing-label">🎯 CLOSING: Bilanț</div>
+      <div class="closing-script">"Pachetul nostru e mai ieftin decât service-ul independent și protejează garanția de 5 ani. Ambele avantaje sunt de partea dvs. Includem pachetul în ofertă?"</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== IVECO 14 ==================== -->
+<div class="card iveco" data-brand="iveco" data-text="experiență negativă probleme trecut vechiu greșeală">
+  <div class="card-header" onclick="toggle(this)">
+    <div class="card-num">19</div>
+    <div class="card-title">
+      <h3>Experiență negativă cu Iveco în trecut</h3>
+      <span class="tip-badge">Obiecție experiență negativă</span>
+    </div>
+    <div class="toggle-icon">▼</div>
+  </div>
+  <div class="card-body">
+    <div class="client-says">"Am avut un Daily acum 6 ani și am avut numai probleme. Nu vreau să repet greșeala."</div>
+    <div class="steps">
+      <div class="step"><div class="step-label">A — ACCEPTARE</div><p>O experiență negativă cu un vehicul comercial lasă urme — aveți tot dreptul să fiți precaut.</p></div>
+      <div class="step"><div class="step-label">Î — ÎNȚELEGERE</div><p>Ce probleme ați întâmpinat — mecanice, service slab, piese greu de găsit? Și care era generația vehiculului — 2018-2019?</p></div>
+      <div class="step"><div class="step-label">R — REFORMULARE</div><p>Deci dacă Daily MY24 este o generație complet diferită din punct de vedere tehnic față de ce ați condus, și garanția 5 ani Autopadova elimină orice risc financiar, considerați că merită o a doua șansă?</p></div>
+      <div class="step"><div class="step-label">S — SOLUȚIE</div><p>Daily MY24: arhitectura electronică și mecanică 80% redesenată față de generația 2017-2019. Motor F1C III: indice de fiabilitate clasa A (JD Power 2024). Cu garanție 5 ani — dacă apare o problemă, nu vă costă nimic. Riscul dvs. financiar este ZERO pe 5 ani.</p></div>
+    </div>
+    <div class="closing-box">
+      <div class="closing-label">🎯 CLOSING: Urgență + Direct</div>
+      <div class="closing-script">"Cu garanție 5 ani de la Autopadova, riscul dvs. este zero. Dacă ceva nu merge, remediem gratuit — fără discuție. Pe această bază, sunteți dispus să dați Daily MY24 o a doua șansă?"</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== IVECO 15 ==================== -->
+<div class="card iveco" data-brand="iveco" data-text="rată lunară mare finanțare leasing IFS scump">
+  <div class="card-header" onclick="toggle(this)">
+    <div class="card-num">20</div>
+    <div class="card-title">
+      <h3>Rata lunară e prea mare</h3>
+      <span class="tip-badge">Obiecție finanțare / rată</span>
+    </div>
+    <div class="toggle-icon">▼</div>
+  </div>
+  <div class="card-body">
+    <div class="client-says">"1.100 lei pe lună e prea mult pentru mine acum. Nu îmi permit."</div>
+    <div class="steps">
+      <div class="step"><div class="step-label">A — ACCEPTARE</div><p>Fluxul de cash lunar e o limitare reală și o înțeleg.</p></div>
+      <div class="step"><div class="step-label">Î — ÎNȚELEGERE</div><p>Ce rată lunară v-ar fi confortabilă? Și care e vechimea vehiculului actual — calculăm ce cheltuiți acum pe el per lună.</p></div>
+      <div class="step"><div class="step-label">R — REFORMULARE</div><p>Deci dacă structurăm finanțarea la 60 de luni cu avans minim și rata ajunge la 780-850 lei/lună, iar economia de service față de vehiculul actual e de 350-400 lei/lună, costul net lunar devine sub 500 lei — este acceptabil?</p></div>
+      <div class="step"><div class="step-label">S — SOLUȚIE</div><p>IFS România: 60 luni, avans 0-10%, valoare reziduală 15-20% care reduce rata semnificativ. La Daily 35S cu valoare reziduală 15%, rata scade de la 1.100 la ~820 lei/lună. Minus economia de service: cost net real sub 500 lei/lună.</p></div>
+    </div>
+    <div class="closing-box">
+      <div class="closing-label">🎯 CLOSING: Alternativă</div>
+      <div class="closing-script">"Calculăm cu avans 0% pe 60 luni sau cu avans 10% pe 48 luni? Amândouă rămân sub bugetul dvs. — aleg varianta cea mai avantajoasă pentru dvs."</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- #cards-container -->
+</div><!-- .main -->
+
+<footer>
+  Autopadova / ROMIL · Dealer autorizat IVECO, Fiat Professional, Jeep, Suzuki · Iași &amp; Bacău<br>
+  Metodologie: Shlomi Leibovitz — SalesMentor.co.il · Material confidențial intern · 2025
+</footer>
+
+<script>
+  function toggle(header) {
+    const card = header.closest('.card');
+    card.classList.toggle('open');
+  }
+
+  // Filter by brand
+  document.querySelectorAll('.badge').forEach(badge => {
+    badge.addEventListener('click', () => {
+      document.querySelectorAll('.badge').forEach(b => b.classList.remove('active'));
+      badge.classList.add('active');
+      const filter = badge.dataset.filter;
+      applyFilters();
+    });
+  });
+
+  function getActiveFilter() {
+    const active = document.querySelector('.badge.active');
+    return active ? active.dataset.filter : 'all';
+  }
+
+  function applyFilters() {
+    const filter = getActiveFilter();
+    const query = document.getElementById('search').value.toLowerCase().trim();
+
+    let visible = 0;
+    document.querySelectorAll('.card').forEach(card => {
+      const brandMatch = filter === 'all' || card.dataset.brand === filter;
+      const textMatch = !query || card.dataset.text.includes(query) ||
+        card.innerText.toLowerCase().includes(query);
+      if (brandMatch && textMatch) {
+        card.classList.remove('hidden');
+        visible++;
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+
+    // Show/hide section headers
+    ['fiat', 'iveco'].forEach(brand => {
+      const header = document.querySelector(`.section-header.${brand}`);
+      const hasVisible = [...document.querySelectorAll(`.card.${brand}`)].some(c => !c.classList.contains('hidden'));
+      header.style.display = hasVisible ? '' : 'none';
+    });
+
+    document.getElementById('stats').textContent = `${visible} situații afișate`;
+  }
+
+  document.getElementById('search').addEventListener('input', applyFilters);
+
+  // Open first card by default
+  document.querySelector('.card').classList.add('open');
+</script>
+
+
+</body></html>
