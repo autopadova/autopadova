@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Comparativ furgonete electrice – piața din România</title>
+<style>
+  :root {
+    --navy: #1F3864;
+    --navy-light: #2E5395;
+    --border: #CCCCCC;
+    --muted: #595959;
+    --green: #E2EFDA;
+    --orange: #FCE4D6;
+    --gray: #F2F2F2;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #1A1A1A;
+    background: #FFFFFF;
+    margin: 0;
+    padding: 32px 40px 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  h1 {
+    color: var(--navy);
+    font-size: 26px;
+    margin: 0 0 6px;
+  }
+  .subtitle {
+    color: var(--muted);
+    font-style: italic;
+    font-size: 14px;
+    margin: 0 0 22px;
+    line-height: 1.5;
+  }
+  .table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 980px;
+    font-size: 13px;
+  }
+  thead th {
+    background: var(--navy);
+    color: #FFFFFF;
+    text-align: center;
+    padding: 10px 8px;
+    border: 1px solid var(--navy-light);
+    font-weight: bold;
+  }
+  tbody td {
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.4;
+  }
+  tbody td .main {
+    font-weight: bold;
+    display: block;
+  }
+  tbody td .sub {
+    display: block;
+    font-weight: normal;
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 2px;
+  }
+  tr.row-green td { background: var(--green); }
+  tr.row-gray td { background: var(--gray); }
+  tr.row-orange td { background: var(--orange); }
+  tr.row-white td { background: #FFFFFF; }
+
+  h2 {
+    color: var(--navy);
+    font-size: 18px;
+    margin: 32px 0 10px;
+    border-bottom: 2px solid var(--navy-light);
+    padding-bottom: 6px;
+  }
+  ul { margin: 0 0 16px; padding-left: 20px; }
+  li { margin-bottom: 8px; line-height: 1.5; }
+  .note {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .legend {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    margin: 14px 0 4px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .swatch { width: 12px; height: 12px; border-radius: 2px; display: inline-block; border: 1px solid var(--border); }
+  footer {
+    margin-top: 40px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+    color: #999;
+    font-size: 11px;
+    text-align: right;
+  }
+  @media print {
+    body { padding: 0; }
+    .table-wrap { border: none; }
+  }
+</style>
+</head>
+<body>
+
+  <h1>Comparativ furgonete electrice – piața din România</h1>
+  <p class="subtitle">IVECO eSuperJolly vs. IVECO eDaily vs. Mercedes-Benz eSprinter vs. Renault Master E-Tech Electric vs. Fiat E-Ducato — date colectate din surse publice (site-uri oficiale producător, presă auto de specialitate) în august 2026. Prețul eSuperJolly este cel practicat de Autopadova.</p>
+
+  <div class="legend">
+    <span><span class="swatch" style="background:var(--green)"></span> Autopadova – IVECO eSuperJolly</span>
+    <span><span class="swatch" style="background:#FFFFFF"></span> Autopadova – IVECO / Fiat Professional</span>
+    <span><span class="swatch" style="background:var(--gray)"></span> informativ (variantă grea)</span>
+    <span><span class="swatch" style="background:var(--orange)"></span> concurență</span>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Model</th>
+          <th>Preț pornire</th>
+          <th>Baterie</th>
+          <th>Autonomie WLTP</th>
+          <th>Motor (putere / cuplu)</th>
+          <th>MTMA</th>
+          <th>Sarcină utilă</th>
+          <th>Volum marfă</th>
+          <th>Încărcare DC rapidă</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="row-green">
+          <td><span class="main">IVECO eSuperJolly</span><span class="sub">(Autopadova – IVECO)</span></td>
+          <td><span class="main">de la 39.000 € + TVA</span><span class="sub">(preț Autopadova)</span></td>
+          <td>110 kWh</td>
+          <td>până la 420 km</td>
+          <td>200 kW<br>410 Nm</td>
+          <td>3,5 – 4,25 t</td>
+          <td>până la 1,4 t</td>
+          <td>până la 17 m³</td>
+          <td>100 km în 15 min</td>
+        </tr>
+        <tr class="row-white">
+          <td><span class="main">IVECO eDaily (Van)</span><span class="sub">(Autopadova – IVECO)</span></td>
+          <td><span class="main">preț la cerere</span><span class="sub">(de confirmat cu dealer)</span></td>
+          <td>37 – 74 kWh</td>
+          <td>150 – 280 km</td>
+          <td>până la 140 kW (188 CP)<br>400 Nm</td>
+          <td>3,5 t (5,0 t Cat. C)</td>
+          <td>până la 1.500 kg</td>
+          <td>7 – 17,2 m³</td>
+          <td>0–80% în ~50 min (50 kW)</td>
+        </tr>
+        <tr class="row-gray">
+          <td><span class="main">IVECO eDaily (Chassis greu)</span><span class="sub">twin wheel, informativ</span></td>
+          <td>preț la cerere</td>
+          <td>până la 148 kWh</td>
+          <td>300 – 400 km</td>
+          <td>până la 140 kW (188 CP)<br>400 Nm</td>
+          <td>până la 7,2 t</td>
+          <td>până la 4,6 t</td>
+          <td>≈ 20 m³</td>
+          <td>—</td>
+        </tr>
+        <tr class="row-orange">
+          <td><span class="main">Mercedes-Benz eSprinter</span><span class="sub">(concurență)</span></td>
+          <td><span class="main">de la 65.600 € cu TVA</span><span class="sub">(PRO 56 kWh); 95.600–99.200 € (113 kWh)</span></td>
+          <td>56 kWh (opt. 81 / 113 kWh)</td>
+          <td>200 km (56 kWh) – 440 km (113 kWh)</td>
+          <td>100 kW (136 CP)<br>opt. până la 150 kW</td>
+          <td>3,5 t</td>
+          <td>961 kg (config. de bază L2 PRO)</td>
+          <td>până la 14 m³</td>
+          <td>— (date incomplete public)</td>
+        </tr>
+        <tr class="row-orange">
+          <td><span class="main">Renault Master E-Tech Electric</span><span class="sub">(concurență)</span></td>
+          <td><span class="main">de la 64.510 € cu TVA (40 kWh)</span><span class="sub">69.270 € cu TVA (87 kWh)</span></td>
+          <td>40 kWh / 87 kWh</td>
+          <td>≈ 200 km (40 kWh) – 460 km (87 kWh)</td>
+          <td>96 kW<br>300 Nm</td>
+          <td>3,5 t</td>
+          <td>1.394 kg</td>
+          <td>10,8 – 17 m³ (după L/H)</td>
+          <td>252 km în 30 min (130 kW)</td>
+        </tr>
+        <tr class="row-white">
+          <td><span class="main">Fiat E-Ducato</span><span class="sub">(Autopadova – Fiat Professional)</span></td>
+          <td><span class="main">indisponibil oficial în RO</span><span class="sub">la data cercetării – de confirmat intern</span></td>
+          <td>47 kWh / 79 kWh</td>
+          <td>170–235 km (47 kWh) / 280–370 km (79 kWh)</td>
+          <td>90 kW (122 CP)<br>280 Nm</td>
+          <td>3,5 t</td>
+          <td>până la 1.950 kg</td>
+          <td>10 – 17 m³</td>
+          <td>100 km în 30 min (50 kW)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Observații cheie</h2>
+  <ul>
+    <li><strong>Preț:</strong> eSuperJolly (39.000 € + TVA) pornește cu peste 25.000 € sub eSprinter și Master E-Tech în configurația lor de bază (cu TVA inclus), ceea ce îl plasează clar cel mai accesibil din segment.</li>
+    <li><strong>Autonomie:</strong> eSuperJolly (420 km WLTP, baterie 110 kWh) depășește configurațiile de bază ale eSprinter (200 km / 56 kWh) și Master E-Tech (≈200 km / 40 kWh) și se apropie de variantele lor cu baterie mare (440–460 km), care costă 30.000–35.000 € în plus.</li>
+    <li><strong>Volum marfă:</strong> eSuperJolly oferă până la 17 m³, superior față de eSprinter (14 m³) și Master E-Tech (10,8–17 m³ după versiune).</li>
+    <li><strong>Fiat E-Ducato:</strong> la data cercetării nu am găsit confirmare că este comercializat oficial pe piața din România – de verificat intern cu Fiat Professional înainte de a-l include în oferta trimisă clientului.</li>
+    <li><strong>IVECO eDaily:</strong> prețul public nu este disponibil; specificațiile variază mult între versiunea Van (comparabilă ca segment cu eSuperJolly) și versiunea Chassis grea (până la 7,2 t) – inclusă aici doar informativ.</li>
+  </ul>
+
+  <h2>Notă privind sursele</h2>
+  <p class="note">Datele provin din site-urile oficiale (iveco.com, mercedes-benz.ro, business.renault.ro) și din presă auto (bestelectricvan.ro, evmarket.ro, ziuacargo.ro, autoexpert.ro). Unele prețuri pentru Master E-Tech pot proveni din campanii/promoții anterioare și este recomandat să fie reconfirmate înainte de trimiterea ofertei către client. Prețurile eSprinter și Master E-Tech sunt afișate cu TVA inclus, spre deosebire de prețul eSuperJolly (fără TVA) – comparația directă trebuie făcută pe aceeași bază.</p>
+
+  <footer>Autopadova – comparativ furgonete electrice</footer>
+
+</body>
+</html>
