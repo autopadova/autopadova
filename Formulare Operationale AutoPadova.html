@@ -1,0 +1,1770 @@
+<title>Formulare Operaționale AutoPadova</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --ink:#0E1A1F; --ink-2:#35484F; --ink-3:#66797F;
+  --paper:#EDF1F1; --sheet:#FFFFFF; --surface-2:#E9EFEF;
+  --line:#CBD6D6; --line-2:#9FB0B0; --rule:#2A3B41;
+  --accent:#B85F10; --accent-soft:#FAEDDE; --accent-ink:#8A4708;
+  --petrol:#0D3742; --petrol-ink:#DCEAEC;
+  --f-head:"IBM Plex Sans Condensed","Helvetica Neue",Arial,sans-serif;
+  --f-body:"IBM Plex Sans","Segoe UI",Roboto,Arial,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ink:#E8EFEF; --ink-2:#B4C4C6; --ink-3:#7C9095;
+    --paper:#0A1316; --sheet:#111E22; --surface-2:#18292E;
+    --line:#2A4249; --line-2:#3E5C65; --rule:#6E8B93;
+    --accent:#E49B4E; --accent-soft:#2A1C0E; --accent-ink:#F0BD80;
+    --petrol:#08242C; --petrol-ink:#CFE3E6;
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#E8EFEF; --ink-2:#B4C4C6; --ink-3:#7C9095;
+  --paper:#0A1316; --sheet:#111E22; --surface-2:#18292E;
+  --line:#2A4249; --line-2:#3E5C65; --rule:#6E8B93;
+  --accent:#E49B4E; --accent-soft:#2A1C0E; --accent-ink:#F0BD80;
+  --petrol:#08242C; --petrol-ink:#CFE3E6;
+}
+*{box-sizing:border-box}
+body{margin:0; background:var(--paper); color:var(--ink-2); font-family:var(--f-body); font-size:13px; line-height:1.5}
+h1,h2,h3,h4{font-family:var(--f-head); color:var(--ink); margin:0; line-height:1.15}
+a{color:var(--accent-ink)}
+:focus-visible{outline:2px solid var(--accent); outline-offset:1px}
+
+.topbar{position:sticky; top:env(safe-area-inset-top,0px); z-index:30; background:var(--petrol); color:var(--petrol-ink)}
+.topbar-in{max-width:1180px; margin:0 auto; padding:10px 16px; display:flex; gap:12px; align-items:center; flex-wrap:wrap}
+.brand{margin-right:auto; display:flex; gap:9px; align-items:baseline}
+.brand b{font-family:var(--f-head); font-size:17px; font-weight:700; color:#fff}
+.brand span{font-family:var(--f-mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:rgba(255,255,255,.6)}
+.btn{font-family:var(--f-head); font-weight:600; font-size:12.5px; background:rgba(255,255,255,.1); color:#fff; border:1px solid rgba(255,255,255,.18); border-radius:6px; padding:6px 11px; cursor:pointer}
+.btn:hover{background:rgba(255,255,255,.2)}
+select.btn{color:#fff; background:rgba(255,255,255,.12)}
+select.btn option{color:#000; background:#fff}
+
+.page{max-width:1180px; margin:0 auto; padding:0 16px 80px}
+
+.intro{padding:34px 0 10px; max-width:70ch}
+.intro h1{font-size:clamp(26px,5.5vw,38px); font-weight:700; letter-spacing:-.015em}
+.intro p{margin:12px 0 0; font-size:15px}
+.hint{margin-top:18px; border-left:3px solid var(--accent); background:var(--accent-soft); padding:11px 14px; border-radius:0 6px 6px 0; font-size:13px; color:var(--accent-ink)}
+.hint b{display:block; font-family:var(--f-mono); font-size:10px; letter-spacing:.13em; text-transform:uppercase; margin-bottom:4px}
+
+.index{margin:26px 0 8px}
+.index h2{font-family:var(--f-mono); font-size:11px; font-weight:500; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); margin-bottom:10px}
+.index ol{list-style:none; margin:0; padding:0; display:grid; gap:8px; grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.index a{display:flex; gap:9px; align-items:baseline; text-decoration:none; background:var(--sheet); border:1px solid var(--line); border-radius:6px; padding:8px 11px; color:var(--ink-2)}
+.index a:hover{border-color:var(--accent); color:var(--ink)}
+.index .c{font-family:var(--f-mono); font-size:11px; font-weight:600; color:var(--accent); flex:none}
+
+/* ---------- sheet ---------- */
+.sheet{
+  background:var(--sheet); border:1px solid var(--line); border-radius:8px;
+  padding:22px 22px 26px; margin:26px 0; scroll-margin-top:70px;
+  box-shadow:0 1px 2px rgba(14,26,31,.05);
+}
+.sheet-head{display:flex; gap:14px; align-items:flex-start; border-bottom:2px solid var(--rule); padding-bottom:11px; margin-bottom:16px; flex-wrap:wrap}
+.sheet-head .id{font-family:var(--f-mono); font-size:12px; font-weight:600; color:#fff; background:var(--rule); padding:4px 9px; border-radius:4px; flex:none}
+.sheet-head .t{flex:1 1 220px; min-width:0}
+.sheet-head h3{font-size:18px; font-weight:700}
+.sheet-head .meta{font-family:var(--f-mono); font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-3); margin-top:4px}
+.sheet-head .act{display:flex; gap:6px; flex:none}
+.mini{font-family:var(--f-head); font-weight:600; font-size:11.5px; background:var(--surface-2); color:var(--ink-2); border:1px solid var(--line); border-radius:5px; padding:5px 9px; cursor:pointer}
+.mini:hover{border-color:var(--accent); color:var(--accent-ink)}
+
+.sec{font-family:var(--f-mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent-ink); background:var(--accent-soft); padding:4px 8px; border-radius:3px; display:inline-block; margin:18px 0 9px}
+.sheet .sec:first-of-type{margin-top:4px}
+.note{font-size:11.5px; color:var(--ink-3); margin:8px 0}
+
+/* fields */
+.fields{display:grid; gap:10px 16px; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); margin:6px 0 2px}
+.fields.two{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.f{display:flex; flex-direction:column; gap:2px; min-width:0}
+.f.wide{grid-column:1/-1}
+.f label{font-family:var(--f-mono); font-size:9.5px; letter-spacing:.11em; text-transform:uppercase; color:var(--ink-3)}
+.fld{
+  font-family:var(--f-body); font-size:13px; color:var(--ink); background:transparent;
+  border:0; border-bottom:1px solid var(--line-2); padding:4px 2px; width:100%; min-width:0;
+}
+.fld:focus{outline:none; border-bottom-color:var(--accent); background:var(--accent-soft)}
+textarea.fld{border:1px solid var(--line-2); border-radius:4px; padding:6px 8px; resize:vertical; min-height:56px; line-height:1.5}
+
+/* tables */
+.scroller{overflow-x:auto; margin:8px 0; border:1px solid var(--line-2); border-radius:5px}
+table{border-collapse:collapse; width:100%; font-size:12px}
+th,td{border:1px solid var(--line); padding:6px 8px; text-align:left; vertical-align:top}
+thead th{background:var(--surface-2); font-family:var(--f-head); font-weight:600; font-size:10.5px; letter-spacing:.05em; text-transform:uppercase; color:var(--ink)}
+td.blank{height:26px}
+td.mono,th.mono{font-family:var(--f-mono); font-variant-numeric:tabular-nums}
+tbody th{background:var(--surface-2); font-weight:600; color:var(--ink); font-size:11.5px}
+.tight th,.tight td{padding:4px 6px}
+.ctr{text-align:center}
+.w-xs{width:38px} .w-s{width:64px} .w-m{width:110px} .w-l{width:150px}
+
+/* checks */
+.cbx{display:inline-flex; align-items:flex-start; gap:7px; font-size:12.5px; line-height:1.45}
+.cbx input{
+  appearance:none; -webkit-appearance:none; flex:none; width:13px; height:13px; margin:2px 0 0;
+  border:1.4px solid var(--line-2); border-radius:3px; background:var(--sheet); cursor:pointer;
+}
+.cbx input:checked{background:var(--accent); border-color:var(--accent)}
+.cbxlist{list-style:none; margin:6px 0; padding:0; display:grid; gap:5px}
+.cbxlist.two{grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:5px 18px}
+
+/* rating */
+.rate{display:flex; gap:5px; align-items:center}
+.rate span{font-family:var(--f-mono); font-size:11px; width:17px; height:17px; border:1px solid var(--line-2); border-radius:3px; display:inline-flex; align-items:center; justify-content:center; color:var(--ink-3)}
+
+/* signatures */
+.sign{display:grid; gap:14px 20px; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); margin-top:20px; padding-top:14px; border-top:1px solid var(--line)}
+.sign div{display:flex; flex-direction:column; gap:3px}
+.sign b{font-family:var(--f-mono); font-size:9.5px; letter-spacing:.11em; text-transform:uppercase; color:var(--ink-3); font-weight:500}
+.sign .line{border-bottom:1px solid var(--rule); height:30px}
+.sign small{font-size:10px; color:var(--ink-3)}
+
+footer.doc{margin-top:40px; border-top:2px solid var(--rule); padding-top:16px; font-size:11.5px; color:var(--ink-3)}
+footer.doc p{margin:4px 0}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important; animation:none!important}}
+
+@media print{
+  @page{size:A4 portrait; margin:12mm}
+  .topbar,.intro,.index,.act,footer.doc{display:none!important}
+  body{background:#fff; color:#000; font-size:10pt}
+  .page{padding:0; max-width:none}
+  .sheet{border:0; box-shadow:none; margin:0; padding:0; border-radius:0; page-break-after:always; break-after:page}
+  .sheet:last-of-type{page-break-after:auto}
+  .scroller{overflow:visible; border:0}
+  table,tr,td,th,.fields,.sign{break-inside:avoid}
+  .fld{border-bottom:1px solid #666}
+  textarea.fld{border:1px solid #666}
+  .cbx input{border:1px solid #333}
+  .sec{background:none; border:0; border-bottom:1px solid #000; border-radius:0; color:#000; display:block; padding:0 0 2px}
+  body.print-one .sheet:not(.printing){display:none!important}
+  body.print-one .sheet.printing{page-break-after:auto}
+}
+</style>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <div class="brand"><b>AutoPadova</b><span>Formulare operaționale · Ed. 1.0</span></div>
+    <select class="btn" id="jump" aria-label="Salt la formular"><option value="">Salt la formular…</option></select>
+    <button class="btn" id="printAll" type="button">Tipărește tot</button>
+  </div>
+</div>
+
+<div class="page">
+
+<div class="intro">
+  <h1>Formulare operaționale</h1>
+  <p>Cele 23 de formulare la care trimite <strong>Manualul de management și proceduri operaționale AutoPadova</strong>, în forma în care se completează. Fiecare formular poartă codul din Anexa A.1 a manualului și numărul capitolului care îl impune.</p>
+  <div class="hint">
+    <b>Mod de utilizare</b>
+    Poți completa direct pe ecran și tipări, sau poți tipări formularul gol și completa de mână. Butonul <em>Tipărește</em> de pe fiecare formular scoate o singură filă A4; <em>Tipărește tot</em> scoate întreg setul, câte un formular pe pagină. Datele introduse pe ecran nu se salvează — tipărește sau transcrie în sistem înainte de a închide pagina.
+  </div>
+</div>
+
+<div class="index">
+  <h2>Cuprins</h2>
+  <ol id="idx"></ol>
+</div>
+
+<!-- ============ F-01 ============ -->
+<section class="sheet" id="f01" data-code="F-01" data-name="Fișă de inspecție 5S showroom">
+  <div class="sheet-head">
+    <span class="id">F-01</span>
+    <div class="t">
+      <h3>Fișă de inspecție 5S showroom</h3>
+      <div class="meta">Manual D2.6 · Zilnic · Responsabil: manager vânzări</div>
+    </div>
+    <div class="act"><button class="mini" type="button" data-print="f01">Tipărește</button></div>
+  </div>
+
+  <div class="fields">
+    <div class="f"><label for="f01-loc">Locația</label><input class="fld" id="f01-loc" type="text"></div>
+    <div class="f"><label for="f01-data">Data</label><input class="fld" id="f01-data" type="text" placeholder="zz.ll.aaaa"></div>
+    <div class="f"><label for="f01-mom">Momentul inspecției</label><input class="fld" id="f01-mom" type="text" placeholder="deschidere / prânz / închidere"></div>
+    <div class="f"><label for="f01-pers">Verificat de</label><input class="fld" id="f01-pers" type="text"></div>
+  </div>
+
+  <span class="sec">Puncte de control</span>
+  <div class="scroller">
+    <table class="tight">
+      <thead><tr><th class="w-m">Zonă</th><th>Element verificat</th><th class="w-s ctr">Conform</th><th class="w-s ctr">Neconform</th><th class="w-l">Acțiune și termen</th></tr></thead>
+      <tbody>
+        <tr><th rowspan="4">Iluminat<br>și ambianță</th><td>Toate corpurile funcționale, niciunul care pâlpâie</td><td class="ctr"></td><td class="ctr"></td><td></td></tr>
+        <tr><td>Temperatură de culoare unitară, fără amestec de lumină rece și caldă</td><td class="ctr"></td><td class="ctr"></td><td></td></tr>
+        <tr><td>Fond muzical la volum corect, fără publicitate</td><td class="ctr"></td><td class="ctr"></td><td></td></tr>
+        <tr><td>Parfum ambiental funcțional; fără miros de mâncare, fum sau solvenți</td><td class="ctr"></td><td class="ctr"></td><td></td></tr>
+        <tr><th rowspan="5">Vehicule<br>expuse</th><td>Curate exterior și interior, fără amprente sau urme de apă</td><td class="ctr"></td><td class="ctr"></td><td></td></tr>
+        <tr><td>Orientare identică, jante și volan drepte, sigle orientate corect</td><td class="ctr"></td><td class="ctr"></td><td></td></tr>
+        <tr><td>Fișa de parametri prezentă, curată, corespunde vehiculului</td><td class="ctr"></td><td class="ctr"></td><td></td></tr>
+        <tr><td>Nivel baterie peste 30% la vehiculele electrificate</td><td class="ctr"></td><td class="ctr"></td><td></td></tr>
+        <tr><td>Uși și portbagaj descuiate; covorașe originale montate</td><td class="ctr"></td><td class="ctr"></td><td></td></tr>
+        <tr><th rowspan="3">Zone de<br>negociere</th><td>Mese eliberate și șterse, fără obiecte personale</td><td class="ctr"></td><td class="ctr"></td><td></td></tr>
+        <tr><td>Scaune în poziția inițială, fără scaune adăugate temporar</td><td class="ctr"></td><td class="ctr"></td><td></td></tr>
+        <tr><td>Birou închis: curat, echipat, fără documente ale clientului anterior</td><td class="ctr"></td><td class="ctr"></td><td></td></tr>
+        <tr><th rowspan="3">Ospitalitate</th><td>Espressor funcțional; cafea, ceai, apă în stoc</td><td class="ctr"></td><td class="ctr"></td><td></td></tr>
+        <tr><td>Gustări disponibile, ambalate individual, în termen</td><td class="ctr"></td><td class="ctr"></td><td></td></tr>
+        <tr><td>Veselă curată, suficientă, depozitată corect</td><td class="ctr"></td><td class="ctr"></td><td></td></tr>
+        <tr><th rowspan="3">Materiale<br>și pereți</th><td>Toate materialele în termen; cele expirate retrase</td><td class="ctr"></td><td class="ctr"></td><td></td></tr>
+        <tr><td>Postere drepte, nesuprapuse; fără prețuri afișate improvizat</td><td class="ctr"></td><td class="ctr"></td><td></td></tr>
+        <tr><td>Pereți curați, fără urme sau deteriorări</td><td class="ctr"></td><td class="ctr"></td><td></td></tr>
+        <tr><th rowspan="4">Curățenie<br>generală</th><td>Pardoseli și suprafețe vitrate fără urme</td><td class="ctr"></td><td class="ctr"></td><td></td></tr>
+        <tr><td>Grupuri sanitare curate și aprovizionate</td><td class="ctr"></td><td class="ctr"></td><td></td></tr>
+        <tr><td>Plante fără frunze uscate; ghivece curate</td><td class="ctr"></td><td class="ctr"></td><td></td></tr>
+        <tr><td>Exterior și parcarea clienților libere și curate</td><td class="ctr"></td><td class="ctr"></td><td></td></tr>
+        <tr><th rowspan="2">Personal</th><td>Ținută conformă, curată; ecuson purtat corect</td><td class="ctr"></td><td class="ctr"></td><td></td></tr>
+        <tr><td>Birouri eliberate; politica „birou fără dezordine” respectată</td><td class="ctr"></td><td class="ctr"></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="fields two">
+    <div class="f wide"><label for="f01-obs">Observații și neconformități care necesită escaladare</label><textarea class="fld" id="f01-obs" rows="3"></textarea></div>
+  </div>
+
+  <div class="sign">
+    <div><b>Verificat de</b><span class="line"></span><small>Nume și semnătură</small></div>
+    <div><b>Luat la cunoștință</b><span class="line"></span><small>Director vânzări</small></div>
+    <div><b>Data remedierii</b><span class="line"></span><small>Confirmare</small></div>
+  </div>
+</section>
+
+<!-- ============ F-02 ============ -->
+<section class="sheet" id="f02" data-code="F-02" data-name="Registrul materialelor promoționale">
+  <div class="sheet-head">
+    <span class="id">F-02</span>
+    <div class="t">
+      <h3>Registrul materialelor promoționale</h3>
+      <div class="meta">Manual D2.4 · Permanent · Responsabil: marketing</div>
+    </div>
+    <div class="act"><button class="mini" type="button" data-print="f02">Tipărește</button></div>
+  </div>
+
+  <div class="fields">
+    <div class="f"><label for="f02-loc">Locația</label><input class="fld" id="f02-loc" type="text"></div>
+    <div class="f"><label for="f02-per">Perioada</label><input class="fld" id="f02-per" type="text" placeholder="luna / trimestrul"></div>
+    <div class="f"><label for="f02-resp">Responsabil registru</label><input class="fld" id="f02-resp" type="text"></div>
+  </div>
+
+  <p class="note">Niciun material nu se montează fără completarea prealabilă a rândului corespunzător. Materialele expirate se retrag în maximum 24 de ore de la încheierea campaniei.</p>
+
+  <div class="scroller">
+    <table class="tight">
+      <thead><tr>
+        <th class="w-xs mono">Nr.</th><th>Denumirea materialului</th><th class="w-m">Marcă / campanie</th><th class="w-m">Zona de amplasare</th>
+        <th class="w-s mono">Data afișării</th><th class="w-s mono">Data retragerii</th><th class="w-m">Responsabil</th><th class="w-s ctr">Retras</th>
+      </tr></thead>
+      <tbody>
+        <tr><td class="mono">1</td><td class="blank"></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td class="mono">2</td><td class="blank"></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td class="mono">3</td><td class="blank"></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td class="mono">4</td><td class="blank"></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td class="mono">5</td><td class="blank"></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td class="mono">6</td><td class="blank"></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td class="mono">7</td><td class="blank"></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td class="mono">8</td><td class="blank"></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td class="mono">9</td><td class="blank"></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td class="mono">10</td><td class="blank"></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td class="mono">11</td><td class="blank"></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td class="mono">12</td><td class="blank"></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td class="mono">13</td><td class="blank"></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td class="mono">14</td><td class="blank"></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td class="mono">15</td><td class="blank"></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td class="mono">16</td><td class="blank"></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td class="mono">17</td><td class="blank"></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td class="mono">18</td><td class="blank"></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sign">
+    <div><b>Întocmit</b><span class="line"></span><small>Marketing</small></div>
+    <div><b>Verificat</b><span class="line"></span><small>Director vânzări</small></div>
+  </div>
+</section>
+
+<!-- ============ F-03 ============ -->
+<section class="sheet" id="f03" data-code="F-03" data-name="Fișă de post">
+  <div class="sheet-head">
+    <span class="id">F-03</span>
+    <div class="t">
+      <h3>Fișă de post</h3>
+      <div class="meta">Manual D3.1 · La angajare și la evaluare · Responsabil: șef de departament</div>
+    </div>
+    <div class="act"><button class="mini" type="button" data-print="f03">Tipărește</button></div>
+  </div>
+
+  <span class="sec">Identificarea postului</span>
+  <div class="fields">
+    <div class="f"><label for="f03-den">Denumirea postului</label><input class="fld" id="f03-den" type="text"></div>
+    <div class="f"><label for="f03-dep">Departamentul</label><input class="fld" id="f03-dep" type="text"></div>
+    <div class="f"><label for="f03-loc">Locația</label><input class="fld" id="f03-loc" type="text"></div>
+    <div class="f"><label for="f03-sup">Se subordonează</label><input class="fld" id="f03-sup" type="text"></div>
+    <div class="f"><label for="f03-sub">Are în subordine</label><input class="fld" id="f03-sub" type="text"></div>
+    <div class="f"><label for="f03-inloc">Este înlocuit de</label><input class="fld" id="f03-inloc" type="text"></div>
+  </div>
+  <div class="fields" style="margin-top:12px">
+    <div class="f wide"><label>Tipul funcției</label>
+      <ul class="cbxlist two" style="margin-top:4px">
+        <li><label class="cbx"><input type="checkbox" id="f03-t1"> <span><strong>Funcție-cheie</strong> — nu se cumulează, vacanță maximum 30 de zile</span></label></li>
+        <li><label class="cbx"><input type="checkbox" id="f03-t2"> <span><strong>Funcție certificată</strong> — necesită certificare validă de constructor</span></label></li>
+        <li><label class="cbx"><input type="checkbox" id="f03-t3"> <span><strong>Funcție operațională</strong> — poate fi ocupată prin cumul</span></label></li>
+      </ul>
+    </div>
+  </div>
+
+  <span class="sec">Scopul postului</span>
+  <textarea class="fld" id="f03-scop" rows="2" placeholder="O frază: de ce rezultat răspunde acest post"></textarea>
+
+  <span class="sec">Responsabilități principale</span>
+  <div class="scroller">
+    <table class="tight">
+      <thead><tr><th class="w-xs mono">Nr.</th><th>Responsabilitate</th><th class="w-l">Rezultat măsurabil / indicator</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">1</td><td class="blank"></td><td></td></tr>
+        <tr><td class="mono">2</td><td class="blank"></td><td></td></tr>
+        <tr><td class="mono">3</td><td class="blank"></td><td></td></tr>
+        <tr><td class="mono">4</td><td class="blank"></td><td></td></tr>
+        <tr><td class="mono">5</td><td class="blank"></td><td></td></tr>
+        <tr><td class="mono">6</td><td class="blank"></td><td></td></tr>
+        <tr><td class="mono">7</td><td class="blank"></td><td></td></tr>
+        <tr><td class="mono">8</td><td class="blank"></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <span class="sec">Cerințe de ocupare</span>
+  <div class="fields two">
+    <div class="f"><label for="f03-exp">Experiență necesară</label><textarea class="fld" id="f03-exp" rows="2"></textarea></div>
+    <div class="f"><label for="f03-comp">Competențe și cunoștințe</label><textarea class="fld" id="f03-comp" rows="2"></textarea></div>
+    <div class="f"><label for="f03-cert">Certificări obligatorii și termen de valabilitate</label><textarea class="fld" id="f03-cert" rows="2"></textarea></div>
+    <div class="f"><label for="f03-alte">Alte cerințe (permis, disponibilitate, deplasări)</label><textarea class="fld" id="f03-alte" rows="2"></textarea></div>
+  </div>
+
+  <span class="sec">Instruiri obligatorii înainte de preluarea postului</span>
+  <ul class="cbxlist two">
+    <li><label class="cbx"><input type="checkbox" id="f03-i1"> <span>Identitatea companiei și portofoliul de mărci</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f03-i2"> <span>Manualul de management și proceduri operaționale</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f03-i3"> <span>Procesul standard aplicabil (vânzare sau service)</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f03-i4"> <span>Standarde de etichetă și comunicare</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f03-i5"> <span>Instruire de produs pe mărcile deservite</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f03-i6"> <span>Securitatea muncii și protecția datelor</span></label></li>
+  </ul>
+
+  <div class="sign">
+    <div><b>Titularul postului</b><span class="line"></span><small>Nume, semnătură, data</small></div>
+    <div><b>Șef de departament</b><span class="line"></span><small>Nume, semnătură, data</small></div>
+    <div><b>Aprobat</b><span class="line"></span><small>Director general</small></div>
+  </div>
+</section>
+
+<!-- ============ F-04 ============ -->
+<section class="sheet" id="f04" data-code="F-04" data-name="Evidența instruirii">
+  <div class="sheet-head">
+    <span class="id">F-04</span>
+    <div class="t">
+      <h3>Formular de evidență a instruirii</h3>
+      <div class="meta">Manual D3.3–D3.4 · La fiecare sesiune · Responsabil: lector</div>
+    </div>
+    <div class="act"><button class="mini" type="button" data-print="f04">Tipărește</button></div>
+  </div>
+
+  <div class="fields">
+    <div class="f wide"><label for="f04-tema">Tema sesiunii</label><input class="fld" id="f04-tema" type="text"></div>
+    <div class="f"><label for="f04-data">Data</label><input class="fld" id="f04-data" type="text"></div>
+    <div class="f"><label for="f04-int">Interval orar</label><input class="fld" id="f04-int" type="text"></div>
+    <div class="f"><label for="f04-locat">Locația</label><input class="fld" id="f04-locat" type="text"></div>
+    <div class="f"><label for="f04-lect">Lector</label><input class="fld" id="f04-lect" type="text"></div>
+  </div>
+  <div class="fields" style="margin-top:10px">
+    <div class="f wide"><label>Tipul instruirii</label>
+      <ul class="cbxlist two" style="margin-top:4px">
+        <li><label class="cbx"><input type="checkbox" id="f04-a"> <span>Microinstruire de dimineață sau seară</span></label></li>
+        <li><label class="cbx"><input type="checkbox" id="f04-b"> <span>Instruirea angajaților noi</span></label></li>
+        <li><label class="cbx"><input type="checkbox" id="f04-c"> <span>Proiect tematic lunar</span></label></li>
+        <li><label class="cbx"><input type="checkbox" id="f04-d"> <span>Evaluare trimestrială</span></label></li>
+        <li><label class="cbx"><input type="checkbox" id="f04-e"> <span>Reinstruire</span></label></li>
+        <li><label class="cbx"><input type="checkbox" id="f04-f"> <span>Instruirea managerilor</span></label></li>
+        <li><label class="cbx"><input type="checkbox" id="f04-g"> <span>Instruire declanșată de eveniment</span></label></li>
+        <li><label class="cbx"><input type="checkbox" id="f04-h"> <span>Instruire de constructor</span></label></li>
+      </ul>
+    </div>
+  </div>
+
+  <span class="sec">Obiectivele sesiunii</span>
+  <textarea class="fld" id="f04-ob" rows="2"></textarea>
+
+  <span class="sec">Participanți</span>
+  <div class="scroller">
+    <table class="tight">
+      <thead><tr><th class="w-xs mono">Nr.</th><th>Nume și prenume</th><th class="w-m">Funcția</th><th class="w-l">Semnătură prezență</th><th class="w-s ctr">Rezultat evaluare</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">1</td><td class="blank"></td><td></td><td></td><td></td></tr>
+        <tr><td class="mono">2</td><td class="blank"></td><td></td><td></td><td></td></tr>
+        <tr><td class="mono">3</td><td class="blank"></td><td></td><td></td><td></td></tr>
+        <tr><td class="mono">4</td><td class="blank"></td><td></td><td></td><td></td></tr>
+        <tr><td class="mono">5</td><td class="blank"></td><td></td><td></td><td></td></tr>
+        <tr><td class="mono">6</td><td class="blank"></td><td></td><td></td><td></td></tr>
+        <tr><td class="mono">7</td><td class="blank"></td><td></td><td></td><td></td></tr>
+        <tr><td class="mono">8</td><td class="blank"></td><td></td><td></td><td></td></tr>
+        <tr><td class="mono">9</td><td class="blank"></td><td></td><td></td><td></td></tr>
+        <tr><td class="mono">10</td><td class="blank"></td><td></td><td></td><td></td></tr>
+        <tr><td class="mono">11</td><td class="blank"></td><td></td><td></td><td></td></tr>
+        <tr><td class="mono">12</td><td class="blank"></td><td></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <span class="sec">Puncte-cheie transmise și cerințe de aplicare</span>
+  <textarea class="fld" id="f04-pct" rows="3"></textarea>
+
+  <span class="sec">Materiale anexate</span>
+  <ul class="cbxlist two">
+    <li><label class="cbx"><input type="checkbox" id="f04-m1"> <span>Suport de curs arhivat</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f04-m2"> <span>Fotografii sau înregistrare de la sesiune</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f04-m3"> <span>Test aplicat, cu rezultate</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f04-m4"> <span>Feedbackul participanților colectat</span></label></li>
+  </ul>
+
+  <div class="sign">
+    <div><b>Lector</b><span class="line"></span><small>Nume și semnătură</small></div>
+    <div><b>Șef de departament</b><span class="line"></span><small>Nume și semnătură</small></div>
+    <div><b>Data următoarei sesiuni</b><span class="line"></span><small>Dacă este cazul</small></div>
+  </div>
+</section>
+
+<!-- ============ F-05 ============ -->
+<section class="sheet" id="f05" data-code="F-05" data-name="Evaluare practică">
+  <div class="sheet-head">
+    <span class="id">F-05</span>
+    <div class="t">
+      <h3>Formular de evaluare practică</h3>
+      <div class="meta">Manual D3.4 · Trimestrial și la autorizare · Responsabil: evaluator desemnat</div>
+    </div>
+    <div class="act"><button class="mini" type="button" data-print="f05">Tipărește</button></div>
+  </div>
+
+  <div class="fields">
+    <div class="f"><label for="f05-nume">Persoana evaluată</label><input class="fld" id="f05-nume" type="text"></div>
+    <div class="f"><label for="f05-func">Funcția</label><input class="fld" id="f05-func" type="text"></div>
+    <div class="f"><label for="f05-data">Data</label><input class="fld" id="f05-data" type="text"></div>
+    <div class="f"><label for="f05-eval">Evaluator</label><input class="fld" id="f05-eval" type="text"></div>
+  </div>
+  <div class="fields" style="margin-top:10px">
+    <div class="f wide"><label>Tipul probei</label>
+      <ul class="cbxlist two" style="margin-top:4px">
+        <li><label class="cbx"><input type="checkbox" id="f05-p1"> <span>Recepția independentă în service</span></label></li>
+        <li><label class="cbx"><input type="checkbox" id="f05-p2"> <span>Livrarea unui vehicul nou</span></label></li>
+        <li><label class="cbx"><input type="checkbox" id="f05-p3"> <span>Preluarea unui client de flotă</span></label></li>
+        <li><label class="cbx"><input type="checkbox" id="f05-p4"> <span>Evaluare trimestrială generală</span></label></li>
+      </ul>
+    </div>
+  </div>
+
+  <span class="sec">Grilă de evaluare — 1 insuficient · 5 excelent</span>
+  <div class="scroller">
+    <table class="tight">
+      <thead><tr><th>Criteriu</th><th class="w-xs ctr">1</th><th class="w-xs ctr">2</th><th class="w-xs ctr">3</th><th class="w-xs ctr">4</th><th class="w-xs ctr">5</th><th class="w-l">Observații</th></tr></thead>
+      <tbody>
+        <tr><td>Respectarea etapelor procesului standard</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>Corectitudinea informației transmise clientului</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>Standardizarea gesturilor și a formulărilor</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>Identificarea și confirmarea nevoii reale</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>Calitatea prezentării și demonstrației</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>Gestionarea obiecțiilor și a situațiilor neprevăzute</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>Respectarea termenelor din procedură</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>Completarea corectă a documentelor și a CRM</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>Ținută, aspect și conduită</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>Aplicarea regulilor de siguranță</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="fields">
+    <div class="f"><label for="f05-tot">Punctaj total (din 50)</label><input class="fld" id="f05-tot" type="text"></div>
+    <div class="f wide"><label>Rezultat</label>
+      <ul class="cbxlist two" style="margin-top:4px">
+        <li><label class="cbx"><input type="checkbox" id="f05-r1"> <span><strong>Admis</strong> — autorizat pentru activitatea evaluată</span></label></li>
+        <li><label class="cbx"><input type="checkbox" id="f05-r2"> <span><strong>Admis condiționat</strong> — cu plan de îmbunătățire</span></label></li>
+        <li><label class="cbx"><input type="checkbox" id="f05-r3"> <span><strong>Respins</strong> — instruire remedială și retestare</span></label></li>
+      </ul>
+    </div>
+  </div>
+
+  <span class="sec">Plan de îmbunătățire și termen de retestare</span>
+  <textarea class="fld" id="f05-plan" rows="3"></textarea>
+
+  <div class="sign">
+    <div><b>Evaluator</b><span class="line"></span><small>Nume și semnătură</small></div>
+    <div><b>Persoana evaluată</b><span class="line"></span><small>Luat la cunoștință</small></div>
+    <div><b>Data retestării</b><span class="line"></span><small>Dacă este cazul</small></div>
+  </div>
+</section>
+
+<!-- ============ F-06 ============ -->
+<section class="sheet" id="f06" data-code="F-06" data-name="Fișă de ofertă">
+  <div class="sheet-head">
+    <span class="id">F-06</span>
+    <div class="t">
+      <h3>Fișă de ofertă</h3>
+      <div class="meta">Manual D4.7 · PS-07 · Transmisă în maximum 24 h de la discuție</div>
+    </div>
+    <div class="act"><button class="mini" type="button" data-print="f06">Tipărește</button></div>
+  </div>
+
+  <div class="fields">
+    <div class="f"><label for="f06-nr">Număr ofertă</label><input class="fld" id="f06-nr" type="text"></div>
+    <div class="f"><label for="f06-data">Data emiterii</label><input class="fld" id="f06-data" type="text"></div>
+    <div class="f"><label for="f06-val">Valabilă până la</label><input class="fld" id="f06-val" type="text"></div>
+    <div class="f"><label for="f06-cons">Consultant</label><input class="fld" id="f06-cons" type="text"></div>
+  </div>
+
+  <span class="sec">Client</span>
+  <div class="fields">
+    <div class="f"><label for="f06-cl">Nume / denumire</label><input class="fld" id="f06-cl" type="text"></div>
+    <div class="f"><label for="f06-cui">CUI / CNP</label><input class="fld" id="f06-cui" type="text"></div>
+    <div class="f"><label for="f06-tel">Telefon</label><input class="fld" id="f06-tel" type="text"></div>
+    <div class="f"><label for="f06-mail">E-mail</label><input class="fld" id="f06-mail" type="text"></div>
+  </div>
+
+  <span class="sec">Vehiculul ofertat</span>
+  <div class="fields">
+    <div class="f"><label for="f06-marca">Marca</label><input class="fld" id="f06-marca" type="text"></div>
+    <div class="f"><label for="f06-model">Model și versiune</label><input class="fld" id="f06-model" type="text"></div>
+    <div class="f"><label for="f06-mot">Motorizare / transmisie</label><input class="fld" id="f06-mot" type="text"></div>
+    <div class="f"><label for="f06-cul">Culoare exterioară / interior</label><input class="fld" id="f06-cul" type="text"></div>
+    <div class="f"><label for="f06-vin">VIN sau poziție de stoc</label><input class="fld" id="f06-vin" type="text"></div>
+    <div class="f"><label for="f06-disp">Disponibilitate / termen de livrare</label><input class="fld" id="f06-disp" type="text"></div>
+  </div>
+
+  <span class="sec">Structura prețului</span>
+  <div class="scroller">
+    <table class="tight">
+      <thead><tr><th>Element</th><th class="w-m ctr mono">Valoare fără TVA</th><th class="w-m ctr mono">Valoare cu TVA</th></tr></thead>
+      <tbody>
+        <tr><td>Preț de listă al vehiculului</td><td></td><td></td></tr>
+        <tr><td>Dotări opționale (detaliate mai jos)</td><td></td><td></td></tr>
+        <tr><td>Accesorii și produse adiționale</td><td></td><td></td></tr>
+        <tr><td>Servicii (înmatriculare, transport, altele)</td><td></td><td></td></tr>
+        <tr><td>Reducere comercială acordată</td><td></td><td></td></tr>
+        <tr><td>Bonusuri și campanii aplicate</td><td></td><td></td></tr>
+        <tr><th>Preț final ofertat</th><td></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="fields" style="margin-top:8px">
+    <div class="f wide"><label for="f06-dot">Dotări opționale incluse</label><textarea class="fld" id="f06-dot" rows="2"></textarea></div>
+  </div>
+
+  <span class="sec">Variante de plată</span>
+  <div class="scroller">
+    <table class="tight">
+      <thead><tr><th class="w-m">Variantă</th><th class="w-s mono">Avans</th><th class="w-s mono">Perioadă</th><th class="w-s mono">Rată lunară</th><th class="w-s mono">Val. reziduală</th><th>Condiții și observații</th></tr></thead>
+      <tbody>
+        <tr><th>Plată integrală</th><td>—</td><td>—</td><td>—</td><td>—</td><td></td></tr>
+        <tr><th>Credit</th><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><th>Leasing financiar</th><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><th>Leasing operațional</th><td></td><td></td><td></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <span class="sec">Asigurări și servicii incluse</span>
+  <ul class="cbxlist two">
+    <li><label class="cbx"><input type="checkbox" id="f06-s1"> <span>RCA — perioadă și furnizor: ______________</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f06-s2"> <span>CASCO — perioadă și furnizor: ______________</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f06-s3"> <span>Garanție extinsă — durată: ______________</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f06-s4"> <span>Pachet de întreținere — durată / km: ______________</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f06-s5"> <span>Preluarea vehiculului actual — valoare estimată: ______________</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f06-s6"> <span>Asistență rutieră — durată: ______________</span></label></li>
+  </ul>
+
+  <p class="note">Prețurile includ toate costurile aferente livrării în configurația descrisă. Nu există costuri suplimentare nemenționate în prezenta ofertă. Oferta este valabilă în limita stocului disponibil la data emiterii.</p>
+
+  <div class="sign">
+    <div><b>Consultant vânzări</b><span class="line"></span><small>Nume și semnătură</small></div>
+    <div><b>Aprobare discount</b><span class="line"></span><small>Dacă depășește limita standard — vezi F-23</small></div>
+    <div><b>Client</b><span class="line"></span><small>Am primit și am luat la cunoștință</small></div>
+  </div>
+</section>
+
+<!-- ============ F-07 ============ -->
+<section class="sheet" id="f07" data-code="F-07" data-name="Listă de verificare pentru livrare">
+  <div class="sheet-head">
+    <span class="id">F-07</span>
+    <div class="t">
+      <h3>Listă de verificare pentru livrarea vehiculului</h3>
+      <div class="meta">Manual D4.8 · PS-08 · Responsabil: responsabil livrări</div>
+    </div>
+    <div class="act"><button class="mini" type="button" data-print="f07">Tipărește</button></div>
+  </div>
+
+  <div class="fields">
+    <div class="f"><label for="f07-cl">Client</label><input class="fld" id="f07-cl" type="text"></div>
+    <div class="f"><label for="f07-veh">Vehicul</label><input class="fld" id="f07-veh" type="text"></div>
+    <div class="f"><label for="f07-vin">VIN</label><input class="fld" id="f07-vin" type="text"></div>
+    <div class="f"><label for="f07-nr">Nr. înmatriculare</label><input class="fld" id="f07-nr" type="text"></div>
+    <div class="f"><label for="f07-data">Data livrării</label><input class="fld" id="f07-data" type="text"></div>
+    <div class="f"><label for="f07-km">Km la livrare</label><input class="fld" id="f07-km" type="text"></div>
+  </div>
+
+  <span class="sec">Pregătirea tehnică</span>
+  <ul class="cbxlist two">
+    <li><label class="cbx"><input type="checkbox" id="f07-a1"> <span>PDI finalizat, semnat și arhivat</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f07-a2"> <span>Fără coduri de eroare în sistem</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f07-a3"> <span>Versiune software conformă</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f07-a4"> <span>Sisteme de siguranță verificate</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f07-a5"> <span>Presiune pneuri și sistem de frânare verificate</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f07-a6"> <span>Nivel combustibil / încărcare baterie asigurat</span></label></li>
+  </ul>
+
+  <span class="sec">Starea vehiculului</span>
+  <ul class="cbxlist two">
+    <li><label class="cbx"><input type="checkbox" id="f07-b1"> <span>Curat exterior și interior, fără urme de transport</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f07-b2"> <span>Folii și protecții de transport îndepărtate</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f07-b3"> <span>Accesoriile comandate montate și funcționale</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f07-b4"> <span>Covorașe originale montate</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f07-b5"> <span>Trusă medicală, triunghiuri, vestă, stingător</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f07-b6"> <span>Roată de rezervă sau kit de reparație prezent</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f07-b7"> <span>Două chei predate și verificate</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f07-b8"> <span>Cablu de încărcare și adaptoare (vehicule electrificate)</span></label></li>
+  </ul>
+
+  <span class="sec">Documente predate</span>
+  <ul class="cbxlist two">
+    <li><label class="cbx"><input type="checkbox" id="f07-c1"> <span>Factura și dovada plății sau documentul de finanțare</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f07-c2"> <span>Certificat de conformitate</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f07-c3"> <span>Carte de identitate a vehiculului</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f07-c4"> <span>Certificat de înmatriculare (sau situația procedurii)</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f07-c5"> <span>Poliță RCA și, dacă este cazul, CASCO</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f07-c6"> <span>Carnet de garanție și întreținere</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f07-c7"> <span>Manualul de utilizare</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f07-c8"> <span>Certificate pentru accesorii și echipamente montate</span></label></li>
+  </ul>
+
+  <span class="sec">Explicații oferite clientului</span>
+  <ul class="cbxlist two">
+    <li><label class="cbx"><input type="checkbox" id="f07-d1"> <span>Funcțiile principale ale vehiculului, demonstrate practic</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f07-d2"> <span>Aplicația mărcii instalată, cont creat, vehicul asociat</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f07-d3"> <span>Încărcare, încărcare programată, consum (vehicule electrificate)</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f07-d4"> <span>Condițiile de garanție și ce o poate anula</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f07-d5"> <span>Planul de revizii: primul termen și kilometraj</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f07-d6"> <span>Programarea în service și asistența rutieră</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f07-d7"> <span>Costurile explicate element cu element, chitanțe predate</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f07-d8"> <span>Prezentarea consultantului de service și a zonei de recepție</span></label></li>
+  </ul>
+
+  <span class="sec">Ceremonia de livrare</span>
+  <ul class="cbxlist two">
+    <li><label class="cbx"><input type="checkbox" id="f07-e1"> <span>Zona de livrare amenajată</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f07-e2"> <span>Cutie-cadou și flori pregătite</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f07-e3"> <span>Fotografie realizată — cu acordul clientului</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f07-e4"> <span>Acord scris pentru publicarea materialelor foto/video</span></label></li>
+  </ul>
+
+  <div class="fields two" style="margin-top:12px">
+    <div class="f wide"><label for="f07-obs">Observații și aspecte rămase de rezolvat, cu termen</label><textarea class="fld" id="f07-obs" rows="2"></textarea></div>
+  </div>
+
+  <div class="sign">
+    <div><b>Responsabil livrări</b><span class="line"></span><small>Nume și semnătură</small></div>
+    <div><b>Consultant vânzări</b><span class="line"></span><small>Nume și semnătură</small></div>
+    <div><b>Client</b><span class="line"></span><small>Am primit vehiculul și documentele de mai sus</small></div>
+  </div>
+</section>
+
+<!-- ============ F-08 ============ -->
+<section class="sheet" id="f08" data-code="F-08" data-name="Fișa de misiune de transport">
+  <div class="sheet-head">
+    <span class="id">F-08</span>
+    <div class="t">
+      <h3>Fișa de misiune de transport</h3>
+      <div class="meta">Manual D5.3 · Înaintea oricărei oferte de vehicul comercial</div>
+    </div>
+    <div class="act"><button class="mini" type="button" data-print="f08">Tipărește</button></div>
+  </div>
+
+  <div class="fields">
+    <div class="f"><label for="f08-fir">Firma</label><input class="fld" id="f08-fir" type="text"></div>
+    <div class="f"><label for="f08-cui">CUI</label><input class="fld" id="f08-cui" type="text"></div>
+    <div class="f"><label for="f08-pers">Persoana de contact și funcția</label><input class="fld" id="f08-pers" type="text"></div>
+    <div class="f"><label for="f08-tel">Telefon / e-mail</label><input class="fld" id="f08-tel" type="text"></div>
+    <div class="f"><label for="f08-data">Data analizei</label><input class="fld" id="f08-data" type="text"></div>
+    <div class="f"><label for="f08-cons">Consultant</label><input class="fld" id="f08-cons" type="text"></div>
+  </div>
+
+  <span class="sec">1 · Marfa transportată</span>
+  <div class="fields">
+    <div class="f"><label for="f08-m1">Natura mărfii</label><input class="fld" id="f08-m1" type="text"></div>
+    <div class="f"><label for="f08-m2">Masa maximă pe cursă (kg)</label><input class="fld" id="f08-m2" type="text"></div>
+    <div class="f"><label for="f08-m3">Volumul necesar (m³)</label><input class="fld" id="f08-m3" type="text"></div>
+    <div class="f"><label for="f08-m4">Dimensiunea unității de încărcare</label><input class="fld" id="f08-m4" type="text" placeholder="palet, colet, ambalaj"></div>
+    <div class="f"><label for="f08-m5">Temperatură controlată</label><input class="fld" id="f08-m5" type="text" placeholder="nu / izoterm / frigorific, °C"></div>
+    <div class="f"><label for="f08-m6">Marfă periculoasă</label><input class="fld" id="f08-m6" type="text" placeholder="nu / da — clasa"></div>
+  </div>
+
+  <span class="sec">2 · Încărcare și descărcare</span>
+  <div class="fields">
+    <div class="f"><label for="f08-i1">Mod de încărcare</label><input class="fld" id="f08-i1" type="text" placeholder="manual / stivuitor / rampă"></div>
+    <div class="f"><label for="f08-i2">Înălțimea de acces la depozite</label><input class="fld" id="f08-i2" type="text"></div>
+    <div class="f"><label for="f08-i3">Operațiuni pe zi</label><input class="fld" id="f08-i3" type="text"></div>
+    <div class="f"><label for="f08-i4">Este necesar hayon ridicător</label><input class="fld" id="f08-i4" type="text"></div>
+  </div>
+
+  <span class="sec">3 · Rute și utilizare</span>
+  <div class="fields">
+    <div class="f"><label for="f08-r1">Tip rută</label><input class="fld" id="f08-r1" type="text" placeholder="urban / interurban / internațional"></div>
+    <div class="f"><label for="f08-r2">Km medii pe zi</label><input class="fld" id="f08-r2" type="text"></div>
+    <div class="f"><label for="f08-r3">Km estimați pe an</label><input class="fld" id="f08-r3" type="text"></div>
+    <div class="f"><label for="f08-r4">Restricții de masă sau gabarit pe traseu</label><input class="fld" id="f08-r4" type="text"></div>
+  </div>
+
+  <span class="sec">4 · Constrângeri de acces</span>
+  <div class="fields two">
+    <div class="f wide"><label for="f08-c1">Înălțimi limitate, parcări subterane, zone cu restricții de emisii, alei înguste</label><textarea class="fld" id="f08-c1" rows="2"></textarea></div>
+  </div>
+
+  <span class="sec">5 · Utilizatori</span>
+  <div class="fields">
+    <div class="f"><label for="f08-u1">Număr de șoferi</label><input class="fld" id="f08-u1" type="text"></div>
+    <div class="f"><label for="f08-u2">Categorii de permis deținute</label><input class="fld" id="f08-u2" type="text"></div>
+    <div class="f"><label for="f08-u3">Experiență cu vehicule similare</label><input class="fld" id="f08-u3" type="text"></div>
+  </div>
+
+  <span class="sec">6 · Disponibilitate</span>
+  <div class="fields">
+    <div class="f"><label for="f08-d1">Ore de funcționare pe zi</label><input class="fld" id="f08-d1" type="text"></div>
+    <div class="f"><label for="f08-d2">Costul unei zile de imobilizare</label><input class="fld" id="f08-d2" type="text"></div>
+    <div class="f"><label for="f08-d3">Există vehicul de rezervă</label><input class="fld" id="f08-d3" type="text"></div>
+    <div class="f"><label for="f08-d4">Cerințe de service în afara programului</label><input class="fld" id="f08-d4" type="text"></div>
+  </div>
+
+  <span class="sec">7 · Echipare solicitată</span>
+  <div class="fields two">
+    <div class="f wide"><label for="f08-e1">Carosare, rafturi, priză suplimentară, monitorizare, semnalizare, personalizare grafică</label><textarea class="fld" id="f08-e1" rows="2"></textarea></div>
+  </div>
+
+  <span class="sec">8 · Cadru financiar</span>
+  <div class="fields">
+    <div class="f"><label for="f08-fin1">Buget orientativ</label><input class="fld" id="f08-fin1" type="text"></div>
+    <div class="f"><label for="f08-fin2">Modalitate preferată</label><input class="fld" id="f08-fin2" type="text" placeholder="achiziție / leasing financiar / operațional"></div>
+    <div class="f"><label for="f08-fin3">Durata de deținere</label><input class="fld" id="f08-fin3" type="text"></div>
+    <div class="f"><label for="f08-fin4">Număr de vehicule și calendar de înlocuire</label><input class="fld" id="f08-fin4" type="text"></div>
+  </div>
+
+  <span class="sec">Concluzie și recomandare tehnică</span>
+  <textarea class="fld" id="f08-rec" rows="3" placeholder="Șasiu, ampatament, motorizare, carosare propusă și justificarea alegerii"></textarea>
+
+  <div class="sign">
+    <div><b>Consultant vehicule comerciale</b><span class="line"></span><small>Nume și semnătură</small></div>
+    <div><b>Coordonator carosări</b><span class="line"></span><small>Avizat, dacă este cazul</small></div>
+    <div><b>Client</b><span class="line"></span><small>Confirm datele de mai sus</small></div>
+  </div>
+</section>
+
+<!-- ============ F-09 ============ -->
+<section class="sheet" id="f09" data-code="F-09" data-name="Înregistrarea vehiculului de test-drive">
+  <div class="sheet-head">
+    <span class="id">F-09</span>
+    <div class="t">
+      <h3>Fișă de înregistrare a vehiculului de test-drive</h3>
+      <div class="meta">Manual D6.2 · În maximum 20 de zile lucrătoare de la livrare</div>
+    </div>
+    <div class="act"><button class="mini" type="button" data-print="f09">Tipărește</button></div>
+  </div>
+
+  <span class="sec">Identificarea vehiculului</span>
+  <div class="fields">
+    <div class="f"><label for="f09-marca">Marca</label><input class="fld" id="f09-marca" type="text"></div>
+    <div class="f"><label for="f09-model">Model și versiune</label><input class="fld" id="f09-model" type="text"></div>
+    <div class="f"><label for="f09-mot">Motorizare</label><input class="fld" id="f09-mot" type="text"></div>
+    <div class="f"><label for="f09-cul">Culoare</label><input class="fld" id="f09-cul" type="text"></div>
+    <div class="f"><label for="f09-vin">VIN</label><input class="fld" id="f09-vin" type="text"></div>
+    <div class="f"><label for="f09-nr">Număr de înmatriculare</label><input class="fld" id="f09-nr" type="text"></div>
+  </div>
+
+  <span class="sec">Punerea în exploatare</span>
+  <div class="fields">
+    <div class="f"><label for="f09-drec">Data recepției la dealer</label><input class="fld" id="f09-drec" type="text"></div>
+    <div class="f"><label for="f09-dinm">Data înmatriculării</label><input class="fld" id="f09-dinm" type="text"></div>
+    <div class="f"><label for="f09-dexp">Data punerii în exploatare</label><input class="fld" id="f09-dexp" type="text"></div>
+    <div class="f"><label for="f09-km">Km la punerea în exploatare</label><input class="fld" id="f09-km" type="text"></div>
+    <div class="f"><label for="f09-loc">Locația de bază</label><input class="fld" id="f09-loc" type="text"></div>
+    <div class="f"><label for="f09-resp">Responsabil desemnat</label><input class="fld" id="f09-resp" type="text"></div>
+  </div>
+
+  <span class="sec">Asigurări</span>
+  <div class="scroller">
+    <table class="tight">
+      <thead><tr><th class="w-m">Tip</th><th class="w-l">Asigurător</th><th class="w-l">Număr poliță</th><th class="w-m">Valabilă până la</th></tr></thead>
+      <tbody>
+        <tr><th>RCA</th><td></td><td></td><td></td></tr>
+        <tr><th>CASCO</th><td></td><td></td><td></td></tr>
+        <tr><th>Altele</th><td></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <span class="sec">Conformitate la punerea în exploatare</span>
+  <ul class="cbxlist two">
+    <li><label class="cbx"><input type="checkbox" id="f09-x1"> <span>Marcaje de test-drive aplicate pe ambele părți, conform standardului</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f09-x2"> <span>Fotografii ale ambelor părți atașate la dosar</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f09-x3"> <span>Copie a certificatului de înmatriculare atașată</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f09-x4"> <span>Configurația corespunde cerinței (versiunea superioară a gamei)</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f09-x5"> <span>Sistem multimedia activat și actualizat</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f09-x6"> <span>Introdus în CRM și în evidența flotei</span></label></li>
+  </ul>
+
+  <div class="fields two" style="margin-top:12px">
+    <div class="f"><label for="f09-scad">Scadența utilizării (1 an sau 30.000 km)</label><input class="fld" id="f09-scad" type="text"></div>
+    <div class="f"><label for="f09-obs">Observații</label><input class="fld" id="f09-obs" type="text"></div>
+  </div>
+
+  <div class="sign">
+    <div><b>Responsabil test-drive</b><span class="line"></span><small>Nume și semnătură</small></div>
+    <div><b>Director vânzări</b><span class="line"></span><small>Aprobat</small></div>
+  </div>
+</section>
+
+<!-- ============ F-10 ============ -->
+<section class="sheet" id="f10" data-code="F-10" data-name="Inspecția zilnică a vehiculului de test-drive">
+  <div class="sheet-head">
+    <span class="id">F-10</span>
+    <div class="t">
+      <h3>Fișă zilnică de inspecție a vehiculului de test-drive</h3>
+      <div class="meta">Manual D6.2 · Zilnic, înainte de program · Un exemplar pe lună și pe vehicul</div>
+    </div>
+    <div class="act"><button class="mini" type="button" data-print="f10">Tipărește</button></div>
+  </div>
+
+  <div class="fields">
+    <div class="f"><label for="f10-veh">Vehiculul</label><input class="fld" id="f10-veh" type="text"></div>
+    <div class="f"><label for="f10-nr">Nr. înmatriculare</label><input class="fld" id="f10-nr" type="text"></div>
+    <div class="f"><label for="f10-luna">Luna / anul</label><input class="fld" id="f10-luna" type="text"></div>
+    <div class="f"><label for="f10-resp">Responsabil</label><input class="fld" id="f10-resp" type="text"></div>
+  </div>
+
+  <p class="note">Se bifează zilnic. Combustibil minimum un sfert de rezervor; baterie minimum 80% la începutul programului. Orice defect constatat se raportează în aceeași zi.</p>
+
+  <div class="scroller">
+    <table class="tight">
+      <thead><tr>
+        <th class="w-xs mono">Zi</th><th class="w-s mono">Km</th><th class="w-s mono">Comb. / baterie</th>
+        <th class="w-xs ctr">Curat ext.</th><th class="w-xs ctr">Curat int.</th><th class="w-xs ctr">Marcaje OK</th>
+        <th class="w-xs ctr">Documente la bord</th><th class="w-xs ctr">Fără defecte</th><th>Observații</th><th class="w-m">Semnătură</th>
+      </tr></thead>
+      <tbody id="f10rows"></tbody>
+    </table>
+  </div>
+
+  <div class="fields two" style="margin-top:10px">
+    <div class="f wide"><label for="f10-def">Defecte constatate și modul de rezolvare</label><textarea class="fld" id="f10-def" rows="2"></textarea></div>
+  </div>
+
+  <div class="sign">
+    <div><b>Responsabil test-drive</b><span class="line"></span><small>Nume și semnătură</small></div>
+    <div><b>Verificat de</b><span class="line"></span><small>Manager vânzări</small></div>
+  </div>
+</section>
+
+<!-- ============ F-11 ============ -->
+<section class="sheet" id="f11" data-code="F-11" data-name="Utilizarea vehiculului de test-drive">
+  <div class="sheet-head">
+    <span class="id">F-11</span>
+    <div class="t">
+      <h3>Fișă zilnică de utilizare pentru test-drive</h3>
+      <div class="meta">Manual D6.2 · Fiecare deplasare · Kilometrajul trebuie să corespundă celui real</div>
+    </div>
+    <div class="act"><button class="mini" type="button" data-print="f11">Tipărește</button></div>
+  </div>
+
+  <div class="fields">
+    <div class="f"><label for="f11-veh">Vehiculul</label><input class="fld" id="f11-veh" type="text"></div>
+    <div class="f"><label for="f11-nr">Nr. înmatriculare</label><input class="fld" id="f11-nr" type="text"></div>
+    <div class="f"><label for="f11-per">Perioada</label><input class="fld" id="f11-per" type="text"></div>
+  </div>
+
+  <div class="scroller">
+    <table class="tight">
+      <thead><tr>
+        <th class="w-s mono">Data</th><th class="w-s mono">Ora plecare</th><th class="w-s mono">Ora sosire</th>
+        <th class="w-s mono">Km plecare</th><th class="w-s mono">Km sosire</th><th class="w-s mono">Km parcurși</th>
+        <th>Client / scopul deplasării</th><th class="w-m">Consultant</th><th class="w-m">Semnătură</th>
+      </tr></thead>
+      <tbody id="f11rows"></tbody>
+    </table>
+  </div>
+
+  <p class="note">Utilizarea în afara programului sau în alt scop decât demonstrația se anunță prealabil managerului. Parcurgerea a mai puțin de 2 km în 24 de ore consecutive și neconcordanța kilometrajului sunt neconformități.</p>
+
+  <div class="sign">
+    <div><b>Responsabil test-drive</b><span class="line"></span><small>Nume și semnătură</small></div>
+    <div><b>Verificat de</b><span class="line"></span><small>Manager vânzări</small></div>
+  </div>
+</section>
+
+<!-- ============ F-12 ============ -->
+<section class="sheet" id="f12" data-code="F-12" data-name="Acord privind experiența de test-drive">
+  <div class="sheet-head">
+    <span class="id">F-12</span>
+    <div class="t">
+      <h3>Acord privind experiența de test-drive</h3>
+      <div class="meta">Manual D4.6 · Semnat obligatoriu înainte de plecare</div>
+    </div>
+    <div class="act"><button class="mini" type="button" data-print="f12">Tipărește</button></div>
+  </div>
+
+  <span class="sec">Participantul</span>
+  <div class="fields">
+    <div class="f"><label for="f12-nume">Nume și prenume</label><input class="fld" id="f12-nume" type="text"></div>
+    <div class="f"><label for="f12-cnp">CNP / serie act identitate</label><input class="fld" id="f12-cnp" type="text"></div>
+    <div class="f"><label for="f12-tel">Telefon</label><input class="fld" id="f12-tel" type="text"></div>
+    <div class="f"><label for="f12-adr">Adresa</label><input class="fld" id="f12-adr" type="text"></div>
+    <div class="f"><label for="f12-perm">Permis de conducere — serie și număr</label><input class="fld" id="f12-perm" type="text"></div>
+    <div class="f"><label for="f12-cat">Categorii și valabilitate</label><input class="fld" id="f12-cat" type="text"></div>
+  </div>
+
+  <span class="sec">Vehiculul și traseul</span>
+  <div class="fields">
+    <div class="f"><label for="f12-veh">Vehiculul</label><input class="fld" id="f12-veh" type="text"></div>
+    <div class="f"><label for="f12-nr">Nr. înmatriculare</label><input class="fld" id="f12-nr" type="text"></div>
+    <div class="f"><label for="f12-km">Km la plecare</label><input class="fld" id="f12-km" type="text"></div>
+    <div class="f"><label for="f12-tras">Traseul</label><input class="fld" id="f12-tras" type="text"></div>
+    <div class="f"><label for="f12-data">Data și ora</label><input class="fld" id="f12-data" type="text"></div>
+    <div class="f"><label for="f12-ins">Însoțitor din partea dealerului</label><input class="fld" id="f12-ins" type="text"></div>
+  </div>
+
+  <span class="sec">Declarațiile participantului</span>
+  <ul class="cbxlist">
+    <li><label class="cbx"><input type="checkbox" id="f12-d1"> <span>Dețin permis de conducere valabil pentru categoria vehiculului și l-am prezentat în original.</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f12-d2"> <span>Am cel puțin un an de experiență efectivă la volan.</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f12-d3"> <span>Nu mă aflu sub influența alcoolului, a substanțelor psihoactive sau a unui tratament care afectează capacitatea de a conduce.</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f12-d4"> <span>Nu sunt în stare de oboseală care să îmi afecteze atenția și nu am afecțiuni care să contraindice conducerea.</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f12-d5"> <span>Am fost informat cu privire la traseu, la caracteristicile vehiculului și la măsurile de siguranță.</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f12-d6"> <span>Mă oblig să respect legislația rutieră și indicațiile însoțitorului și să port centura de siguranță.</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f12-d7"> <span>Am luat la cunoștință că însoțitorul poate încheia test-drive-ul în orice moment, din motive de siguranță.</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f12-d8"> <span>Am verificat starea vehiculului la plecare și nu am constatat deteriorări nemenționate.</span></label></li>
+  </ul>
+
+  <span class="sec">Răspundere</span>
+  <p class="note">Vehiculul este asigurat RCA și CASCO. Participantul răspunde, în limita franșizei și în condițiile legii, pentru pagubele produse din culpa sa, precum și integral pentru amenzile, taxele de drum și consecințele contravențiilor săvârșite în timpul conducerii. Participantul răspunde integral pentru pagubele produse în situațiile excluse de la acoperirea asigurării, între care conducerea sub influența alcoolului sau a substanțelor interzise, părăsirea locului accidentului și utilizarea vehiculului în competiții.</p>
+
+  <span class="sec">Prelucrarea datelor cu caracter personal</span>
+  <ul class="cbxlist">
+    <li><label class="cbx"><input type="checkbox" id="f12-g1"> <span>Am luat la cunoștință că datele din prezentul acord și copia permisului se prelucrează în scopul desfășurării și evidenței test-drive-ului, pe durata prevăzută de lege.</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f12-g2"> <span>Sunt de acord să fiu contactat ulterior cu informații comerciale. <em>(opțional, se poate retrage oricând)</em></span></label></li>
+  </ul>
+
+  <span class="sec">La returnarea vehiculului</span>
+  <div class="fields">
+    <div class="f"><label for="f12-kmr">Km la sosire</label><input class="fld" id="f12-kmr" type="text"></div>
+    <div class="f"><label for="f12-orar">Ora sosirii</label><input class="fld" id="f12-orar" type="text"></div>
+    <div class="f wide"><label for="f12-stare">Starea vehiculului la returnare / eveniment produs</label><input class="fld" id="f12-stare" type="text"></div>
+  </div>
+
+  <div class="sign">
+    <div><b>Participant</b><span class="line"></span><small>Nume, semnătură, data</small></div>
+    <div><b>Însoțitor / responsabil test-drive</b><span class="line"></span><small>Nume, semnătură</small></div>
+    <div><b>Confirmare returnare</b><span class="line"></span><small>Semnături ambele părți</small></div>
+  </div>
+</section>
+
+<!-- ============ F-13 ============ -->
+<section class="sheet" id="f13" data-code="F-13" data-name="Feedback după test-drive">
+  <div class="sheet-head">
+    <span class="id">F-13</span>
+    <div class="t">
+      <h3>Formular de feedback pentru test-drive</h3>
+      <div class="meta">Manual D4.6 · Completat împreună cu clientul, imediat după revenire</div>
+    </div>
+    <div class="act"><button class="mini" type="button" data-print="f13">Tipărește</button></div>
+  </div>
+
+  <div class="fields">
+    <div class="f"><label for="f13-cl">Client</label><input class="fld" id="f13-cl" type="text"></div>
+    <div class="f"><label for="f13-veh">Vehiculul testat</label><input class="fld" id="f13-veh" type="text"></div>
+    <div class="f"><label for="f13-data">Data</label><input class="fld" id="f13-data" type="text"></div>
+    <div class="f"><label for="f13-cons">Consultant</label><input class="fld" id="f13-cons" type="text"></div>
+  </div>
+
+  <span class="sec">Evaluarea experienței — 1 nesatisfăcător · 5 foarte bun</span>
+  <div class="scroller">
+    <table class="tight">
+      <thead><tr><th>Criteriu</th><th class="w-xs ctr">1</th><th class="w-xs ctr">2</th><th class="w-xs ctr">3</th><th class="w-xs ctr">4</th><th class="w-xs ctr">5</th><th>Comentariu</th></tr></thead>
+      <tbody>
+        <tr><td>Poziția de conducere și ergonomia</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>Spațiul interior și accesul</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>Confortul suspensiei</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>Motorizarea și accelerația</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>Manevrabilitatea și direcția</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>Nivelul de zgomot</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>Sistemele de asistență la conducere</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>Sistemul multimedia și conectivitatea</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>Calitatea materialelor și finisajele</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>Organizarea test-drive-ului de către dealer</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="fields two">
+    <div class="f"><label for="f13-plus">Ce v-a plăcut cel mai mult</label><textarea class="fld" id="f13-plus" rows="2"></textarea></div>
+    <div class="f"><label for="f13-minus">Ce ați îmbunătăți</label><textarea class="fld" id="f13-minus" rows="2"></textarea></div>
+  </div>
+
+  <span class="sec">Intenția de achiziție</span>
+  <ul class="cbxlist two">
+    <li><label class="cbx"><input type="checkbox" id="f13-i1"> <span>Doresc o ofertă acum</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f13-i2"> <span>În următoarele 7–15 zile</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f13-i3"> <span>În 1–3 luni</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f13-i4"> <span>Peste 3 luni sau nedecis</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f13-i5"> <span>Doresc să testez și o altă versiune sau model</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f13-i6"> <span>Sunt de acord să fiu contactat pentru follow-up</span></label></li>
+  </ul>
+
+  <div class="fields two" style="margin-top:10px">
+    <div class="f"><label for="f13-obs">Observații ale consultantului — obiecții identificate, pasul următor</label><textarea class="fld" id="f13-obs" rows="2"></textarea></div>
+    <div class="f"><label for="f13-crm">Nivel de intenție actualizat în CRM</label><input class="fld" id="f13-crm" type="text" placeholder="Hot / Warm / Cold / Inactiv"></div>
+  </div>
+
+  <div class="sign">
+    <div><b>Client</b><span class="line"></span><small>Semnătură</small></div>
+    <div><b>Consultant</b><span class="line"></span><small>Semnătură</small></div>
+  </div>
+</section>
+
+<!-- ============ F-14 ============ -->
+<section class="sheet" id="f14" data-code="F-14" data-name="Cerere de înlocuire a vehiculului de test-drive">
+  <div class="sheet-head">
+    <span class="id">F-14</span>
+    <div class="t">
+      <h3>Cerere de înlocuire a vehiculului de test-drive</h3>
+      <div class="meta">Manual D6.2 · Retragere anticipată sau la expirarea duratei</div>
+    </div>
+    <div class="act"><button class="mini" type="button" data-print="f14">Tipărește</button></div>
+  </div>
+
+  <span class="sec">Vehiculul actual</span>
+  <div class="fields">
+    <div class="f"><label for="f14-veh">Marcă, model, versiune</label><input class="fld" id="f14-veh" type="text"></div>
+    <div class="f"><label for="f14-vin">VIN</label><input class="fld" id="f14-vin" type="text"></div>
+    <div class="f"><label for="f14-nr">Nr. înmatriculare</label><input class="fld" id="f14-nr" type="text"></div>
+    <div class="f"><label for="f14-dexp">Data punerii în exploatare</label><input class="fld" id="f14-dexp" type="text"></div>
+    <div class="f"><label for="f14-km">Kilometraj actual</label><input class="fld" id="f14-km" type="text"></div>
+    <div class="f"><label for="f14-luni">Luni în exploatare</label><input class="fld" id="f14-luni" type="text"></div>
+  </div>
+
+  <span class="sec">Motivul cererii</span>
+  <ul class="cbxlist two">
+    <li><label class="cbx"><input type="checkbox" id="f14-m1"> <span>Expirarea duratei standard (1 an sau 30.000 km)</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f14-m2"> <span>Degradarea stării, sub cerințele pentru test-drive</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f14-m3"> <span>Accident sau reparație majoră a sistemului de propulsie</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f14-m4"> <span>Schimbarea gamei sau lansarea unei versiuni noi</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f14-m5"> <span>Modificarea cerințelor de configurare ale constructorului</span></label></li>
+  </ul>
+
+  <div class="fields two" style="margin-top:10px">
+    <div class="f wide"><label for="f14-stare">Descrierea stării tehnice și estetice actuale</label><textarea class="fld" id="f14-stare" rows="3"></textarea></div>
+  </div>
+
+  <span class="sec">Vehiculul propus pentru înlocuire</span>
+  <div class="fields">
+    <div class="f"><label for="f14-nveh">Marcă, model, versiune</label><input class="fld" id="f14-nveh" type="text"></div>
+    <div class="f"><label for="f14-nmot">Motorizare</label><input class="fld" id="f14-nmot" type="text"></div>
+    <div class="f"><label for="f14-ndisp">Disponibilitate estimată</label><input class="fld" id="f14-ndisp" type="text"></div>
+    <div class="f"><label for="f14-nmod">Mod de alocare</label><input class="fld" id="f14-nmod" type="text" placeholder="comandă directă / din stoc"></div>
+  </div>
+
+  <p class="note">Vehiculul original poate fi retras numai după configurarea completă și punerea în exploatare a vehiculului de înlocuire, conform F-09.</p>
+
+  <div class="sign">
+    <div><b>Solicitant</b><span class="line"></span><small>Responsabil test-drive</small></div>
+    <div><b>Avizat</b><span class="line"></span><small>Director vânzări</small></div>
+    <div><b>Aprobat</b><span class="line"></span><small>Director general · Data</small></div>
+  </div>
+</section>
+
+<!-- ============ F-15 ============ -->
+<section class="sheet" id="f15" data-code="F-15" data-name="Tabel de management al stocului">
+  <div class="sheet-head">
+    <span class="id">F-15</span>
+    <div class="t">
+      <h3>Tabel de management al stocului de vehicule</h3>
+      <div class="meta">Manual D6.3 · Actualizat permanent · Analiză lunară a structurii</div>
+    </div>
+    <div class="act"><button class="mini" type="button" data-print="f15">Tipărește</button></div>
+  </div>
+
+  <div class="fields">
+    <div class="f"><label for="f15-loc">Locația</label><input class="fld" id="f15-loc" type="text"></div>
+    <div class="f"><label for="f15-data">Data raportării</label><input class="fld" id="f15-data" type="text"></div>
+    <div class="f"><label for="f15-med">Media vânzărilor lunare</label><input class="fld" id="f15-med" type="text"></div>
+    <div class="f"><label for="f15-rap">Raport stoc / vânzări</label><input class="fld" id="f15-rap" type="text" placeholder="țintă 2,0–3,0"></div>
+  </div>
+
+  <div class="scroller">
+    <table class="tight">
+      <thead><tr>
+        <th class="w-xs mono">Nr.</th><th class="w-l mono">VIN</th><th class="w-m">Model</th><th class="w-m">Versiune</th>
+        <th class="w-m">Motorizare</th><th class="w-m">Culoare</th><th class="w-m">Status</th>
+        <th class="w-s mono">Data intrării</th><th class="w-s mono">Vechime (zile)</th><th class="w-m">Observații</th>
+      </tr></thead>
+      <tbody id="f15rows"></tbody>
+    </table>
+  </div>
+
+  <span class="sec">Analiza structurii</span>
+  <div class="scroller">
+    <table class="tight">
+      <thead><tr><th>Dimensiune</th><th class="w-m ctr mono">Pondere în stoc</th><th class="w-m ctr mono">Pondere în vânzări</th><th class="w-m ctr mono">Abatere</th><th class="w-l">Acțiune</th></tr></thead>
+      <tbody>
+        <tr><td class="blank">Motorizare principală</td><td></td><td></td><td></td><td></td></tr>
+        <tr><td class="blank">Motorizare secundară</td><td></td><td></td><td></td><td></td></tr>
+        <tr><td class="blank">Culoare principală</td><td></td><td></td><td></td><td></td></tr>
+        <tr><td class="blank">Culori secundare</td><td></td><td></td><td></td><td></td></tr>
+        <tr><td class="blank">Vehicule cu vechime peste 90 de zile</td><td></td><td>—</td><td></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">Abaterea acceptată între ponderea în stoc și ponderea în vânzări este de ±15%. Vehiculele cu vechime peste 90 de zile primesc acțiune comercială dedicată, nu doar reducere de preț.</p>
+
+  <div class="sign">
+    <div><b>Întocmit</b><span class="line"></span><small>Manager vânzări</small></div>
+    <div><b>Verificat</b><span class="line"></span><small>Director vânzări</small></div>
+    <div><b>Luat la cunoștință</b><span class="line"></span><small>Director general</small></div>
+  </div>
+</section>
+
+<!-- ============ F-16 ============ -->
+<section class="sheet" id="f16" data-code="F-16" data-name="Inspecția vehiculelor din stoc">
+  <div class="sheet-head">
+    <span class="id">F-16</span>
+    <div class="t">
+      <h3>Fișă de inspecție și întreținere pentru vehiculele din stoc</h3>
+      <div class="meta">Manual D6.4 · Un exemplar pe vehicul · Se păstrează până la ieșirea din stoc</div>
+    </div>
+    <div class="act"><button class="mini" type="button" data-print="f16">Tipărește</button></div>
+  </div>
+
+  <div class="fields">
+    <div class="f"><label for="f16-model">Model și versiune</label><input class="fld" id="f16-model" type="text"></div>
+    <div class="f"><label for="f16-vin">VIN</label><input class="fld" id="f16-vin" type="text"></div>
+    <div class="f"><label for="f16-dfab">Data fabricației</label><input class="fld" id="f16-dfab" type="text"></div>
+    <div class="f"><label for="f16-dint">Data intrării în stoc</label><input class="fld" id="f16-dint" type="text"></div>
+    <div class="f"><label for="f16-loc">Locul de depozitare</label><input class="fld" id="f16-loc" type="text"></div>
+    <div class="f"><label for="f16-tip">Tip propulsie</label><input class="fld" id="f16-tip" type="text" placeholder="benzină / diesel / hibrid / electric"></div>
+  </div>
+
+  <span class="sec">Operațiuni la intrarea în stoc</span>
+  <ul class="cbxlist two">
+    <li><label class="cbx"><input type="checkbox" id="f16-a1"> <span>Tensiune baterie verificată (sub 12,6 V — încărcare; sub 11,6 V — înlocuire)</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f16-a2"> <span>Folii de protecție verificate; termen de îndepărtare consemnat</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f16-a3"> <span>Scaune reglate, consumatori electrici opriți</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f16-a4"> <span>Centuri de siguranță repoziționate</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f16-a5"> <span>Uși și geamuri închise, portbagaj asigurat, cheie predată la gestiune</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f16-a6"> <span>Ștergătoare ridicate sau protejate</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f16-a7"> <span>Presiune pneuri adusă la valoarea de depozitare</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f16-a8"> <span>Bornă negativă deconectată</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f16-a9"> <span>Protecție solară pentru bord și scaune (depozitare peste 30 de zile)</span></label></li>
+  </ul>
+
+  <span class="sec">Întrețineri periodice</span>
+  <div class="scroller">
+    <table class="tight">
+      <thead><tr>
+        <th class="w-m">Etapă</th><th class="w-s mono">Data</th><th class="w-s mono">Tensiune baterie</th>
+        <th class="w-s mono">Presiune pneuri</th><th class="w-s ctr">Vehicul deplasat</th><th>Operațiuni efectuate și constatări</th><th class="w-m">Executant</th>
+      </tr></thead>
+      <tbody>
+        <tr><th>Inspecție (15 zile)</th><td></td><td></td><td></td><td></td><td class="blank"></td><td></td></tr>
+        <tr><th>1 lună</th><td></td><td></td><td></td><td></td><td class="blank"></td><td></td></tr>
+        <tr><th>3 luni</th><td></td><td></td><td></td><td></td><td class="blank"></td><td></td></tr>
+        <tr><th>6 luni</th><td></td><td></td><td></td><td></td><td class="blank"></td><td></td></tr>
+        <tr><th>12 luni</th><td></td><td></td><td></td><td></td><td class="blank"></td><td></td></tr>
+        <tr><th>Ieșire din stoc</th><td></td><td></td><td></td><td></td><td class="blank"></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">La 6 luni se îndepărtează foliile de protecție ale caroseriei. La 12 luni se verifică îmbătrânirea componentelor din cauciuc și plastic, nivelurile de lichide și se înlocuiește uleiul de motor.</p>
+
+  <div class="sign">
+    <div><b>Responsabil depozit</b><span class="line"></span><small>Nume și semnătură</small></div>
+    <div><b>Verificat</b><span class="line"></span><small>Manager vânzări sau service</small></div>
+  </div>
+</section>
+
+<!-- ============ F-17 ============ -->
+<section class="sheet" id="f17" data-code="F-17" data-name="Inspecție perimetrală în nouă poziții">
+  <div class="sheet-head">
+    <span class="id">F-17</span>
+    <div class="t">
+      <h3>Raport de inspecție perimetrală în nouă poziții</h3>
+      <div class="meta">Manual D7.3 · SR-04 · Se completează la primire, cu clientul de față</div>
+    </div>
+    <div class="act"><button class="mini" type="button" data-print="f17">Tipărește</button></div>
+  </div>
+
+  <div class="fields">
+    <div class="f"><label for="f17-cl">Client</label><input class="fld" id="f17-cl" type="text"></div>
+    <div class="f"><label for="f17-veh">Vehicul</label><input class="fld" id="f17-veh" type="text"></div>
+    <div class="f"><label for="f17-nr">Nr. înmatriculare</label><input class="fld" id="f17-nr" type="text"></div>
+    <div class="f"><label for="f17-vin">VIN</label><input class="fld" id="f17-vin" type="text"></div>
+    <div class="f"><label for="f17-km">Km la sosire</label><input class="fld" id="f17-km" type="text"></div>
+    <div class="f"><label for="f17-data">Data și ora</label><input class="fld" id="f17-data" type="text"></div>
+    <div class="f"><label for="f17-comb">Nivel combustibil / baterie</label><input class="fld" id="f17-comb" type="text"></div>
+    <div class="f"><label for="f17-cons">Consultant service</label><input class="fld" id="f17-cons" type="text"></div>
+  </div>
+
+  <div class="fields" style="margin-top:10px">
+    <div class="f wide"><label>Participarea clientului</label>
+      <ul class="cbxlist two" style="margin-top:4px">
+        <li><label class="cbx"><input type="checkbox" id="f17-p1"> <span>Clientul a participat la inspecție</span></label></li>
+        <li><label class="cbx"><input type="checkbox" id="f17-p2"> <span>Clientul a fost invitat și a refuzat; condus în zona de așteptare</span></label></li>
+      </ul>
+    </div>
+  </div>
+
+  <span class="sec">Constatări pe poziții</span>
+  <div class="scroller">
+    <table class="tight">
+      <thead><tr><th class="w-xs mono">Poz.</th><th class="w-l">Zona</th><th class="w-s ctr">Fără defecte</th><th>Constatări — zgârieturi, lovituri, uzură, lipsuri</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">1</td><th>Scaunul șoferului — bord, martori, software, bunuri personale</th><td></td><td class="blank"></td></tr>
+        <tr><td class="mono">2</td><th>Ușa șoferului — geam, oglindă, garnituri, vopsea</th><td></td><td class="blank"></td></tr>
+        <tr><td class="mono">3</td><th>Roata stânga-față — uzură, presiune, jantă, frâne</th><td></td><td class="blank"></td></tr>
+        <tr><td class="mono">4</td><th>Față și compartiment motor — bară, faruri, lichide, scurgeri</th><td></td><td class="blank"></td></tr>
+        <tr><td class="mono">5</td><th>Roata dreapta-față</th><td></td><td class="blank"></td></tr>
+        <tr><td class="mono">6</td><th>Partea dreaptă — uși, praguri, geamuri, vopsea</th><td></td><td class="blank"></td></tr>
+        <tr><td class="mono">7</td><th>Roata dreapta-spate</th><td></td><td class="blank"></td></tr>
+        <tr><td class="mono">8</td><th>Spate și portbagaj — bară, lămpi, roată de rezervă, trusă</th><td></td><td class="blank"></td></tr>
+        <tr><td class="mono">9</td><th>Roata stânga-spate</th><td></td><td class="blank"></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <span class="sec">Dotări și bunuri aflate în vehicul la primire</span>
+  <div class="fields two">
+    <div class="f"><label for="f17-dot">Scule de bord, trusă, triunghiuri, vestă, roată de rezervă</label><input class="fld" id="f17-dot" type="text"></div>
+    <div class="f"><label for="f17-bun">Bunuri personale rămase în vehicul</label><input class="fld" id="f17-bun" type="text"></div>
+  </div>
+
+  <span class="sec">Recomandări identificate în urma inspecției</span>
+  <textarea class="fld" id="f17-rec" rows="3" placeholder="Lucrări suplimentare recomandate, cu justificare; se prezintă clientului înainte de autorizare"></textarea>
+
+  <div class="sign">
+    <div><b>Consultant service</b><span class="line"></span><small>Nume și semnătură</small></div>
+    <div><b>Client</b><span class="line"></span><small>Confirm constatările consemnate mai sus</small></div>
+  </div>
+</section>
+
+<!-- ============ F-18 ============ -->
+<section class="sheet" id="f18" data-code="F-18" data-name="Comandă de service și deviz">
+  <div class="sheet-head">
+    <span class="id">F-18</span>
+    <div class="t">
+      <h3>Comandă de service și deviz</h3>
+      <div class="meta">Manual D7.4 · SR-05 și SR-06 · Semnătura clientului autorizează execuția</div>
+    </div>
+    <div class="act"><button class="mini" type="button" data-print="f18">Tipărește</button></div>
+  </div>
+
+  <span class="sec">Informații esențiale</span>
+  <div class="fields">
+    <div class="f"><label for="f18-nr">Număr comandă</label><input class="fld" id="f18-nr" type="text"></div>
+    <div class="f"><label for="f18-ora">Ora sosirii</label><input class="fld" id="f18-ora" type="text"></div>
+    <div class="f"><label for="f18-orap">Ora estimată a predării</label><input class="fld" id="f18-orap" type="text"></div>
+    <div class="f"><label for="f18-cons">Consultant service</label><input class="fld" id="f18-cons" type="text"></div>
+    <div class="f"><label for="f18-tipcl">Tipul clientului</label><input class="fld" id="f18-tipcl" type="text" placeholder="persoană fizică / firmă / flotă"></div>
+    <div class="f"><label for="f18-prog">ID programare</label><input class="fld" id="f18-prog" type="text"></div>
+  </div>
+
+  <span class="sec">Client și vehicul</span>
+  <div class="fields">
+    <div class="f"><label for="f18-cl">Proprietar</label><input class="fld" id="f18-cl" type="text"></div>
+    <div class="f"><label for="f18-tel">Telefon</label><input class="fld" id="f18-tel" type="text"></div>
+    <div class="f"><label for="f18-veh">Marcă, model, an</label><input class="fld" id="f18-veh" type="text"></div>
+    <div class="f"><label for="f18-vin">VIN</label><input class="fld" id="f18-vin" type="text"></div>
+    <div class="f"><label for="f18-nrinm">Nr. înmatriculare</label><input class="fld" id="f18-nrinm" type="text"></div>
+    <div class="f"><label for="f18-gar">Garanția expiră la</label><input class="fld" id="f18-gar" type="text"></div>
+    <div class="f"><label for="f18-kms">Km la sosire</label><input class="fld" id="f18-kms" type="text"></div>
+    <div class="f"><label for="f18-kmp">Km la plecare</label><input class="fld" id="f18-kmp" type="text"></div>
+  </div>
+
+  <span class="sec">Descrierea problemei în cuvintele clientului</span>
+  <textarea class="fld" id="f18-cuv" rows="2" placeholder="Se consemnează exact ce spune clientul, fără interpretare"></textarea>
+
+  <span class="sec">Constatarea tehnicianului / diagnostic</span>
+  <textarea class="fld" id="f18-diag" rows="2"></textarea>
+
+  <span class="sec">Operațiuni</span>
+  <div class="scroller">
+    <table class="tight">
+      <thead><tr><th class="w-s mono">Cod</th><th>Denumirea operațiunii</th><th class="w-s mono ctr">Ore</th><th class="w-s mono ctr">Tarif</th><th class="w-m mono ctr">Valoare</th><th class="w-s ctr">Garanție</th></tr></thead>
+      <tbody id="f18ops"></tbody>
+    </table>
+  </div>
+
+  <span class="sec">Piese și materiale</span>
+  <div class="scroller">
+    <table class="tight">
+      <thead><tr><th class="w-m mono">Cod piesă</th><th>Denumire</th><th class="w-s mono ctr">Cant.</th><th class="w-s mono ctr">Preț unitar</th><th class="w-m mono ctr">Valoare</th><th class="w-s ctr">În stoc</th></tr></thead>
+      <tbody id="f18parts"></tbody>
+    </table>
+  </div>
+
+  <span class="sec">Totaluri și decontare</span>
+  <div class="scroller">
+    <table class="tight">
+      <thead><tr><th>Element</th><th class="w-m mono ctr">Fără TVA</th><th class="w-m mono ctr">TVA</th><th class="w-m mono ctr">Total</th></tr></thead>
+      <tbody>
+        <tr><td>Manoperă</td><td></td><td></td><td></td></tr>
+        <tr><td>Piese și materiale</td><td></td><td></td><td></td></tr>
+        <tr><td>Reduceri acordate</td><td></td><td></td><td></td></tr>
+        <tr><th>Total de plată de către client</th><td></td><td></td><td></td></tr>
+        <tr><td>Suportat în garanție de producător</td><td></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="fields two" style="margin-top:10px">
+    <div class="f"><label>Tipul decontării</label>
+      <ul class="cbxlist" style="margin-top:4px">
+        <li><label class="cbx"><input type="checkbox" id="f18-t1"> <span>Plată client</span></label></li>
+        <li><label class="cbx"><input type="checkbox" id="f18-t2"> <span>Garanție producător</span></label></li>
+        <li><label class="cbx"><input type="checkbox" id="f18-t3"> <span>Asigurare / daună</span></label></li>
+        <li><label class="cbx"><input type="checkbox" id="f18-t4"> <span>Contract de flotă</span></label></li>
+      </ul>
+    </div>
+    <div class="f"><label>Organizare și piese vechi</label>
+      <ul class="cbxlist" style="margin-top:4px">
+        <li><label class="cbx"><input type="checkbox" id="f18-o1"> <span>Clientul așteaptă în unitate</span></label></li>
+        <li><label class="cbx"><input type="checkbox" id="f18-o2"> <span>Clientul pleacă — transport asigurat</span></label></li>
+        <li><label class="cbx"><input type="checkbox" id="f18-o3"> <span>Clientul dorește piesele vechi</span></label></li>
+        <li><label class="cbx"><input type="checkbox" id="f18-o4"> <span>Spălare inclusă în termenul de predare</span></label></li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="note">Lucrările suplimentare identificate în timpul execuției se execută numai după informarea clientului și obținerea unui nou acord, consemnat mai jos. Fișa de inspecție F-17 face parte integrantă din prezenta comandă.</p>
+
+  <span class="sec">Autorizarea lucrărilor suplimentare</span>
+  <div class="scroller">
+    <table class="tight">
+      <thead><tr><th class="w-s mono">Data / ora</th><th>Lucrarea suplimentară</th><th class="w-m mono ctr">Valoare</th><th class="w-m">Mod de acord</th><th class="w-m">Semnătură client</th></tr></thead>
+      <tbody>
+        <tr><td></td><td class="blank"></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td class="blank"></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td class="blank"></td><td></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sign">
+    <div><b>Client — autorizare</b><span class="line"></span><small>Autorizez executarea lucrărilor de mai sus</small></div>
+    <div><b>Consultant service</b><span class="line"></span><small>Nume și semnătură</small></div>
+    <div><b>Client — la predare</b><span class="line"></span><small>Am primit vehiculul și explicațiile</small></div>
+  </div>
+</section>
+
+<!-- ============ F-19 ============ -->
+<section class="sheet" id="f19" data-code="F-19" data-name="Împrumut scule speciale">
+  <div class="sheet-head">
+    <span class="id">F-19</span>
+    <div class="t">
+      <h3>Formular de împrumut și returnare a sculelor speciale</h3>
+      <div class="meta">Manual D7.2 · SR-07 · Responsabil: șef de atelier</div>
+    </div>
+    <div class="act"><button class="mini" type="button" data-print="f19">Tipărește</button></div>
+  </div>
+
+  <div class="fields">
+    <div class="f"><label for="f19-loc">Locația / atelierul</label><input class="fld" id="f19-loc" type="text"></div>
+    <div class="f"><label for="f19-per">Perioada</label><input class="fld" id="f19-per" type="text"></div>
+    <div class="f"><label for="f19-gest">Gestionar</label><input class="fld" id="f19-gest" type="text"></div>
+  </div>
+
+  <div class="scroller">
+    <table class="tight">
+      <thead><tr>
+        <th class="w-m mono">Cod sculă</th><th>Denumire</th><th class="w-m">Tehnician</th><th class="w-s mono">Comandă service</th>
+        <th class="w-s mono">Data / ora împrumut</th><th class="w-s mono">Data / ora returnare</th><th class="w-m">Stare la returnare</th><th class="w-m">Semnături</th>
+      </tr></thead>
+      <tbody id="f19rows"></tbody>
+    </table>
+  </div>
+
+  <p class="note">Scula se returnează la poziția desemnată imediat după terminarea lucrării. Deteriorările sau lipsurile se raportează în aceeași zi șefului de atelier.</p>
+
+  <div class="sign">
+    <div><b>Șef de atelier</b><span class="line"></span><small>Nume și semnătură</small></div>
+    <div><b>Verificat</b><span class="line"></span><small>Director service</small></div>
+  </div>
+</section>
+
+<!-- ============ F-20 ============ -->
+<section class="sheet" id="f20" data-code="F-20" data-name="Vehicul de curtoazie">
+  <div class="sheet-head">
+    <span class="id">F-20</span>
+    <div class="t">
+      <h3>Cerere, acord și proces-verbal pentru vehiculul de curtoazie</h3>
+      <div class="meta">Manual D7.6 · Aprobare prealabilă a directorului service</div>
+    </div>
+    <div class="act"><button class="mini" type="button" data-print="f20">Tipărește</button></div>
+  </div>
+
+  <span class="sec">Situația care justifică cererea</span>
+  <div class="fields">
+    <div class="f"><label for="f20-cl">Client</label><input class="fld" id="f20-cl" type="text"></div>
+    <div class="f"><label for="f20-tel">Telefon</label><input class="fld" id="f20-tel" type="text"></div>
+    <div class="f"><label for="f20-vehr">Vehiculul aflat în reparație</label><input class="fld" id="f20-vehr" type="text"></div>
+    <div class="f"><label for="f20-cmd">Număr comandă de service</label><input class="fld" id="f20-cmd" type="text"></div>
+    <div class="f"><label for="f20-dur">Durata estimată a reparației</label><input class="fld" id="f20-dur" type="text"></div>
+    <div class="f"><label for="f20-mot">Natura problemei</label><input class="fld" id="f20-mot" type="text" placeholder="garanție / defect major de calitate"></div>
+  </div>
+  <ul class="cbxlist two" style="margin-top:8px">
+    <li><label class="cbx"><input type="checkbox" id="f20-c1"> <span>Durata totală de la reparație la predare depășește 5 zile</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f20-c2"> <span>Problema este acoperită de garanție sau este un defect major de calitate</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f20-c3"> <span>Clientul are contract de flotă cu clauză de vehicul de înlocuire</span></label></li>
+  </ul>
+
+  <span class="sec">Vehiculul pus la dispoziție</span>
+  <div class="fields">
+    <div class="f"><label for="f20-veh">Marcă și model</label><input class="fld" id="f20-veh" type="text"></div>
+    <div class="f"><label for="f20-nr">Nr. înmatriculare</label><input class="fld" id="f20-nr" type="text"></div>
+    <div class="f"><label for="f20-kmp">Km la predare</label><input class="fld" id="f20-kmp" type="text"></div>
+    <div class="f"><label for="f20-combp">Combustibil / baterie la predare</label><input class="fld" id="f20-combp" type="text"></div>
+    <div class="f"><label for="f20-dp">Data și ora predării</label><input class="fld" id="f20-dp" type="text"></div>
+    <div class="f"><label for="f20-dr">Data estimată a returnării</label><input class="fld" id="f20-dr" type="text"></div>
+  </div>
+
+  <span class="sec">Starea la predare</span>
+  <div class="fields two">
+    <div class="f wide"><label for="f20-stare">Deteriorări existente, dotări predate, documente la bord</label><textarea class="fld" id="f20-stare" rows="2"></textarea></div>
+  </div>
+
+  <span class="sec">Condiții de utilizare acceptate de client</span>
+  <ul class="cbxlist">
+    <li><label class="cbx"><input type="checkbox" id="f20-u1"> <span>Vehiculul se folosește exclusiv de către persoanele nominalizate, care dețin permis valabil.</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f20-u2"> <span>Nu se folosește pentru transport de persoane contra cost, competiții, tractare sau instruire.</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f20-u3"> <span>Nu se părăsește teritoriul țării fără acord scris prealabil.</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f20-u4"> <span>Amenzile, taxele de drum și consecințele contravențiilor din perioada de utilizare revin clientului.</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f20-u5"> <span>Clientul răspunde, în limita franșizei, pentru pagubele produse din culpa sa.</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f20-u6"> <span>Orice eveniment rutier se anunță imediat dealerului și autorităților.</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f20-u7"> <span>Vehiculul se returnează cu același nivel de combustibil sau încărcare.</span></label></li>
+  </ul>
+
+  <span class="sec">Proces-verbal de returnare</span>
+  <div class="fields">
+    <div class="f"><label for="f20-kmr">Km la returnare</label><input class="fld" id="f20-kmr" type="text"></div>
+    <div class="f"><label for="f20-combr">Combustibil / baterie la returnare</label><input class="fld" id="f20-combr" type="text"></div>
+    <div class="f"><label for="f20-dret">Data și ora returnării</label><input class="fld" id="f20-dret" type="text"></div>
+  </div>
+  <ul class="cbxlist two" style="margin-top:8px">
+    <li><label class="cbx"><input type="checkbox" id="f20-r1"> <span>Fără deteriorări noi — vehiculul revine direct în flotă</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f20-r2"> <span>Deteriorări noi — se întocmește evaluarea daunei</span></label></li>
+  </ul>
+  <div class="fields two" style="margin-top:8px">
+    <div class="f wide"><label for="f20-dau">Descrierea deteriorărilor, cost estimat și confirmarea clientului</label><textarea class="fld" id="f20-dau" rows="2"></textarea></div>
+  </div>
+
+  <div class="sign">
+    <div><b>Client</b><span class="line"></span><small>Am primit vehiculul și accept condițiile</small></div>
+    <div><b>Consultant service</b><span class="line"></span><small>Nume și semnătură</small></div>
+    <div><b>Aprobat</b><span class="line"></span><small>Director service</small></div>
+  </div>
+</section>
+
+<!-- ============ F-21 ============ -->
+<section class="sheet" id="f21" data-code="F-21" data-name="Recepția tehnică a carosării">
+  <div class="sheet-head">
+    <span class="id">F-21</span>
+    <div class="t">
+      <h3>Fișă de recepție tehnică a carosării</h3>
+      <div class="meta">Manual D9.3 · La preluarea vehiculului de la carosier · Înainte de livrarea către client</div>
+    </div>
+    <div class="act"><button class="mini" type="button" data-print="f21">Tipărește</button></div>
+  </div>
+
+  <div class="fields">
+    <div class="f"><label for="f21-proj">Proiect / comandă</label><input class="fld" id="f21-proj" type="text"></div>
+    <div class="f"><label for="f21-cl">Client</label><input class="fld" id="f21-cl" type="text"></div>
+    <div class="f"><label for="f21-sasiu">Șasiu — model și VIN</label><input class="fld" id="f21-sasiu" type="text"></div>
+    <div class="f"><label for="f21-car">Carosier / furnizor</label><input class="fld" id="f21-car" type="text"></div>
+    <div class="f"><label for="f21-tip">Tipul carosării</label><input class="fld" id="f21-tip" type="text" placeholder="izotermă / frigorifică / basculantă / furgon echipat / platformă"></div>
+    <div class="f"><label for="f21-data">Data recepției</label><input class="fld" id="f21-data" type="text"></div>
+  </div>
+
+  <span class="sec">Verificări de conformitate</span>
+  <ul class="cbxlist two">
+    <li><label class="cbx"><input type="checkbox" id="f21-v1"> <span>Conformitatea dimensională cu specificația comandată</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f21-v2"> <span>Calitatea îmbinărilor, sudurilor și a finisajelor vizibile</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f21-v3"> <span>Etanșeitatea compartimentului, unde este cazul</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f21-v4"> <span>Funcționarea echipamentelor montate</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f21-v5"> <span>Instalația electrică suplimentară: siguranțe, trasee protejate, consum</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f21-v6"> <span>Elemente de siguranță: semnalizare, benzi reflectorizante, protecții laterale și antiîmpănare</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f21-v7"> <span>Aspect exterior: vopsitorie, personalizare grafică, fără deteriorări de transport</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f21-v8"> <span>Documentația completă și corespunzătoare configurației reale</span></label></li>
+  </ul>
+
+  <span class="sec">Măsurători</span>
+  <div class="scroller">
+    <table class="tight">
+      <thead><tr><th>Parametru</th><th class="w-m ctr mono">Specificat</th><th class="w-m ctr mono">Măsurat</th><th class="w-m ctr">Conform</th></tr></thead>
+      <tbody>
+        <tr><td>Masa proprie a vehiculului carosat (kg)</td><td></td><td></td><td></td></tr>
+        <tr><td>Sarcina utilă rezultată (kg)</td><td></td><td></td><td></td></tr>
+        <tr><td>Masa pe axa față / spate (kg)</td><td></td><td></td><td></td></tr>
+        <tr><td>Masa totală maximă autorizată (kg)</td><td></td><td></td><td></td></tr>
+        <tr><td>Dimensiuni interioare utile L × l × h (mm)</td><td></td><td></td><td></td></tr>
+        <tr><td>Volum util (m³)</td><td></td><td></td><td></td></tr>
+        <tr><td>Înălțimea totală a vehiculului (mm)</td><td></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <span class="sec">Neconformități constatate</span>
+  <div class="scroller">
+    <table class="tight">
+      <thead><tr><th class="w-xs mono">Nr.</th><th>Descrierea neconformității</th><th class="w-m">Responsabil remediere</th><th class="w-m mono">Termen</th><th class="w-s ctr">Remediat</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">1</td><td class="blank"></td><td></td><td></td><td></td></tr>
+        <tr><td class="mono">2</td><td class="blank"></td><td></td><td></td><td></td></tr>
+        <tr><td class="mono">3</td><td class="blank"></td><td></td><td></td><td></td></tr>
+        <tr><td class="mono">4</td><td class="blank"></td><td></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <span class="sec">Decizia de recepție</span>
+  <ul class="cbxlist two">
+    <li><label class="cbx"><input type="checkbox" id="f21-d1"> <span><strong>Acceptat</strong> — se poate livra clientului</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f21-d2"> <span><strong>Acceptat cu observații</strong> — remedieri cu termen, livrare permisă</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f21-d3"> <span><strong>Respins</strong> — se returnează carosierului</span></label></li>
+  </ul>
+
+  <div class="sign">
+    <div><b>Coordonator carosări</b><span class="line"></span><small>Nume și semnătură</small></div>
+    <div><b>Reprezentant carosier</b><span class="line"></span><small>Nume și semnătură</small></div>
+    <div><b>Aprobat pentru livrare</b><span class="line"></span><small>Director general sau manager VC</small></div>
+  </div>
+</section>
+
+<!-- ============ F-22 ============ -->
+<section class="sheet" id="f22" data-code="F-22" data-name="Fișă de reclamație">
+  <div class="sheet-head">
+    <span class="id">F-22</span>
+    <div class="t">
+      <h3>Fișă de reclamație</h3>
+      <div class="meta">Manual D11.3 · Confirmare în 24 h · Soluționare în 5 zile lucrătoare</div>
+    </div>
+    <div class="act"><button class="mini" type="button" data-print="f22">Tipărește</button></div>
+  </div>
+
+  <span class="sec">Preluarea</span>
+  <div class="fields">
+    <div class="f"><label for="f22-nr">Număr înregistrare</label><input class="fld" id="f22-nr" type="text"></div>
+    <div class="f"><label for="f22-data">Data și ora primirii</label><input class="fld" id="f22-data" type="text"></div>
+    <div class="f"><label for="f22-canal">Canalul</label><input class="fld" id="f22-canal" type="text" placeholder="direct / telefon / e-mail / online / autoritate"></div>
+    <div class="f"><label for="f22-prel">Preluată de</label><input class="fld" id="f22-prel" type="text"></div>
+    <div class="f"><label for="f22-cl">Client</label><input class="fld" id="f22-cl" type="text"></div>
+    <div class="f"><label for="f22-tel">Contact</label><input class="fld" id="f22-tel" type="text"></div>
+    <div class="f"><label for="f22-veh">Vehiculul</label><input class="fld" id="f22-veh" type="text"></div>
+    <div class="f"><label for="f22-dep">Departamentul vizat</label><input class="fld" id="f22-dep" type="text"></div>
+  </div>
+
+  <span class="sec">Descrierea în cuvintele clientului</span>
+  <textarea class="fld" id="f22-cuv" rows="3" placeholder="Se consemnează exact, fără reformulare și fără atenuare"></textarea>
+
+  <span class="sec">Confirmarea către client — în maximum 24 de ore</span>
+  <div class="fields">
+    <div class="f"><label for="f22-conf">Data și ora confirmării</label><input class="fld" id="f22-conf" type="text"></div>
+    <div class="f"><label for="f22-resp">Responsabil desemnat</label><input class="fld" id="f22-resp" type="text"></div>
+    <div class="f"><label for="f22-term">Termen comunicat clientului</label><input class="fld" id="f22-term" type="text"></div>
+  </div>
+
+  <span class="sec">Investigație și cauză</span>
+  <div class="fields two">
+    <div class="f"><label for="f22-fapte">Fapte colectate — documente, istoric, declarații, dovezi tehnice</label><textarea class="fld" id="f22-fapte" rows="3"></textarea></div>
+    <div class="f"><label for="f22-cauza">Cauza identificată</label><textarea class="fld" id="f22-cauza" rows="3"></textarea></div>
+  </div>
+
+  <span class="sec">Soluționare</span>
+  <div class="fields two">
+    <div class="f wide"><label for="f22-sol">Soluția propusă și acordul clientului</label><textarea class="fld" id="f22-sol" rows="2"></textarea></div>
+    <div class="f"><label for="f22-cost">Cost suportat și de către cine</label><input class="fld" id="f22-cost" type="text"></div>
+    <div class="f"><label for="f22-dsol">Data soluționării</label><input class="fld" id="f22-dsol" type="text"></div>
+  </div>
+  <ul class="cbxlist two" style="margin-top:8px">
+    <li><label class="cbx"><input type="checkbox" id="f22-e1"> <span>Escaladat directorului general</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f22-e2"> <span>Raportat importatorului mărcii</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f22-e3"> <span>Implicații de siguranță sau expunere publică</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f22-e4"> <span>Clientul a confirmat că soluția este acceptată</span></label></li>
+  </ul>
+
+  <span class="sec">Măsură de prevenire</span>
+  <div class="fields">
+    <div class="f wide"><label for="f22-prev">Ce se schimbă în proces ca situația să nu se repete</label><textarea class="fld" id="f22-prev" rows="2"></textarea></div>
+    <div class="f"><label for="f22-prresp">Responsabil</label><input class="fld" id="f22-prresp" type="text"></div>
+    <div class="f"><label for="f22-prterm">Termen de implementare</label><input class="fld" id="f22-prterm" type="text"></div>
+    <div class="f"><label for="f22-inch">Data închiderii</label><input class="fld" id="f22-inch" type="text"></div>
+  </div>
+  <p class="note">Reclamația se închide numai după implementarea măsurii de prevenire, nu la momentul în care clientul a fost mulțumit.</p>
+
+  <div class="sign">
+    <div><b>Responsabil soluționare</b><span class="line"></span><small>Nume și semnătură</small></div>
+    <div><b>Responsabil CRM</b><span class="line"></span><small>Înregistrat și urmărit</small></div>
+    <div><b>Director general</b><span class="line"></span><small>Închidere aprobată</small></div>
+  </div>
+</section>
+
+<!-- ============ F-23 ============ -->
+<section class="sheet" id="f23" data-code="F-23" data-name="Grilă de aprobare a discountului">
+  <div class="sheet-head">
+    <span class="id">F-23</span>
+    <div class="t">
+      <h3>Grilă de aprobare a discountului</h3>
+      <div class="meta">Manual D12.2 · Obligatorie la depășirea limitei standard a consultantului</div>
+    </div>
+    <div class="act"><button class="mini" type="button" data-print="f23">Tipărește</button></div>
+  </div>
+
+  <div class="fields">
+    <div class="f"><label for="f23-cl">Client</label><input class="fld" id="f23-cl" type="text"></div>
+    <div class="f"><label for="f23-of">Număr ofertă (F-06)</label><input class="fld" id="f23-of" type="text"></div>
+    <div class="f"><label for="f23-veh">Vehicul</label><input class="fld" id="f23-veh" type="text"></div>
+    <div class="f"><label for="f23-vin">VIN / poziție stoc</label><input class="fld" id="f23-vin" type="text"></div>
+    <div class="f"><label for="f23-vech">Vechime în stoc (zile)</label><input class="fld" id="f23-vech" type="text"></div>
+    <div class="f"><label for="f23-cons">Consultant</label><input class="fld" id="f23-cons" type="text"></div>
+  </div>
+
+  <span class="sec">Calculul</span>
+  <div class="scroller">
+    <table class="tight">
+      <thead><tr><th>Element</th><th class="w-m ctr mono">Valoare</th><th class="w-s ctr mono">% din preț</th></tr></thead>
+      <tbody>
+        <tr><td>Preț de listă</td><td></td><td>—</td></tr>
+        <tr><td>Cost de achiziție</td><td></td><td>—</td></tr>
+        <tr><td>Discount în limita standard a consultantului</td><td></td><td></td></tr>
+        <tr><td>Discount suplimentar solicitat</td><td></td><td></td></tr>
+        <tr><th>Preț final propus</th><td></td><td></td></tr>
+        <tr><th>Marja rezultată</th><td></td><td></td></tr>
+        <tr><td>Contribuție suplimentară (finanțare, asigurare, accesorii, service)</td><td></td><td></td></tr>
+        <tr><th>Marja totală pe tranzacție</th><td></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <span class="sec">Justificarea</span>
+  <div class="fields two">
+    <div class="f"><label for="f23-mot">Motivul solicitării</label><textarea class="fld" id="f23-mot" rows="2" placeholder="Situație concretă: concurență, vechime în stoc, volum, client de flotă"></textarea></div>
+    <div class="f"><label for="f23-alt">Alternative analizate înainte de reducere</label><textarea class="fld" id="f23-alt" rows="2" placeholder="Versiune inferioară, reducerea opționalelor, altă soluție de finanțare, pachet de service"></textarea></div>
+  </div>
+
+  <span class="sec">Nivelul de aprobare necesar</span>
+  <ul class="cbxlist two">
+    <li><label class="cbx"><input type="checkbox" id="f23-n1"> <span>Manager sau director vânzări — depășire a limitei standard</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f23-n2"> <span>Director general — discount excepțional</span></label></li>
+    <li><label class="cbx"><input type="checkbox" id="f23-n3"> <span>Director general — preț pentru contract-cadru de flotă</span></label></li>
+  </ul>
+
+  <div class="fields two" style="margin-top:10px">
+    <div class="f wide"><label for="f23-dec">Decizia și eventualele condiții</label><textarea class="fld" id="f23-dec" rows="2" placeholder="Aprobat / aprobat parțial / respins — cu valoarea aprobată și condițiile atașate"></textarea></div>
+  </div>
+
+  <p class="note">Solicitarea și decizia se consemnează în CRM, la oportunitatea comercială respectivă. Politicile de preț ale importatorilor nu se încalcă indiferent de nivelul de aprobare.</p>
+
+  <div class="sign">
+    <div><b>Solicitant</b><span class="line"></span><small>Consultant · Data</small></div>
+    <div><b>Avizat</b><span class="line"></span><small>Manager / director vânzări</small></div>
+    <div><b>Aprobat</b><span class="line"></span><small>Director general · Data</small></div>
+  </div>
+</section>
+
+<footer class="doc">
+  <p><strong>Formulare operaționale AutoPadova</strong> — Ediția 1.0 · Anexa A.1 la Manualul de management și proceduri operaționale</p>
+  <p>Document intern. Formularele completate se arhivează conform termenelor din manual și ale legislației aplicabile. Datele cu caracter personal se prelucrează numai în scopul pentru care au fost colectate.</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  /* ---- repetitive blank rows ---- */
+  function rows(id, cells, n, numbered){
+    var tb = document.getElementById(id);
+    if (!tb) return;
+    var html = '';
+    for (var i = 1; i <= n; i++){
+      html += '<tr>';
+      for (var c = 0; c < cells; c++){
+        if (numbered && c === 0) html += '<td class="mono">' + i + '</td>';
+        else html += '<td' + (c === (numbered ? 1 : 0) ? ' class="blank"' : '') + '></td>';
+      }
+      html += '</tr>';
+    }
+    tb.innerHTML = html;
+  }
+  /* F-10: 31 days */
+  (function(){
+    var tb = document.getElementById('f10rows');
+    if (!tb) return;
+    var html = '';
+    for (var d = 1; d <= 31; d++){
+      html += '<tr><td class="mono">' + d + '</td>';
+      for (var c = 0; c < 9; c++) html += '<td' + (c === 7 ? ' class="blank"' : '') + '></td>';
+      html += '</tr>';
+    }
+    tb.innerHTML = html;
+  })();
+  rows('f11rows', 9, 16, false);
+  rows('f15rows', 10, 20, true);
+  rows('f18ops', 6, 8, false);
+  rows('f18parts', 6, 10, false);
+  rows('f19rows', 8, 14, false);
+
+  /* ---- index + jump ---- */
+  var sheets = Array.prototype.slice.call(document.querySelectorAll('.sheet'));
+  var idx = document.getElementById('idx');
+  var jump = document.getElementById('jump');
+  sheets.forEach(function(s){
+    var code = s.getAttribute('data-code');
+    var name = s.getAttribute('data-name');
+    var li = document.createElement('li');
+    li.innerHTML = '<a href="#' + s.id + '"><span class="c">' + code + '</span><span>' + name + '</span></a>';
+    idx.appendChild(li);
+    var op = document.createElement('option');
+    op.value = s.id;
+    op.textContent = code + ' — ' + name;
+    jump.appendChild(op);
+  });
+  jump.addEventListener('change', function(){
+    var el = document.getElementById(jump.value);
+    if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
+    jump.value = '';
+  });
+
+  /* ---- printing ---- */
+  var cleanup = null;
+  function afterPrint(){
+    if (cleanup) { cleanup(); cleanup = null; }
+  }
+  window.addEventListener('afterprint', afterPrint);
+  document.addEventListener('click', function(e){
+    var b = e.target.closest('[data-print]');
+    if (!b) return;
+    var el = document.getElementById(b.getAttribute('data-print'));
+    if (!el) return;
+    document.body.classList.add('print-one');
+    el.classList.add('printing');
+    cleanup = function(){
+      document.body.classList.remove('print-one');
+      el.classList.remove('printing');
+    };
+    window.print();
+    setTimeout(afterPrint, 800);
+  });
+  document.getElementById('printAll').addEventListener('click', function(){ window.print(); });
+})();
+</script>
